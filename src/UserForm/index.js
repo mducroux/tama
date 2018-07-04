@@ -51,7 +51,7 @@ class UserForm extends React.Component {
   }
 
   render() {
-    const { classes, onSubmit } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>

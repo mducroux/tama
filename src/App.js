@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import FormCard from "./UserForm";
+import TrainingTypeButton from "./ChooseTraining";
+import ExampleGridList from "./TrainWithExamples";
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = {
   root: {
@@ -23,11 +23,24 @@ const styles = {
 
 class App extends Component {
   state = {
-    formSubmitted: false,
+    isLoggedIn: false,
+    hasChosenTrainingType: false,
+    hasChosenExample: true
   }
 
   render() {
     const { classes } = this.props;
+    let displayed;
+    if (!this.state.isLoggedIn) {
+      displayed = <FormCard onSubmit={() => this.setState({isLoggedIn: true})}/>;
+    } else if (!this.state.hasChosenTrainingType) {
+      displayed = <TrainingTypeButton onClickExample={() => this.setState({hasChosenTrainingType: true, hasChosenExample: true})} onClickExercise={() => this.setState({hasChosenTrainingType: true, hasChosenExample: false})}/>;
+    } else if (this.state.hasChosenTrainingType) {
+      if (this.state.hasChosenExample)
+        displayed = <ExampleGridList/>;
+      else
+        displayed = <textarea/>;
+    }
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -38,9 +51,9 @@ class App extends Component {
           </Toolbar>
         </AppBar>
         <div>
-          {!this.state.formSubmitted && <FormCard onSubmit={() => this.setState({formSubmitted: true})}/>}
+          {displayed}
         </div>
-      </div>
+      </div >  
     );
   }
 }
