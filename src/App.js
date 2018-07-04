@@ -22,22 +22,23 @@ const styles = {
 };
 
 class App extends Component {
+  state = {
+    formSubmitted: false,
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
               Welcome to Tama !
             </Typography>
           </Toolbar>
         </AppBar>
         <div>
-          <FormCard/>
+          {!this.state.formSubmitted && <FormCard onSubmit={() => this.setState({formSubmitted: true})}/>}
         </div>
       </div>
     );
