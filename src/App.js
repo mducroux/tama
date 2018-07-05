@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormCard from "./UserForm";
 import TrainingTypeButton from "./ChooseTraining";
-import ExampleGridList from "./TrainWithExamples";
+import ExampleTraining from "./TrainWithExamples";
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,9 +23,10 @@ const styles = {
 
 class App extends Component {
   state = {
-    isLoggedIn: false,
-    hasChosenTrainingType: false,
-    hasChosenExample: true
+    isLoggedIn: true,
+    hasChosenTrainingType: true,
+    hasChosenExampleTrainingType: true,
+    hasChosenExamples: false
   }
 
   render() {
@@ -34,12 +35,17 @@ class App extends Component {
     if (!this.state.isLoggedIn) {
       displayed = <FormCard onSubmit={() => this.setState({isLoggedIn: true})}/>;
     } else if (!this.state.hasChosenTrainingType) {
-      displayed = <TrainingTypeButton onClickExample={() => this.setState({hasChosenTrainingType: true, hasChosenExample: true})} onClickExercise={() => this.setState({hasChosenTrainingType: true, hasChosenExample: false})}/>;
+      displayed = <TrainingTypeButton onClickExample={() => this.setState({hasChosenTrainingType: true, hasChosenExampleTrainingType: true})} onClickExercise={() => this.setState({hasChosenTrainingType: true, hasChosenExampleTrainingType: false})}/>;
     } else if (this.state.hasChosenTrainingType) {
-      if (this.state.hasChosenExample)
-        displayed = <ExampleGridList/>;
-      else
+      if (this.state.hasChosenExampleTrainingType) {
+        displayed = 
+          <ExampleTraining 
+            onSubmit={() => this.setState({hasChosenExamples: true})}
+            onDisplay={(!this.state.hasChosenExamples) ? 'chooseExamples' : 'presentExamples'}
+          />;
+      } else {
         displayed = <textarea/>;
+      }
     }
     return (
       <div className={classes.root}>

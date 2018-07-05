@@ -1,122 +1,64 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import Button from "@material-ui/core/Button";
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import UncheckIcon from '@material-ui/icons/Close';
-import CheckIcon from '@material-ui/icons/Check';
-import ListSubheader from '@material-ui/core/ListSubheader';
 
-import tilePositiveExampleData from "./tilePositiveExampleData";
-import tileNegativeExampleData from "./tileNegativeExampleData";
+import ExampleGridList from "./ChooseExamples"
+import PresentExamples from "./PresentExamples"
 
-const styles = theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper
-  },
-  gridList: {
-    width: 500,
-    height: 450
-  },
-  button: {
-    margin: theme.spacing.unit,
-    height: '20px'
-  },
-  titleBar: {
-    background:
-      'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, ' +
-      'rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 100%)',
-  },
-});
+import tilePositiveExampleData from "./tilePositiveExampleData"
+import tileNegativeExampleData from "./tileNegativeExampleData"
 
-class ExampleGridList extends React.Component {
+class ExampleTraining extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       positiveExamples: Array(6).fill(false),
       negativeExamples: Array(4).fill(false),
-      numberOfElemLeft: 3,
     };
+    this.numberOfElem = 3;
   }
 
-  handleClickPositiveExamples(i) {
-    if (this.state.numberOfElemLeft > 0 || this.state.positiveExamples[i]){
-      const newPositiveExamples = this.state.positiveExamples.slice();
-      newPositiveExamples[i] = !newPositiveExamples[i];
-      const newNumberOfElemLeft = this.state.positiveExamples[i] ? this.state.numberOfElemLeft+1 : this.state.numberOfElemLeft-1;
-      this.setState({positiveExamples: newPositiveExamples, numberOfElemLeft: newNumberOfElemLeft});
-    }
+  handleClickPositiveExample = (i) => {
+    const newPositiveExamples = [...this.state.positiveExamples];
+    newPositiveExamples[i] = !newPositiveExamples[i];
+    this.setState({positiveExamples: newPositiveExamples});
   }
-
-  handleClickNegativeExamples(i) {
-    if (this.state.numberOfElemLeft > 0 || this.state.negativeExamples[i]){
-      const newNegativeExamples = this.state.negativeExamples.slice();
-      newNegativeExamples[i] = !newNegativeExamples[i];
-      const newNumberOfElemLeft = this.state.negativeExamples[i] ? this.state.numberOfElemLeft+1 : this.state.numberOfElemLeft-1;
-      this.setState({negativeExamples: newNegativeExamples, numberOfElemLeft: newNumberOfElemLeft});
-    }
+    
+  handleClickNegativeExample = (i) => {
+    const newNegativeExamples = [...this.state.negativeExamples];
+    newNegativeExamples[i] = !newNegativeExamples[i];
+    this.setState({negativeExamples: newNegativeExamples});
   }
 
   render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <GridList cellHeight={180} className={classes.gridList}>
-          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-            <ListSubheader component="div">Parallélogrammes</ListSubheader>
-          </GridListTile>
-          {tilePositiveExampleData.map((tile, index) => (
-            <GridListTile key={tile.img}>
-              <img src={tile.img} alt={tile.title} />
-              <GridListTileBar
-                titlePosition="top"
-                actionIcon={ 
-                  <IconButton onClick={() => {this.handleClickPositiveExamples(index)}}>
-                    {this.state.positiveExamples[index] ? <CheckIcon /> : <UncheckIcon />}
-                  </IconButton>
-                }
-                actionPosition="right"
-                className={classes.titleBar}
-              />
-            </GridListTile>
-          ))}
-        </GridList>
-        <GridList cellHeight={180} className={classes.gridList}>
-          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-            <ListSubheader component="div">Non parallélogrammes</ListSubheader>
-          </GridListTile>
-          {tileNegativeExampleData.map((tile, index) => (
-            <GridListTile key={tile.img}>
-              <img src={tile.img} alt={tile.title} />
-              <GridListTileBar
-                titlePosition="top"
-                actionIcon={ 
-                  <IconButton onClick={() => this.handleClickNegativeExamples(index)}>
-                    {this.state.negativeExamples[index] ? <CheckIcon /> : <UncheckIcon />}
-                  </IconButton>
-                }
-                actionPosition="right"
-                className={classes.titleBar}
-              />
-            </GridListTile>
-          ))}
-        </GridList>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-        >
-          Ok
-        </Button>
-        Choisissez {this.state.numberOfElemLeft} {this.state.numberOfElemLeft > 1 ? 'formes' : 'forme'}. 
-      </div>
-    );
+    if (this.props.onDisplay==='chooseExamples'){
+      return(
+        <ExampleGridList 
+          onSubmit={this.props.onSubmit}
+          onClickPositiveExample={this.handleClickPositiveExample}
+          onClickNegativeExample={this.handleClickNegativeExample}
+          numberOfElem={this.numberOfElem}
+          positiveExamples={this.state.positiveExamples}
+          negativeExamples={this.state.negativeExamples}
+        />
+      );
+    } else {
+      var parallelograms = []
+      var i;
+      for (i = 0; i < this.state.positiveExamples.length; i++){
+        if (this.state.positiveExamples[i])
+          parallelograms.push(tilePositiveExampleData[i].img)
+      }
+      for (i = 0; i < this.state.negativeExamples.length; i++){
+        if (this.state.negativeExamples[i])
+          parallelograms.push(tileNegativeExampleData[i].img)
+      }
+      return(
+        <PresentExamples 
+          parallelograms={parallelograms}
+          numberOfElem={this.numberOfElem}
+        />
+      );
+    }
   }
 }
 
-export default withStyles(styles)(ExampleGridList);
+export default ExampleTraining;
