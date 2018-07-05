@@ -1,4 +1,4 @@
-const tileExampleData = [
+const tilePositiveExampleData = [
   {
     img: 'images/examples/1.png',
     title: 'img_1',
@@ -23,10 +23,6 @@ const tileExampleData = [
     img: 'images/examples/6.png',
     title: 'img_6',
   },
-  {
-    img: 'images/examples/7.png',
-    title: 'img_7',
-  },
 ];
 
-export default tileExampleData;
+export default tilePositiveExampleData;
