@@ -20,7 +20,7 @@ class ShowExamples extends React.Component {
       }
       this.choiceOrAnswer = this.state.answer;
     } else {
-      if (this.state.indexExample == this.props.numberOfExamples){
+      if (this.state.indexExample === this.props.numberOfExamples){
         return; // TODO get back to homescreen
       }
       this.bubbleImage = 'images/virtual_student/bubble_question.jpg';

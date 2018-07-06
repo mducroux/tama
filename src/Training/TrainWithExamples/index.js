@@ -49,7 +49,7 @@ class TrainWithExamples extends React.Component {
       return(
         <ShowExamples 
           parallelograms={this.getSelectedParallelograms()}
-          numberOfElem={this.numberOfExamples}
+          numberOfExamples={this.numberOfExamples}
         />
       );
     }
