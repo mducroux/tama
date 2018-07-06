@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RegistrationFormCard from "./RegistrationForm";
+import RegistrationForm from "./RegistrationForm";
 import TrainingTypeButton from "./Training/ChooseTraining";
 import TrainWithExamples from "./Training/TrainWithExamples";
 
@@ -25,7 +25,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isRegistered: true,
+      isRegistered: false,
       hasChosenTrainingType: false,
       hasChosenExampleTrainingType: false,
     }
@@ -35,7 +35,7 @@ class App extends Component {
     const { classes } = this.props;
     let displayed;
     if (!this.state.isRegistered) {
-      displayed = <RegistrationFormCard onSubmit={() => this.setState({isRegistered: true})}/>;
+      displayed = <RegistrationForm onSubmit={() => this.setState({isRegistered: true})}/>;
     } else if (!this.state.hasChosenTrainingType) {
       displayed = <TrainingTypeButton onClickExample={() => this.setState({hasChosenTrainingType: true, hasChosenExampleTrainingType: true})} onClickExercise={() => this.setState({hasChosenTrainingType: true, hasChosenExampleTrainingType: false})}/>;
     } else if (this.state.hasChosenTrainingType) {

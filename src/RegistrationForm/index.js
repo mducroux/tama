@@ -3,24 +3,27 @@ import { withStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import TextField from "@material-ui/core/TextField";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
 
 const styles = theme => ({
   root: {
     display: "flex"
   },
-  formControl: {
+  validatorForm: {
     margin: theme.spacing.unit,
   },
   group: {
     margin: theme.spacing.unit * 3,
   },
-  textField: {
+  title: {
+    margin: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 6
+  },
+  textValidator: {
     width: 200
   },
   button: {
@@ -32,6 +35,7 @@ class RegistrationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      pseudo: '',
       gender: "femme",
       status: 'eleve',
       age: '',
@@ -53,7 +57,23 @@ class RegistrationForm extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
+        <ValidatorForm component="fieldset" className={classes.validatorForm} onSubmit={this.props.onSubmit}>
+          <div className={classes.title}>
+            <Typography variant="display1">
+              Inscription à Tama
+            </Typography>
+          </div>
+          <div className={classes.group}>
+            <TextValidator
+              name="pseudo"
+              value={this.state.pseudo}
+              className={classes.textValidator}
+              onChange={this.handleInputChange}
+              label="Mon pseudo *"
+              validators={['required']}
+              errorMessages={['ce champ est obligatoire']}
+            />
+          </div>
           <div className={classes.group}>
             <FormLabel component="legend" >Je suis :</FormLabel>
             <RadioGroup
@@ -82,13 +102,14 @@ class RegistrationForm extends React.Component {
             </RadioGroup>
           </div>
           <div className={classes.group}>
-            <TextField
+            <TextValidator
               name="age"
               value={this.state.age}
-              className={classes.textField}
+              className={classes.textValidator}
               onChange={this.handleInputChange}
-              margin="normal"
-              label="Age"
+              label="Age *"
+              validators={['required', 'isNumber']}
+              errorMessages={['ce champ est obligatoire', 'veuillez entrer un nombre']}
             />
           </div>
           <div className={classes.group}>
@@ -111,26 +132,14 @@ class RegistrationForm extends React.Component {
               variant="contained"
               color="primary"
               className={classes.button}
-              onClick={this.props.onSubmit}
+              type="submit"
             >
               Ok
             </Button>
-        </FormControl>
+        </ValidatorForm>
       </div>
     );
   }
 }
 
-const RegistrationFormStyled = withStyles(styles)(RegistrationForm);
-
-const RegistrationFormCard = (props) => {
-  return (
-    <Card>
-      <CardContent>
-        <RegistrationFormStyled onSubmit={props.onSubmit}/>
-      </CardContent>
-    </Card>
-  );
-}
-
-export default RegistrationFormCard;
+export default withStyles(styles)(RegistrationForm);
