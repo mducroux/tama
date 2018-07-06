@@ -6,25 +6,26 @@ import VirtualStudent from "../../VirtualStudent";
 class ShowExamples extends React.Component {
   constructor(props){
     super(props);
-    this.state = {indexExample: 0, thinkingAboutIt: false, answer: ''};
-    this.bubbleImage;
-    this.choiceOrAnswer;
+    this.state = {indexExample: 0, thinkingAboutIt: false, answer: '', bubbleImage: '', choiceOrAnswer: ''};
   }
 
-  askUser = () => {
+  bubbleImage = () => {
     if (this.state.thinkingAboutIt === true){
       if (this.state.answer === 'oui'){ // arbitrary choice
-        this.bubbleImage = 'images/virtual_student/bubble_know.jpg';
+        return 'images/virtual_student/bubble_know.jpg';
       } else {
-        this.bubbleImage = 'images/virtual_student/bubble_dont_know.jpg';
+        return 'images/virtual_student/bubble_dont_know.jpg';
       }
-      this.choiceOrAnswer = this.state.answer;
     } else {
-      if (this.state.indexExample === this.props.numberOfExamples){
-        return; // TODO get back to homescreen
-      }
-      this.bubbleImage = 'images/virtual_student/bubble_question.jpg';
-      this.choiceOrAnswer = (
+      return 'images/virtual_student/bubble_question.jpg';
+    }
+  }
+
+  choiceOrAnswer = () => {
+    if (this.state.thinkingAboutIt === true){
+      return (this.state.answer); 
+    } else {
+      return (
         <div>
           <Button
             variant="contained"
@@ -40,32 +41,25 @@ class ShowExamples extends React.Component {
           >
             Non
           </Button>
-        </div>);
+        </div>
+      );
     }
   }
 
   handleClick = (key) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
       this.setState({thinkingAboutIt: true, answer: key});
-    }
-  }
-
-  async componentDidUpdate() {
-    if (this.state.thinkingAboutIt === true){
-      await new Promise(resolve => {
-        setTimeout(() => {
-          resolve(this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1}));
-        }, 2000);
-      });
+      setTimeout(() => {
+        this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1});
+      }, 2000);
     }
   }
 
   render() {
     return (
       <div>
-        {this.askUser()}
         <div>
-          <VirtualStudent bubbleImage={this.bubbleImage}/>
+          <VirtualStudent bubbleImage={this.bubbleImage()}/>
           <div>
             Exemple : {this.state.indexExample + 1} / 3 
           </div>
@@ -73,7 +67,7 @@ class ShowExamples extends React.Component {
             <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
           </div>
           <div>
-            {this.choiceOrAnswer}
+            {this.choiceOrAnswer()}
           </div>
         </div>
       </div>

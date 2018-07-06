@@ -2,26 +2,24 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    minWidth: 300,
-    width: "20%"
+    display: "flex"
   },
-  image: {
+  button: {
     position: "relative",
-    height: 200,
+    height: 512,
+    width: "100%",
     "&:hover, &$focusVisible": {
-      zIndex: 1,
       "& $imageBackdrop": {
         opacity: 0.15
-      },
+      }
     }
   },
   focusVisible: {},
-  imageButton: {
+  textButton: {
     position: "absolute",
     left: 0,
     right: 0,
@@ -50,31 +48,30 @@ const styles = theme => ({
     backgroundColor: theme.palette.common.black,
     opacity: 0.4,
     transition: theme.transitions.create("opacity")
-  },
+  }
 });
 
 const images = [
   {
-    url: 'images/example_512x512.png',
+    url: "images/example_512x512.png",
     title: "Montrer des exemples",
     width: "50%"
   },
   {
-    url: 'images/exercise_512x512.png',
+    url: "images/exercise_512x512.png",
     title: "Donner un exercice",
     width: "50%"
   }
 ];
 
 class TrainingTypeButton extends React.Component {
-
   constructor(props) {
     super(props);
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   handleButtonClick(key) {
-    if (key === "Montrer des exemples"){
+    if (key === "Montrer des exemples") {
       this.props.onClickExample();
     } else {
       this.props.onClickExercise();
@@ -84,36 +81,45 @@ class TrainingTypeButton extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-        <div className={classes.root}>
-          {images.map(image => (
-            <ButtonBase
-              focusRipple
-              key={image.title}
-              className={classes.image}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                width: image.width
-              }}
-              onClick={() => this.handleButtonClick(image.title)}
-            >
-              <span
-                className={classes.imageSrc}
-                style={{
-                  backgroundImage: `url(${image.url})`
-                }}
-              />
-              <span className={classes.imageBackdrop} />
-              <span className={classes.imageButton}>
-                <Typography component="span" variant="subheading" color="inherit">
-                  {image.title}
-                </Typography>
-              </span>
-            </ButtonBase>
-          ))}
-        </div>
-      );
-    }
-  
+      <Grid container className={classes.root} justify="center" >
+        <Grid item xs={12} sm={8}>
+          <Grid
+            container
+            className={classes.root}
+            justify="center"
+            spacing={0}
+          >
+            {images.map(image => (
+              <Grid item xs={12} sm={6} key={image.title}>
+                <ButtonBase
+                  className={classes.button}
+                  focusVisibleClassName={classes.focusVisible}
+                  onClick={() => this.handleButtonClick(image.title)}
+                >
+                  <span
+                    className={classes.imageSrc}
+                    style={{
+                      backgroundImage: `url(${image.url})`
+                    }}
+                  />
+                  <span className={classes.imageBackdrop} />
+                  <span className={classes.textButton}>
+                    <Typography
+                      component="span"
+                      variant="subheading"
+                      color="inherit"
+                    >
+                      {image.title}
+                    </Typography>
+                  </span>
+                </ButtonBase>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
 }
 
 export default withStyles(styles)(TrainingTypeButton);
