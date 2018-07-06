@@ -1,7 +1,18 @@
 import React from "react";
 
+import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Typography from '@material-ui/core/Typography';
 import VirtualStudent from "../../VirtualStudent";
+
+const styles = () => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    marginTop: "10px"
+  },
+});
 
 class ShowExamples extends React.Component {
   constructor(props){
@@ -11,7 +22,7 @@ class ShowExamples extends React.Component {
 
   bubbleImage = () => {
     if (this.state.thinkingAboutIt === true){
-      if (this.state.answer === 'oui'){ // arbitrary choice
+      if (this.state.answer === 'OUI'){ // arbitrary choice
         return 'images/virtual_student/bubble_know.jpg';
       } else {
         return 'images/virtual_student/bubble_dont_know.jpg';
@@ -23,24 +34,34 @@ class ShowExamples extends React.Component {
 
   choiceOrAnswer = () => {
     if (this.state.thinkingAboutIt === true){
-      return (this.state.answer); 
+      return (
+        <Typography variant="title">
+          {this.state.answer}
+        </Typography>
+      ); 
     } else {
       return (
         <div>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => this.handleClick('oui')}
-          >
-            Oui
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => this.handleClick('non')}
-          >
-            Non
-          </Button>
+          <Grid container justify="center" spacing={40}>
+            <Grid item >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.handleClick('OUI')}
+              >
+                Oui
+              </Button>
+            </Grid>
+            <Grid item >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.handleClick('NON')}
+              >
+                Non
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       );
     }
@@ -56,23 +77,40 @@ class ShowExamples extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <div>
-          <VirtualStudent bubbleImage={this.bubbleImage()}/>
-          <div>
-            Exemple : {this.state.indexExample + 1} / 3 
-          </div>
-          <div>
-            <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
-          </div>
-          <div>
-            {this.choiceOrAnswer()}
-          </div>
-        </div>
+        <Grid container justify="center" className={classes.root}>
+          <Grid item xs={12} sm={4} >
+            <Grid container justify="center">
+              <VirtualStudent bubbleImage={this.bubbleImage()}/>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Grid item xs={12} sm={4} >
+            <Grid container justify="center">
+              Exemple : {this.state.indexExample + 1} / 3
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Grid item xs={12} sm={4} >
+            <Grid container justify="center">
+              <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Grid item xs={12} sm={4} >
+            <Grid container justify="center">
+              {this.choiceOrAnswer()}
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
     );
   }
 }
 
-export default ShowExamples;
+export default withStyles(styles)(ShowExamples);
