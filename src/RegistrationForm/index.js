@@ -28,7 +28,7 @@ const styles = theme => ({
   }
 });
 
-class UserForm extends React.Component {
+class RegistrationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,9 +41,8 @@ class UserForm extends React.Component {
   }
 
   handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const value = event.target.value;
+    const name = event.target.name;
 
     this.setState({
       [name]: value
@@ -122,16 +121,16 @@ class UserForm extends React.Component {
   }
 }
 
-const UserFormStyled = withStyles(styles)(UserForm);
+const RegistrationFormStyled = withStyles(styles)(RegistrationForm);
 
-const FormCard = (props) => {
+const RegistrationFormCard = (props) => {
   return (
     <Card>
       <CardContent>
-        <UserFormStyled onSubmit={props.onSubmit}/>
+        <RegistrationFormStyled onSubmit={props.onSubmit}/>
       </CardContent>
     </Card>
   );
 }
 
-export default FormCard;
+export default RegistrationFormCard;
