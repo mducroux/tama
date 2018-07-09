@@ -7,6 +7,8 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+
 import PropTypes from 'prop-types'
 
 const styles = {
@@ -26,7 +28,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isRegistered: false,
+      isRegistered: localStorage.getItem('username') != null,
       hasChosenTrainingType: false,
       hasChosenExampleTrainingType: false
     }
@@ -36,7 +38,10 @@ class App extends Component {
     const { classes } = this.props
     let displayed
     if (!this.state.isRegistered) {
-      displayed = <RegistrationForm onSubmit={() => this.setState({isRegistered: true})}/>
+      displayed = <RegistrationForm onSubmit={(username) => {
+        this.setState({isRegistered: true})
+        localStorage.setItem('username', username)
+      }}/>
     } else if (!this.state.hasChosenTrainingType) {
       displayed = <TrainingTypeButton
         onClickExample={() => this.setState({
@@ -62,8 +67,11 @@ class App extends Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Welcome to Tama !
+              {!this.state.isRegistered ? 'Welcome to Tama !' : 'Welcome back ' + localStorage.getItem('username') + ' !' }
             </Typography>
+            {this.state.isRegistered && (
+              <AccountCircle />
+            )}
           </Toolbar>
         </AppBar>
         <div>

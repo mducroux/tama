@@ -52,7 +52,6 @@ class ChooseExamples extends React.Component {
   handleSubmit = () => {
     tileData['positiveItems'].forEach(elem => { elem.isSelected = false })
     tileData['negativeItems'].forEach(elem => { elem.isSelected = false })
-
     if (this.state.numberOfExamplesLeft === 0) this.props.onSubmit()
   }
 
