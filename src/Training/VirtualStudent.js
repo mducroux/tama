@@ -2,12 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const VirtualStudent = (props) => {
-  const { classes } = props
   return (
     <div>
       <div>
         <img
-          src={classes.bubbleImage}
+          src={props.bubbleImage}
           width="200"
           height="150"
           alt="bubble"
@@ -26,7 +25,7 @@ const VirtualStudent = (props) => {
 }
 
 VirtualStudent.propTypes = {
-  classes: PropTypes.object.isRequired
+  bubbleImage: PropTypes.string.isRequired
 }
 
 export default VirtualStudent

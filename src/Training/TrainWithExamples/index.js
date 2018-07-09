@@ -29,12 +29,12 @@ class TrainWithExamples extends React.Component {
     for (let items in this.state.examples){
       for (var ind = 0; ind < this.state.examples[items].length; ind++){
         if (this.state.examples[items][ind])
-          parallelograms.push(tileData[items][ind].img);
+          parallelograms.push(tileData[items][ind].src)
       }
     }
-    return parallelograms;
+    return parallelograms
   }
-
+ 
   render () {
     if (!this.state.hasChosenExamples) {
       return (

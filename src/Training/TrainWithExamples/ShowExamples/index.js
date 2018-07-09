@@ -21,18 +21,6 @@ class ShowExamples extends React.Component {
     this.state = {indexExample: 0, thinkingAboutIt: false, answer: '', bubbleImage: '', choiceOrAnswer: ''}
   }
 
-  bubbleImage = () => {
-    if (this.state.thinkingAboutIt === true) {
-      if (this.state.answer === 'OUI') { // arbitrary choice
-        return 'images/virtual_student/bubble_know.jpg'
-      } else {
-        return 'images/virtual_student/bubble_dont_know.jpg'
-      }
-    } else {
-      return 'images/virtual_student/bubble_question.jpg'
-    }
-  }
-
   choiceOrAnswer = () => {
     if (this.state.thinkingAboutIt === true) {
       return (
@@ -69,8 +57,7 @@ class ShowExamples extends React.Component {
   }
 
   handleClick = (key) => {
-    const { classes } = this.props
-    if (this.state.indexExample < classes.numberOfExamples) {
+    if (this.state.indexExample < this.props.numberOfExamples) {
       this.setState({thinkingAboutIt: true, answer: key})
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
@@ -80,12 +67,25 @@ class ShowExamples extends React.Component {
 
   render () {
     const { classes } = this.props
+
+    let bubbleImage
+    if (this.state.thinkingAboutIt === true) {
+      if (this.state.answer === 'OUI') { // arbitrary choice
+        bubbleImage = 'images/virtual_student/bubble_know.jpg'
+      } else {
+        bubbleImage = 'images/virtual_student/bubble_dont_know.jpg'
+      }
+    } else {
+      bubbleImage = 'images/virtual_student/bubble_question.jpg'
+    }
+
+
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
           <Grid item xs={12} sm={4} >
             <Grid container justify="center">
-              <VirtualStudent bubbleImage={this.bubbleImage()}/>
+              <VirtualStudent bubbleImage={bubbleImage}/>
             </Grid>
           </Grid>
         </Grid>
@@ -99,7 +99,7 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item xs={12} sm={4} >
             <Grid container justify="center">
-              <img src={classes.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
+              <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
@@ -116,7 +116,9 @@ class ShowExamples extends React.Component {
 }
 
 ShowExamples.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  numberOfExamples: PropTypes.number.isRequired,
+  parallelograms: PropTypes.array.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)
