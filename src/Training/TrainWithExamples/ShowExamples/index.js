@@ -79,7 +79,6 @@ class ShowExamples extends React.Component {
       bubbleImage = 'images/virtual_student/bubble_question.jpg'
     }
 
-
     return (
       <div>
         <Grid container justify="center" className={classes.root}>

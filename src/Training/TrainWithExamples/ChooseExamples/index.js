@@ -54,9 +54,9 @@ class ChooseExamples extends React.Component {
   }
 
   onSelectPositiveItems = (index, event) => {
-    var img = tileData['positiveItems'][index]
-    img.isSelected = !img.isSelected
     if (this.state.numberOfExamplesLeft > 0 || this.props.examples['positiveItems'][index]) {
+      var img = tileData['positiveItems'][index]
+      img.isSelected = !img.isSelected
       this.props.onClickExample('positiveItems', index)
       const newNumberOfElemLeft = this.props.examples['positiveItems'][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
       this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
@@ -64,9 +64,9 @@ class ChooseExamples extends React.Component {
   }
 
   onSelectNegativeItems = (index, event) => {
-    var img = tileData['negativeItems'][index]
-    img.isSelected = !img.isSelected
     if (this.state.numberOfExamplesLeft > 0 || this.props.examples['negativeItems'][index]) {
+      var img = tileData['negativeItems'][index]
+      img.isSelected = !img.isSelected
       this.props.onClickExample('negativeItems', index)
       const newNumberOfElemLeft = this.props.examples['negativeItems'][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
       this.setState({numberOfExamplesLeft: newNumberOfElemLeft})

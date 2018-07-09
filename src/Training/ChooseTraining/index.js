@@ -66,7 +66,7 @@ const images = [
 ]
 
 class TrainingTypeButton extends React.Component {
-  handleButtonClick = (key) => { // eslint-disable-line
+  handleButtonClick = (key) => {
     if (key === 'Montrer des exemples') {
       this.props.onClickExample()
     } else {
