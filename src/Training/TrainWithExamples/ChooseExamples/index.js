@@ -1,16 +1,10 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import GridList from '@material-ui/core/GridList'
-import GridListTile from '@material-ui/core/GridListTile'
 import Button from '@material-ui/core/Button'
-import GridListTileBar from '@material-ui/core/GridListTileBar'
-import IconButton from '@material-ui/core/IconButton'
-import CheckBoxOutlineIcon from '@material-ui/icons/CheckBoxOutlineBlank'
-import CheckBoxIcon from '@material-ui/icons/CheckBox'
-import ListSubheader from '@material-ui/core/ListSubheader'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
+import Gallery from 'react-grid-gallery'
 
 import tileData from '../../tileData'
 
@@ -28,6 +22,13 @@ const styles = theme => ({
     background:
       'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, ' +
       'rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 100%)'
+  },
+  gallery: {
+    display: 'block',
+    minHeight: '1px',
+    width: '100%',
+    border: '1px solid #ddd',
+    overflow: 'auto'
   },
   title: {
     margin: theme.spacing.unit * 3
@@ -52,29 +53,24 @@ class ChooseExamples extends React.Component {
     if (this.state.numberOfExamplesLeft === 0) this.props.onSubmit()
   }
 
-  displayGridList = (items) => {
-    const { classes } = this.props
-    return (
-      tileData[items].map((tile, index) => (
-        <GridListTile key={tile.img}>
-          <img src={tile.img} alt={tile.title} />
-          <GridListTileBar
-            titlePosition="top"
-            actionIcon={
-              <IconButton onClick={() => this.handleClickExample(items, index)}>
-                {this.props.examples[items][index] ? (
-                  <CheckBoxIcon />
-                ) : (
-                  <CheckBoxOutlineIcon />
-                )}
-              </IconButton>
-            }
-            actionPosition="right"
-            className={classes.titleBar}
-          />
-        </GridListTile>
-      ))
-    )
+  onSelectPositiveItems = (index, event) => {
+    var img = tileData['positiveItems'][index]
+    img.isSelected = !img.isSelected
+    if (this.state.numberOfExamplesLeft > 0 || this.props.examples['positiveItems'][index]) {
+      this.props.onClickExample('positiveItems', index)
+      const newNumberOfElemLeft = this.props.examples['positiveItems'][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
+      this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
+    }
+  }
+
+  onSelectNegativeItems = (index, event) => {
+    var img = tileData['negativeItems'][index]
+    img.isSelected = !img.isSelected
+    if (this.state.numberOfExamplesLeft > 0 || this.props.examples['negativeItems'][index]) {
+      this.props.onClickExample('negativeItems', index)
+      const newNumberOfElemLeft = this.props.examples['negativeItems'][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
+      this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
+    }
   }
 
   render () {
@@ -82,37 +78,33 @@ class ChooseExamples extends React.Component {
     return (
       <div>
         <div className={classes.root}>
-          <Grid container justify="center">
+          <Grid container justify='center'>
             <Grid item>
-              <Typography variant="headline" className={classes.title}>
+              <Typography variant='headline' className={classes.title}>
                 Choisissez {this.state.numberOfExamplesLeft}{' '}
-                {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'} à montrer.
+                {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'}
               </Typography>
             </Grid>
           </Grid>
         </div>
-        <div className={classes.root}>
-          <GridList cols={12}>
-            <GridListTile key="Subheader" cols={12} style={{ height: 'auto' }}>
-              <ListSubheader component="div">Parallélogrammes</ListSubheader>
-            </GridListTile>
-            {this.displayGridList('positiveItems')}
-          </GridList>
+        <div className={classes.gallery}>
+          <Gallery
+            images={tileData['positiveItems']}
+            onClickThumbnail={this.onSelectPositiveItems}
+          />
+        </div>
+        <div className={classes.gallery}>
+          <Gallery
+            images={tileData['negativeItems']}
+            onClickThumbnail={this.onSelectNegativeItems}
+          />
         </div>
         <div className={classes.root}>
-          <GridList cols={12}>
-            <GridListTile key="Subheader" cols={12} style={{ height: 'auto' }}>
-              <ListSubheader component="div">Non parallélogrammes</ListSubheader>
-            </GridListTile>
-            {this.displayGridList('negativeItems')}
-          </GridList>
-        </div>
-        <div className={classes.root}>
-          <Grid container justify="center">
+          <Grid container justify='center'>
             <Grid item>
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 className={classes.button}
                 onClick={this.handleSubmit}
               >
