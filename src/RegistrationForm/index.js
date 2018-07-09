@@ -42,7 +42,6 @@ class RegistrationForm extends React.Component {
       knowledge: 'no'
     }
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleFormSubmission = this.handleFormSubmission.bind(this)
   }
 
   handleInputChange (event) {
