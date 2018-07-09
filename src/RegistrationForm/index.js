@@ -1,23 +1,23 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
-import Typography from '@material-ui/core/Typography';
-import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormLabel from '@material-ui/core/FormLabel'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import PropTypes from 'prop-types'
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: 'flex'
   },
   validatorForm: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   group: {
-    margin: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3
   },
   title: {
     margin: theme.spacing.unit * 3,
@@ -29,117 +29,167 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit * 3
   }
-});
+})
 
 class RegistrationForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       pseudo: '',
-      gender: "femme",
+      gender: 'femme',
       status: 'eleve',
       age: '',
-      knowledge: 'no',
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
+      knowledge: 'no'
+    }
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  handleInputChange(event) {
-    const value = event.target.value;
-    const name = event.target.name;
+  handleInputChange (event) {
+    const value = event.target.value
+    const name = event.target.name
 
     this.setState({
       [name]: value
-    });
+    })
   }
 
-  render() {
-    const { classes } = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div className={classes.root}>
-        <ValidatorForm component="fieldset" className={classes.validatorForm} onSubmit={this.props.onSubmit}>
+        <ValidatorForm
+          component='fieldset'
+          className={classes.validatorForm}
+          onSubmit={this.props.onSubmit}
+        >
           <div className={classes.title}>
-            <Typography variant="display1">
-              Inscription à Tama
-            </Typography>
+            <Typography variant='display1'>Inscription à Tama</Typography>
           </div>
           <div className={classes.group}>
             <TextValidator
-              name="pseudo"
+              name='pseudo'
               value={this.state.pseudo}
               className={classes.textValidator}
               onChange={this.handleInputChange}
-              label="Mon pseudo *"
+              label='Mon pseudo *'
               validators={['required']}
               errorMessages={['ce champ est obligatoire']}
             />
           </div>
           <div className={classes.group}>
-            <FormLabel component="legend" >Je suis :</FormLabel>
+            <FormLabel component='legend'>Je suis :</FormLabel>
             <RadioGroup
-              name="gender"
+              name='gender'
               value={this.state.gender}
               onChange={this.handleInputChange}
               row={true}
             >
-              <FormControlLabel value="femme" control={<Radio />} label="Femme" />
-              <FormControlLabel value="homme" control={<Radio />} label="Homme" />
-              <FormControlLabel value="autre" control={<Radio />} label="Autre" />
+              <FormControlLabel
+                value='femme'
+                control={<Radio />}
+                label='Femme'
+              />
+              <FormControlLabel
+                value='homme'
+                control={<Radio />}
+                label='Homme'
+              />
+              <FormControlLabel
+                value='autre'
+                control={<Radio />}
+                label='Autre'
+              />
             </RadioGroup>
           </div>
           <div className={classes.group}>
-            <FormLabel component="legend" >Je suis :</FormLabel>
+            <FormLabel component='legend'>Je suis :</FormLabel>
             <RadioGroup
-              name="status"
+              name='status'
               value={this.state.status}
               onChange={this.handleInputChange}
               row={true}
             >
-              <FormControlLabel value="eleve" control={<Radio />} label="Elève" />
-              <FormControlLabel value="enseignant" control={<Radio />} label="Enseignant(e)" />
-              <FormControlLabel value="parent" control={<Radio />} label="Parent" />
-              <FormControlLabel value="autre" control={<Radio />} label="Autre" />
+              <FormControlLabel
+                value='eleve'
+                control={<Radio />}
+                label='Elève'
+              />
+              <FormControlLabel
+                value='enseignant'
+                control={<Radio />}
+                label='Enseignant(e)'
+              />
+              <FormControlLabel
+                value='parent'
+                control={<Radio />}
+                label='Parent'
+              />
+              <FormControlLabel
+                value='autre'
+                control={<Radio />}
+                label='Autre'
+              />
             </RadioGroup>
           </div>
           <div className={classes.group}>
             <TextValidator
-              name="age"
+              name='age'
               value={this.state.age}
               className={classes.textValidator}
               onChange={this.handleInputChange}
-              label="Age *"
+              label='Age *'
               validators={['required', 'isNumber']}
-              errorMessages={['ce champ est obligatoire', 'veuillez entrer un nombre']}
+              errorMessages={[
+                'ce champ est obligatoire',
+                'veuillez entrer un nombre'
+              ]}
             />
           </div>
           <div className={classes.group}>
-            <FormLabel component="legend">
+            <FormLabel component='legend'>
               Mes connaissances sur les parallélogrammes :
             </FormLabel>
             <RadioGroup
-              name="knowledge"
+              name='knowledge'
               value={this.state.knowledge}
               onChange={this.handleInputChange}
               row={true}
             >
-              <FormControlLabel value="no" control={<Radio />} label="Nulle" />
-              <FormControlLabel value="poor" control={<Radio />} label="Faible" />
-              <FormControlLabel value="average" control={<Radio />} label="Moyenne" />
-              <FormControlLabel value="solid" control={<Radio />} label="Solide" />
+              <FormControlLabel value='no' control={<Radio />} label='Nulle' />
+              <FormControlLabel
+                value='poor'
+                control={<Radio />}
+                label='Faible'
+              />
+              <FormControlLabel
+                value='average'
+                control={<Radio />}
+                label='Moyenne'
+              />
+              <FormControlLabel
+                value='solid'
+                control={<Radio />}
+                label='Solide'
+              />
             </RadioGroup>
           </div>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              type="submit"
-            >
-              Ok
-            </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            className={classes.button}
+            type='submit'
+          >
+            Ok
+          </Button>
         </ValidatorForm>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(RegistrationForm);
+RegistrationForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired
+}
+
+export default withStyles(styles)(RegistrationForm)

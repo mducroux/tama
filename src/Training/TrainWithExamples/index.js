@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react'
 
-import ChooseExamples from "./ChooseExamples"
-import ShowExamples from "./ShowExamples"
+import ChooseExamples from './ChooseExamples'
+import ShowExamples from './ShowExamples'
 
-import tileData from "../tileData"
+import tileData from '../tileData'
 
 class TrainWithExamples extends React.Component {
-  constructor(props){
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       examples: {
-        positiveItems: Array(tileData['positiveItems'].length).fill(false), 
+        positiveItems: Array(tileData['positiveItems'].length).fill(false),
         negativeItems: Array(tileData['negativeItems'].length).fill(false)
       },
       hasChosenExamples: false
-    };
-    this.numberOfExamples = 3;
+    }
+    this.numberOfExamples = 3
   }
 
   handleClickExample = (items, index) => {
@@ -35,25 +35,25 @@ class TrainWithExamples extends React.Component {
     return parallelograms;
   }
 
-  render() {
-    if (!this.state.hasChosenExamples){
-      return(
+  render () {
+    if (!this.state.hasChosenExamples) {
+      return (
         <ChooseExamples
           onSubmit={() => this.setState({hasChosenExamples: true})}
           onClickExample={this.handleClickExample}
           numberOfExamples={this.numberOfExamples}
           examples={this.state.examples}
         />
-      );
+      )
     } else {
-      return(
-        <ShowExamples 
+      return (
+        <ShowExamples
           parallelograms={this.getSelectedParallelograms()}
           numberOfExamples={this.numberOfExamples}
         />
-      );
+      )
     }
   }
 }
 
-export default TrainWithExamples;
+export default TrainWithExamples

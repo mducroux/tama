@@ -1,44 +1,45 @@
-import React from "react";
+import React from 'react'
 
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
-import VirtualStudent from "../../VirtualStudent";
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import VirtualStudent from '../../VirtualStudent'
+import PropTypes from 'prop-types'
 
 const styles = () => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "10px"
-  },
-});
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginTop: '10px'
+  }
+})
 
 class ShowExamples extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {indexExample: 0, thinkingAboutIt: false, answer: '', bubbleImage: '', choiceOrAnswer: ''};
+  constructor (props) {
+    super(props)
+    this.state = {indexExample: 0, thinkingAboutIt: false, answer: '', bubbleImage: '', choiceOrAnswer: ''}
   }
 
   bubbleImage = () => {
-    if (this.state.thinkingAboutIt === true){
-      if (this.state.answer === 'OUI'){ // arbitrary choice
-        return 'images/virtual_student/bubble_know.jpg';
+    if (this.state.thinkingAboutIt === true) {
+      if (this.state.answer === 'OUI') { // arbitrary choice
+        return 'images/virtual_student/bubble_know.jpg'
       } else {
-        return 'images/virtual_student/bubble_dont_know.jpg';
+        return 'images/virtual_student/bubble_dont_know.jpg'
       }
     } else {
-      return 'images/virtual_student/bubble_question.jpg';
+      return 'images/virtual_student/bubble_question.jpg'
     }
   }
 
   choiceOrAnswer = () => {
-    if (this.state.thinkingAboutIt === true){
+    if (this.state.thinkingAboutIt === true) {
       return (
         <Typography variant="title">
-          {this.state.answer}
+          { this.state.answer }
         </Typography>
-      ); 
+      )
     } else {
       return (
         <div>
@@ -63,21 +64,22 @@ class ShowExamples extends React.Component {
             </Grid>
           </Grid>
         </div>
-      );
+      )
     }
   }
 
   handleClick = (key) => {
-    if (this.state.indexExample < this.props.numberOfExamples) {
-      this.setState({thinkingAboutIt: true, answer: key});
+    const { classes } = this.props
+    if (this.state.indexExample < classes.numberOfExamples) {
+      this.setState({thinkingAboutIt: true, answer: key})
       setTimeout(() => {
-        this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1});
-      }, 2000);
+        this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
+      }, 2000)
     }
   }
 
-  render() {
-    const { classes } = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
@@ -97,7 +99,7 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item xs={12} sm={4} >
             <Grid container justify="center">
-              <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
+              <img src={classes.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
@@ -109,8 +111,12 @@ class ShowExamples extends React.Component {
           </Grid>
         </Grid>
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(ShowExamples);
+ShowExamples.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(ShowExamples)

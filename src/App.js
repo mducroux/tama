@@ -1,48 +1,56 @@
-import React, { Component } from 'react';
-import RegistrationForm from "./RegistrationForm";
-import TrainingTypeButton from "./Training/ChooseTraining";
-import TrainWithExamples from "./Training/TrainWithExamples";
+import React, { Component } from 'react'
+import RegistrationForm from './RegistrationForm'
+import TrainingTypeButton from './Training/ChooseTraining'
+import TrainWithExamples from './Training/TrainWithExamples'
 
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import PropTypes from 'prop-types'
 
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
-  },
-};
+    marginRight: 20
+  }
+}
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       isRegistered: true,
-      hasChosenTrainingType: false,
-      hasChosenExampleTrainingType: false,
+      hasChosenTrainingType: true,
+      hasChosenExampleTrainingType: true
     }
   }
 
-  render() {
-    const { classes } = this.props;
-    let displayed;
+  render () {
+    const { classes } = this.props
+    let displayed
     if (!this.state.isRegistered) {
-      displayed = <RegistrationForm onSubmit={() => this.setState({isRegistered: true})}/>;
+      displayed = <RegistrationForm onSubmit={() => this.setState({isRegistered: true})}/>
     } else if (!this.state.hasChosenTrainingType) {
-      displayed = <TrainingTypeButton onClickExample={() => this.setState({hasChosenTrainingType: true, hasChosenExampleTrainingType: true})} onClickExercise={() => this.setState({hasChosenTrainingType: true, hasChosenExampleTrainingType: false})}/>;
+      displayed = <TrainingTypeButton
+        onClickExample={() => this.setState({
+          hasChosenTrainingType: true, hasChosenExampleTrainingType: true})
+        }
+        onClickExercise={() => this.setState({
+          hasChosenTrainingType: true, hasChosenExampleTrainingType: false})
+        }
+      />
     } else if (this.state.hasChosenTrainingType) {
       if (this.state.hasChosenExampleTrainingType) {
-        displayed = <TrainWithExamples/>;
+        displayed = <TrainWithExamples/>
       } else {
-        displayed = <textarea/>;
+        displayed = <textarea/>
       }
     }
     return (
@@ -57,9 +65,13 @@ class App extends Component {
         <div>
           {displayed}
         </div>
-      </div >  
-    );
+      </div>
+    )
   }
 }
 
-export default withStyles(styles, { withTheme: true })(App);
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles, { withTheme: true })(App)
