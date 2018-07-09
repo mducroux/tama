@@ -119,7 +119,9 @@ class TrainingTypeButton extends React.Component {
 }
 
 TrainingTypeButton.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  onClickExample: PropTypes.func.isRequired,
+  onClickExercise: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(TrainingTypeButton)

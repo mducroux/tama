@@ -50,25 +50,18 @@ class ChooseExamples extends React.Component {
   }
 
   handleSubmit = () => {
+    tileData['positiveItems'].forEach(elem => { elem.isSelected = false })
+    tileData['negativeItems'].forEach(elem => { elem.isSelected = false })
+
     if (this.state.numberOfExamplesLeft === 0) this.props.onSubmit()
   }
 
-  onSelectPositiveItems = (index, event) => {
-    if (this.state.numberOfExamplesLeft > 0 || this.props.examples['positiveItems'][index]) {
-      var img = tileData['positiveItems'][index]
+  onSelectItems = (index, event, itemType) => {
+    if (this.state.numberOfExamplesLeft > 0 || this.props.examples[itemType][index]) {
+      var img = tileData[itemType][index]
       img.isSelected = !img.isSelected
-      this.props.onClickExample('positiveItems', index)
-      const newNumberOfElemLeft = this.props.examples['positiveItems'][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
-      this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
-    }
-  }
-
-  onSelectNegativeItems = (index, event) => {
-    if (this.state.numberOfExamplesLeft > 0 || this.props.examples['negativeItems'][index]) {
-      var img = tileData['negativeItems'][index]
-      img.isSelected = !img.isSelected
-      this.props.onClickExample('negativeItems', index)
-      const newNumberOfElemLeft = this.props.examples['negativeItems'][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
+      this.props.onClickExample(itemType, index)
+      const newNumberOfElemLeft = this.props.examples[itemType][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
       this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
     }
   }
@@ -90,13 +83,13 @@ class ChooseExamples extends React.Component {
         <div className={classes.gallery}>
           <Gallery
             images={tileData['positiveItems']}
-            onClickThumbnail={this.onSelectPositiveItems}
+            onClickThumbnail={(i, e) => this.onSelectItems(i, e, 'positiveItems')}
           />
         </div>
         <div className={classes.gallery}>
           <Gallery
             images={tileData['negativeItems']}
-            onClickThumbnail={this.onSelectNegativeItems}
+            onClickThumbnail={(i, e) => this.onSelectItems(i, e, 'negativeItems')}
           />
         </div>
         <div className={classes.root}>

@@ -2,6 +2,7 @@ import React from 'react'
 
 import ChooseExamples from './ChooseExamples'
 import ShowExamples from './ShowExamples'
+import PropTypes from 'prop-types'
 
 import tileData from '../tileData'
 
@@ -19,22 +20,23 @@ class TrainWithExamples extends React.Component {
   }
 
   handleClickExample = (items, index) => {
-    const newExamples = this.state.examples;
-    newExamples[items][index] = !newExamples[items][index];
-    this.setState({examples: newExamples});
+    const newExamples = this.state.examples
+    newExamples[items][index] = !newExamples[items][index]
+    this.setState({examples: newExamples})
   }
 
   getSelectedParallelograms = () => {
     var parallelograms = []
-    for (let items in this.state.examples){
-      for (var ind = 0; ind < this.state.examples[items].length; ind++){
-        if (this.state.examples[items][ind])
-          parallelograms.push(tileData[items][ind].src)
+    for (let items in this.state.examples) {
+      for (var ind = 0; ind < this.state.examples[items].length; ind++) {
+        if (this.state.examples[items][ind]) {
+          parallelograms.push(tileData[items][ind].thumbnail)
+        }
       }
     }
     return parallelograms
   }
- 
+
   render () {
     if (!this.state.hasChosenExamples) {
       return (
@@ -50,10 +52,15 @@ class TrainWithExamples extends React.Component {
         <ShowExamples
           parallelograms={this.getSelectedParallelograms()}
           numberOfExamples={this.numberOfExamples}
+          getBackToMenu={this.props.getBackToMenu}
         />
       )
     }
   }
+}
+
+TrainWithExamples.propTypes = {
+  getBackToMenu: PropTypes.func.isRequired
 }
 
 export default TrainWithExamples

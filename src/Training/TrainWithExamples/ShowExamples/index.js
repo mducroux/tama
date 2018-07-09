@@ -61,12 +61,16 @@ class ShowExamples extends React.Component {
       this.setState({thinkingAboutIt: true, answer: key})
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
-      }, 2000)
+      }, 200)
     }
   }
 
   render () {
     const { classes } = this.props
+
+    if (this.state.indexExample === this.props.numberOfExamples) {
+      this.props.getBackToMenu()
+    }
 
     let bubbleImage
     if (this.state.thinkingAboutIt === true) {
@@ -117,7 +121,8 @@ class ShowExamples extends React.Component {
 ShowExamples.propTypes = {
   classes: PropTypes.object.isRequired,
   numberOfExamples: PropTypes.number.isRequired,
-  parallelograms: PropTypes.array.isRequired
+  parallelograms: PropTypes.array.isRequired,
+  getBackToMenu: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)

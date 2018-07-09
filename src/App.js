@@ -26,9 +26,9 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isRegistered: true,
-      hasChosenTrainingType: true,
-      hasChosenExampleTrainingType: true
+      isRegistered: false,
+      hasChosenTrainingType: false,
+      hasChosenExampleTrainingType: false
     }
   }
 
@@ -48,7 +48,11 @@ class App extends Component {
       />
     } else if (this.state.hasChosenTrainingType) {
       if (this.state.hasChosenExampleTrainingType) {
-        displayed = <TrainWithExamples/>
+        displayed = <TrainWithExamples
+          getBackToMenu={() => this.setState({
+            hasChosenTrainingType: false, hasChosenExampleTrainingType: false})
+          }
+        />
       } else {
         displayed = <textarea/>
       }
