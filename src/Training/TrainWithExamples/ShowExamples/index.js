@@ -74,7 +74,7 @@ class ShowExamples extends React.Component {
 
     let bubbleImage
     if (this.state.thinkingAboutIt === true) {
-      if (this.state.answer === 'OUI') { // arbitrary choice
+      if (Math.random() > 0.5) {
         bubbleImage = 'images/virtual_student/bubble_know.jpg'
       } else {
         bubbleImage = 'images/virtual_student/bubble_dont_know.jpg'

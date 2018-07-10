@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
 import TrainingTypeButton from './Training/ChooseTraining'
 import TrainWithExamples from './Training/TrainWithExamples'
+import TrainWithExercises from './Training/TrainWithExercises'
 import AppBarMenu from './AppBarMenu'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -52,11 +53,15 @@ class App extends Component {
       if (this.state.hasChosenExampleTrainingType) {
         displayed = <TrainWithExamples
           getBackToMenu={() => this.setState({
-            hasChosenTrainingType: false, hasChosenExampleTrainingType: false})
+            hasChosenTrainingType: false})
           }
         />
       } else {
-        displayed = <textarea/>
+        displayed = <TrainWithExercises
+          getBackToMenu={() => this.setState({
+            hasChosenTrainingType: false})
+          }
+        />
       }
     }
     return (

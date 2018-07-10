@@ -1,12 +1,10 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 import Gallery from 'react-grid-gallery'
 import IconButton from '@material-ui/core/IconButton'
 import BackNavigation from '@material-ui/icons/ArrowBack'
+import Typography from '@material-ui/core/Typography'
 
 import tileData from '../../tileData'
 
@@ -37,41 +35,13 @@ const styles = theme => ({
   }
 })
 
-class ChooseExamples extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = { numberOfExamplesLeft: this.props.numberOfExamples }
-  }
-
+class ChooseExercise extends React.Component {
   onSelectItems = (index, event, itemType) => {
-    if (this.state.numberOfExamplesLeft > 0 || this.props.examples[itemType][index]) {
-      var img = tileData[itemType][index]
-      img.isSelected = !img.isSelected
-      this.props.onClickExample(itemType, index)
-      const newNumberOfElemLeft = this.props.examples[itemType][index]
-        ? this.state.numberOfExamplesLeft - 1
-        : this.state.numberOfExamplesLeft + 1
-      this.setState({ numberOfExamplesLeft: newNumberOfElemLeft })
-    }
-  }
-
-  handleSubmit = () => {
-    if (this.state.numberOfExamplesLeft === 0) {
-      this.props.onSubmit()
-    }
+    this.props.onSelectExercise(itemType, index)
   }
 
   handleBackNavigation = () => {
     this.props.onBackNavigation()
-  }
-
-  componentWillUnmount () {
-    tileData['positiveItems'].forEach(elem => {
-      elem.isSelected = false
-    })
-    tileData['negativeItems'].forEach(elem => {
-      elem.isSelected = false
-    })
   }
 
   render () {
@@ -83,8 +53,7 @@ class ChooseExamples extends React.Component {
             <BackNavigation />
           </IconButton>
           <Typography variant='headline' className={classes.title}>
-            Choisissez {this.state.numberOfExamplesLeft}{' '}
-            {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'}
+            Choisissez une forme
           </Typography>
         </div>
         <div className={classes.gallery}>
@@ -103,32 +72,15 @@ class ChooseExamples extends React.Component {
             }
           />
         </div>
-        <div className={classes.root}>
-          <Grid container justify='center'>
-            <Grid item>
-              <Button
-                variant='contained'
-                color='primary'
-                className={classes.button}
-                onClick={this.handleSubmit}
-              >
-                Ok
-              </Button>
-            </Grid>
-          </Grid>
-        </div>
       </div>
     )
   }
 }
 
-ChooseExamples.propTypes = {
+ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  examples: PropTypes.object.isRequired,
-  onClickExample: PropTypes.func.isRequired,
-  numberOfExamples: PropTypes.number.isRequired,
+  onSelectExercise: PropTypes.func.isRequired,
   onBackNavigation: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(ChooseExamples)
+export default withStyles(styles)(ChooseExercise)
