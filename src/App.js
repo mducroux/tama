@@ -28,7 +28,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isRegistered: localStorage.getItem('username') != null,
+      isRegistered: localStorage.getItem('username') !== '',
       hasChosenTrainingType: false,
       hasChosenExampleTrainingType: false
     }

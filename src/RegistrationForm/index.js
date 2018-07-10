@@ -41,16 +41,19 @@ class RegistrationForm extends React.Component {
       age: '',
       knowledge: 'no'
     }
-    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  handleInputChange (event) {
+  handleInputChange = (event) => {
     const value = event.target.value
     const name = event.target.name
 
     this.setState({
       [name]: value
     })
+  }
+
+  handleSubmit = () => {
+    this.props.onSubmit(this.state.pseudo)
   }
 
   render () {
@@ -60,7 +63,7 @@ class RegistrationForm extends React.Component {
         <ValidatorForm
           component='fieldset'
           className={classes.validatorForm}
-          onSubmit={this.props.onSubmit(this.state.pseudo)}
+          onSubmit={this.handleSubmit}
         >
           <div className={classes.title}>
             <Typography variant='display1'>Inscription à Tama</Typography>
