@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
 import TrainingTypeButton from './Training/ChooseTraining'
 import TrainWithExamples from './Training/TrainWithExamples'
+import AppBarMenu from './AppBarMenu'
 
 import { withStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import AccountCircle from '@material-ui/icons/AccountCircle'
 
 import PropTypes from 'prop-types'
 
@@ -64,16 +61,15 @@ class App extends Component {
     }
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              {!this.state.isRegistered ? 'Welcome to Tama !' : 'Welcome back ' + localStorage.getItem('username') + ' !' }
-            </Typography>
-            {this.state.isRegistered && (
-              <AccountCircle />
-            )}
-          </Toolbar>
-        </AppBar>
+        <AppBarMenu
+          isRegistered={this.state.isRegistered}
+          onLogout={() => {
+            localStorage.clear('username')
+            this.setState({
+              isRegistered: false, hasChosenTrainingType: false, hasChosenExampleTrainingType: false
+            })
+          }}
+        />
         <div>
           {displayed}
         </div>
