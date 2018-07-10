@@ -55,22 +55,29 @@ const styles = theme => ({
 const images = [
   {
     url: 'images/example_512x512.png',
-    title: 'Montrer des exemples',
+    title: 'Exemples',
     width: '50%'
   },
   {
     url: 'images/exercise_512x512.png',
-    title: 'Donner un exercice',
+    title: 'Exercices',
+    width: '50%'
+  },
+  {
+    url: 'images/test_512x512.png',
+    title: 'Test',
     width: '50%'
   }
 ]
 
-class TrainingTypeButton extends React.Component {
+class ActivityTypeButton extends React.Component {
   handleButtonClick = (key) => {
-    if (key === 'Montrer des exemples') {
+    if (key === 'Exemples') {
       this.props.onClickExample()
-    } else {
+    } else if (key === 'Exercices') {
       this.props.onClickExercise()
+    } else if (key === 'Test') {
+      this.props.onClickTest()
     }
   }
 
@@ -78,7 +85,7 @@ class TrainingTypeButton extends React.Component {
     const { classes } = this.props
     return (
       <Grid container className={classes.root} justify='center' >
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={12}>
           <Grid
             container
             className={classes.root}
@@ -86,7 +93,7 @@ class TrainingTypeButton extends React.Component {
             spacing={0}
           >
             {images.map(image => (
-              <Grid item xs={12} sm={6} key={image.title}>
+              <Grid item xs={12} sm={4} key={image.title}>
                 <ButtonBase
                   className={classes.button}
                   focusVisibleClassName={classes.focusVisible}
@@ -118,10 +125,11 @@ class TrainingTypeButton extends React.Component {
   }
 }
 
-TrainingTypeButton.propTypes = {
+ActivityTypeButton.propTypes = {
   classes: PropTypes.object.isRequired,
   onClickExample: PropTypes.func.isRequired,
-  onClickExercise: PropTypes.func.isRequired
+  onClickExercise: PropTypes.func.isRequired,
+  onClickTest: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(TrainingTypeButton)
+export default withStyles(styles)(ActivityTypeButton)

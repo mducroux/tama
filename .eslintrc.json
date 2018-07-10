@@ -1,5 +1,5 @@
 {
     "parser": "babel-eslint",
     "extends": ["standard","plugin:react/recommended"],
-    "globals": {"localStorage": true}
+    "globals": {"localStorage": true, "it": true}
 }

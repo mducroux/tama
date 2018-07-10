@@ -40,13 +40,12 @@ class AppBarMenu extends React.Component {
     const { classes } = this.props
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
-
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              {!this.props.isRegistered ? 'Welcome to Tama !' : 'Welcome ' + localStorage.getItem('username') + ' !'}
+              {!this.props.isRegistered ? 'Bienvenue à Tama !' : 'Bienvenue ' + localStorage.getItem('username') + ' !'}
             </Typography>
             {this.props.isRegistered && (
               <div>

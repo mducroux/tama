@@ -47,21 +47,21 @@ class ShowExamples extends React.Component {
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               <VirtualStudent bubbleImage={bubbleImage}/>
             </Grid>
           </Grid>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               <img src={this.props.parallelograms} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               {!this.state.thinkingAboutIt && (
                 <div>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
-import TrainingTypeButton from './Training/ChooseTraining'
-import TrainWithExamples from './Training/TrainWithExamples'
-import TrainWithExercises from './Training/TrainWithExercises'
+import ActivityTypeButton from './Activity/ChooseActivity'
+import TrainWithExamples from './Activity/TrainWithExamples'
+import TrainWithExercises from './Activity/TrainWithExercises'
 import AppBarMenu from './AppBarMenu'
+import HomeMenu from './HomeMenu'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -26,42 +27,79 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isRegistered: localStorage.getItem('username') !== '',
-      hasChosenTrainingType: false,
-      hasChosenExampleTrainingType: false
+      hasBeenWelcomed: false,
+      isRegistered: !(!(localStorage.getItem('username'))),
+      hasChosenActivityType: false,
+      hasChosenActivity: ''
     }
   }
 
   render () {
     const { classes } = this.props
     let displayed
-    if (!this.state.isRegistered) {
-      displayed = <RegistrationForm onSubmit={(username) => {
-        this.setState({isRegistered: true})
-        localStorage.setItem('username', username)
-      }}/>
-    } else if (!this.state.hasChosenTrainingType) {
-      displayed = <TrainingTypeButton
-        onClickExample={() => this.setState({
-          hasChosenTrainingType: true, hasChosenExampleTrainingType: true})
-        }
-        onClickExercise={() => this.setState({
-          hasChosenTrainingType: true, hasChosenExampleTrainingType: false})
-        }
-      />
-    } else if (this.state.hasChosenTrainingType) {
-      if (this.state.hasChosenExampleTrainingType) {
-        displayed = <TrainWithExamples
-          getBackToMenu={() => this.setState({
-            hasChosenTrainingType: false})
+    if (!this.state.hasBeenWelcomed) {
+      displayed = (
+        <HomeMenu
+          onClickStart={() =>
+            this.setState({
+              hasBeenWelcomed: true
+            })
           }
         />
-      } else {
-        displayed = <TrainWithExercises
-          getBackToMenu={() => this.setState({
-            hasChosenTrainingType: false})
+      )
+    } else if (!this.state.isRegistered) {
+      displayed = (
+        <RegistrationForm
+          onSubmit={username => {
+            this.setState({ isRegistered: true })
+            localStorage.setItem('username', username)
+          }}
+        />
+      )
+    } else if (!this.state.hasChosenActivityType) {
+      displayed = (
+        <ActivityTypeButton
+          onClickExample={() =>
+            this.setState({
+              hasChosenActivityType: true,
+              hasChosenActivity: 'example'
+            })
+          }
+          onClickExercise={() =>
+            this.setState({
+              hasChosenActivityType: true,
+              hasChosenActivity: 'exercise'
+            })
+          }
+          onClickTest={() =>
+            this.setState({
+              hasChosenActivityType: true,
+              hasChosenActivity: 'test'
+            })
           }
         />
+      )
+    } else if (this.state.hasChosenActivityType) {
+      if (this.state.hasChosenActivity === 'example') {
+        displayed = (
+          <TrainWithExamples
+            getBackToMenu={() =>
+              this.setState({
+                hasChosenActivityType: false
+              })
+            }
+          />
+        )
+      } else if (this.state.hasChosenActivity === 'exercise') {
+        displayed = (
+          <TrainWithExercises
+            getBackToMenu={() =>
+              this.setState({
+                hasChosenActivityType: false
+              })
+            }
+          />
+        )
       }
     }
     return (
@@ -71,13 +109,14 @@ class App extends Component {
           onLogout={() => {
             localStorage.clear('username')
             this.setState({
-              isRegistered: false, hasChosenTrainingType: false, hasChosenExampleTrainingType: false
+              hasBeenWelcomed: false,
+              isRegistered: false,
+              hasChosenActivityType: false,
+              hasChosenActivity: ''
             })
           }}
         />
-        <div>
-          {displayed}
-        </div>
+        <div>{displayed}</div>
       </div>
     )
   }

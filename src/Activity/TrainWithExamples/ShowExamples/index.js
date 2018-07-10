@@ -61,16 +61,15 @@ class ShowExamples extends React.Component {
       this.setState({thinkingAboutIt: true, answer: key})
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
+        if (this.state.indexExample === this.props.numberOfExamples) {
+          this.props.getBackToMenu()
+        }
       }, 200)
     }
   }
 
   render () {
     const { classes } = this.props
-
-    if (this.state.indexExample === this.props.numberOfExamples) {
-      this.props.getBackToMenu()
-    }
 
     let bubbleImage
     if (this.state.thinkingAboutIt === true) {
@@ -86,28 +85,28 @@ class ShowExamples extends React.Component {
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               <VirtualStudent bubbleImage={bubbleImage}/>
             </Grid>
           </Grid>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               Exemple : {this.state.indexExample + 1} / 3
             </Grid>
           </Grid>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item xs={12} sm={4} >
+          <Grid item>
             <Grid container justify="center">
               {this.choiceOrAnswer()}
             </Grid>
