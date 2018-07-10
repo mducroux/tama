@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 import Gallery from 'react-grid-gallery'
+import IconButton from '@material-ui/core/IconButton'
+import BackNavigation from '@material-ui/icons/ArrowBack'
 
 import tileData from '../../tileData'
 
@@ -15,8 +17,7 @@ const styles = theme => ({
     overflow: 'hidden'
   },
   button: {
-    margin: theme.spacing.unit * 3,
-    height: '20px'
+    margin: theme.spacing.unit * 3
   },
   titleBar: {
     background:
@@ -31,28 +32,27 @@ const styles = theme => ({
     overflow: 'auto'
   },
   title: {
-    margin: theme.spacing.unit * 3
+    display: 'flex',
+    alignItems: 'center'
   }
 })
 
 class ChooseExamples extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {numberOfExamplesLeft: this.props.numberOfExamples}
-  }
-
-  handleClickExample = (items, index) => {
-    if (this.state.numberOfExamplesLeft > 0 || this.props.examples[items][index]) {
-      this.props.onClickExample(items, index)
-      const newNumberOfElemLeft = this.props.examples[items][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
-      this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
-    }
+    this.state = { numberOfExamplesLeft: this.props.numberOfExamples }
   }
 
   handleSubmit = () => {
-    tileData['positiveItems'].forEach(elem => { elem.isSelected = false })
-    tileData['negativeItems'].forEach(elem => { elem.isSelected = false })
-    if (this.state.numberOfExamplesLeft === 0) this.props.onSubmit()
+    if (this.state.numberOfExamplesLeft === 0) {
+      tileData['positiveItems'].forEach(elem => {
+        elem.isSelected = false
+      })
+      tileData['negativeItems'].forEach(elem => {
+        elem.isSelected = false
+      })
+      this.props.onSubmit()
+    }
   }
 
   onSelectItems = (index, event, itemType) => {
@@ -60,9 +60,21 @@ class ChooseExamples extends React.Component {
       var img = tileData[itemType][index]
       img.isSelected = !img.isSelected
       this.props.onClickExample(itemType, index)
-      const newNumberOfElemLeft = this.props.examples[itemType][index] ? this.state.numberOfExamplesLeft - 1 : this.state.numberOfExamplesLeft + 1
-      this.setState({numberOfExamplesLeft: newNumberOfElemLeft})
+      const newNumberOfElemLeft = this.props.examples[itemType][index]
+        ? this.state.numberOfExamplesLeft - 1
+        : this.state.numberOfExamplesLeft + 1
+      this.setState({ numberOfExamplesLeft: newNumberOfElemLeft })
     }
+  }
+
+  handleBackNavigation = () => {
+    tileData['positiveItems'].forEach(elem => {
+      elem.isSelected = false
+    })
+    tileData['negativeItems'].forEach(elem => {
+      elem.isSelected = false
+    })
+    this.props.onBackNavigation()
   }
 
   render () {
@@ -70,25 +82,28 @@ class ChooseExamples extends React.Component {
     return (
       <div>
         <div className={classes.root}>
-          <Grid container justify='center'>
-            <Grid item>
-              <Typography variant='headline' className={classes.title}>
-                Choisissez {this.state.numberOfExamplesLeft}{' '}
-                {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'}
-              </Typography>
-            </Grid>
-          </Grid>
+          <IconButton className={classes.button} onClick={this.handleBackNavigation} color='inherit'>
+            <BackNavigation />
+          </IconButton>
+          <Typography variant='headline' className={classes.title}>
+            Choisissez {this.state.numberOfExamplesLeft}{' '}
+            {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'}
+          </Typography>
         </div>
         <div className={classes.gallery}>
           <Gallery
             images={tileData['positiveItems']}
-            onClickThumbnail={(i, e) => this.onSelectItems(i, e, 'positiveItems')}
+            onClickThumbnail={(i, e) =>
+              this.onSelectItems(i, e, 'positiveItems')
+            }
           />
         </div>
         <div className={classes.gallery}>
           <Gallery
             images={tileData['negativeItems']}
-            onClickThumbnail={(i, e) => this.onSelectItems(i, e, 'negativeItems')}
+            onClickThumbnail={(i, e) =>
+              this.onSelectItems(i, e, 'negativeItems')
+            }
           />
         </div>
         <div className={classes.root}>
@@ -108,14 +123,15 @@ class ChooseExamples extends React.Component {
       </div>
     )
   }
-};
+}
 
 ChooseExamples.propTypes = {
   classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   examples: PropTypes.object.isRequired,
   onClickExample: PropTypes.func.isRequired,
-  numberOfExamples: PropTypes.number.isRequired
+  numberOfExamples: PropTypes.number.isRequired,
+  onBackNavigation: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ChooseExamples)

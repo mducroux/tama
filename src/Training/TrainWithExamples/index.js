@@ -45,6 +45,7 @@ class TrainWithExamples extends React.Component {
           onClickExample={this.handleClickExample}
           numberOfExamples={this.numberOfExamples}
           examples={this.state.examples}
+          onBackNavigation={this.props.getBackToMenu}
         />
       )
     } else {

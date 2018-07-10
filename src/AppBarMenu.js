@@ -46,7 +46,7 @@ class AppBarMenu extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              {!this.props.isRegistered ? 'Welcome to Tama !' : 'Welcome back ' + localStorage.getItem('username') + ' !'}
+              {!this.props.isRegistered ? 'Welcome to Tama !' : 'Welcome ' + localStorage.getItem('username') + ' !'}
             </Typography>
             {this.props.isRegistered && (
               <div>
