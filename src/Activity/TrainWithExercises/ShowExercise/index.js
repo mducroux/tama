@@ -17,11 +17,14 @@ const styles = () => ({
 class ShowExamples extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', choiceOrAnswer: ''}
+    this.state = {thinkingAboutIt: true, bubbleImage: '', answer: ''}
   }
 
-  handleClick = () => {
-    this.props.getBackToExercise()
+  handleClick = (answer) => {
+    this.setState({answer: answer, thinkingAboutIt: true})
+    setTimeout(() => {
+      this.props.getBackToMenu()
+    }, 2000)
   }
 
   componentDidMount () {
@@ -35,7 +38,15 @@ class ShowExamples extends React.Component {
 
     let bubbleImage
     if (this.state.thinkingAboutIt === true) {
-      bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
+      if (!this.state.answer) {
+        bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
+      } else {
+        if (this.state.answer === 'true') {
+          bubbleImage = 'images/virtual_student/bubble_happy.jpg'
+        } else {
+          bubbleImage = 'images/virtual_student/bubble_disappointed.jpg'
+        }
+      }
     } else {
       if (Math.random() > 0.5) {
         bubbleImage = 'images/virtual_student/bubble_positive_answer.jpg'
@@ -56,7 +67,7 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item>
             <Grid container justify="center">
-              <img src={this.props.parallelogram} alt="parallelogram" width="300" height="300"/>
+              <img src={this.props.parallelogram.src} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
@@ -70,7 +81,7 @@ class ShowExamples extends React.Component {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => this.handleClick()}
+                        onClick={() => this.handleClick('true')}
                       >
                         Vrai
                       </Button>
@@ -79,7 +90,7 @@ class ShowExamples extends React.Component {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => this.handleClick()}
+                        onClick={() => this.handleClick('false')}
                       >
                         Faux
                       </Button>
@@ -97,8 +108,8 @@ class ShowExamples extends React.Component {
 
 ShowExamples.propTypes = {
   classes: PropTypes.object.isRequired,
-  getBackToExercise: PropTypes.func.isRequired,
-  parallelogram: PropTypes.string.isRequired
+  getBackToMenu: PropTypes.func.isRequired,
+  parallelogram: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)

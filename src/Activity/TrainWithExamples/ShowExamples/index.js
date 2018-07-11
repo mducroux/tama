@@ -73,11 +73,7 @@ class ShowExamples extends React.Component {
 
     let bubbleImage
     if (this.state.thinkingAboutIt === true) {
-      if (Math.random() > 0.5) {
-        bubbleImage = 'images/virtual_student/bubble_know.jpg'
-      } else {
-        bubbleImage = 'images/virtual_student/bubble_dont_know.jpg'
-      }
+      bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
     } else {
       bubbleImage = 'images/virtual_student/bubble_question.jpg'
     }

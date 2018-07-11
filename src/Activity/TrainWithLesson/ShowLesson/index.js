@@ -25,7 +25,7 @@ const styles = () => ({
 class ShowLesson extends React.Component {
   componentDidMount () {
     setTimeout(() => {
-      this.props.getBackToLesson()
+      this.props.getBackToMenu()
     }, 3000)
   }
 
@@ -65,7 +65,7 @@ class ShowLesson extends React.Component {
 
 ShowLesson.propTypes = {
   classes: PropTypes.object.isRequired,
-  getBackToLesson: PropTypes.func.isRequired,
+  getBackToMenu: PropTypes.func.isRequired,
   lesson: PropTypes.string.isRequired
 }
 

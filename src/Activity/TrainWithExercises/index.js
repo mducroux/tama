@@ -34,8 +34,8 @@ class TrainWithExercise extends React.Component {
     } else {
       return (
         <ShowExercise
-          parallelogram={parallelogramData[this.state.index].src}
-          getBackToExercise={this.getBackToExercise}
+          parallelogram={parallelogramData[this.state.index]}
+          getBackToMenu={this.props.getBackToMenu}
         />
       )
     }

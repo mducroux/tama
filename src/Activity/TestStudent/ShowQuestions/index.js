@@ -23,7 +23,7 @@ class ShowQuestions extends React.Component {
   componentDidMount () {
     this.timerID = setInterval(
       () => this.state.thinkingAboutIt ? this.answerQuestion() : this.thinkingAboutQuestion(),
-      80
+      2000
     )
   }
 

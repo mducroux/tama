@@ -19,10 +19,6 @@ class TrainWithLesson extends React.Component {
     this.setState({index: index, hasChosenLesson: true})
   }
 
-  getBackToLesson = () => {
-    this.setState({hasChosenLesson: false})
-  }
-
   render () {
     if (!this.state.hasChosenLesson) {
       return (
@@ -35,7 +31,7 @@ class TrainWithLesson extends React.Component {
       return (
         <ShowLesson
           lesson={lesson[this.state.index]}
-          getBackToLesson={this.getBackToLesson}
+          getBackToMenu={this.props.getBackToMenu}
         />
       )
     }
