@@ -3,6 +3,8 @@ import RegistrationForm from './RegistrationForm'
 import ActivityTypeButton from './Activity/ChooseActivity'
 import TrainWithExamples from './Activity/TrainWithExamples'
 import TrainWithExercises from './Activity/TrainWithExercises'
+import TrainWithLesson from './Activity/TrainWithLesson'
+import TestStudent from './Activity/TestStudent'
 import AppBarMenu from './AppBarMenu'
 import HomeMenu from './HomeMenu'
 
@@ -71,6 +73,12 @@ class App extends Component {
               hasChosenActivity: 'exercise'
             })
           }
+          onClickLesson={() =>
+            this.setState({
+              hasChosenActivityType: true,
+              hasChosenActivity: 'lesson'
+            })
+          }
           onClickTest={() =>
             this.setState({
               hasChosenActivityType: true,
@@ -99,6 +107,20 @@ class App extends Component {
               })
             }
           />
+        )
+      } else if (this.state.hasChosenActivity === 'lesson') {
+        displayed = (
+          <TrainWithLesson
+            getBackToMenu={() =>
+              this.setState({
+                hasChosenActivityType: false
+              })
+            }
+          />
+        )
+      } else if (this.state.hasChosenActivity === 'test') {
+        displayed = (
+          <TestStudent />
         )
       }
     }

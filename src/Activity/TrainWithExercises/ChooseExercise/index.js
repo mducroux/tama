@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import BackNavigation from '@material-ui/icons/ArrowBack'
 import Typography from '@material-ui/core/Typography'
 
-import tileData from '../../tileData'
+import tileData from '../../TileData'
 
 const styles = theme => ({
   root: {

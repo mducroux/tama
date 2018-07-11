@@ -55,18 +55,19 @@ const styles = theme => ({
 const images = [
   {
     url: 'images/example_512x512.png',
-    title: 'Exemples',
-    width: '50%'
+    title: 'Exemples'
   },
   {
     url: 'images/exercise_512x512.png',
-    title: 'Exercices',
-    width: '50%'
+    title: 'Exercices'
+  },
+  {
+    url: 'images/lesson_512x512.png',
+    title: 'Leçon'
   },
   {
     url: 'images/test_512x512.png',
-    title: 'Test',
-    width: '50%'
+    title: 'Test'
   }
 ]
 
@@ -76,6 +77,8 @@ class ActivityTypeButton extends React.Component {
       this.props.onClickExample()
     } else if (key === 'Exercices') {
       this.props.onClickExercise()
+    } else if (key === 'Leçon') {
+      this.props.onClickLesson()
     } else if (key === 'Test') {
       this.props.onClickTest()
     }
@@ -93,7 +96,7 @@ class ActivityTypeButton extends React.Component {
             spacing={0}
           >
             {images.map(image => (
-              <Grid item xs={12} sm={4} key={image.title}>
+              <Grid item xs={12} sm={3} key={image.title}>
                 <ButtonBase
                   className={classes.button}
                   focusVisibleClassName={classes.focusVisible}
@@ -129,6 +132,7 @@ ActivityTypeButton.propTypes = {
   classes: PropTypes.object.isRequired,
   onClickExample: PropTypes.func.isRequired,
   onClickExercise: PropTypes.func.isRequired,
+  onClickLesson: PropTypes.func.isRequired,
   onClickTest: PropTypes.func.isRequired
 }
 

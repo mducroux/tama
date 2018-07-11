@@ -4,7 +4,7 @@ import ChooseExercise from './ChooseExercise'
 import ShowExercise from './ShowExercise'
 import PropTypes from 'prop-types'
 
-import tileData from '../tileData'
+import tileData from '../TileData'
 
 class TrainWithExercise extends React.Component {
   constructor (props) {

@@ -4,7 +4,7 @@ import ChooseExamples from './ChooseExamples'
 import ShowExamples from './ShowExamples'
 import PropTypes from 'prop-types'
 
-import tileData from '../tileData'
+import tileData from '../TileData'
 
 class TrainWithExamples extends React.Component {
   constructor (props) {

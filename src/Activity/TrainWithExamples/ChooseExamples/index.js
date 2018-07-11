@@ -8,7 +8,7 @@ import Gallery from 'react-grid-gallery'
 import IconButton from '@material-ui/core/IconButton'
 import BackNavigation from '@material-ui/icons/ArrowBack'
 
-import tileData from '../../tileData'
+import tileData from '../../TileData'
 
 const styles = theme => ({
   root: {
