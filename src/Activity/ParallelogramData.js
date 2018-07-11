@@ -81,6 +81,6 @@ const negativeItems = [
   }
 ]
 
-const tileData = {positiveItems: positiveItems, negativeItems: negativeItems}
+const parallelogramData = {positiveItems: positiveItems, negativeItems: negativeItems}
 
-export default tileData
+export default parallelogramData

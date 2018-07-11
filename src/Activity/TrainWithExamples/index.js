@@ -4,15 +4,15 @@ import ChooseExamples from './ChooseExamples'
 import ShowExamples from './ShowExamples'
 import PropTypes from 'prop-types'
 
-import tileData from '../TileData'
+import parallelogramData from '../ParallelogramData'
 
 class TrainWithExamples extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       examples: {
-        positiveItems: Array(tileData['positiveItems'].length).fill(false),
-        negativeItems: Array(tileData['negativeItems'].length).fill(false)
+        positiveItems: Array(parallelogramData['positiveItems'].length).fill(false),
+        negativeItems: Array(parallelogramData['negativeItems'].length).fill(false)
       },
       hasChosenExamples: false
     }
@@ -30,7 +30,7 @@ class TrainWithExamples extends React.Component {
     for (let items in this.state.examples) {
       for (var ind = 0; ind < this.state.examples[items].length; ind++) {
         if (this.state.examples[items][ind]) {
-          parallelograms.push(tileData[items][ind].src)
+          parallelograms.push(parallelogramData[items][ind].src)
         }
       }
     }

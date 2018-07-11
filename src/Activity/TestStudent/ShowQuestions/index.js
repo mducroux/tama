@@ -23,7 +23,7 @@ class ShowQuestions extends React.Component {
   componentDidMount () {
     this.timerID = setInterval(
       () => this.state.thinkingAboutIt ? this.answerQuestion() : this.thinkingAboutQuestion(),
-      2000
+      200
     )
   }
 
@@ -34,13 +34,14 @@ class ShowQuestions extends React.Component {
   }
 
   thinkingAboutQuestion () {
-    if (this.props.numberOfQuestion === this.state.indexQuestion + 1) {
-      this.props.displayResult()
+    if (this.props.numberOfQuestions === this.state.indexQuestion + 1) {
+      this.props.displayResultTest()
+    } else {
+      this.setState({
+        indexQuestion: this.state.indexQuestion + 1,
+        thinkingAboutIt: true
+      })
     }
-    this.setState({
-      indexQuestion: this.state.indexQuestion + 1,
-      thinkingAboutIt: true
-    })
   }
 
   componentWillUnmount () {
@@ -75,7 +76,7 @@ class ShowQuestions extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item>
             <Grid container justify="center">
-              <img src={this.props.examQuestion[this.state.indexQuestion]} alt="parallelogram" width="300" height="300"/>
+              <img src={this.props.examQuestions[this.state.indexQuestion]} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
@@ -93,9 +94,9 @@ class ShowQuestions extends React.Component {
 
 ShowQuestions.propTypes = {
   classes: PropTypes.object.isRequired,
-  displayResult: PropTypes.func.isRequired,
-  numberOfQuestion: PropTypes.number.isRequired,
-  examQuestion: PropTypes.array.isRequired
+  displayResultTest: PropTypes.func.isRequired,
+  numberOfQuestions: PropTypes.number.isRequired,
+  examQuestions: PropTypes.array.isRequired
 }
 
 export default withStyles(styles)(ShowQuestions)

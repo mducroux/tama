@@ -4,7 +4,7 @@ import ChooseExercise from './ChooseExercise'
 import ShowExercise from './ShowExercise'
 import PropTypes from 'prop-types'
 
-import tileData from '../TileData'
+import parallelogramData from '../ParallelogramData'
 
 class TrainWithExercise extends React.Component {
   constructor (props) {
@@ -35,7 +35,7 @@ class TrainWithExercise extends React.Component {
     } else {
       return (
         <ShowExercise
-          parallelograms={tileData[this.state.itemType][this.state.index].src}
+          parallelograms={parallelogramData[this.state.itemType][this.state.index].src}
           getBackToExercise={this.getBackToExercise}
         />
       )

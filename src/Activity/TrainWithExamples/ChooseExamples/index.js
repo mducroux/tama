@@ -8,7 +8,7 @@ import Gallery from 'react-grid-gallery'
 import IconButton from '@material-ui/core/IconButton'
 import BackNavigation from '@material-ui/icons/ArrowBack'
 
-import tileData from '../../TileData'
+import parallelogramData from '../../ParallelogramData'
 
 const styles = theme => ({
   root: {
@@ -45,7 +45,7 @@ class ChooseExamples extends React.Component {
 
   onSelectItems = (index, event, itemType) => {
     if (this.state.numberOfExamplesLeft > 0 || this.props.examples[itemType][index]) {
-      var img = tileData[itemType][index]
+      var img = parallelogramData[itemType][index]
       img.isSelected = !img.isSelected
       this.props.onClickExample(itemType, index)
       const newNumberOfElemLeft = this.props.examples[itemType][index]
@@ -66,10 +66,10 @@ class ChooseExamples extends React.Component {
   }
 
   componentWillUnmount () {
-    tileData['positiveItems'].forEach(elem => {
+    parallelogramData['positiveItems'].forEach(elem => {
       elem.isSelected = false
     })
-    tileData['negativeItems'].forEach(elem => {
+    parallelogramData['negativeItems'].forEach(elem => {
       elem.isSelected = false
     })
   }
@@ -89,7 +89,7 @@ class ChooseExamples extends React.Component {
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={tileData['positiveItems']}
+            images={parallelogramData['positiveItems']}
             onClickThumbnail={(i, e) =>
               this.onSelectItems(i, e, 'positiveItems')
             }
@@ -97,7 +97,7 @@ class ChooseExamples extends React.Component {
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={tileData['negativeItems']}
+            images={parallelogramData['negativeItems']}
             onClickThumbnail={(i, e) =>
               this.onSelectItems(i, e, 'negativeItems')
             }
