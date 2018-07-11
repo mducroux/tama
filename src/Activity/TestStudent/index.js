@@ -16,14 +16,10 @@ class TrainWithExamples extends React.Component {
   }
 
   setExamQuestion = () => {
-    // The number of questions should be less than the shortest length of the ParallelogramData arrays
-    var positiveItemQuestion = parallelogramData['positiveItems'].sort(() => 0.5 - Math.random())
-    var negativeItemQuestion = parallelogramData['negativeItems'].sort(() => 0.5 - Math.random())
-    var numberOfPositiveItem = Math.floor(Math.random() * this.numberOfQuestions) + 1
-    this.examQuestions = positiveItemQuestion.slice(0, numberOfPositiveItem, positiveItemQuestion.length)
-    this.examQuestions = this.examQuestions.concat(negativeItemQuestion.slice(0, this.numberOfQuestions - numberOfPositiveItem))
+    // The number of questions should be less than the length of parallelogramData
+    this.examQuestions = parallelogramData.sort(() => 0.5 - Math.random()) // shuffle array
+    this.examQuestions = this.examQuestions.slice(0, this.numberOfQuestions)
     this.examQuestions = this.examQuestions.map(x => x.src)
-    this.examQuestions = this.examQuestions.sort(() => 0.5 - Math.random())
   }
 
   render () {

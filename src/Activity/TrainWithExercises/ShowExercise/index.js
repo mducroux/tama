@@ -56,7 +56,7 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item>
             <Grid container justify="center">
-              <img src={this.props.parallelograms} alt="parallelogram" width="300" height="300"/>
+              <img src={this.props.parallelogram} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
@@ -98,7 +98,7 @@ class ShowExamples extends React.Component {
 ShowExamples.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToExercise: PropTypes.func.isRequired,
-  parallelograms: PropTypes.string.isRequired
+  parallelogram: PropTypes.string.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)

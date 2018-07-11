@@ -10,14 +10,13 @@ class TrainWithExercise extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      itemType: '',
       index: 0,
       hasChosenExercise: false
     }
   }
 
-  handleSelectExercise = (items, index) => {
-    this.setState({hasChosenExercise: true, itemType: items, index: index})
+  handleSelectExercise = (index) => {
+    this.setState({hasChosenExercise: true, index: index})
   }
 
   getBackToExercise = () => {
@@ -35,7 +34,7 @@ class TrainWithExercise extends React.Component {
     } else {
       return (
         <ShowExercise
-          parallelograms={parallelogramData[this.state.itemType][this.state.index].src}
+          parallelogram={parallelogramData[this.state.index].src}
           getBackToExercise={this.getBackToExercise}
         />
       )

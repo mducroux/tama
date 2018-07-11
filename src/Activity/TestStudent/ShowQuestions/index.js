@@ -17,13 +17,13 @@ const styles = () => ({
 class ShowQuestions extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0}
+    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, score: 0}
   }
 
   componentDidMount () {
     this.timerID = setInterval(
       () => this.state.thinkingAboutIt ? this.answerQuestion() : this.thinkingAboutQuestion(),
-      200
+      2000
     )
   }
 
@@ -84,6 +84,15 @@ class ShowQuestions extends React.Component {
           <Grid item>
             <Grid container justify="center">
               <VirtualStudent bubbleImage={bubbleImage}/>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Grid item>
+            <Grid container justify="center">
+              <Typography variant='subheading'>
+                Note : {this.state.score} / {this.props.numberOfQuestions}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>

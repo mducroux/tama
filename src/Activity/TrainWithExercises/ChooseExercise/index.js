@@ -36,8 +36,8 @@ const styles = theme => ({
 })
 
 class ChooseExercise extends React.Component {
-  onSelectItems = (index, event, itemType) => {
-    this.props.onSelectExercise(itemType, index)
+  onSelectItems = (index, event) => {
+    this.props.onSelectExercise(index)
   }
 
   handleBackNavigation = () => {
@@ -58,17 +58,17 @@ class ChooseExercise extends React.Component {
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={parallelogramData['positiveItems']}
-            onClickThumbnail={(i, e) =>
-              this.onSelectItems(i, e, 'positiveItems')
-            }
+            images={parallelogramData.filter(img => { return img.itemType === 'positive' })}
+            onClickThumbnail={this.onSelectItems}
           />
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={parallelogramData['negativeItems']}
-            onClickThumbnail={(i, e) =>
-              this.onSelectItems(i, e, 'negativeItems')
+            images={parallelogramData.filter(img => { return img.itemType === 'negative' })}
+            onClickThumbnail={(index, event) =>
+              this.onSelectItems(
+                index + parallelogramData.indexOf(parallelogramData.find(img => img.itemType === 'negative')), event
+              )
             }
           />
         </div>

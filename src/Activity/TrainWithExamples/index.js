@@ -10,28 +10,23 @@ class TrainWithExamples extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      examples: {
-        positiveItems: Array(parallelogramData['positiveItems'].length).fill(false),
-        negativeItems: Array(parallelogramData['negativeItems'].length).fill(false)
-      },
+      examples: Array(parallelogramData.length).fill(false),
       hasChosenExamples: false
     }
     this.numberOfExamples = 3
   }
 
-  handleClickExample = (items, index) => {
+  handleClickExample = (index) => {
     const newExamples = this.state.examples
-    newExamples[items][index] = !newExamples[items][index]
+    newExamples[index] = !newExamples[index]
     this.setState({examples: newExamples})
   }
 
   getSelectedParallelograms = () => {
     var parallelograms = []
-    for (let items in this.state.examples) {
-      for (var ind = 0; ind < this.state.examples[items].length; ind++) {
-        if (this.state.examples[items][ind]) {
-          parallelograms.push(parallelogramData[items][ind].src)
-        }
+    for (var ind = 0; ind < this.state.examples.length; ind++) {
+      if (this.state.examples[ind]) {
+        parallelograms.push(parallelogramData[ind].src)
       }
     }
     return parallelograms

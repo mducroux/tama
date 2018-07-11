@@ -43,12 +43,13 @@ class ChooseExamples extends React.Component {
     this.state = { numberOfExamplesLeft: this.props.numberOfExamples }
   }
 
-  onSelectItems = (index, event, itemType) => {
-    if (this.state.numberOfExamplesLeft > 0 || this.props.examples[itemType][index]) {
-      var img = parallelogramData[itemType][index]
+  onSelectItems = (index, event) => {
+    console.log(index)
+    if (this.state.numberOfExamplesLeft > 0 || this.props.examples[index]) {
+      var img = parallelogramData[index]
       img.isSelected = !img.isSelected
-      this.props.onClickExample(itemType, index)
-      const newNumberOfElemLeft = this.props.examples[itemType][index]
+      this.props.onClickExample(index)
+      const newNumberOfElemLeft = this.props.examples[index]
         ? this.state.numberOfExamplesLeft - 1
         : this.state.numberOfExamplesLeft + 1
       this.setState({ numberOfExamplesLeft: newNumberOfElemLeft })
@@ -66,11 +67,8 @@ class ChooseExamples extends React.Component {
   }
 
   componentWillUnmount () {
-    parallelogramData['positiveItems'].forEach(elem => {
-      elem.isSelected = false
-    })
-    parallelogramData['negativeItems'].forEach(elem => {
-      elem.isSelected = false
+    parallelogramData.forEach(img => {
+      img.isSelected = false
     })
   }
 
@@ -89,17 +87,17 @@ class ChooseExamples extends React.Component {
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={parallelogramData['positiveItems']}
-            onClickThumbnail={(i, e) =>
-              this.onSelectItems(i, e, 'positiveItems')
-            }
+            images={parallelogramData.filter(img => { return img.itemType === 'positive' })}
+            onClickThumbnail={this.onSelectItems}
           />
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={parallelogramData['negativeItems']}
-            onClickThumbnail={(i, e) =>
-              this.onSelectItems(i, e, 'negativeItems')
+            images={parallelogramData.filter(img => { return img.itemType === 'negative' })}
+            onClickThumbnail={(index, event) =>
+              this.onSelectItems(
+                index + parallelogramData.indexOf(parallelogramData.find(img => img.itemType === 'negative')), event
+              )
             }
           />
         </div>
@@ -125,7 +123,7 @@ class ChooseExamples extends React.Component {
 ChooseExamples.propTypes = {
   classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  examples: PropTypes.object.isRequired,
+  examples: PropTypes.array.isRequired,
   onClickExample: PropTypes.func.isRequired,
   numberOfExamples: PropTypes.number.isRequired,
   onBackNavigation: PropTypes.func.isRequired
