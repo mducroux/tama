@@ -97,7 +97,7 @@ class ShowQuestions extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item>
             <Grid container justify="center">
-              <Typography variant='subheading'>
+              <Typography variant='display1'>
                 Note : {this.state.grade} / {this.props.numberOfQuestions}
               </Typography>
             </Grid>

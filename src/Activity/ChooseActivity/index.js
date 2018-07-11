@@ -55,31 +55,31 @@ const styles = theme => ({
 const images = [
   {
     url: 'images/example_512x512.png',
-    title: 'Exemples'
+    title: 'Montrer des exemples'
   },
   {
     url: 'images/exercise_512x512.png',
-    title: 'Exercices'
+    title: 'Donner un exercice'
   },
   {
     url: 'images/lesson_512x512.png',
-    title: 'Leçon'
+    title: 'Donner un leçon'
   },
   {
     url: 'images/test_512x512.png',
-    title: 'Test'
+    title: "Tester l'élève"
   }
 ]
 
 class ActivityTypeButton extends React.Component {
   handleButtonClick = (key) => {
-    if (key === 'Exemples') {
+    if (key === 'Montrer des exemples') {
       this.props.onClickExample()
-    } else if (key === 'Exercices') {
+    } else if (key === 'Donner un exercice') {
       this.props.onClickExercise()
-    } else if (key === 'Leçon') {
+    } else if (key === 'Donner un leçon') {
       this.props.onClickLesson()
-    } else if (key === 'Test') {
+    } else if (key === "Tester l'élève") {
       this.props.onClickTest()
     }
   }
@@ -96,7 +96,7 @@ class ActivityTypeButton extends React.Component {
             spacing={0}
           >
             {images.map(image => (
-              <Grid item xs={12} sm={3} key={image.title}>
+              <Grid item xs={12} sm={4} key={image.title}>
                 <ButtonBase
                   className={classes.button}
                   focusVisibleClassName={classes.focusVisible}
@@ -112,7 +112,7 @@ class ActivityTypeButton extends React.Component {
                   <span className={classes.textButton}>
                     <Typography
                       component='span'
-                      variant='subheading'
+                      variant='title'
                       color='inherit'
                     >
                       {image.title}
