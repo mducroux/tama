@@ -5,7 +5,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/examples/2.png',
@@ -13,7 +14,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/examples/3.png',
@@ -21,7 +23,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/examples/4.png',
@@ -29,7 +32,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/examples/5.png',
@@ -37,7 +41,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/examples/6.png',
@@ -45,7 +50,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/examples/7.png',
@@ -53,7 +59,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'positive'
+    itemType: 'positive',
+    valid: true
   },
   {
     src: 'images/counter_examples/1.png',
@@ -61,7 +68,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'negative'
+    itemType: 'negative',
+    valid: false
   },
   {
     src: 'images/counter_examples/2.png',
@@ -69,7 +77,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'negative'
+    itemType: 'negative',
+    valid: false
   },
   {
     src: 'images/counter_examples/3.png',
@@ -77,7 +86,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'negative'
+    itemType: 'negative',
+    valid: false
   },
   {
     src: 'images/counter_examples/4.png',
@@ -85,7 +95,8 @@ const parallelogramData = [
     thumbnailWidth: 128,
     thumbnailHeight: 128,
     isSelected: false,
-    itemType: 'negative'
+    itemType: 'negative',
+    valid: false
   }
 ]
 

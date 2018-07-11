@@ -17,7 +17,7 @@ const styles = () => ({
 class ShowQuestions extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, score: 0}
+    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, score: 0, answer: false}
   }
 
   componentDidMount () {
@@ -28,8 +28,17 @@ class ShowQuestions extends React.Component {
   }
 
   answerQuestion () {
+    var answer = Math.random() > 0.5
+    var newScore = this.state.score
+    console.log(answer)
+    console.log(this.props.examQuestions[this.state.indexQuestion].valid)
+    if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
+      newScore = this.state.score + 1
+    }
     this.setState({
-      thinkingAboutIt: false
+      thinkingAboutIt: false,
+      score: newScore,
+      answer: answer
     })
   }
 
@@ -55,7 +64,7 @@ class ShowQuestions extends React.Component {
     if (this.state.thinkingAboutIt === true) {
       bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
     } else {
-      if (Math.random() > 0.5) {
+      if (this.state.answer === true) {
         bubbleImage = 'images/virtual_student/bubble_positive_answer.jpg'
       } else {
         bubbleImage = 'images/virtual_student/bubble_negative_answer.jpg'
@@ -76,7 +85,7 @@ class ShowQuestions extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item>
             <Grid container justify="center">
-              <img src={this.props.examQuestions[this.state.indexQuestion]} alt="parallelogram" width="300" height="300"/>
+              <img src={this.props.examQuestions[this.state.indexQuestion].src} alt="parallelogram" width="300" height="300"/>
             </Grid>
           </Grid>
         </Grid>
