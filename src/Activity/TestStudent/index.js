@@ -11,20 +11,22 @@ class TrainWithExamples extends React.Component {
       tookTest: false
     }
     this.numberOfQuestions = 5
-    this.examQuestions = []
-    this.setExamQuestion()
-  }
-
-  setExamQuestion = () => {
+    try {
+      if (this.numberOfQuestions > parallelogramData.length) {
+        throw new Error('there are more questions than available parallelograms')
+      }
+    } catch (e) {
+      throw e
+    }
     this.examQuestions = parallelogramData.sort(() => 0.5 - Math.random()) // shuffle array
-    this.examQuestions = this.examQuestions.slice(0, this.numberOfQuestions) // The number of questions should be less than the length of parallelogramData
+    this.examQuestions = this.examQuestions.slice(0, this.numberOfQuestions)
   }
 
   render () {
     if (!this.state.tookTest) {
       return (
         <ShowQuestions
-          displayResultTest={() => this.setState({tookTest: true})}
+          displayResultTest={(grade) => this.setState({tookTest: true, grade: grade})}
           numberOfQuestions={this.numberOfQuestions}
           examQuestions={this.examQuestions}
         />
@@ -32,6 +34,8 @@ class TrainWithExamples extends React.Component {
     } else {
       return (
         <Result
+          grade={this.state.grade}
+          numberOfQuestions={this.numberOfQuestions}
         />
       )
     }

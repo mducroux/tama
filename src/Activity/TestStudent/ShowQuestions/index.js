@@ -17,34 +17,32 @@ const styles = () => ({
 class ShowQuestions extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, score: 0, answer: false}
+    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, grade: 0, answer: false}
   }
 
   componentDidMount () {
     this.timerID = setInterval(
       () => this.state.thinkingAboutIt ? this.answerQuestion() : this.thinkingAboutQuestion(),
-      2000
+      80
     )
   }
 
   answerQuestion () {
     var answer = Math.random() > 0.5
-    var newScore = this.state.score
-    console.log(answer)
-    console.log(this.props.examQuestions[this.state.indexQuestion].valid)
+    var newGrade = this.state.grade
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
-      newScore = this.state.score + 1
+      newGrade = this.state.grade + 1
     }
     this.setState({
       thinkingAboutIt: false,
-      score: newScore,
+      grade: newGrade,
       answer: answer
     })
   }
 
   thinkingAboutQuestion () {
     if (this.props.numberOfQuestions === this.state.indexQuestion + 1) {
-      this.props.displayResultTest()
+      this.props.displayResultTest(this.state.grade)
     } else {
       this.setState({
         indexQuestion: this.state.indexQuestion + 1,
@@ -100,7 +98,7 @@ class ShowQuestions extends React.Component {
           <Grid item>
             <Grid container justify="center">
               <Typography variant='subheading'>
-                Note : {this.state.score} / {this.props.numberOfQuestions}
+                Note : {this.state.grade} / {this.props.numberOfQuestions}
               </Typography>
             </Grid>
           </Grid>
