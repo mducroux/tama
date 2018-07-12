@@ -120,7 +120,16 @@ class App extends Component {
         )
       } else if (this.state.hasChosenActivity === 'test') {
         displayed = (
-          <TestStudent />
+          <TestStudent
+            startNewGame={() => {
+              localStorage.clear('username')
+              this.setState({
+                hasBeenWelcomed: false,
+                isRegistered: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: ''
+              })
+            }}/>
         )
       }
     }

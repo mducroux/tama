@@ -58,48 +58,36 @@ class ShowExamples extends React.Component {
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <VirtualStudent bubbleImage={bubbleImage}/>
-            </Grid>
-          </Grid>
+          <VirtualStudent bubbleImage={bubbleImage}/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <img src={this.props.parallelogram.src} alt="parallelogram" width="300" height="300"/>
-            </Grid>
-          </Grid>
+          <img src={this.props.parallelogram.src} alt="parallelogram" width="300" height="300"/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              {!this.state.thinkingAboutIt && (
-                <div>
-                  <Grid container justify="center" spacing={40}>
-                    <Grid item >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => this.handleClick('true')}
-                      >
-                        Vrai
-                      </Button>
-                    </Grid>
-                    <Grid item >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => this.handleClick('false')}
-                      >
-                        Faux
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </div>
-              )}
-            </Grid>
-          </Grid>
+          {!this.state.thinkingAboutIt && (
+            <div>
+              <Grid container justify="center" spacing={40}>
+                <Grid item >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => this.handleClick('true')}
+                  >
+                    Vrai
+                  </Button>
+                </Grid>
+                <Grid item >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => this.handleClick('false')}
+                  >
+                    Faux
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+          )}
         </Grid>
       </div>
     )

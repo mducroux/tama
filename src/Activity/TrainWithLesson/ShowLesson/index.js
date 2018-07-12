@@ -42,21 +42,13 @@ class ShowLesson extends React.Component {
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <div className={classes.group}>
-                <img src="images/blackboard.jpg" alt="Blackboard" width="400" height="300"/>
-                <div className={classes.textImage}>{this.props.lesson}</div>
-              </div>
-            </Grid>
-          </Grid>
+          <div className={classes.group}>
+            <img src="images/blackboard.jpg" alt="Blackboard" width="400" height="300"/>
+            <div className={classes.textImage}>{this.props.lesson}</div>
+          </div>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <VirtualStudent bubbleImage={bubbleImage}/>
-            </Grid>
-          </Grid>
+          <VirtualStudent bubbleImage={bubbleImage}/>
         </Grid>
       </div>
     )

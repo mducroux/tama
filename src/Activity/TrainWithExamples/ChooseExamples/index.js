@@ -103,16 +103,14 @@ class ChooseExamples extends React.Component {
         </div>
         <div className={classes.root}>
           <Grid container justify='center'>
-            <Grid item>
-              <Button
-                variant='contained'
-                color='primary'
-                className={classes.button}
-                onClick={this.handleSubmit}
-              >
-                Ok
-              </Button>
-            </Grid>
+            <Button
+              variant='contained'
+              color='primary'
+              className={classes.button}
+              onClick={this.handleSubmit}
+            >
+              Ok
+            </Button>
           </Grid>
         </div>
       </div>

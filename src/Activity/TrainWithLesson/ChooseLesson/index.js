@@ -51,16 +51,14 @@ class TrainWithLesson extends React.Component {
         </div>
         <div className={classes.root}>
           <Grid container justify='center'>
-            <Grid item>
-              <Button
-                variant='contained'
-                color='primary'
-                className={classes.button}
-                onClick={() => this.props.onSubmit(this.state.checked)}
-              >
-                Ok
-              </Button>
-            </Grid>
+            <Button
+              variant='contained'
+              color='primary'
+              className={classes.button}
+              onClick={() => this.props.onSubmit(this.state.checked)}
+            >
+              Ok
+            </Button>
           </Grid>
         </div>
       </div>

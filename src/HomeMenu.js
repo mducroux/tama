@@ -19,48 +19,32 @@ class HomeMenu extends React.Component {
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <img
-                src={'images/logo.png'}
-                alt="logo"
-              />
-            </Grid>
-          </Grid>
+          <img
+            src={'images/logo.png'}
+            alt="logo"
+          />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <Typography variant="title" color="inherit">
-                Apprends de nouvelles choses à ton élève virtuel
-              </Typography>
-            </Grid>
-          </Grid>
+          <Typography variant="title" color="inherit">
+            Apprends de nouvelles choses à ton élève virtuel
+          </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <img
-                src={'images/virtual_student/student.jpg'}
-                width="200"
-                height="200"
-                alt="virtual_student"
-              />
-            </Grid>
-          </Grid>
+          <img
+            src={'images/virtual_student/student.jpg'}
+            width="200"
+            height="200"
+            alt="virtual_student"
+          />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Grid item>
-            <Grid container justify="center">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.props.onClickStart}
-              >
-                Commencer à jouer
-              </Button>
-            </Grid>
-          </Grid>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.props.onClickStart}
+          >
+            Commencer à jouer
+          </Button>
         </Grid>
       </div>
     )
