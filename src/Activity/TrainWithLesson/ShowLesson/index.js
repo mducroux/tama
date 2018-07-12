@@ -2,7 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import VirtualStudent from '../../VirtualStudent'
+import VirtualStudent from '../../../VirtualStudent'
 import PropTypes from 'prop-types'
 
 const styles = () => ({
@@ -25,6 +25,7 @@ const styles = () => ({
 class ShowLesson extends React.Component {
   componentDidMount () {
     setTimeout(() => {
+      this.props.levelUpStudent()
       this.props.getBackToMenu()
     }, 3000)
   }
@@ -58,7 +59,8 @@ class ShowLesson extends React.Component {
 ShowLesson.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  lesson: PropTypes.string.isRequired
+  lesson: PropTypes.string.isRequired,
+  levelUpStudent: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowLesson)

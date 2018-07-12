@@ -3,7 +3,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import VirtualStudent from '../../VirtualStudent'
+import VirtualStudent from '../../../VirtualStudent'
 import PropTypes from 'prop-types'
 
 const styles = () => ({
@@ -14,7 +14,7 @@ const styles = () => ({
   }
 })
 
-class ShowExamples extends React.Component {
+class ShowExercise extends React.Component {
   constructor (props) {
     super(props)
     this.state = {thinkingAboutIt: true, bubbleImage: '', answer: ''}
@@ -23,6 +23,7 @@ class ShowExamples extends React.Component {
   handleClick = (answer) => {
     this.setState({answer: answer, thinkingAboutIt: true})
     setTimeout(() => {
+      this.props.levelUpStudent()
       this.props.getBackToMenu()
     }, 2000)
   }
@@ -94,10 +95,11 @@ class ShowExamples extends React.Component {
   }
 }
 
-ShowExamples.propTypes = {
+ShowExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  parallelogram: PropTypes.object.isRequired
+  parallelogram: PropTypes.object.isRequired,
+  levelUpStudent: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(ShowExamples)
+export default withStyles(styles)(ShowExercise)

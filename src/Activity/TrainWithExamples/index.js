@@ -49,6 +49,7 @@ class TrainWithExamples extends React.Component {
           parallelograms={this.getSelectedParallelograms()}
           numberOfExamples={this.numberOfExamples}
           getBackToMenu={this.props.getBackToMenu}
+          levelUpStudent={this.props.levelUpStudent}
         />
       )
     }
@@ -56,7 +57,8 @@ class TrainWithExamples extends React.Component {
 }
 
 TrainWithExamples.propTypes = {
-  getBackToMenu: PropTypes.func.isRequired
+  getBackToMenu: PropTypes.func.isRequired,
+  levelUpStudent: PropTypes.func.isRequired
 }
 
 export default TrainWithExamples

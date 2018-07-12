@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 
@@ -13,8 +12,14 @@ const styles = {
   root: {
     flexGrow: 1
   },
-  flex: {
+  welcome: {
     flex: 1
+  },
+  level: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: '25px'
   }
 }
 
@@ -44,9 +49,14 @@ class AppBarMenu extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="title" color="inherit" className={classes.flex}>
+            <Typography variant="title" color="inherit" className={classes.welcome}>
               {!this.props.isRegistered ? 'Bienvenue à Tama !' : 'Bienvenue ' + localStorage.getItem('username') + ' !'}
             </Typography>
+            {this.props.isRegistered && (
+              <Typography variant="title" color="inherit" className={classes.level}>
+                Niveau de ton élève : {localStorage.getItem('studentLevel')} / 5
+              </Typography>
+            )}
             {this.props.isRegistered && (
               <div>
                 <IconButton
@@ -55,7 +65,7 @@ class AppBarMenu extends React.Component {
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  <img src='images/virtual_student/student_avatar.png' alt='student_avatar' width='40px' height='40px'/>
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -71,7 +81,7 @@ class AppBarMenu extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleLogout}>Déconnexion</MenuItem>
+                  <MenuItem onClick={this.handleLogout}>{"Quitter l'entraînement"}</MenuItem>
                 </Menu>
               </div>
             )}

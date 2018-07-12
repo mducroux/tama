@@ -36,6 +36,7 @@ class TrainWithExercise extends React.Component {
         <ShowExercise
           parallelogram={parallelogramData[this.state.index]}
           getBackToMenu={this.props.getBackToMenu}
+          levelUpStudent={this.props.levelUpStudent}
         />
       )
     }
@@ -43,7 +44,8 @@ class TrainWithExercise extends React.Component {
 }
 
 TrainWithExercise.propTypes = {
-  getBackToMenu: PropTypes.func.isRequired
+  getBackToMenu: PropTypes.func.isRequired,
+  levelUpStudent: PropTypes.func.isRequired
 }
 
 export default TrainWithExercise

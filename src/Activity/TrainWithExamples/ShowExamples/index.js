@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import VirtualStudent from '../../VirtualStudent'
+import VirtualStudent from '../../../VirtualStudent'
 import PropTypes from 'prop-types'
 
 const styles = () => ({
@@ -62,6 +62,7 @@ class ShowExamples extends React.Component {
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         if (this.state.indexExample === this.props.numberOfExamples) {
+          this.props.levelUpStudent()
           this.props.getBackToMenu()
         }
       }, 200)
@@ -101,7 +102,8 @@ ShowExamples.propTypes = {
   classes: PropTypes.object.isRequired,
   numberOfExamples: PropTypes.number.isRequired,
   parallelograms: PropTypes.array.isRequired,
-  getBackToMenu: PropTypes.func.isRequired
+  getBackToMenu: PropTypes.func.isRequired,
+  levelUpStudent: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)
