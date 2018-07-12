@@ -3,6 +3,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import VirtualStudent from '../../VirtualStudent'
 import PropTypes from 'prop-types'
 
@@ -11,6 +12,10 @@ const styles = () => ({
     display: 'flex',
     flexWrap: 'wrap',
     marginTop: '25px'
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center'
   }
 })
 
@@ -21,10 +26,7 @@ class ShowQuestions extends React.Component {
   }
 
   componentDidMount () {
-    this.timerID = setInterval(
-      () => this.state.thinkingAboutIt ? this.answerQuestion() : this.thinkingAboutQuestion(),
-      2000
-    )
+    setTimeout(() => this.answerQuestion(), 2000)
   }
 
   answerQuestion () {
@@ -40,7 +42,7 @@ class ShowQuestions extends React.Component {
     })
   }
 
-  thinkingAboutQuestion () {
+  handleNextQuestion () {
     if (this.props.numberOfQuestions === this.state.indexQuestion + 1) {
       this.props.displayResultTest(this.state.grade)
     } else {
@@ -48,11 +50,8 @@ class ShowQuestions extends React.Component {
         indexQuestion: this.state.indexQuestion + 1,
         thinkingAboutIt: true
       })
+      setTimeout(() => this.answerQuestion(), 2000)
     }
-  }
-
-  componentWillUnmount () {
-    clearInterval(this.timerID)
   }
 
   render () {
@@ -74,8 +73,8 @@ class ShowQuestions extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <Grid item>
             <Grid container justify="center">
-              <Typography variant='title'>
-                Question {this.state.indexQuestion + 1} : Est-ce un parallélogramme ?
+              <Typography variant='title' className={classes.title}>
+                Question {this.state.indexQuestion + 1} / {this.props.numberOfQuestions} : Est-ce un parallélogramme ?
               </Typography>
             </Grid>
           </Grid>
@@ -100,6 +99,16 @@ class ShowQuestions extends React.Component {
               <Typography variant='display1'>
                 Note : {this.state.grade} / {this.props.numberOfQuestions}
               </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Grid item>
+            <Grid container justify="center">
+              {!this.state.thinkingAboutIt &&
+                <Button className={classes.button} onClick={() => this.handleNextQuestion()} color='primary' size='large'>
+                  {(this.props.numberOfQuestions !== this.state.indexQuestion + 1) ? 'Question suivante' : 'Voir le résultat'}
+                </Button>}
             </Grid>
           </Grid>
         </Grid>
