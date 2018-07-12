@@ -32,7 +32,7 @@ class TrainWithLesson extends React.Component {
         <ShowLesson
           lesson={lesson[this.state.index]}
           getBackToMenu={this.props.getBackToMenu}
-          levelUpStudent={this.props.levelUpStudent}
+          updateScore={this.props.updateScore}
         />
       )
     }
@@ -41,7 +41,7 @@ class TrainWithLesson extends React.Component {
 
 TrainWithLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
-  levelUpStudent: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired
 }
 
 export default TrainWithLesson

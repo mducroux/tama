@@ -9,7 +9,6 @@ import AppBarMenu from './AppBarMenu'
 import HomeMenu from './HomeMenu'
 
 import { withStyles } from '@material-ui/core/styles'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import PropTypes from 'prop-types'
 
 const styles = {
@@ -55,7 +54,7 @@ class App extends Component {
           onSubmit={username => {
             this.setState({ isRegistered: true })
             localStorage.setItem('username', username)
-            localStorage.setItem('studentLevel', '0')
+            localStorage.setItem('score', '200')
           }}
         />
       )
@@ -97,7 +96,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            levelUpStudent={() => localStorage.setItem('studentLevel', Math.min(Number(localStorage.getItem('studentLevel')) + 1, 5)) }
+            updateScore={() => localStorage.setItem('score', Number(localStorage.getItem('score')) - 10) }
           />
         )
       } else if (this.state.hasChosenActivity === 'exercise') {
@@ -108,7 +107,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            levelUpStudent={() => localStorage.setItem('studentLevel', Math.min(Number(localStorage.getItem('studentLevel')) + 1, 5)) }
+            updateScore={() => localStorage.setItem('score', Number(localStorage.getItem('score')) - 30) }
           />
         )
       } else if (this.state.hasChosenActivity === 'lesson') {
@@ -119,7 +118,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            levelUpStudent={() => localStorage.setItem('studentLevel', Math.min(Number(localStorage.getItem('studentLevel')) + 1, 5)) }
+            updateScore={() => localStorage.setItem('score', Number(localStorage.getItem('score')) - 50) }
           />
         )
       } else if (this.state.hasChosenActivity === 'test') {
@@ -151,7 +150,6 @@ class App extends Component {
             })
           }}
         />
-        <LinearProgress color="primary" variant="determinate" value={Number(localStorage.getItem('studentLevel')) * 20} />
         <div>{displayed}</div>
       </div>
     )

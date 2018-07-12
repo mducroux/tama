@@ -23,7 +23,7 @@ class ShowExercise extends React.Component {
   handleClick = (answer) => {
     this.setState({answer: answer, thinkingAboutIt: true})
     setTimeout(() => {
-      this.props.levelUpStudent()
+      this.props.updateScore()
       this.props.getBackToMenu()
     }, 2000)
   }
@@ -99,7 +99,7 @@ ShowExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   parallelogram: PropTypes.object.isRequired,
-  levelUpStudent: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowExercise)

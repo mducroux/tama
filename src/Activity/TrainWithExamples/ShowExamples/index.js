@@ -62,7 +62,7 @@ class ShowExamples extends React.Component {
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         if (this.state.indexExample === this.props.numberOfExamples) {
-          this.props.levelUpStudent()
+          this.props.updateScore()
           this.props.getBackToMenu()
         }
       }, 200)
@@ -103,7 +103,7 @@ ShowExamples.propTypes = {
   numberOfExamples: PropTypes.number.isRequired,
   parallelograms: PropTypes.array.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  levelUpStudent: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)

@@ -25,7 +25,7 @@ const styles = () => ({
 class ShowLesson extends React.Component {
   componentDidMount () {
     setTimeout(() => {
-      this.props.levelUpStudent()
+      this.props.updateScore()
       this.props.getBackToMenu()
     }, 3000)
   }
@@ -60,7 +60,7 @@ ShowLesson.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   lesson: PropTypes.string.isRequired,
-  levelUpStudent: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowLesson)

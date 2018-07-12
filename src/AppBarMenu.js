@@ -54,7 +54,7 @@ class AppBarMenu extends React.Component {
             </Typography>
             {this.props.isRegistered && (
               <Typography variant="title" color="inherit" className={classes.level}>
-                Niveau de ton élève : {localStorage.getItem('studentLevel')} / 5
+                Score : {localStorage.getItem('score')}
               </Typography>
             )}
             {this.props.isRegistered && (

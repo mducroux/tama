@@ -26,7 +26,7 @@ class ShowQuestions extends React.Component {
   }
 
   componentDidMount () {
-    setTimeout(() => this.answerQuestion(), 200)
+    setTimeout(() => this.answerQuestion(), 2000)
   }
 
   answerQuestion () {
@@ -53,7 +53,7 @@ class ShowQuestions extends React.Component {
         indexQuestion: this.state.indexQuestion + 1,
         thinkingAboutIt: true
       })
-      setTimeout(() => this.answerQuestion(), 200)
+      setTimeout(() => this.answerQuestion(), 2000)
     }
   }
 
@@ -86,7 +86,7 @@ class ShowQuestions extends React.Component {
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <Typography variant='display1'>
-            Note : {this.state.grade} / {this.props.numberOfQuestions}
+            Note : {this.state.grade} / {this.state.indexQuestion + 1}
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
