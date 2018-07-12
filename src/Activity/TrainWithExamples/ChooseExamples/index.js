@@ -44,7 +44,6 @@ class ChooseExamples extends React.Component {
   }
 
   onSelectItems = (index, event) => {
-    console.log(index)
     if (this.state.numberOfExamplesLeft > 0 || this.props.examples[index]) {
       var img = parallelogramData[index]
       img.isSelected = !img.isSelected

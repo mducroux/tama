@@ -16,7 +16,8 @@ class TestStudent extends React.Component {
     } catch (e) {
       throw e
     }
-    this.examQuestions = parallelogramData.sort(() => 0.5 - Math.random()) // shuffle array
+    this.examQuestions = parallelogramData.slice()
+    this.examQuestions.sort(() => 0.5 - Math.random()) // shuffle array
     this.examQuestions = this.examQuestions.slice(0, this.numberOfQuestions)
     this.correctAnswers = Array(this.numberOfQuestions).fill(false)
     this.state = {
