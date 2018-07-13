@@ -104,7 +104,7 @@ class ActivityTypeButton extends React.Component {
         <Grid container className={classes.root} justify='center'>
           <Grid item sm={4}>
             <Grid container className={classes.root} justify='center'>
-              <Typography variant="display1">
+              <Typography variant="display1" color="inherit">
                 Choisit une activité
               </Typography>
             </Grid>
@@ -168,7 +168,7 @@ class ActivityTypeButton extends React.Component {
                     variant='title'
                     color='inherit'
                   >
-                    {'Passer le test'} <br></br> {'+ 50 points par réponse juste'}
+                    {'Passer le test'}
                   </Typography>
                 </span>
               </ButtonBase>

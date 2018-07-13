@@ -40,7 +40,7 @@ class TrainWithLesson extends React.Component {
             <BackNavigation />
           </IconButton>
           <Typography variant='headline' className={classes.title}>
-            Choisissez une leçon à apprendre
+            Choisit une leçon à apprendre
           </Typography>
         </div>
         <div>

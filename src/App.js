@@ -37,9 +37,9 @@ class App extends Component {
     }
   }
 
-  updateScore = (by) => {
-    this.setState({scoreDisplayed: localStorage.getItem('score') + by})
-    localStorage.setItem('score', parseInt(localStorage.getItem('score'), 10) + parseInt(by, 10))
+  updateScore = (points) => {
+    this.setState({scoreDisplayed: localStorage.getItem('score') + points})
+    localStorage.setItem('score', parseInt(localStorage.getItem('score'), 10) + parseInt(points, 10))
     setTimeout(() => { this.setState({scoreDisplayed: localStorage.getItem('score')}) }, 2000)
   }
 

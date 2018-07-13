@@ -53,7 +53,7 @@ class ChooseExercise extends React.Component {
             <BackNavigation />
           </IconButton>
           <Typography variant='headline' className={classes.title}>
-            Choisissez une forme
+            {"Choisit une forme pour l'exercice"}
           </Typography>
         </div>
         <div className={classes.gallery}>

@@ -80,8 +80,9 @@ class ChooseExamples extends React.Component {
             <BackNavigation />
           </IconButton>
           <Typography variant='headline' className={classes.title}>
-            Choisissez {this.state.numberOfExamplesLeft}{' '}
-            {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'}
+            Choisit {this.state.numberOfExamplesLeft}{' '}
+            {this.state.numberOfExamplesLeft > 1 ? 'formes' : 'forme'}{' '}
+            à montrer
           </Typography>
         </div>
         <div className={classes.gallery}>

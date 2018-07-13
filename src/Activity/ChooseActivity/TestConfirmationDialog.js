@@ -15,7 +15,7 @@ class TestConfirmationDialog extends React.Component {
         <DialogTitle>Passer le test</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {"5 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, tu gagnes 50 points. Une fois le test fini, tu ne pourras plus revenir à l'entraînement. Est-tu sûr de vouloir continuer ? "}
+            {"5 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, tu gagnes 50 points. Une fois le test complété, le jeu sera fini et tu ne pourras plus revenir à l'entraînement. Est-tu sûr de vouloir continuer ? "}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

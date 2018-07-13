@@ -26,7 +26,7 @@ class HomeMenu extends React.Component {
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <Typography variant="title" color="inherit">
-            Apprends de nouvelles choses à ton élève virtuel
+            Apprends à reconnaître les parallélogrammes à ton élève virtuel
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>

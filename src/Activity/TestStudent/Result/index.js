@@ -32,6 +32,10 @@ const styles = () => ({
 })
 
 class Result extends React.Component {
+  componentDidMount () {
+    localStorage.clear('username')
+  }
+
   render () {
     const { classes } = this.props
     return (
