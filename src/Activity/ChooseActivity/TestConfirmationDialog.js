@@ -25,7 +25,7 @@ class TestConfirmationDialog extends React.Component {
         </DialogActions>
         <DialogActions>
           <Button onClick={this.props.onClose} color='primary'>
-            {"Non ramène moi à l'entraînement"}
+            {"Non je veux revenir à l'entraînement"}
           </Button>
         </DialogActions>
       </Dialog>

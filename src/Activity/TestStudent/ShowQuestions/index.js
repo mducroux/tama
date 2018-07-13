@@ -30,6 +30,7 @@ class ShowQuestions extends React.Component {
   }
 
   answerQuestion () {
+    // bool func(featureOfPara) => thinkAboutAnswer(featureOfPara)
     var answer = Math.random() > 0.5
     var newGrade = this.state.grade
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {

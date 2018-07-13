@@ -59,6 +59,7 @@ class ShowExamples extends React.Component {
   handleClick = (key) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
       this.setState({thinkingAboutIt: true, answer: key})
+      // void func(featureOfPara, answer) => studentLearn(featureOfPara, answer)
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         if (this.state.indexExample === this.props.numberOfExamples) {

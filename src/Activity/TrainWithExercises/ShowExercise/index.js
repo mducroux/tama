@@ -22,6 +22,11 @@ class ShowExercise extends React.Component {
 
   handleClick = (answer) => {
     this.setState({answer: answer, thinkingAboutIt: true})
+    // void func(featureOfPara, answer) =>
+    //    if answer == true
+    //      studentLearn(featureOfPara, answer)
+    //    else
+    //      studentLearn(featureOfPara, answer)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -29,6 +34,7 @@ class ShowExercise extends React.Component {
   }
 
   componentDidMount () {
+    // bool func(featureOfPara) => thinkAboutAnswer(featureOfPara)
     setTimeout(() => {
       this.setState({thinkingAboutIt: false})
     }, 2000)

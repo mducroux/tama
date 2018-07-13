@@ -24,6 +24,7 @@ const styles = () => ({
 
 class ShowLesson extends React.Component {
   componentDidMount () {
+    // void func(featureOfPara) => studentLearn(featureOfPara, answer)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -34,6 +35,7 @@ class ShowLesson extends React.Component {
     const { classes } = this.props
 
     let bubbleImage
+    // bool func(featureOfPara) => studentKnowledge(featureOfPara)
     if (Math.random() > 0.5) {
       bubbleImage = 'images/virtual_student/bubble_know.jpg'
     } else {
