@@ -2,13 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class VirtualStudent extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      level: 0
-    }
-  }
-
   render () {
     return (
       <div>

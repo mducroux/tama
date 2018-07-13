@@ -3,18 +3,30 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
 import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    marginBottom: '50px'
+    marginTop: '15px'
+  },
+  test: {
+    marginTop: '50px'
   },
   button: {
     position: 'relative',
     height: 512,
     width: '100%',
+    '&:hover, &$focusVisible': {
+      '& $imageBackdrop': {
+        opacity: 0.15
+      }
+    }
+  },
+  button_test: {
+    position: 'relative',
+    height: 100,
+    width: '75%',
     '&:hover, &$focusVisible': {
       '& $imageBackdrop': {
         opacity: 0.15
@@ -40,7 +52,7 @@ const styles = theme => ({
     top: 0,
     bottom: 0,
     backgroundSize: 'cover',
-    backgroundPosition: 'center 40%'
+    backgroundPosition: 'center 50%'
   },
   imageBackdrop: {
     position: 'absolute',
@@ -58,17 +70,17 @@ const images = [
   {
     url: 'images/example_512x512.png',
     title: 'Montrer des exemples',
-    cost: '10'
+    learningCost: '10'
   },
   {
     url: 'images/exercise_512x512.png',
     title: 'Donner un exercice',
-    cost: '30'
+    learningCost: '30'
   },
   {
     url: 'images/lesson_512x512.png',
-    title: 'Donner une leçon',
-    cost: '50'
+    title: 'Apprendre une leçon',
+    learningCost: '50'
   }
 ]
 
@@ -78,7 +90,7 @@ class ActivityTypeButton extends React.Component {
       this.props.onClickExample()
     } else if (key === 'Donner un exercice') {
       this.props.onClickExercise()
-    } else if (key === 'Donner une leçon') {
+    } else if (key === 'Apprendre une leçon') {
       this.props.onClickLesson()
     }
   }
@@ -87,6 +99,15 @@ class ActivityTypeButton extends React.Component {
     const { classes } = this.props
     return (
       <div>
+        <Grid container className={classes.root} justify='center'>
+          <Grid item sm={4}>
+            <Grid container className={classes.root} justify='center'>
+              <Typography variant="display1">
+                Choisit une activité
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
         <Grid container className={classes.root} justify='center' >
           <Grid item xs={12} sm={12}>
             <Grid
@@ -115,7 +136,7 @@ class ActivityTypeButton extends React.Component {
                         variant='title'
                         color='inherit'
                       >
-                        {image.title} <br></br> <br></br>- {image.cost} points
+                        {image.title} <br></br> <br></br>- {image.learningCost} points
                       </Typography>
                     </span>
                   </ButtonBase>
@@ -124,11 +145,32 @@ class ActivityTypeButton extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container className={classes.root} justify='flex-end' >
-          <Grid item xs={12} sm={2}>
-            <IconButton onClick={() => this.props.onClickTest()}>
-              <img src="images/medal_512x512.png" alt="test"/>
-            </IconButton>
+        <Grid container className={classes.test} justify='flex-end' >
+          <Grid item xs={4}>
+            <Grid container justify='center'>
+              <ButtonBase
+                className={classes.button_test}
+                focusVisibleClassName={classes.focusVisible}
+                onClick={() => this.props.onClickTest()}
+              >
+                <span
+                  className={classes.imageSrc}
+                  style={{
+                    backgroundImage: `url(${'images/medal_300x100.png'})`
+                  }}
+                />
+                <span className={classes.imageBackdrop} />
+                <span className={classes.textButton}>
+                  <Typography
+                    component='span'
+                    variant='title'
+                    color='inherit'
+                  >
+                    {"Tester l'élève"}
+                  </Typography>
+                </span>
+              </ButtonBase>
+            </Grid>
           </Grid>
         </Grid>
       </div>
