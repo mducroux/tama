@@ -5,6 +5,8 @@ import ButtonBase from '@material-ui/core/ButtonBase'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
+import TestConfirmationDialog from './TestConfirmationDialog'
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -166,13 +168,18 @@ class ActivityTypeButton extends React.Component {
                     variant='title'
                     color='inherit'
                   >
-                    {"Tester l'élève"} <br></br> {'+ 50 points par réponse juste'}
+                    {'Passer le test'} <br></br> {'+ 50 points par réponse juste'}
                   </Typography>
                 </span>
               </ButtonBase>
             </Grid>
           </Grid>
         </Grid>
+        <TestConfirmationDialog
+          open={this.props.openTestConfirmationDialog}
+          onClose={this.props.handleCloseTestConfirmationDialog}
+          onContinueTest={this.props.handleContinueTestConfirmationDialog}
+        />
       </div>
     )
   }
@@ -183,7 +190,10 @@ ActivityTypeButton.propTypes = {
   onClickExample: PropTypes.func.isRequired,
   onClickExercise: PropTypes.func.isRequired,
   onClickLesson: PropTypes.func.isRequired,
-  onClickTest: PropTypes.func.isRequired
+  onClickTest: PropTypes.func.isRequired,
+  openTestConfirmationDialog: PropTypes.bool.isRequired,
+  handleCloseTestConfirmationDialog: PropTypes.func.isRequired,
+  handleContinueTestConfirmationDialog: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ActivityTypeButton)

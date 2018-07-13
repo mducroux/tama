@@ -32,7 +32,8 @@ class App extends Component {
       isRegistered: !(!(localStorage.getItem('username'))),
       hasChosenActivityType: false,
       hasChosenActivity: '',
-      scoreDisplayed: localStorage.getItem('score')
+      scoreDisplayed: localStorage.getItem('score'),
+      openTestConfirmationDialog: false
     }
   }
 
@@ -59,7 +60,7 @@ class App extends Component {
       displayed = (
         <RegistrationForm
           onSubmit={username => {
-            this.setState({ isRegistered: true })
+            this.setState({ isRegistered: true, scoreDisplayed: '200' })
             localStorage.setItem('username', username)
             localStorage.setItem('score', '200')
           }}
@@ -88,10 +89,18 @@ class App extends Component {
           }
           onClickTest={() =>
             this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: 'test'
+              openTestConfirmationDialog: true
             })
           }
+          handleCloseTestConfirmationDialog={() => this.setState({openTestConfirmationDialog: false})}
+          handleContinueTestConfirmationDialog={() =>
+            this.setState({
+              hasChosenActivityType: true,
+              hasChosenActivity: 'test',
+              openTestConfirmationDialog: false
+            })
+          }
+          openTestConfirmationDialog={this.state.openTestConfirmationDialog}
         />
       )
     } else if (this.state.hasChosenActivityType) {
@@ -137,8 +146,7 @@ class App extends Component {
                 hasBeenWelcomed: false,
                 isRegistered: false,
                 hasChosenActivityType: false,
-                hasChosenActivity: '',
-                scoreDisplayed: '200'
+                hasChosenActivity: ''
               })
             }}
             updateScore={() => this.updateScore('+50')}
@@ -156,8 +164,7 @@ class App extends Component {
               hasBeenWelcomed: false,
               isRegistered: false,
               hasChosenActivityType: false,
-              hasChosenActivity: '',
-              scoreDisplayed: '200'
+              hasChosenActivity: ''
             })
           }}
           scoreDisplayed={this.state.scoreDisplayed}
