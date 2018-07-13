@@ -166,7 +166,7 @@ class ActivityTypeButton extends React.Component {
                     variant='title'
                     color='inherit'
                   >
-                    {"Tester l'élève"}
+                    {"Tester l'élève"} <br></br> {'+ 50 points par réponse juste'}
                   </Typography>
                 </span>
               </ButtonBase>

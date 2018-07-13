@@ -34,6 +34,7 @@ class ShowQuestions extends React.Component {
     var newGrade = this.state.grade
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
       newGrade = this.state.grade + 1
+      this.props.updateScore()
       this.props.onAnswerQuestion(this.state.indexQuestion, true)
     } else {
       this.props.onAnswerQuestion(this.state.indexQuestion, false)
@@ -85,11 +86,6 @@ class ShowQuestions extends React.Component {
           <VirtualStudent bubbleImage={bubbleImage}/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Typography variant='display1'>
-            Note : {this.state.grade} / {this.state.indexQuestion + 1}
-          </Typography>
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
           {!this.state.thinkingAboutIt &&
             <Button className={classes.button} onClick={() => this.handleNextQuestion()} color='primary' size='large'>
               {(this.props.numberOfQuestions !== this.state.indexQuestion + 1) ? 'Question suivante' : 'Voir le résultat'}
@@ -105,7 +101,8 @@ ShowQuestions.propTypes = {
   displayResultTest: PropTypes.func.isRequired,
   numberOfQuestions: PropTypes.number.isRequired,
   examQuestions: PropTypes.array.isRequired,
-  onAnswerQuestion: PropTypes.func.isRequired
+  onAnswerQuestion: PropTypes.func.isRequired,
+  updateScore: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowQuestions)

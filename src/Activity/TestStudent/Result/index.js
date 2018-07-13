@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Cancel from '@material-ui/icons/Cancel'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
 const styles = () => ({
   root: {
@@ -49,6 +50,11 @@ class Result extends React.Component {
               {this.props.correctAnswers[index] ? <CheckCircle color="primary"/> : <Cancel color="error"/>}
             </div>
           )}
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Typography variant='display1'>
+            Votre score final : {localStorage.getItem('score')} points
+          </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <Button

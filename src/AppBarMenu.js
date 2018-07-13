@@ -54,7 +54,7 @@ class AppBarMenu extends React.Component {
             </Typography>
             {this.props.isRegistered && (
               <Typography variant="title" color="inherit" className={classes.score}>
-                Score : {localStorage.getItem('score')}
+                Score : {this.props.scoreDisplayed}
               </Typography>
             )}
             {this.props.isRegistered && (
@@ -95,7 +95,8 @@ class AppBarMenu extends React.Component {
 AppBarMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   isRegistered: PropTypes.bool.isRequired,
-  onLogout: PropTypes.func.isRequired
+  onLogout: PropTypes.func.isRequired,
+  scoreDisplayed: PropTypes.string.isRequired
 }
 
 export default withStyles(styles)(AppBarMenu)

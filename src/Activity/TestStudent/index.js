@@ -37,6 +37,7 @@ class TestStudent extends React.Component {
           numberOfQuestions={this.numberOfQuestions}
           examQuestions={this.examQuestions}
           onAnswerQuestion={(index, isCorrect) => this.handleAnswerQuestion(index, isCorrect)}
+          updateScore={this.props.updateScore}
         />
       )
     } else {
@@ -54,7 +55,8 @@ class TestStudent extends React.Component {
 }
 
 TestStudent.propTypes = {
-  startNewGame: PropTypes.func.isRequired
+  startNewGame: PropTypes.func.isRequired,
+  updateScore: PropTypes.func.isRequired
 }
 
 export default TestStudent

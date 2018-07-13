@@ -31,8 +31,15 @@ class App extends Component {
       hasBeenWelcomed: false,
       isRegistered: !(!(localStorage.getItem('username'))),
       hasChosenActivityType: false,
-      hasChosenActivity: ''
+      hasChosenActivity: '',
+      scoreDisplayed: localStorage.getItem('score')
     }
+  }
+
+  updateScore = (by) => {
+    this.setState({scoreDisplayed: localStorage.getItem('score') + by})
+    localStorage.setItem('score', parseInt(localStorage.getItem('score'), 10) + parseInt(by, 10))
+    setTimeout(() => { this.setState({scoreDisplayed: localStorage.getItem('score')}) }, 2000)
   }
 
   render () {
@@ -96,7 +103,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            updateScore={() => localStorage.setItem('score', Number(localStorage.getItem('score')) - 10) }
+            updateScore={() => this.updateScore('-10')}
           />
         )
       } else if (this.state.hasChosenActivity === 'exercise') {
@@ -107,7 +114,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            updateScore={() => localStorage.setItem('score', Number(localStorage.getItem('score')) - 30) }
+            updateScore={() => this.updateScore('-30')}
           />
         )
       } else if (this.state.hasChosenActivity === 'lesson') {
@@ -118,7 +125,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            updateScore={() => localStorage.setItem('score', Number(localStorage.getItem('score')) - 50) }
+            updateScore={() => this.updateScore('-50')}
           />
         )
       } else if (this.state.hasChosenActivity === 'test') {
@@ -130,9 +137,12 @@ class App extends Component {
                 hasBeenWelcomed: false,
                 isRegistered: false,
                 hasChosenActivityType: false,
-                hasChosenActivity: ''
+                hasChosenActivity: '',
+                scoreDisplayed: '200'
               })
-            }}/>
+            }}
+            updateScore={() => this.updateScore('+50')}
+          />
         )
       }
     }
@@ -146,9 +156,11 @@ class App extends Component {
               hasBeenWelcomed: false,
               isRegistered: false,
               hasChosenActivityType: false,
-              hasChosenActivity: ''
+              hasChosenActivity: '',
+              scoreDisplayed: '200'
             })
           }}
+          scoreDisplayed={this.state.scoreDisplayed}
         />
         <div>{displayed}</div>
       </div>
