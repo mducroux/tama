@@ -12,13 +12,19 @@ const styles = () => ({
     display: 'flex',
     flexWrap: 'wrap',
     marginTop: '10px'
+  },
+  textImage: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
   }
 })
 
 class ShowExamples extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {indexExample: 0, thinkingAboutIt: false, answer: '', bubbleImage: '', choiceOrAnswer: ''}
+    this.state = {indexExample: 0, thinkingAboutIt: false, answer: ''}
   }
 
   choiceOrAnswer = () => {
@@ -59,8 +65,7 @@ class ShowExamples extends React.Component {
   handleClick = (answer) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
       this.setState({thinkingAboutIt: true, answer: answer})
-      // void func(featureOfPara, answer) => studentLearn(featureOfPara, answer)
-      this.props.student.studentLearn(this.props.parallelograms[this.state.indexExample].featuresParallelogram, answer)
+      this.props.student.learn(this.props.parallelograms[this.state.indexExample].featuresParallelogram, answer)
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         if (this.state.indexExample === this.props.numberOfExamples) {
@@ -74,17 +79,17 @@ class ShowExamples extends React.Component {
   render () {
     const { classes } = this.props
 
-    let bubbleImage
+    let bubbleText
     if (this.state.thinkingAboutIt === true) {
-      bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
+      bubbleText = this.props.student.thinkingAboutExample
     } else {
-      bubbleImage = 'images/virtual_student/bubble_question.jpg'
+      bubbleText = this.props.student.questionExample
     }
 
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleImage={bubbleImage}/>
+          <VirtualStudent bubbleText={bubbleText}/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
               Exemple : {this.state.indexExample + 1} / 3

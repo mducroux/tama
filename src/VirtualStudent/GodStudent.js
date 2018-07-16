@@ -1,25 +1,28 @@
 class GodStudent {
   constructor () {
-    this.featuresParallelogram = {
-      isQuadrilateral: true,
-      hasSameLengthEdges: false,
-      hasSameLengthOppositeEdges: true,
-      hasOppositeEdgesParallel: true
-    }
+    this.thinkingAboutExample = '...'
+    this.questionExample = 'Est-ce un parallélogramme ?'
+    this.thinkingAboutExercice = '...'
+    this.hasRightAnswerExercice = 'Super !'
+    this.hasFalseAnswerExercice = 'Mince !'
+    this.givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme"
+    this.giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
+    this.feedbackLessonKnow = 'Je le savais'
+    this.feedbackLessonDontKnow = 'Oh je ne savais pas !'
   }
 
-  thinkAboutAnswer (featuresParallelogram) {
+  answerParallelogram (featuresParallelogram) {
     return (
-      featuresParallelogram.isQuadrilateral === this.featuresParallelogram.isQuadrilateral &&
-      featuresParallelogram.hasOppositeEdgesParallel === this.featuresParallelogram.hasOppositeEdgesParallel
+      featuresParallelogram.isQuadrilateral &&
+      featuresParallelogram.hasOppositeEdgesParallel
     )
   }
 
-  studentLearn (featuresParallelogram, answer) {
+  learn (featuresParallelogram, answer) {
     // Nothing to learn, he is God
   }
 
-  studentKnowledge (featuresParallelogram) {
+  alreadyKnowLesson (featuresParallelogram) {
     return true
   }
 }

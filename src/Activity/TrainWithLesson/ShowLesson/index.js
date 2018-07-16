@@ -24,7 +24,7 @@ const styles = () => ({
 
 class ShowLesson extends React.Component {
   componentDidMount () {
-    this.props.student.studentLearn(this.props.lesson.featuresParallelogram, true)
+    this.props.student.learn(this.props.lesson.featuresParallelogram, true)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -33,11 +33,11 @@ class ShowLesson extends React.Component {
 
   render () {
     const { classes } = this.props
-    let bubbleImage
-    if (this.props.student.studentKnowledge(this.props.lesson.featuresParallelogram)) {
-      bubbleImage = 'images/virtual_student/bubble_know.jpg'
+    let bubbleText
+    if (this.props.student.alreadyKnowLesson(this.props.lesson.featuresParallelogram)) {
+      bubbleText = this.props.student.feedbackLessonKnow
     } else {
-      bubbleImage = 'images/virtual_student/bubble_dont_know.jpg'
+      bubbleText = this.props.student.feedbackLessonDontKnow
     }
 
     return (
@@ -49,7 +49,7 @@ class ShowLesson extends React.Component {
           </div>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleImage={bubbleImage}/>
+          <VirtualStudent bubbleText={bubbleText}/>
         </Grid>
       </div>
     )

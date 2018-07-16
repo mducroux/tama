@@ -1,4 +1,4 @@
-class DumbStudent {
+class QuickLearnerStudent {
   constructor () {
     this.featuresParallelogram = {
       isQuadrilateral: false,
@@ -20,4 +20,4 @@ class DumbStudent {
   }
 }
 
-export default DumbStudent
+export default QuickLearnerStudent

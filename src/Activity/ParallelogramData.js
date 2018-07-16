@@ -1,3 +1,5 @@
+/* */
+
 const parallelogramData = [
   {
     src: 'images/examples/1.png',

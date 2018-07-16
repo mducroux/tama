@@ -22,7 +22,7 @@ const styles = () => ({
 class ShowQuestions extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, answer: false}
+    this.state = {thinkingAboutIt: true, indexQuestion: 0, answer: false}
   }
 
   componentDidMount () {
@@ -30,7 +30,7 @@ class ShowQuestions extends React.Component {
   }
 
   answerQuestion () {
-    var answer = this.props.student.thinkAboutAnswer(this.props.examQuestions[this.state.indexQuestion].featuresParallelogram)
+    var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].featuresParallelogram)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
       this.props.increaseGrade()
       this.props.updateScore()
@@ -59,14 +59,14 @@ class ShowQuestions extends React.Component {
   render () {
     const { classes } = this.props
 
-    let bubbleImage
+    let bubbleText
     if (this.state.thinkingAboutIt === true) {
-      bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
+      bubbleText = this.props.student.thinkingAboutExample
     } else {
       if (this.state.answer === true) {
-        bubbleImage = 'images/virtual_student/bubble_positive_answer.jpg'
+        bubbleText = this.props.student.givePositiveAnswer
       } else {
-        bubbleImage = 'images/virtual_student/bubble_negative_answer.jpg'
+        bubbleText = this.props.student.giveNegativeAnswer
       }
     }
 
@@ -81,7 +81,7 @@ class ShowQuestions extends React.Component {
           <img src={this.props.examQuestions[this.state.indexQuestion].src} alt="parallelogram" width="300" height="300"/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleImage={bubbleImage}/>
+          <VirtualStudent bubbleText={bubbleText}/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
           {!this.state.thinkingAboutIt &&

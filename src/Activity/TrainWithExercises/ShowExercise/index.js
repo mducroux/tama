@@ -17,12 +17,12 @@ const styles = () => ({
 class ShowExercise extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', answerUser: ''}
+    this.state = {thinkingAboutIt: true, answerUser: ''}
   }
 
   handleClick = (answer) => {
     this.setState({answerUser: answer, thinkingAboutIt: true})
-    this.props.student.studentLearn(this.props.parallelogram.featuresParallelogram, answer)
+    this.props.student.learn(this.props.parallelogram.featuresParallelogram, answer)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -38,29 +38,29 @@ class ShowExercise extends React.Component {
   render () {
     const { classes } = this.props
 
-    let bubbleImage
+    let bubbleText
     if (this.state.thinkingAboutIt === true) {
       if (!this.state.answerUser) {
-        bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
+        bubbleText = this.props.student.thinkingAboutExercice
       } else {
         if (this.state.answerUser === 'true') {
-          bubbleImage = 'images/virtual_student/bubble_happy.jpg'
+          bubbleText = this.props.student.hasRightAnswerExercice
         } else {
-          bubbleImage = 'images/virtual_student/bubble_disappointed.jpg'
+          bubbleText = this.props.student.hasFalseAnswerExercice
         }
       }
     } else {
-      if (this.props.student.thinkAboutAnswer(this.props.parallelogram.featuresParallelogram)) {
-        bubbleImage = 'images/virtual_student/bubble_positive_answer.jpg'
+      if (this.props.student.answerParallelogram(this.props.parallelogram.featuresParallelogram)) {
+        bubbleText = this.props.student.givePositiveAnswer
       } else {
-        bubbleImage = 'images/virtual_student/bubble_negative_answer.jpg'
+        bubbleText = this.props.student.giveNegativeAnswer
       }
     }
 
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleImage={bubbleImage}/>
+          <VirtualStudent bubbleText={bubbleText}/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <img src={this.props.parallelogram.src} alt="parallelogram" width="300" height="300"/>
