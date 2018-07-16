@@ -86,7 +86,13 @@ const images = [
   }
 ]
 
-class ActivityTypeButton extends React.Component {
+class ChooseActivity extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      openTestDialog: false
+    }
+  }
   handleButtonClick = (key) => {
     if (key === 'Montrer des exemples') {
       this.props.onClickExample()
@@ -153,7 +159,7 @@ class ActivityTypeButton extends React.Component {
               <ButtonBase
                 className={classes.button_test}
                 focusVisibleClassName={classes.focusVisible}
-                onClick={() => this.props.onClickTest()}
+                onClick={() => this.setState({openTestDialog: true})}
               >
                 <span
                   className={classes.imageSrc}
@@ -176,24 +182,21 @@ class ActivityTypeButton extends React.Component {
           </Grid>
         </Grid>
         <TestConfirmationDialog
-          open={this.props.openTestConfirmationDialog}
-          onClose={this.props.handleCloseTestConfirmationDialog}
-          onContinueTest={this.props.handleContinueTestConfirmationDialog}
+          onConfirmTestDialog={this.props.onConfirmTestDialog}
+          openTestDialog={this.state.openTestDialog}
+          onCloseTestDialog={() => this.setState({openTestDialog: false})}
         />
       </div>
     )
   }
 }
 
-ActivityTypeButton.propTypes = {
+ChooseActivity.propTypes = {
   classes: PropTypes.object.isRequired,
   onClickExample: PropTypes.func.isRequired,
   onClickExercise: PropTypes.func.isRequired,
   onClickLesson: PropTypes.func.isRequired,
-  onClickTest: PropTypes.func.isRequired,
-  openTestConfirmationDialog: PropTypes.bool.isRequired,
-  handleCloseTestConfirmationDialog: PropTypes.func.isRequired,
-  handleContinueTestConfirmationDialog: PropTypes.func.isRequired
+  onConfirmTestDialog: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(ActivityTypeButton)
+export default withStyles(styles)(ChooseActivity)

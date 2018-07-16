@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 class TestConfirmationDialog extends React.Component {
   render () {
     return (
-      <Dialog open={this.props.open} onClose={this.props.onClose}>
+      <Dialog open={this.props.openTestDialog} onClose={this.props.onCloseTestDialog}>
         <DialogTitle>Passer le test</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -19,12 +19,12 @@ class TestConfirmationDialog extends React.Component {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.onContinueTest} color='primary'>
+          <Button onClick={this.props.onConfirmTestDialog} color='primary'>
             {'Oui je veux passer le test'}
           </Button>
         </DialogActions>
         <DialogActions>
-          <Button onClick={this.props.onClose} color='primary'>
+          <Button onClick={this.props.onCloseTestDialog} color='primary'>
             {"Non je veux revenir à l'entraînement"}
           </Button>
         </DialogActions>
@@ -34,9 +34,9 @@ class TestConfirmationDialog extends React.Component {
 }
 
 TestConfirmationDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  onContinueTest: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
+  onConfirmTestDialog: PropTypes.func.isRequired,
+  openTestDialog: PropTypes.bool.isRequired,
+  onCloseTestDialog: PropTypes.func.isRequired
 }
 
 export default TestConfirmationDialog

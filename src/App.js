@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import RegistrationForm from './RegistrationForm'
-import ActivityTypeButton from './Activity/ChooseActivity'
+import ChooseActivity from './Activity/ChooseActivity'
 import TrainWithExamples from './Activity/TrainWithExamples'
 import TrainWithExercises from './Activity/TrainWithExercises'
 import TrainWithLesson from './Activity/TrainWithLesson'
 import TestStudent from './Activity/TestStudent'
 import AppBarMenu from './AppBarMenu'
-import HomeMenu from './HomeMenu'
+import WelcomeMenu from './WelcomeMenu'
 
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -32,8 +32,7 @@ class App extends Component {
       isRegistered: !(!(localStorage.getItem('username'))),
       hasChosenActivityType: false,
       hasChosenActivity: '',
-      scoreDisplayed: localStorage.getItem('score'),
-      openTestConfirmationDialog: false
+      scoreDisplayed: localStorage.getItem('score')
     }
   }
 
@@ -48,7 +47,7 @@ class App extends Component {
     let displayed
     if (!this.state.hasBeenWelcomed) {
       displayed = (
-        <HomeMenu
+        <WelcomeMenu
           onClickStart={() =>
             this.setState({
               hasBeenWelcomed: true
@@ -68,7 +67,7 @@ class App extends Component {
       )
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
-        <ActivityTypeButton
+        <ChooseActivity
           onClickExample={() =>
             this.setState({
               hasChosenActivityType: true,
@@ -87,20 +86,12 @@ class App extends Component {
               hasChosenActivity: 'lesson'
             })
           }
-          onClickTest={() =>
-            this.setState({
-              openTestConfirmationDialog: true
-            })
-          }
-          handleCloseTestConfirmationDialog={() => this.setState({openTestConfirmationDialog: false})}
-          handleContinueTestConfirmationDialog={() =>
+          onConfirmTestDialog={() =>
             this.setState({
               hasChosenActivityType: true,
-              hasChosenActivity: 'test',
-              openTestConfirmationDialog: false
+              hasChosenActivity: 'test'
             })
           }
-          openTestConfirmationDialog={this.state.openTestConfirmationDialog}
         />
       )
     } else if (this.state.hasChosenActivityType) {

@@ -96,7 +96,7 @@ AppBarMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   isRegistered: PropTypes.bool.isRequired,
   onLogout: PropTypes.func.isRequired,
-  scoreDisplayed: PropTypes.string.isRequired
+  scoreDisplayed: PropTypes.string
 }
 
 export default withStyles(styles)(AppBarMenu)

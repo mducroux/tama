@@ -13,7 +13,7 @@ const styles = () => ({
   }
 })
 
-class HomeMenu extends React.Component {
+class WelcomeMenu extends React.Component {
   render () {
     const { classes } = this.props
     return (
@@ -51,9 +51,9 @@ class HomeMenu extends React.Component {
   }
 }
 
-HomeMenu.propTypes = {
+WelcomeMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   onClickStart: PropTypes.func.isRequired
 }
 
-export default withStyles(styles)(HomeMenu)
+export default withStyles(styles)(WelcomeMenu)
