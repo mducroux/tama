@@ -56,10 +56,11 @@ class ShowExamples extends React.Component {
     }
   }
 
-  handleClick = (key) => {
+  handleClick = (answer) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
-      this.setState({thinkingAboutIt: true, answer: key})
+      this.setState({thinkingAboutIt: true, answer: answer})
       // void func(featureOfPara, answer) => studentLearn(featureOfPara, answer)
+      this.props.student.studentLearn(this.props.parallelograms[this.state.indexExample].featuresParallelogram, answer)
       setTimeout(() => {
         this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         if (this.state.indexExample === this.props.numberOfExamples) {
@@ -104,7 +105,8 @@ ShowExamples.propTypes = {
   numberOfExamples: PropTypes.number.isRequired,
   parallelograms: PropTypes.array.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)

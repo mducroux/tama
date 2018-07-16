@@ -50,6 +50,7 @@ class TrainWithExamples extends React.Component {
           numberOfExamples={this.numberOfExamples}
           getBackToMenu={this.props.getBackToMenu}
           updateScore={this.props.updateScore}
+          student={this.props.student}
         />
       )
     }
@@ -58,7 +59,8 @@ class TrainWithExamples extends React.Component {
 
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired
 }
 
 export default TrainWithExamples

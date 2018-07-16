@@ -17,7 +17,7 @@ class RadioListLesson extends React.Component {
         <List>
           {lesson.map((value, index) => (
             <ListItem
-              key={value}
+              key={value.title}
               dense={false}
               button={true}
               onClick={this.handleToggle(index)}
@@ -25,7 +25,7 @@ class RadioListLesson extends React.Component {
               <Radio
                 checked={index === this.props.checked}
               />
-              <ListItemText primary={value} />
+              <ListItemText primary={value.title} />
             </ListItem>
           ))}
         </List>

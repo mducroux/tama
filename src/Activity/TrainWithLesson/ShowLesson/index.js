@@ -24,7 +24,7 @@ const styles = () => ({
 
 class ShowLesson extends React.Component {
   componentDidMount () {
-    // void func(featureOfPara) => studentLearn(featureOfPara, answer)
+    this.props.student.studentLearn(this.props.lesson.featuresParallelogram, true)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -33,10 +33,8 @@ class ShowLesson extends React.Component {
 
   render () {
     const { classes } = this.props
-
     let bubbleImage
-    // bool func(featureOfPara) => studentKnowledge(featureOfPara)
-    if (Math.random() > 0.5) {
+    if (this.props.student.studentKnowledge(this.props.lesson.featuresParallelogram)) {
       bubbleImage = 'images/virtual_student/bubble_know.jpg'
     } else {
       bubbleImage = 'images/virtual_student/bubble_dont_know.jpg'
@@ -47,7 +45,7 @@ class ShowLesson extends React.Component {
         <Grid container justify="center" className={classes.root}>
           <div className={classes.group}>
             <img src="images/blackboard.jpg" alt="Blackboard" width="400" height="300"/>
-            <div className={classes.textImage}>{this.props.lesson}</div>
+            <div className={classes.textImage}>{this.props.lesson.title}</div>
           </div>
         </Grid>
         <Grid container justify="center" className={classes.root}>
@@ -61,8 +59,9 @@ class ShowLesson extends React.Component {
 ShowLesson.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
-  lesson: PropTypes.string.isRequired,
-  updateScore: PropTypes.func.isRequired
+  lesson: PropTypes.object.isRequired,
+  updateScore: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(ShowLesson)

@@ -7,6 +7,7 @@ import TrainWithLesson from './Activity/TrainWithLesson'
 import TestStudent from './Activity/TestStudent'
 import AppBarMenu from './AppBarMenu'
 import WelcomeMenu from './WelcomeMenu'
+import DumbStudent from './VirtualStudent/DumbStudent'
 
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -34,6 +35,7 @@ class App extends Component {
       hasChosenActivity: '',
       scoreDisplayed: localStorage.getItem('score')
     }
+    this.student = new DumbStudent()
   }
 
   updateScore = (points) => {
@@ -104,6 +106,7 @@ class App extends Component {
               })
             }
             updateScore={() => this.updateScore('-10')}
+            student={this.student}
           />
         )
       } else if (this.state.hasChosenActivity === 'exercise') {
@@ -115,6 +118,7 @@ class App extends Component {
               })
             }
             updateScore={() => this.updateScore('-30')}
+            student={this.student}
           />
         )
       } else if (this.state.hasChosenActivity === 'lesson') {
@@ -126,6 +130,7 @@ class App extends Component {
               })
             }
             updateScore={() => this.updateScore('-50')}
+            student={this.student}
           />
         )
       } else if (this.state.hasChosenActivity === 'test') {
@@ -141,6 +146,7 @@ class App extends Component {
               })
             }}
             updateScore={() => this.updateScore('+50')}
+            student={this.student}
           />
         )
       }

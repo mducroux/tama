@@ -17,16 +17,12 @@ const styles = () => ({
 class ShowExercise extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', answer: ''}
+    this.state = {thinkingAboutIt: true, bubbleImage: '', answerUser: ''}
   }
 
   handleClick = (answer) => {
-    this.setState({answer: answer, thinkingAboutIt: true})
-    // void func(featureOfPara, answer) =>
-    //    if answer == true
-    //      studentLearn(featureOfPara, answer)
-    //    else
-    //      studentLearn(featureOfPara, answer)
+    this.setState({answerUser: answer, thinkingAboutIt: true})
+    this.props.student.studentLearn(this.props.parallelogram.featuresParallelogram, answer)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -34,7 +30,6 @@ class ShowExercise extends React.Component {
   }
 
   componentDidMount () {
-    // bool func(featureOfPara) => thinkAboutAnswer(featureOfPara)
     setTimeout(() => {
       this.setState({thinkingAboutIt: false})
     }, 2000)
@@ -45,17 +40,17 @@ class ShowExercise extends React.Component {
 
     let bubbleImage
     if (this.state.thinkingAboutIt === true) {
-      if (!this.state.answer) {
+      if (!this.state.answerUser) {
         bubbleImage = 'images/virtual_student/bubble_thinking.jpg'
       } else {
-        if (this.state.answer === 'true') {
+        if (this.state.answerUser === 'true') {
           bubbleImage = 'images/virtual_student/bubble_happy.jpg'
         } else {
           bubbleImage = 'images/virtual_student/bubble_disappointed.jpg'
         }
       }
     } else {
-      if (Math.random() > 0.5) {
+      if (this.props.student.thinkAboutAnswer(this.props.parallelogram.featuresParallelogram)) {
         bubbleImage = 'images/virtual_student/bubble_positive_answer.jpg'
       } else {
         bubbleImage = 'images/virtual_student/bubble_negative_answer.jpg'
@@ -105,7 +100,8 @@ ShowExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   parallelogram: PropTypes.object.isRequired,
-  updateScore: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(ShowExercise)

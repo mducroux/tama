@@ -7,10 +7,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/examples/2.png',
@@ -20,10 +22,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/examples/3.png',
@@ -33,10 +37,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/examples/4.png',
@@ -46,10 +52,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/examples/5.png',
@@ -59,10 +67,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: true,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: true,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/examples/6.png',
@@ -72,10 +82,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/examples/7.png',
@@ -85,10 +97,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'positive',
     valid: true,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/counter_examples/1.png',
@@ -98,10 +112,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'negative',
     valid: false,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: false,
-    hasOppositeEdgesParallel: false
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: false,
+      hasOppositeEdgesParallel: false
+    }
   },
   {
     src: 'images/counter_examples/2.png',
@@ -111,10 +127,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'negative',
     valid: false,
-    isQuadrilateral: false,
-    hasSameLengthEdges: true,
-    hasSameLengthOppositeEdges: true,
-    hasOppositeEdgesParallel: false
+    featuresParallelogram: {
+      isQuadrilateral: false,
+      hasSameLengthEdges: true,
+      hasSameLengthOppositeEdges: true,
+      hasOppositeEdgesParallel: false
+    }
   },
   {
     src: 'images/counter_examples/3.png',
@@ -124,10 +142,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'negative',
     valid: false,
-    isQuadrilateral: false,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: false,
-    hasOppositeEdgesParallel: true
+    featuresParallelogram: {
+      isQuadrilateral: false,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: false,
+      hasOppositeEdgesParallel: true
+    }
   },
   {
     src: 'images/counter_examples/4.png',
@@ -137,10 +157,12 @@ const parallelogramData = [
     isSelected: false,
     itemType: 'negative',
     valid: false,
-    isQuadrilateral: true,
-    hasSameLengthEdges: false,
-    hasSameLengthOppositeEdges: false,
-    hasOppositeEdgesParallel: false
+    featuresParallelogram: {
+      isQuadrilateral: true,
+      hasSameLengthEdges: false,
+      hasSameLengthOppositeEdges: false,
+      hasOppositeEdgesParallel: false
+    }
   }
 ]
 

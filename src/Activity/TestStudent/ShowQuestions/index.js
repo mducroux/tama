@@ -22,7 +22,7 @@ const styles = () => ({
 class ShowQuestions extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, grade: 0, answer: false}
+    this.state = {thinkingAboutIt: true, bubbleImage: '', indexQuestion: 0, answer: false}
   }
 
   componentDidMount () {
@@ -30,11 +30,9 @@ class ShowQuestions extends React.Component {
   }
 
   answerQuestion () {
-    // bool func(featureOfPara) => thinkAboutAnswer(featureOfPara)
-    var answer = Math.random() > 0.5
-    var newGrade = this.state.grade
+    var answer = this.props.student.thinkAboutAnswer(this.props.examQuestions[this.state.indexQuestion].featuresParallelogram)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
-      newGrade = this.state.grade + 1
+      this.props.increaseGrade()
       this.props.updateScore()
       this.props.onAnswerQuestion(this.state.indexQuestion, true)
     } else {
@@ -42,7 +40,6 @@ class ShowQuestions extends React.Component {
     }
     this.setState({
       thinkingAboutIt: false,
-      grade: newGrade,
       answer: answer
     })
   }
@@ -103,7 +100,9 @@ ShowQuestions.propTypes = {
   numberOfQuestions: PropTypes.number.isRequired,
   examQuestions: PropTypes.array.isRequired,
   onAnswerQuestion: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired,
+  increaseGrade: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowQuestions)

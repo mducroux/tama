@@ -21,7 +21,8 @@ class TestStudent extends React.Component {
     this.examQuestions = this.examQuestions.slice(0, this.numberOfQuestions)
     this.correctAnswers = Array(this.numberOfQuestions).fill(false)
     this.state = {
-      tookTest: false
+      tookTest: false,
+      grade: 0
     }
   }
 
@@ -33,11 +34,13 @@ class TestStudent extends React.Component {
     if (!this.state.tookTest) {
       return (
         <ShowQuestions
-          displayResultTest={(grade) => this.setState({tookTest: true, grade: grade})}
+          displayResultTest={() => this.setState({tookTest: true})}
           numberOfQuestions={this.numberOfQuestions}
           examQuestions={this.examQuestions}
           onAnswerQuestion={(index, isCorrect) => this.handleAnswerQuestion(index, isCorrect)}
           updateScore={this.props.updateScore}
+          student={this.props.student}
+          increaseGrade={() => this.setState({grade: this.state.grade + 1})}
         />
       )
     } else {
@@ -56,7 +59,8 @@ class TestStudent extends React.Component {
 
 TestStudent.propTypes = {
   startNewGame: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired
+  updateScore: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired
 }
 
 export default TestStudent
