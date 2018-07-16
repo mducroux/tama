@@ -7,7 +7,7 @@ import TrainWithLesson from './Activity/TrainWithLesson'
 import TestStudent from './Activity/TestStudent'
 import AppBarMenu from './AppBarMenu'
 import WelcomeMenu from './WelcomeMenu'
-import DumbStudent from './VirtualStudent/DumbStudent'
+import GodStudent from './VirtualStudent/GodStudent'
 
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -35,7 +35,7 @@ class App extends Component {
       hasChosenActivity: '',
       scoreDisplayed: localStorage.getItem('score')
     }
-    this.student = new DumbStudent()
+    this.student = new GodStudent()
   }
 
   updateScore = (points) => {
