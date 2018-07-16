@@ -1,14 +1,14 @@
 class GodStudent {
   constructor () {
-    this.thinkingAboutExample = '...'
+    this.thinkingAboutExample = 'Trop facile'
     this.questionExample = 'Est-ce un parallélogramme ?'
-    this.thinkingAboutExercice = '...'
-    this.hasRightAnswerExercice = 'Super !'
-    this.hasFalseAnswerExercice = 'Mince !'
-    this.givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme"
-    this.giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
-    this.feedbackLessonKnow = 'Je le savais'
-    this.feedbackLessonDontKnow = 'Oh je ne savais pas !'
+    this.thinkingAboutExercice = 'Trop facile'
+    this.hasRightAnswerExercice = "J'en étais sûr"
+    this.hasFalseAnswerExercice = 'Tu mens !'
+    this.givePositiveAnswer = "C'est un paralléĺogramme"
+    this.giveNegativeAnswer = "Ce n'est pas un parallélogramme"
+    this.feedbackLessonKnow = "Je le savais (comme d'habitude)"
+    this.feedbackLessonDontKnow = ''
   }
 
   answerParallelogram (featuresParallelogram) {
