@@ -1,11 +1,5 @@
 class DumbStudent {
   constructor () {
-    this.featuresParallelogram = {
-      isQuadrilateral: false,
-      hasSameLengthEdges: false,
-      hasSameLengthOppositeEdges: false,
-      hasOppositeEdgesParallel: false
-    }
     this.thinkingAboutExample = '...'
     this.questionExample = 'Est-ce un parallélogramme ?'
     this.thinkingAboutExercice = '...'

@@ -1,10 +1,10 @@
 class QuickLearnerStudent {
   constructor () {
-    this.featuresParallelogram = {
-      isQuadrilateral: false,
-      hasSameLengthEdges: false,
-      hasSameLengthOppositeEdges: false,
-      hasOppositeEdgesParallel: false
+    this.knowledgeParallelogram = {
+      isQuadrilateral: Math.random() > 0.5,
+      hasSameLengthEdges: Math.random() > 0.5,
+      hasSameLengthOppositeEdges: Math.random() > 0.5,
+      hasOppositeEdgesParallel: Math.random() > 0.5
     }
     this.thinkingAboutExample = '...'
     this.questionExample = 'Est-ce un parallélogramme ?'
