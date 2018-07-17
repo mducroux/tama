@@ -65,12 +65,13 @@ class ShowExamples extends React.Component {
   handleClick = (answer) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
       this.setState({thinkingAboutIt: true, answer: answer})
-      this.props.student.learn(this.props.parallelograms[this.state.indexExample].featuresParallelogram, answer)
+      this.props.student.learn(this.props.parallelograms[this.state.indexExample].valid, this.props.parallelograms[this.state.indexExample].featuresParallelogram)
       setTimeout(() => {
-        this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
-        if (this.state.indexExample === this.props.numberOfExamples) {
+        if (this.state.indexExample + 1 === this.props.numberOfExamples) {
           this.props.updateScore()
           this.props.getBackToMenu()
+        } else {
+          this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         }
       }, 200)
     }
@@ -95,7 +96,7 @@ class ShowExamples extends React.Component {
               Exemple : {this.state.indexExample + 1} / 3
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <img src={this.props.parallelograms[this.state.indexExample]} alt="parallelogram" width="300" height="300"/>
+          <img src={this.props.parallelograms[this.state.indexExample].src} alt="parallelogram" width="300" height="300"/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
           {this.choiceOrAnswer()}

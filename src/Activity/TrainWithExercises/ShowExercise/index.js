@@ -22,7 +22,7 @@ class ShowExercise extends React.Component {
 
   handleClick = (answer) => {
     this.setState({answerUser: answer, thinkingAboutIt: true})
-    this.props.student.learn(this.props.parallelogram.featuresParallelogram, answer)
+    this.props.student.learn(this.props.parallelogram.valid, this.props.parallelogram.featuresParallelogram)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()

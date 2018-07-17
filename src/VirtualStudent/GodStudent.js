@@ -5,11 +5,11 @@ class GodStudent {
     this.thinkingAboutExercice = 'Trop facile'
     this.hasRightAnswerExercice = "J'en étais sûr"
     this.hasFalseAnswerExercice = 'Tu mens !'
+    this.feedbackLessonKnow = 'Je le savais (comme toujours)'
+    this.feedbackLessonDontKnow = ''
+    this.thinkingAboutExam = 'Trop facile'
     this.givePositiveAnswer = "C'est un paralléĺogramme"
     this.giveNegativeAnswer = "Ce n'est pas un parallélogramme"
-    this.feedbackLessonKnow = "Je le savais (comme d'habitude)"
-    this.thinkingAboutExam = 'Trop facile'
-    this.feedbackLessonDontKnow = ''
   }
 
   answerParallelogram (featuresParallelogram) {
@@ -19,7 +19,11 @@ class GodStudent {
     )
   }
 
-  learn (featuresParallelogram, answer) {
+  learn (isParallelogram, featuresParallelogram) {
+    // Nothing to learn, he is God
+  }
+
+  learnLesson (featuresParallelogram) {
     // Nothing to learn, he is God
   }
 

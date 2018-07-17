@@ -7,7 +7,7 @@ import TrainWithLesson from './Activity/TrainWithLesson'
 import TestStudent from './Activity/TestStudent'
 import AppBarMenu from './AppBarMenu'
 import WelcomeMenu from './WelcomeMenu'
-import GodStudent from './VirtualStudent/GodStudent'
+import QuickLearnerStudent from './VirtualStudent/QuickLearnerStudent'
 
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -35,7 +35,8 @@ class App extends Component {
       hasChosenActivity: '',
       scoreDisplayed: localStorage.getItem('score')
     }
-    this.student = new GodStudent()
+    this.student = new QuickLearnerStudent()
+    console.log(this.student.knowledgeParallelogram)
   }
 
   updateScore = (points) => {

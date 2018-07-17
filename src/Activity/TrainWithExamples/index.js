@@ -26,7 +26,7 @@ class TrainWithExamples extends React.Component {
     var parallelograms = []
     for (var ind = 0; ind < this.state.examples.length; ind++) {
       if (this.state.examples[ind]) {
-        parallelograms.push(parallelogramData[ind].src)
+        parallelograms.push(parallelogramData[ind])
       }
     }
     return parallelograms

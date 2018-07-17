@@ -63,7 +63,7 @@ class RegistrationForm extends React.Component {
     return (
       <Grid container className={classes.root} justify='center'>
         <Grid item xs={12} sm={8}>
-          <Grid containe className={classes.root} justify='center'>
+          <Grid container className={classes.root} justify='center'>
             <Grid item xs={12} sm={8}>
               <ValidatorForm
                 component='fieldset'

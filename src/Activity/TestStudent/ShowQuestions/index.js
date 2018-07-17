@@ -52,7 +52,7 @@ class ShowQuestions extends React.Component {
         indexQuestion: this.state.indexQuestion + 1,
         thinkingAboutIt: true
       })
-      setTimeout(() => this.answerQuestion(), 2000)
+      setTimeout(() => this.answerQuestion(), 200)
     }
   }
 
