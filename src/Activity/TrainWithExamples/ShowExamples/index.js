@@ -73,7 +73,7 @@ class ShowExamples extends React.Component {
         } else {
           this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
         }
-      }, 200)
+      }, 2000)
     }
   }
 

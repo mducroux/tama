@@ -139,6 +139,7 @@ class App extends Component {
           <TestStudent
             startNewGame={() => {
               localStorage.clear('username')
+              this.student = new QuickLearnerStudent()
               this.setState({
                 hasBeenWelcomed: false,
                 isRegistered: false,
@@ -158,6 +159,7 @@ class App extends Component {
           isRegistered={this.state.isRegistered}
           onLogout={() => {
             localStorage.clear('username')
+            this.student = new QuickLearnerStudent()
             this.setState({
               hasBeenWelcomed: false,
               isRegistered: false,

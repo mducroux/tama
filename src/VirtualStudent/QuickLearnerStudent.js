@@ -2,18 +2,10 @@ class QuickLearnerStudent {
   constructor () {
     // At first he thinks that everything is a parallelogram
     this.knowledgeParallelogram = {
-      isQuadrilateral: {
-        necessaryCondition: 0
-      },
-      hasSameLengthEdges: {
-        necessaryCondition: 0
-      },
-      hasSameLengthOppositeEdges: {
-        necessaryCondition: 0
-      },
-      hasOppositeEdgesParallel: {
-        necessaryCondition: 0
-      }
+      isQuadrilateral: 0,
+      hasSameLengthEdges: 0,
+      hasSameLengthOppositeEdges: 0,
+      hasOppositeEdgesParallel: 0
     }
     this.thinkingAboutExample = '...'
     this.questionExample = 'Est-ce un parallélogramme ?'
@@ -30,10 +22,10 @@ class QuickLearnerStudent {
   // All necessary features should correspond to identify the figure as a parallelogram
   answerParallelogram (featuresParallelogram) {
     return (
-      (this.knowledgeParallelogram.isQuadrilateral.necessaryCondition > 0 ? featuresParallelogram.isQuadrilateral : true) &&
-      (this.knowledgeParallelogram.hasSameLengthEdges.necessaryCondition > 0 ? featuresParallelogram.hasSameLengthEdges : true) &&
-      (this.knowledgeParallelogram.hasSameLengthOppositeEdges.necessaryCondition > 0 ? featuresParallelogram.hasSameLengthOppositeEdges : true) &&
-      (this.knowledgeParallelogram.hasOppositeEdgesParallel.necessaryCondition > 0 ? featuresParallelogram.hasOppositeEdgesParallel : true)
+      (this.knowledgeParallelogram.isQuadrilateral > 0 ? featuresParallelogram.isQuadrilateral : true) &&
+      (this.knowledgeParallelogram.hasSameLengthEdges > 0 ? featuresParallelogram.hasSameLengthEdges : true) &&
+      (this.knowledgeParallelogram.hasSameLengthOppositeEdges > 0 ? featuresParallelogram.hasSameLengthOppositeEdges : true) &&
+      (this.knowledgeParallelogram.hasOppositeEdgesParallel > 0 ? featuresParallelogram.hasOppositeEdgesParallel : true)
     )
   }
 
@@ -41,20 +33,20 @@ class QuickLearnerStudent {
     if (!isParallelogram) {
       for (let feature in this.knowledgeParallelogram) {
         if (!featuresParallelogram[feature]) {
-          this.knowledgeParallelogram[feature].necessaryCondition += 0.1
+          this.knowledgeParallelogram[feature] += 0.1
         }
         if (featuresParallelogram[feature]) {
-          this.knowledgeParallelogram[feature].necessaryCondition -= 0.1
+          this.knowledgeParallelogram[feature] -= 0.1
         }
       }
     }
     if (isParallelogram) {
       for (let feature in this.knowledgeParallelogram) {
         if (!featuresParallelogram[feature]) {
-          this.knowledgeParallelogram[feature].necessaryCondition -= 0.1
+          this.knowledgeParallelogram[feature] -= 0.1
         }
         if (featuresParallelogram[feature]) {
-          this.knowledgeParallelogram[feature].necessaryCondition += 0.1
+          this.knowledgeParallelogram[feature] += 0.1
         }
       }
     }
@@ -64,7 +56,7 @@ class QuickLearnerStudent {
   // The lesson is the truth (weight of 1 or -1)
   learnLesson (featuresParallelogram) {
     for (var feature in featuresParallelogram) {
-      this.knowledgeParallelogram[feature].necessaryCondition = featuresParallelogram[feature] ? 1 : -1
+      this.knowledgeParallelogram[feature] = featuresParallelogram[feature] ? 1 : -1
     }
     console.log(this.knowledgeParallelogram)
   }
@@ -73,7 +65,7 @@ class QuickLearnerStudent {
   // return true even if it increased his certainty
   alreadyKnowLesson (featuresParallelogram) {
     for (var feature in featuresParallelogram) {
-      if (this.knowledgeParallelogram[feature].necessaryCondition > 0 ? !featuresParallelogram[feature] : featuresParallelogram[feature]) {
+      if (this.knowledgeParallelogram[feature] > 0 ? !featuresParallelogram[feature] : featuresParallelogram[feature]) {
         return false
       }
     }
