@@ -8,6 +8,7 @@ class GodStudent {
     this.givePositiveAnswer = "C'est un paralléĺogramme"
     this.giveNegativeAnswer = "Ce n'est pas un parallélogramme"
     this.feedbackLessonKnow = "Je le savais (comme d'habitude)"
+    this.thinkingAboutExam = 'Trop facile'
     this.feedbackLessonDontKnow = ''
   }
 

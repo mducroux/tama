@@ -15,7 +15,7 @@ const styles = () => ({
   },
   title: {
     display: 'flex',
-    alignItems: 'center'
+    textAlign: 'center'
   }
 })
 
@@ -61,7 +61,7 @@ class ShowQuestions extends React.Component {
 
     let bubbleText
     if (this.state.thinkingAboutIt === true) {
-      bubbleText = this.props.student.thinkingAboutExample
+      bubbleText = this.props.student.thinkingAboutExam
     } else {
       if (this.state.answer === true) {
         bubbleText = this.props.student.givePositiveAnswer

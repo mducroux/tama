@@ -28,6 +28,9 @@ const styles = () => ({
     top: '50%',
     left: '35%',
     transform: 'translate(-50%, -50%)'
+  },
+  finalScore: {
+    textAlign: 'center'
   }
 })
 
@@ -52,7 +55,7 @@ class Result extends React.Component {
           )}
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Typography variant='display1'>
+          <Typography variant='display1' className={classes.finalScore}>
             Votre score final : {localStorage.getItem('score')} points
           </Typography>
         </Grid>

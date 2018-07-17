@@ -10,6 +10,9 @@ const styles = () => ({
     display: 'flex',
     flexWrap: 'wrap',
     marginTop: '50px'
+  },
+  title: {
+    textAlign: 'center'
   }
 })
 
@@ -25,7 +28,7 @@ class WelcomeMenu extends React.Component {
           />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <Typography variant="title" color="inherit">
+          <Typography className={classes.title} variant="title" color="inherit">
             Apprends à reconnaître les parallélogrammes à ton élève virtuel
           </Typography>
         </Grid>

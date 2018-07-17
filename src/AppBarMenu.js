@@ -17,9 +17,8 @@ const styles = {
   },
   score: {
     flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-end',
-    marginRight: '25px'
+    textAlign: 'right',
+    marginRight: '10px'
   }
 }
 

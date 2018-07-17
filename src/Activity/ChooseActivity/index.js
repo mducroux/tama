@@ -108,7 +108,7 @@ class ChooseActivity extends React.Component {
     return (
       <div>
         <Grid container className={classes.root} justify='center'>
-          <Grid item sm={4}>
+          <Grid item sm={6}>
             <Grid container className={classes.root} justify='center'>
               <Typography variant="display1" color="inherit">
                 Choisit une activité
@@ -154,7 +154,7 @@ class ChooseActivity extends React.Component {
           </Grid>
         </Grid>
         <Grid container className={classes.test} justify='flex-end' >
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             <Grid container justify='center'>
               <ButtonBase
                 className={classes.button_test}

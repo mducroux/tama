@@ -8,6 +8,7 @@ class DumbStudent {
     this.givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme"
     this.giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
     this.feedbackLessonKnow = 'Je le savais'
+    this.thinkingAboutExam = '...'
     this.feedbackLessonDontKnow = 'Oh je ne savais pas !'
   }
 

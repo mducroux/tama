@@ -62,132 +62,136 @@ class RegistrationForm extends React.Component {
     const { classes } = this.props
     return (
       <Grid container className={classes.root} justify='center'>
-        <Grid item sm={4}>
-          <ValidatorForm
-            component='fieldset'
-            className={classes.validatorForm}
-            onSubmit={this.handleSubmit}
-          >
-            <div className={classes.title}>
-              <Typography variant='display1'>Inscription à Tama</Typography>
-            </div>
-            <div className={classes.group}>
-              <TextValidator
-                name='pseudo'
-                value={this.state.pseudo}
-                className={classes.textValidator}
-                onChange={this.handleInputChange}
-                label='Mon pseudo *'
-                validators={['required']}
-                errorMessages={['ce champ est obligatoire']}
-              />
-            </div>
-            <div className={classes.group}>
-              <FormLabel component='legend'>Je suis :</FormLabel>
-              <RadioGroup
-                name='gender'
-                value={this.state.gender}
-                onChange={this.handleInputChange}
-                row={true}
+        <Grid item xs={12} sm={8}>
+          <Grid containe className={classes.root} justify='center'>
+            <Grid item xs={12} sm={8}>
+              <ValidatorForm
+                component='fieldset'
+                className={classes.validatorForm}
+                onSubmit={this.handleSubmit}
               >
-                <FormControlLabel
-                  value='femme'
-                  control={<Radio />}
-                  label='Femme'
-                />
-                <FormControlLabel
-                  value='homme'
-                  control={<Radio />}
-                  label='Homme'
-                />
-                <FormControlLabel
-                  value='autre'
-                  control={<Radio />}
-                  label='Autre'
-                />
-              </RadioGroup>
-            </div>
-            <div className={classes.group}>
-              <FormLabel component='legend'>Je suis :</FormLabel>
-              <RadioGroup
-                name='status'
-                value={this.state.status}
-                onChange={this.handleInputChange}
-                row={true}
-              >
-                <FormControlLabel
-                  value='eleve'
-                  control={<Radio />}
-                  label='Elève'
-                />
-                <FormControlLabel
-                  value='enseignant'
-                  control={<Radio />}
-                  label='Enseignant(e)'
-                />
-                <FormControlLabel
-                  value='parent'
-                  control={<Radio />}
-                  label='Parent'
-                />
-                <FormControlLabel
-                  value='autre'
-                  control={<Radio />}
-                  label='Autre'
-                />
-              </RadioGroup>
-            </div>
-            <div className={classes.group}>
-              <TextValidator
-                name='age'
-                value={this.state.age}
-                className={classes.textValidator}
-                onChange={this.handleInputChange}
-                label='Age *'
-                validators={['required', 'isNumber']}
-                errorMessages={[
-                  'ce champ est obligatoire',
-                  'veuillez entrer un nombre'
-                ]}
-              />
-            </div>
-            <div className={classes.group}>
-              <FormLabel component='legend'>
-                Mes connaissances sur les parallélogrammes :
-              </FormLabel>
-              <RadioGroup
-                name='knowledge'
-                value={this.state.knowledge}
-                onChange={this.handleInputChange}
-                row={true}
-              >
-                <FormControlLabel value='no' control={<Radio />} label='Nulle' />
-                <FormControlLabel
-                  value='poor'
-                  control={<Radio />}
-                  label='Faible'
-                />
-                <FormControlLabel
-                  value='average'
-                  control={<Radio />}
-                  label='Moyenne'
-                />
-                <FormControlLabel
-                  value='solid'
-                  control={<Radio />}
-                  label='Solide'
-                />
-              </RadioGroup>
-            </div>
-            <Button
-              variant='contained'
-              color='primary'
-              className={classes.button}
-              type='submit'
-            >
-              Ok
-            </Button>
-          </ValidatorForm>
+                <div className={classes.title}>
+                  <Typography variant='display1'>Inscription à Tama</Typography>
+                </div>
+                <div className={classes.group}>
+                  <TextValidator
+                    name='pseudo'
+                    value={this.state.pseudo}
+                    className={classes.textValidator}
+                    onChange={this.handleInputChange}
+                    label='Mon pseudo *'
+                    validators={['required']}
+                    errorMessages={['ce champ est obligatoire']}
+                  />
+                </div>
+                <div className={classes.group}>
+                  <FormLabel component='legend'>Je suis :</FormLabel>
+                  <RadioGroup
+                    name='gender'
+                    value={this.state.gender}
+                    onChange={this.handleInputChange}
+                    row={true}
+                  >
+                    <FormControlLabel
+                      value='femme'
+                      control={<Radio />}
+                      label='Femme'
+                    />
+                    <FormControlLabel
+                      value='homme'
+                      control={<Radio />}
+                      label='Homme'
+                    />
+                    <FormControlLabel
+                      value='autre'
+                      control={<Radio />}
+                      label='Autre'
+                    />
+                  </RadioGroup>
+                </div>
+                <div className={classes.group}>
+                  <FormLabel component='legend'>Je suis :</FormLabel>
+                  <RadioGroup
+                    name='status'
+                    value={this.state.status}
+                    onChange={this.handleInputChange}
+                    row={true}
+                  >
+                    <FormControlLabel
+                      value='eleve'
+                      control={<Radio />}
+                      label='Elève'
+                    />
+                    <FormControlLabel
+                      value='enseignant'
+                      control={<Radio />}
+                      label='Enseignant(e)'
+                    />
+                    <FormControlLabel
+                      value='parent'
+                      control={<Radio />}
+                      label='Parent'
+                    />
+                    <FormControlLabel
+                      value='autre'
+                      control={<Radio />}
+                      label='Autre'
+                    />
+                  </RadioGroup>
+                </div>
+                <div className={classes.group}>
+                  <TextValidator
+                    name='age'
+                    value={this.state.age}
+                    className={classes.textValidator}
+                    onChange={this.handleInputChange}
+                    label='Age *'
+                    validators={['required', 'isNumber']}
+                    errorMessages={[
+                      'ce champ est obligatoire',
+                      'veuillez entrer un nombre'
+                    ]}
+                  />
+                </div>
+                <div className={classes.group}>
+                  <FormLabel component='legend'>
+                    Mes connaissances sur les parallélogrammes :
+                  </FormLabel>
+                  <RadioGroup
+                    name='knowledge'
+                    value={this.state.knowledge}
+                    onChange={this.handleInputChange}
+                    row={true}
+                  >
+                    <FormControlLabel value='no' control={<Radio />} label='Nulle' />
+                    <FormControlLabel
+                      value='poor'
+                      control={<Radio />}
+                      label='Faible'
+                    />
+                    <FormControlLabel
+                      value='average'
+                      control={<Radio />}
+                      label='Moyenne'
+                    />
+                    <FormControlLabel
+                      value='solid'
+                      control={<Radio />}
+                      label='Solide'
+                    />
+                  </RadioGroup>
+                </div>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  className={classes.button}
+                  type='submit'
+                >
+                  Ok
+                </Button>
+              </ValidatorForm>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     )
