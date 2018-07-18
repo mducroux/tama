@@ -17,12 +17,12 @@ const styles = () => ({
 class ShowExercise extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, answerUser: ''}
+    this.state = {thinkingAboutIt: true, answerUser: '', answerStudent: false}
   }
 
-  handleClick = (answer) => {
-    this.setState({answerUser: answer, thinkingAboutIt: true})
-    this.props.student.learn(this.props.parallelogram.valid, this.props.parallelogram.featuresShape)
+  handleClick = (answerUser) => {
+    this.setState({answerUser: answerUser, thinkingAboutIt: true})
+    this.props.student.learn(this.state.answerStudent ? answerUser === 'true' : !(answerUser === 'true'), this.props.parallelogram.featuresShape)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -31,7 +31,7 @@ class ShowExercise extends React.Component {
 
   componentDidMount () {
     setTimeout(() => {
-      this.setState({thinkingAboutIt: false})
+      this.setState({thinkingAboutIt: false, answerStudent: this.props.student.answerParallelogram(this.props.parallelogram.featuresShape)})
     }, 2000)
   }
 
@@ -50,7 +50,7 @@ class ShowExercise extends React.Component {
         }
       }
     } else {
-      if (this.props.student.answerParallelogram(this.props.parallelogram.featuresShape)) {
+      if (this.state.answerStudent) {
         bubbleText = this.props.student.givePositiveAnswer
       } else {
         bubbleText = this.props.student.giveNegativeAnswer
