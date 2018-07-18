@@ -12,22 +12,22 @@ class GodStudent {
     this.giveNegativeAnswer = "Ce n'est pas un parallélogramme"
   }
 
-  answerParallelogram (featuresParallelogram) {
+  answerParallelogram (featuresShape) {
     return (
-      featuresParallelogram.isQuadrilateral &&
-      featuresParallelogram.hasOppositeEdgesParallel
+      featuresShape.hasFourEdges &&
+      featuresShape.hasEveryPairOppositeEdgesParallel
     )
   }
 
-  learn (isParallelogram, featuresParallelogram) {
+  learn (isParallelogram, featuresShape) {
     // Nothing to learn, he is God
   }
 
-  learnLesson (featuresParallelogram) {
+  learnLesson (featuresShape) {
     // Nothing to learn, he is God
   }
 
-  alreadyKnowLesson (featuresParallelogram) {
+  alreadyKnowLesson (featuresShape) {
     return true
   }
 }

@@ -12,17 +12,17 @@ class DumbStudent {
     this.giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
   }
 
-  answerParallelogram (featuresParallelogram) {
+  answerParallelogram (featuresShape) {
     return (Math.random() > 0.5)
   }
 
-  learn (isParallelogram, featuresParallelogram) {
+  learn (isParallelogram, featuresShape) {
   }
 
-  learnLesson (featuresParallelogram) {
+  learnLesson (featuresShape) {
   }
 
-  alreadyKnowLesson (featuresParallelogram) {
+  alreadyKnowLesson (featuresShape) {
     return (Math.random() > 0.5)
   }
 }

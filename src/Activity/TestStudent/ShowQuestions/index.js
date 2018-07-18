@@ -30,7 +30,7 @@ class ShowQuestions extends React.Component {
   }
 
   answerQuestion () {
-    var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].featuresParallelogram)
+    var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].featuresShape)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
       this.props.increaseGrade()
       this.props.updateScore()

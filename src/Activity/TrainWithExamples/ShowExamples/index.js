@@ -65,7 +65,7 @@ class ShowExamples extends React.Component {
   handleClick = (answer) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
       this.setState({thinkingAboutIt: true, answer: answer})
-      this.props.student.learn(this.props.parallelograms[this.state.indexExample].valid, this.props.parallelograms[this.state.indexExample].featuresParallelogram)
+      this.props.student.learn(this.props.parallelograms[this.state.indexExample].valid, this.props.parallelograms[this.state.indexExample].featuresShape)
       setTimeout(() => {
         if (this.state.indexExample + 1 === this.props.numberOfExamples) {
           this.props.updateScore()

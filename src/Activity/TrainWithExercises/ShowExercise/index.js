@@ -22,7 +22,7 @@ class ShowExercise extends React.Component {
 
   handleClick = (answer) => {
     this.setState({answerUser: answer, thinkingAboutIt: true})
-    this.props.student.learn(this.props.parallelogram.valid, this.props.parallelogram.featuresParallelogram)
+    this.props.student.learn(this.props.parallelogram.valid, this.props.parallelogram.featuresShape)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -50,7 +50,7 @@ class ShowExercise extends React.Component {
         }
       }
     } else {
-      if (this.props.student.answerParallelogram(this.props.parallelogram.featuresParallelogram)) {
+      if (this.props.student.answerParallelogram(this.props.parallelogram.featuresShape)) {
         bubbleText = this.props.student.givePositiveAnswer
       } else {
         bubbleText = this.props.student.giveNegativeAnswer

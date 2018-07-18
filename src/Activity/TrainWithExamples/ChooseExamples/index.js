@@ -29,7 +29,7 @@ const styles = theme => ({
     minHeight: '1px',
     width: '100%',
     border: '1px solid #ddd',
-    overflow: 'auto'
+    overflow: 'hidden'
   },
   title: {
     display: 'flex',
@@ -87,18 +87,8 @@ class ChooseExamples extends React.Component {
         </div>
         <div className={classes.gallery}>
           <Gallery
-            images={parallelogramData.filter(img => { return img.itemType === 'positive' })}
+            images={parallelogramData}
             onClickThumbnail={this.onSelectItems}
-          />
-        </div>
-        <div className={classes.gallery}>
-          <Gallery
-            images={parallelogramData.filter(img => { return img.itemType === 'negative' })}
-            onClickThumbnail={(index, event) =>
-              this.onSelectItems(
-                index + parallelogramData.indexOf(parallelogramData.find(img => img.itemType === 'negative')), event
-              )
-            }
           />
         </div>
         <div className={classes.root}>
