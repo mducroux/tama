@@ -1,4 +1,5 @@
 import React from 'react'
+import fire from '../fire'
 import { withStyles } from '@material-ui/core/styles'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -55,6 +56,7 @@ class RegistrationForm extends React.Component {
   }
 
   handleSubmit = () => {
+    fire.database().ref().child('users').push(this.state)
     this.props.onSubmit(this.state.pseudo)
   }
 

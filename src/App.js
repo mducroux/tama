@@ -142,13 +142,13 @@ class App extends Component {
         displayed = (
           <TestStudent
             startNewGame={() => {
-              localStorage.clear('username')
               this.student = new QuickLearnerStudent()
               this.setState({
                 hasBeenWelcomed: false,
-                isRegistered: false,
                 hasChosenActivityType: false,
-                hasChosenActivity: ''
+                hasChosenActivity: '',
+                score: 200,
+                scoreDisplayed: '200'
               })
             }}
             updateScore={() => this.updateScore(+50)}
@@ -162,14 +162,25 @@ class App extends Component {
       <div className={classes.root}>
         <AppBarMenu
           isRegistered={this.state.isRegistered}
-          onLogout={() => {
-            localStorage.clear('username')
+          onLeaveSession={() => {
             this.student = new QuickLearnerStudent()
             this.setState({
               hasBeenWelcomed: false,
-              isRegistered: false,
               hasChosenActivityType: false,
-              hasChosenActivity: ''
+              hasChosenActivity: '',
+              score: 200,
+              scoreDisplayed: '200'
+            })
+          }}
+          onUnregister={() => {
+            this.student = new QuickLearnerStudent()
+            this.setState({
+              isRegistered: false,
+              hasBeenWelcomed: false,
+              hasChosenActivityType: false,
+              hasChosenActivity: '',
+              score: 200,
+              scoreDisplayed: '200'
             })
           }}
           scoreDisplayed={this.state.scoreDisplayed}

@@ -35,9 +35,14 @@ class AppBarMenu extends React.Component {
     this.setState({ anchorEl: null })
   }
 
-  handleLogout = () => {
+  handleLeaveSession = () => {
     this.setState({ anchorEl: null })
-    this.props.onLogout()
+    this.props.onLeaveSession()
+  }
+
+  handleUnregistrer = () => {
+    this.setState({ anchorEl: null })
+    this.props.onUnregister()
   }
 
   render () {
@@ -80,7 +85,8 @@ class AppBarMenu extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleLogout}>{"Quitter l'entraînement"}</MenuItem>
+                  <MenuItem onClick={this.handleLeaveSession}>{"Quitter l'entraînement"}</MenuItem>
+                  <MenuItem onClick={this.handleUnregistrer}>{'Se désinscrire'}</MenuItem>
                 </Menu>
               </div>
             )}
@@ -94,7 +100,8 @@ class AppBarMenu extends React.Component {
 AppBarMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   isRegistered: PropTypes.bool.isRequired,
-  onLogout: PropTypes.func.isRequired,
+  onUnregister: PropTypes.func.isRequired,
+  onLeaveSession: PropTypes.func.isRequired,
   scoreDisplayed: PropTypes.string
 }
 
