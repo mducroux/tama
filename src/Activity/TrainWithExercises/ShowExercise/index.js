@@ -17,12 +17,12 @@ const styles = () => ({
 class ShowExercise extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, answerUser: ''}
+    this.state = {thinking: true, learning: false, userAnswer: false, studentAnswer: false}
   }
 
-  handleClick = (answer) => {
-    this.setState({answerUser: answer, thinkingAboutIt: true})
-    this.props.student.learn(this.props.parallelogram.valid, this.props.parallelogram.featuresParallelogram)
+  handleClick = (userAnswer) => {
+    this.setState({learning: true, userAnswer: userAnswer})
+    this.props.student.learn(this.state.studentAnswer ? userAnswer : !userAnswer, this.props.parallelogram.shapeFeatures)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -31,7 +31,7 @@ class ShowExercise extends React.Component {
 
   componentDidMount () {
     setTimeout(() => {
-      this.setState({thinkingAboutIt: false})
+      this.setState({thinking: false, studentAnswer: this.props.student.answerParallelogram(this.props.parallelogram.shapeFeatures)})
     }, 2000)
   }
 
@@ -39,18 +39,16 @@ class ShowExercise extends React.Component {
     const { classes } = this.props
 
     let bubbleText
-    if (this.state.thinkingAboutIt === true) {
-      if (!this.state.answerUser) {
-        bubbleText = this.props.student.thinkingAboutExercice
+    if (this.state.thinking === true) {
+      bubbleText = this.props.student.thinkingAboutExercice
+    } else if (this.state.learning === true) {
+      if (this.state.userAnswer) {
+        bubbleText = this.props.student.hasRightAnswerExercice
       } else {
-        if (this.state.answerUser === 'true') {
-          bubbleText = this.props.student.hasRightAnswerExercice
-        } else {
-          bubbleText = this.props.student.hasFalseAnswerExercice
-        }
+        bubbleText = this.props.student.hasFalseAnswerExercice
       }
     } else {
-      if (this.props.student.answerParallelogram(this.props.parallelogram.featuresParallelogram)) {
+      if (this.state.studentAnswer) {
         bubbleText = this.props.student.givePositiveAnswer
       } else {
         bubbleText = this.props.student.giveNegativeAnswer
@@ -66,14 +64,14 @@ class ShowExercise extends React.Component {
           <img src={this.props.parallelogram.src} alt="parallelogram" width="300" height="300"/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          {!this.state.thinkingAboutIt && (
+          {!this.state.thinking && !this.state.learning && (
             <div>
               <Grid container justify="center" spacing={40}>
                 <Grid item >
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => this.handleClick('true')}
+                    onClick={() => this.handleClick(true)}
                   >
                     Vrai
                   </Button>
@@ -82,7 +80,7 @@ class ShowExercise extends React.Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => this.handleClick('false')}
+                    onClick={() => this.handleClick(false)}
                   >
                     Faux
                   </Button>
