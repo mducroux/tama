@@ -24,7 +24,7 @@ var parallelogramData = [
       isGreen: false,
       isBlue: true,
       isRotated: true,
-      isThin: true,
+      isThin: false,
       hasEveryRightAngles: false,
       hasAtLeastOneRightAngle: false
     }
