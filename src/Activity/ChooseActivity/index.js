@@ -81,7 +81,7 @@ const images = [
   },
   {
     url: 'images/lesson_512x512.png',
-    title: 'Apprendre une leçon',
+    title: 'Donner une leçon',
     learningCost: '50'
   }
 ]
@@ -98,7 +98,7 @@ class ChooseActivity extends React.Component {
       this.props.onClickExample()
     } else if (key === 'Donner un exercice') {
       this.props.onClickExercise()
-    } else if (key === 'Apprendre une leçon') {
+    } else if (key === 'Donner une leçon') {
       this.props.onClickLesson()
     }
   }
