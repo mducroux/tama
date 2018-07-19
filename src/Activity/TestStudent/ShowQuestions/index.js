@@ -26,7 +26,7 @@ class ShowQuestions extends React.Component {
   }
 
   componentDidMount () {
-    setTimeout(() => this.answerQuestion(), 2000)
+    setTimeout(() => this.answerQuestion(), 200)
   }
 
   answerQuestion () {
@@ -52,7 +52,7 @@ class ShowQuestions extends React.Component {
         indexQuestion: this.state.indexQuestion + 1,
         thinking: true
       })
-      setTimeout(() => this.answerQuestion(), 2000)
+      setTimeout(() => this.answerQuestion(), 200)
     }
   }
 

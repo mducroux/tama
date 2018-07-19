@@ -49,7 +49,7 @@ class Result extends React.Component {
         <Grid container justify="center" className={classes.root}>
           {this.props.examQuestions.map((img, index) =>
             <div key={img.src}>
-              <img src={img.src} alt={img.src}/>
+              <img src={img.src} alt={img.src} width="200" height="200"/>
               {this.props.correctAnswers[index] ? <CheckCircle color="primary"/> : <Cancel color="error"/>}
             </div>
           )}
