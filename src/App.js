@@ -33,16 +33,21 @@ class App extends Component {
       isRegistered: !(!(localStorage.getItem('username'))),
       hasChosenActivityType: false,
       hasChosenActivity: '',
-      scoreDisplayed: localStorage.getItem('score')
+      score: 200,
+      scoreDisplayed: '200'
     }
     this.student = new QuickLearnerStudent()
     console.log(this.student.knowledgeParallelogram)
   }
 
   updateScore = (points) => {
-    this.setState({scoreDisplayed: localStorage.getItem('score') + points})
-    localStorage.setItem('score', parseInt(localStorage.getItem('score'), 10) + parseInt(points, 10))
-    setTimeout(() => { this.setState({scoreDisplayed: localStorage.getItem('score')}) }, 2000)
+    this.setState({score: this.state.score + points})
+    if (points < 0) {
+      this.setState({scoreDisplayed: this.state.scoreDisplayed + points})
+    } else {
+      this.setState({scoreDisplayed: this.state.scoreDisplayed + '+' + points})
+    }
+    setTimeout(() => { this.setState({scoreDisplayed: (this.state.score).toString()}) }, 2000)
   }
 
   render () {
@@ -62,9 +67,8 @@ class App extends Component {
       displayed = (
         <RegistrationForm
           onSubmit={username => {
-            this.setState({ isRegistered: true, scoreDisplayed: '200' })
+            this.setState({ isRegistered: true })
             localStorage.setItem('username', username)
-            localStorage.setItem('score', '200')
           }}
         />
       )
@@ -106,7 +110,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            updateScore={() => this.updateScore('-10')}
+            updateScore={() => this.updateScore(-10)}
             student={this.student}
           />
         )
@@ -118,7 +122,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            updateScore={() => this.updateScore('-30')}
+            updateScore={() => this.updateScore(-30)}
             student={this.student}
           />
         )
@@ -130,7 +134,7 @@ class App extends Component {
                 hasChosenActivityType: false
               })
             }
-            updateScore={() => this.updateScore('-50')}
+            updateScore={() => this.updateScore(-50)}
             student={this.student}
           />
         )
@@ -147,8 +151,9 @@ class App extends Component {
                 hasChosenActivity: ''
               })
             }}
-            updateScore={() => this.updateScore('+50')}
+            updateScore={() => this.updateScore(+50)}
             student={this.student}
+            score={this.state.score}
           />
         )
       }
