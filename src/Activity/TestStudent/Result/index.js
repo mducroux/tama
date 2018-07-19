@@ -56,7 +56,7 @@ class Result extends React.Component {
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <Typography variant='display1' className={classes.finalScore}>
-            Votre score final : {localStorage.getItem('score')} points
+            Votre score final : {this.props.score} points
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
@@ -79,7 +79,8 @@ Result.propTypes = {
   numberOfQuestions: PropTypes.number.isRequired,
   examQuestions: PropTypes.array.isRequired,
   correctAnswers: PropTypes.array.isRequired,
-  startNewGame: PropTypes.func.isRequired
+  startNewGame: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired
 }
 
 export default withStyles(styles)(Result)

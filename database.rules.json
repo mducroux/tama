@@ -1,0 +1,8 @@
+/* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+/* Totally irresponsible rules that allow everyone to read and write for now */
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}

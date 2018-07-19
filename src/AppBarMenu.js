@@ -15,7 +15,7 @@ const styles = {
   welcome: {
     flex: 1
   },
-  score: {
+  scoreDisplayed: {
     flex: 1,
     textAlign: 'right',
     marginRight: '10px'
@@ -52,7 +52,7 @@ class AppBarMenu extends React.Component {
               {!this.props.isRegistered ? 'Bienvenue à Tama !' : 'Bienvenue ' + localStorage.getItem('username') + ' !'}
             </Typography>
             {this.props.isRegistered && (
-              <Typography variant="title" color="inherit" className={classes.score}>
+              <Typography variant="title" color="inherit" className={classes.scoreDisplayed}>
                 Score : {this.props.scoreDisplayed}
               </Typography>
             )}
