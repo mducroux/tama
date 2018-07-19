@@ -22,15 +22,15 @@ const styles = () => ({
 class ShowQuestions extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {thinkingAboutIt: true, indexQuestion: 0, answer: false}
+    this.state = {thinking: true, indexQuestion: 0, answer: false}
   }
 
   componentDidMount () {
-    setTimeout(() => this.answerQuestion(), 2000)
+    setTimeout(() => this.answerQuestion(), 200)
   }
 
   answerQuestion () {
-    var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].featuresParallelogram)
+    var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].shapeFeatures)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
       this.props.increaseGrade()
       this.props.updateScore()
@@ -39,7 +39,7 @@ class ShowQuestions extends React.Component {
       this.props.onAnswerQuestion(this.state.indexQuestion, false)
     }
     this.setState({
-      thinkingAboutIt: false,
+      thinking: false,
       answer: answer
     })
   }
@@ -50,9 +50,9 @@ class ShowQuestions extends React.Component {
     } else {
       this.setState({
         indexQuestion: this.state.indexQuestion + 1,
-        thinkingAboutIt: true
+        thinking: true
       })
-      setTimeout(() => this.answerQuestion(), 2000)
+      setTimeout(() => this.answerQuestion(), 200)
     }
   }
 
@@ -60,7 +60,7 @@ class ShowQuestions extends React.Component {
     const { classes } = this.props
 
     let bubbleText
-    if (this.state.thinkingAboutIt === true) {
+    if (this.state.thinking === true) {
       bubbleText = this.props.student.thinkingAboutExam
     } else {
       if (this.state.answer === true) {
@@ -84,7 +84,7 @@ class ShowQuestions extends React.Component {
           <VirtualStudent bubbleText={bubbleText}/>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          {!this.state.thinkingAboutIt &&
+          {!this.state.thinking &&
             <Button className={classes.button} onClick={() => this.handleNextQuestion()} color='primary' size='large'>
               {(this.props.numberOfQuestions !== this.state.indexQuestion + 1) ? 'Question suivante' : 'Voir le résultat'}
             </Button>}

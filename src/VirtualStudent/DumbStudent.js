@@ -1,28 +1,26 @@
 class DumbStudent {
-  constructor () {
-    this.thinkingAboutExample = '...'
-    this.questionExample = 'Est-ce un parallélogramme ?'
-    this.thinkingAboutExercice = '...'
-    this.hasRightAnswerExercice = 'Super !'
-    this.hasFalseAnswerExercice = 'Mince !'
-    this.feedbackLessonAlreadyKnow = 'Je le savais'
-    this.feedbackLessonDidntKnow = 'Oh je ne savais pas !'
-    this.thinkingAboutExam = '...'
-    this.givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme"
-    this.giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
-  }
+  thinkingAboutExample = '...'
+  questionExample = 'Est-ce un parallélogramme ?'
+  thinkingAboutExercice = '...'
+  hasRightAnswerExercice = 'Super !'
+  hasFalseAnswerExercice = 'Mince !'
+  feedbackLessonAlreadyKnow = 'Je le savais'
+  feedbackLessonDidntKnow = 'Oh je ne savais pas !'
+  thinkingAboutExam = '...'
+  givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme"
+  giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
 
-  answerParallelogram (featuresParallelogram) {
+  answerParallelogram (shapeFeatures) {
     return (Math.random() > 0.5)
   }
 
-  learn (isParallelogram, featuresParallelogram) {
+  learn (isParallelogram, shapeFeatures) {
   }
 
-  learnLesson (featuresParallelogram) {
+  learnLesson (shapeFeatures) {
   }
 
-  alreadyKnowLesson (featuresParallelogram) {
+  alreadyKnowLesson (shapeFeatures) {
     return (Math.random() > 0.5)
   }
 }

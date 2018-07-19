@@ -24,14 +24,14 @@ const styles = () => ({
 class ShowExamples extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {indexExample: 0, thinkingAboutIt: false, answer: ''}
+    this.state = {indexExample: 0, thinking: false, userAnswer: false}
   }
 
   choiceOrAnswer = () => {
-    if (this.state.thinkingAboutIt === true) {
+    if (this.state.thinking) {
       return (
         <Typography variant="title">
-          { this.state.answer }
+          { this.state.userAnswer ? 'OUI' : 'NON' }
         </Typography>
       )
     } else {
@@ -42,7 +42,7 @@ class ShowExamples extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => this.handleClick('OUI')}
+                onClick={() => this.handleClick(true)}
               >
                 Oui
               </Button>
@@ -51,7 +51,7 @@ class ShowExamples extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => this.handleClick('NON')}
+                onClick={() => this.handleClick(false)}
               >
                 Non
               </Button>
@@ -62,16 +62,16 @@ class ShowExamples extends React.Component {
     }
   }
 
-  handleClick = (answer) => {
+  handleClick = (userAnswer) => {
     if (this.state.indexExample < this.props.numberOfExamples) {
-      this.setState({thinkingAboutIt: true, answer: answer})
-      this.props.student.learn(this.props.parallelograms[this.state.indexExample].valid, this.props.parallelograms[this.state.indexExample].featuresParallelogram)
+      this.setState({thinking: true, userAnswer: userAnswer})
+      this.props.student.learn(userAnswer, this.props.parallelograms[this.state.indexExample].shapeFeatures)
       setTimeout(() => {
         if (this.state.indexExample + 1 === this.props.numberOfExamples) {
           this.props.updateScore()
           this.props.getBackToMenu()
         } else {
-          this.setState({thinkingAboutIt: false, indexExample: this.state.indexExample + 1})
+          this.setState({thinking: false, indexExample: this.state.indexExample + 1})
         }
       }, 2000)
     }
@@ -81,7 +81,7 @@ class ShowExamples extends React.Component {
     const { classes } = this.props
 
     let bubbleText
-    if (this.state.thinkingAboutIt === true) {
+    if (this.state.thinking) {
       bubbleText = this.props.student.thinkingAboutExample
     } else {
       bubbleText = this.props.student.questionExample

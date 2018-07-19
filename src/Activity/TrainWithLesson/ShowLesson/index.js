@@ -24,7 +24,7 @@ const styles = () => ({
 
 class ShowLesson extends React.Component {
   componentDidMount () {
-    this.props.student.learnLesson(this.props.lesson.featuresParallelogram)
+    this.props.student.learnLesson(this.props.lesson.shapeFeatures)
     setTimeout(() => {
       this.props.updateScore()
       this.props.getBackToMenu()
@@ -34,7 +34,7 @@ class ShowLesson extends React.Component {
   render () {
     const { classes } = this.props
     let bubbleText
-    if (this.props.student.alreadyKnowLesson(this.props.lesson.featuresParallelogram)) {
+    if (this.props.student.alreadyKnowLesson(this.props.lesson.shapeFeatures)) {
       bubbleText = this.props.student.feedbackLessonAlreadyKnow
     } else {
       bubbleText = this.props.student.feedbackLessonDidntKnow
