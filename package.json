@@ -2,10 +2,12 @@
   "name": "tama",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://vood00child.github.io/tama",
+  "homepage": "https://tama-7e5ac.firebaseapp.com/",
   "dependencies": {
     "@material-ui/core": "^1.3.1",
     "@material-ui/icons": "^1.1.0",
+    "firebase": "^5.2.0",
+    "firebase-tools": "^3.19.3",
     "implement-js": "0.0.26",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -20,7 +22,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "firebase deploy",
     "flow": "flow"
   },
   "devDependencies": {
