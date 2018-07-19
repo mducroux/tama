@@ -51,7 +51,7 @@ var parallelogramData = [
       isGreen: true,
       isBlue: false,
       isRotated: false,
-      isThin: true,
+      isThin: false,
       hasEveryRightAngles: false,
       hasAtLeastOneRightAngle: false
     }
@@ -132,7 +132,7 @@ var parallelogramData = [
       isGreen: false,
       isBlue: false,
       isRotated: false,
-      isThin: true,
+      isThin: false,
       hasEveryRightAngles: false,
       hasAtLeastOneRightAngle: false
     }
