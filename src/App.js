@@ -44,7 +44,6 @@ class App extends Component {
 
   updateScore = (points) => {
     this.sessionRef.update({score: this.state.score + points})
-    this.sessionRef.update({knowledge: this.student.knowledgeParallelogram})
     this.setState({score: this.state.score + points})
     if (points < 0) {
       this.setState({scoreDisplayed: this.state.scoreDisplayed + points})
@@ -52,33 +51,6 @@ class App extends Component {
       this.setState({scoreDisplayed: this.state.scoreDisplayed + '+' + points})
     }
     setTimeout(() => { this.setState({scoreDisplayed: (this.state.score).toString()}) }, 2000)
-  }
-
-  recordExampleActivity = (itemsTitle) => {
-    var newActivity = this.sessionRef.child('activities').push().key
-    this.sessionRef.child('activities/' + newActivity + '/activity_type').set('example')
-    for (var i in itemsTitle) {
-      this.sessionRef.child('activities/' + newActivity + '/item_example_' + i).set(itemsTitle[i])
-    }
-  }
-
-  recordExerciseActivity = (itemTitle) => {
-    var newActivity = this.sessionRef.child('activities').push().key
-    this.sessionRef.child('activities/' + newActivity + '/activity_type').set('exercise')
-    this.sessionRef.child('activities/' + newActivity + '/item_exercise').set(itemTitle)
-  }
-
-  recordLessonActivity = (itemTitle) => {
-    var newActivity = this.sessionRef.child('activities').push().key
-    this.sessionRef.child('activities/' + newActivity + '/activity_type').set('lesson')
-    this.sessionRef.child('activities/' + newActivity + '/item_lesson').set(itemTitle)
-  }
-
-  recordTest = (itemsTitle, grade) => {
-    for (var i in itemsTitle) {
-      this.sessionRef.child('test/item_test_' + i).set(itemsTitle[i])
-    }
-    this.sessionRef.child('test/grade').set(grade)
   }
 
   render () {
@@ -145,37 +117,28 @@ class App extends Component {
       if (this.state.hasChosenActivity === 'example') {
         displayed = (
           <TrainWithExamples
-            getBackToMenu={(parallelograms) => {
-              this.setState({hasChosenActivityType: false})
-              this.recordExampleActivity(parallelograms)
-            }}
-            onNavigationBackToMenu={() => this.setState({hasChosenActivityType: false})}
+            getBackToMenu={() => this.setState({hasChosenActivityType: false})}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
+            sessionRef={this.sessionRef}
           />
         )
       } else if (this.state.hasChosenActivity === 'exercise') {
         displayed = (
           <TrainWithExercises
-            getBackToMenu={(parallelogram) => {
-              this.setState({hasChosenActivityType: false})
-              this.recordExerciseActivity(parallelogram)
-            }}
-            onNavigationBackToMenu={() => this.setState({hasChosenActivityType: false})}
+            getBackToMenu={() => this.setState({hasChosenActivityType: false})}
             updateScore={() => this.updateScore(-30)}
             student={this.student}
+            sessionRef={this.sessionRef}
           />
         )
       } else if (this.state.hasChosenActivity === 'lesson') {
         displayed = (
           <TrainWithLesson
-            getBackToMenu={(lesson) => {
-              this.setState({hasChosenActivityType: false})
-              this.recordLessonActivity(lesson)
-            }}
-            onNavigationBackToMenu={() => this.setState({hasChosenActivityType: false})}
+            getBackToMenu={() => this.setState({hasChosenActivityType: false})}
             updateScore={() => this.updateScore(-50)}
             student={this.student}
+            sessionRef={this.sessionRef}
           />
         )
       } else if (this.state.hasChosenActivity === 'test') {
@@ -194,7 +157,7 @@ class App extends Component {
             updateScore={() => this.updateScore(+50)}
             student={this.student}
             score={this.state.score}
-            recordTest={(itemsTitle, grade) => this.recordTest(itemsTitle, grade)}
+            sessionRef={this.sessionRef}
           />
         )
       }

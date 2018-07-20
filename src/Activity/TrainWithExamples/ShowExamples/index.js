@@ -63,18 +63,17 @@ class ShowExamples extends React.Component {
   }
 
   handleClick = (userAnswer) => {
-    if (this.state.indexExample < this.props.numberOfExamples) {
-      this.setState({thinking: true, userAnswer: userAnswer})
-      this.props.student.learn(userAnswer, this.props.parallelograms[this.state.indexExample].shapeFeatures)
-      setTimeout(() => {
-        if (this.state.indexExample + 1 === this.props.numberOfExamples) {
-          this.props.updateScore()
-          this.props.getBackToMenu()
-        } else {
-          this.setState({thinking: false, indexExample: this.state.indexExample + 1})
-        }
-      }, 2000)
-    }
+    this.setState({thinking: true, userAnswer: userAnswer})
+    this.props.recordExampleActivity(this.state.userAnswer, this.state.indexExample)
+    this.props.student.learn(userAnswer, this.props.parallelograms[this.state.indexExample].shapeFeatures)
+    setTimeout(() => {
+      if (this.state.indexExample + 1 === this.props.numberOfExamples) {
+        this.props.updateScore()
+        this.props.getBackToMenu()
+      } else {
+        this.setState({thinking: false, indexExample: this.state.indexExample + 1})
+      }
+    }, 2000)
   }
 
   render () {
@@ -112,7 +111,8 @@ ShowExamples.propTypes = {
   parallelograms: PropTypes.array.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  recordExampleActivity: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowExamples)

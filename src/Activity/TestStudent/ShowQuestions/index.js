@@ -32,10 +32,12 @@ class ShowQuestions extends React.Component {
   answerQuestion () {
     var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].shapeFeatures)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
+      this.props.recordTest(this.state.indexQuestion, true)
       this.props.increaseGrade()
       this.props.updateScore()
       this.props.onAnswerQuestion(this.state.indexQuestion, true)
     } else {
+      this.props.recordTest(this.state.indexQuestion, false)
       this.props.onAnswerQuestion(this.state.indexQuestion, false)
     }
     this.setState({
@@ -102,7 +104,8 @@ ShowQuestions.propTypes = {
   onAnswerQuestion: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  increaseGrade: PropTypes.func.isRequired
+  increaseGrade: PropTypes.func.isRequired,
+  recordTest: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ShowQuestions)

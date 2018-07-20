@@ -13,14 +13,21 @@ class TrainWithExercise extends React.Component {
       index: 0,
       hasChosenExercise: false
     }
+    this.newActivityRef = this.props.sessionRef.child('activities').push()
   }
 
   handleSelectExercise = (index) => {
     this.setState({hasChosenExercise: true, index: index})
   }
 
-  getBackToExercise = () => {
-    this.setState({hasChosenExercise: false})
+  recordExerciseActivity = (userAnswer, studentAnswer) => {
+    var parallelogramTitle = (parallelogramData[this.state.index].src).split('/')
+    var itemTitle = parallelogramTitle[parallelogramTitle.length - 1]
+    this.newActivityRef.child('/item_exercise').set(itemTitle)
+    this.newActivityRef.child('/activity_type').set('exercise')
+    this.newActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelogram)
+    this.newActivityRef.child('/student_answer').set(studentAnswer)
+    this.newActivityRef.child('/user_answer').set(userAnswer)
   }
 
   render () {
@@ -28,19 +35,17 @@ class TrainWithExercise extends React.Component {
       return (
         <ChooseExercise
           onSelectExercise={this.handleSelectExercise}
-          onNavigationBackToMenu={this.props.onNavigationBackToMenu}
+          onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
     } else {
       return (
         <ShowExercise
           parallelogram={parallelogramData[this.state.index]}
-          getBackToMenu={() => {
-            var parallelogramTitle = (parallelogramData[this.state.index].src).split('/')
-            this.props.getBackToMenu(parallelogramTitle[parallelogramTitle.length - 1])
-          }}
+          getBackToMenu={this.props.getBackToMenu}
           updateScore={this.props.updateScore}
           student={this.props.student}
+          recordExerciseActivity={(userAnswer, studentAnswer) => this.recordExerciseActivity(userAnswer, studentAnswer)}
         />
       )
     }
@@ -49,9 +54,9 @@ class TrainWithExercise extends React.Component {
 
 TrainWithExercise.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
-  onNavigationBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  sessionRef: PropTypes.isRequired
 }
 
 export default TrainWithExercise

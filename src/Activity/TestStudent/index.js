@@ -20,6 +20,7 @@ class TestStudent extends React.Component {
     this.examQuestions.sort(() => 0.5 - Math.random()) // shuffle array
     this.examQuestions = this.examQuestions.slice(0, this.numberOfQuestions)
     this.correctAnswers = Array(this.numberOfQuestions).fill(false)
+    this.testRef = this.props.sessionRef.child('test')
     this.state = {
       tookTest: false,
       grade: 0
@@ -30,24 +31,26 @@ class TestStudent extends React.Component {
     this.correctAnswers[index] = isCorrect
   }
 
+  recordTest = (indexQuestion, isCorrect) => {
+    var newQuestionRef = this.testRef.child('/question_' + indexQuestion)
+    var questions = this.examQuestions[indexQuestion].src.split('/')
+    var item = questions[questions.length - 1]
+    newQuestionRef.child('item').set(item)
+    newQuestionRef.child('is_correct').set(isCorrect)
+  }
+
   render () {
     if (!this.state.tookTest) {
       return (
         <ShowQuestions
-          displayResultTest={() => {
-            this.props.recordTest(
-              this.examQuestions.map(x => {
-                var parallelogramTitle = x.src.split('/')
-                return parallelogramTitle[parallelogramTitle.length - 1]
-              }), this.state.grade)
-            this.setState({tookTest: true})
-          }}
+          displayResultTest={() => this.setState({tookTest: true})}
           numberOfQuestions={this.numberOfQuestions}
           examQuestions={this.examQuestions}
           onAnswerQuestion={(index, isCorrect) => this.handleAnswerQuestion(index, isCorrect)}
           updateScore={this.props.updateScore}
           student={this.props.student}
           increaseGrade={() => this.setState({grade: this.state.grade + 1})}
+          recordTest={(indexQuestion, grade) => this.recordTest(indexQuestion, grade)}
         />
       )
     } else {
@@ -70,7 +73,7 @@ TestStudent.propTypes = {
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   score: PropTypes.number.isRequired,
-  recordTest: PropTypes.func.isRequired
+  sessionRef: PropTypes.isRequired
 }
 
 export default TestStudent

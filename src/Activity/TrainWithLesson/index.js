@@ -13,10 +13,17 @@ class TrainWithLesson extends React.Component {
       index: -1,
       hasChosenLesson: false
     }
+    this.newActivityRef = this.props.sessionRef.child('activities').push()
   }
 
   handleSubmit = (index) => {
     this.setState({index: index, hasChosenLesson: true})
+  }
+
+  recordLessonActivity = () => {
+    this.newActivityRef.child('/activity_type').set('lesson')
+    this.newActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelogram)
+    this.newActivityRef.child('/item_lesson').set(lesson[this.state.index].title)
   }
 
   render () {
@@ -24,7 +31,7 @@ class TrainWithLesson extends React.Component {
       return (
         <ChooseLesson
           onSubmit={this.handleSubmit}
-          onNavigationBackToMenu={this.props.onNavigationBackToMenu}
+          onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
     } else {
@@ -34,6 +41,7 @@ class TrainWithLesson extends React.Component {
           getBackToMenu={() => this.props.getBackToMenu(lesson[this.state.index].title)}
           updateScore={this.props.updateScore}
           student={this.props.student}
+          recordLessonActivity={this.recordLessonActivity}
         />
       )
     }
@@ -42,9 +50,9 @@ class TrainWithLesson extends React.Component {
 
 TrainWithLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
-  onNavigationBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  sessionRef: PropTypes.isRequired
 }
 
 export default TrainWithLesson

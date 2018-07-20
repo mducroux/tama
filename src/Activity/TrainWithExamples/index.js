@@ -14,6 +14,7 @@ class TrainWithExamples extends React.Component {
       hasChosenExamples: false
     }
     this.numberOfExamples = 3
+    this.newActivityRef = this.props.sessionRef.child('activities').push()
   }
 
   handleClickExample = (index) => {
@@ -32,6 +33,16 @@ class TrainWithExamples extends React.Component {
     return parallelograms
   }
 
+  recordExampleActivity = (userAnswer, indexExample) => {
+    this.newActivityRef.child('/activity_type').set('example')
+    var newSubActivityRef = this.newActivityRef.child('/example_' + indexExample)
+    var parallelogramTitle = this.getSelectedParallelograms()[indexExample].src.split('/')
+    var itemTitle = parallelogramTitle[parallelogramTitle.length - 1]
+    newSubActivityRef.child('/item').set(itemTitle)
+    newSubActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelogram)
+    newSubActivityRef.child('/user_answer').set(userAnswer)
+  }
+
   render () {
     if (!this.state.hasChosenExamples) {
       return (
@@ -40,7 +51,7 @@ class TrainWithExamples extends React.Component {
           onClickExample={this.handleClickExample}
           numberOfExamples={this.numberOfExamples}
           examples={this.state.examples}
-          onNavigationBackToMenu={this.props.onNavigationBackToMenu}
+          onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
     } else {
@@ -48,16 +59,10 @@ class TrainWithExamples extends React.Component {
         <ShowExamples
           parallelograms={this.getSelectedParallelograms()}
           numberOfExamples={this.numberOfExamples}
-          getBackToMenu={() => {
-            this.props.getBackToMenu(
-              this.getSelectedParallelograms().map(x => {
-                var parallelogramTitle = x.src.split('/')
-                return parallelogramTitle[parallelogramTitle.length - 1]
-              })
-            )
-          }}
+          getBackToMenu={this.props.getBackToMenu}
           updateScore={this.props.updateScore}
           student={this.props.student}
+          recordExampleActivity={(userAnswer, indexExample) => this.recordExampleActivity(userAnswer, indexExample)}
         />
       )
     }
@@ -66,9 +71,9 @@ class TrainWithExamples extends React.Component {
 
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
-  onNavigationBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  sessionRef: PropTypes.isRequired
 }
 
 export default TrainWithExamples
