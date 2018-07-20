@@ -34,7 +34,14 @@ class TestStudent extends React.Component {
     if (!this.state.tookTest) {
       return (
         <ShowQuestions
-          displayResultTest={() => this.setState({tookTest: true})}
+          displayResultTest={() => {
+            this.props.recordTest(
+              this.examQuestions.map(x => {
+                var parallelogramTitle = x.src.split('/')
+                return parallelogramTitle[parallelogramTitle.length - 1]
+              }), this.state.grade)
+            this.setState({tookTest: true})
+          }}
           numberOfQuestions={this.numberOfQuestions}
           examQuestions={this.examQuestions}
           onAnswerQuestion={(index, isCorrect) => this.handleAnswerQuestion(index, isCorrect)}
@@ -62,7 +69,8 @@ TestStudent.propTypes = {
   startNewGame: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  score: PropTypes.number.isRequired
+  score: PropTypes.number.isRequired,
+  recordTest: PropTypes.func.isRequired
 }
 
 export default TestStudent
