@@ -36,7 +36,7 @@ class TrainWithLesson extends React.Component {
     return (
       <div>
         <div className={classes.root}>
-          <IconButton className={classes.button} onClick={this.props.onBackNavigation} color='inherit'>
+          <IconButton className={classes.button} onClick={this.props.onNavigationBackToMenu} color='inherit'>
             <BackNavigation />
           </IconButton>
           <Typography variant='headline' className={classes.title}>
@@ -68,7 +68,7 @@ class TrainWithLesson extends React.Component {
 
 TrainWithLesson.propTypes = {
   classes: PropTypes.object.isRequired,
-  onBackNavigation: PropTypes.func.isRequired,
+  onNavigationBackToMenu: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 

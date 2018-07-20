@@ -24,7 +24,7 @@ class TrainWithLesson extends React.Component {
       return (
         <ChooseLesson
           onSubmit={this.handleSubmit}
-          onBackNavigation={this.props.getBackToMenu}
+          onNavigationBackToMenu={this.props.onNavigationBackToMenu}
         />
       )
     } else {
@@ -42,6 +42,7 @@ class TrainWithLesson extends React.Component {
 
 TrainWithLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
+  onNavigationBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired
 }

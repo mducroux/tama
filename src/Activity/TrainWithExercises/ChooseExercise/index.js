@@ -41,7 +41,7 @@ class ChooseExercise extends React.Component {
   }
 
   handleBackNavigation = () => {
-    this.props.onBackNavigation()
+    this.props.onNavigationBackToMenu()
   }
 
   render () {
@@ -70,7 +70,7 @@ class ChooseExercise extends React.Component {
 ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,
   onSelectExercise: PropTypes.func.isRequired,
-  onBackNavigation: PropTypes.func.isRequired
+  onNavigationBackToMenu: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ChooseExercise)

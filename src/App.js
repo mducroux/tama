@@ -44,6 +44,7 @@ class App extends Component {
 
   updateScore = (points) => {
     this.sessionRef.update({score: this.state.score + points})
+    this.sessionRef.update({knowledge: this.student.knowledgeParallelogram})
     this.setState({score: this.state.score + points})
     if (points < 0) {
       this.setState({scoreDisplayed: this.state.scoreDisplayed + points})
@@ -148,6 +149,7 @@ class App extends Component {
               this.setState({hasChosenActivityType: false})
               this.recordExampleActivity(parallelograms)
             }}
+            onNavigationBackToMenu={() => this.setState({hasChosenActivityType: false})}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
           />
@@ -159,6 +161,7 @@ class App extends Component {
               this.setState({hasChosenActivityType: false})
               this.recordExerciseActivity(parallelogram)
             }}
+            onNavigationBackToMenu={() => this.setState({hasChosenActivityType: false})}
             updateScore={() => this.updateScore(-30)}
             student={this.student}
           />
@@ -170,6 +173,7 @@ class App extends Component {
               this.setState({hasChosenActivityType: false})
               this.recordLessonActivity(lesson)
             }}
+            onNavigationBackToMenu={() => this.setState({hasChosenActivityType: false})}
             updateScore={() => this.updateScore(-50)}
             student={this.student}
           />

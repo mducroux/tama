@@ -40,7 +40,7 @@ class TrainWithExamples extends React.Component {
           onClickExample={this.handleClickExample}
           numberOfExamples={this.numberOfExamples}
           examples={this.state.examples}
-          onBackNavigation={this.props.getBackToMenu}
+          onNavigationBackToMenu={this.props.onNavigationBackToMenu}
         />
       )
     } else {
@@ -66,6 +66,7 @@ class TrainWithExamples extends React.Component {
 
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
+  onNavigationBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired
 }

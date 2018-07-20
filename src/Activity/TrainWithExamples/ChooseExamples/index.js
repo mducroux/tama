@@ -62,7 +62,7 @@ class ChooseExamples extends React.Component {
   }
 
   handleBackNavigation = () => {
-    this.props.onBackNavigation()
+    this.props.onNavigationBackToMenu()
   }
 
   componentWillUnmount () {
@@ -114,7 +114,7 @@ ChooseExamples.propTypes = {
   examples: PropTypes.array.isRequired,
   onClickExample: PropTypes.func.isRequired,
   numberOfExamples: PropTypes.number.isRequired,
-  onBackNavigation: PropTypes.func.isRequired
+  onNavigationBackToMenu: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(ChooseExamples)
