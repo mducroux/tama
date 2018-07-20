@@ -43,6 +43,7 @@ class App extends Component {
   }
 
   updateScore = (points) => {
+    this.sessionRef.update({score: this.state.score + points})
     this.setState({score: this.state.score + points})
     if (points < 0) {
       this.setState({scoreDisplayed: this.state.scoreDisplayed + points})
@@ -50,6 +51,26 @@ class App extends Component {
       this.setState({scoreDisplayed: this.state.scoreDisplayed + '+' + points})
     }
     setTimeout(() => { this.setState({scoreDisplayed: (this.state.score).toString()}) }, 2000)
+  }
+
+  recordExampleActivity = (activityType, itemsTitle) => {
+    var newActivity = this.sessionRef.child('activities').push().key
+    this.sessionRef.child('activities/' + newActivity + '/activity_type').set(activityType)
+    for (var i in itemsTitle) {
+      this.sessionRef.child('activities/' + newActivity + '/item_example_' + i).set(itemsTitle[i])
+    }
+  }
+
+  recordExerciseActivity = (activityType, itemTitle) => {
+    var newActivity = this.sessionRef.child('activities').push().key
+    this.sessionRef.child('activities/' + newActivity + '/activity_type').set(activityType)
+    this.sessionRef.child('activities/' + newActivity + '/item_exercise').set(itemTitle)
+  }
+
+  recordLessonActivity = (activityType, itemTitle) => {
+    var newActivity = this.sessionRef.child('activities').push().key
+    this.sessionRef.child('activities/' + newActivity + '/activity_type').set(activityType)
+    this.sessionRef.child('activities/' + newActivity + '/item_lesson').set(itemTitle)
   }
 
   render () {
@@ -61,6 +82,9 @@ class App extends Component {
           onClickStart={() => {
             if (this.state.isRegistered) {
               var newSession = firebase.database().ref('/sessions/' + localStorage.getItem('user_id')).push().key
+              this.sessionRef = firebase.database().ref('/sessions/' + localStorage.getItem('user_id') + '/' + newSession)
+              this.sessionRef.child('timestamp').set((new Date()).getTime())
+              this.sessionRef.child('score').set(200)
               this.setState({sessionId: newSession})
             }
             this.setState({
@@ -73,6 +97,9 @@ class App extends Component {
       displayed = (
         <RegistrationForm
           onSubmit={(newSession) => {
+            this.sessionRef = firebase.database().ref('/sessions/' + localStorage.getItem('user_id') + '/' + newSession)
+            this.sessionRef.child('timestamp').set((new Date()).getTime())
+            this.sessionRef.child('score').set(200)
             this.setState({ isRegistered: true, sessionId: newSession })
           }}
         />
@@ -80,24 +107,24 @@ class App extends Component {
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
-          onClickExample={() =>
+          onClickExample={() => {
             this.setState({
               hasChosenActivityType: true,
               hasChosenActivity: 'example'
             })
-          }
-          onClickExercise={() =>
+          }}
+          onClickExercise={() => {
             this.setState({
               hasChosenActivityType: true,
               hasChosenActivity: 'exercise'
             })
-          }
-          onClickLesson={() =>
+          }}
+          onClickLesson={() => {
             this.setState({
               hasChosenActivityType: true,
               hasChosenActivity: 'lesson'
             })
-          }
+          }}
           onConfirmTestDialog={() =>
             this.setState({
               hasChosenActivityType: true,
@@ -110,11 +137,10 @@ class App extends Component {
       if (this.state.hasChosenActivity === 'example') {
         displayed = (
           <TrainWithExamples
-            getBackToMenu={() =>
-              this.setState({
-                hasChosenActivityType: false
-              })
-            }
+            getBackToMenu={(parallelograms) => {
+              this.setState({hasChosenActivityType: false})
+              this.recordExampleActivity('example', parallelograms)
+            }}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
           />
@@ -122,11 +148,10 @@ class App extends Component {
       } else if (this.state.hasChosenActivity === 'exercise') {
         displayed = (
           <TrainWithExercises
-            getBackToMenu={() =>
-              this.setState({
-                hasChosenActivityType: false
-              })
-            }
+            getBackToMenu={(parallelogram) => {
+              this.setState({hasChosenActivityType: false})
+              this.recordExerciseActivity('exercise', parallelogram)
+            }}
             updateScore={() => this.updateScore(-30)}
             student={this.student}
           />
@@ -134,11 +159,10 @@ class App extends Component {
       } else if (this.state.hasChosenActivity === 'lesson') {
         displayed = (
           <TrainWithLesson
-            getBackToMenu={() =>
-              this.setState({
-                hasChosenActivityType: false
-              })
-            }
+            getBackToMenu={(lesson) => {
+              this.setState({hasChosenActivityType: false})
+              this.recordLessonActivity('lesson', lesson)
+            }}
             updateScore={() => this.updateScore(-50)}
             student={this.student}
           />

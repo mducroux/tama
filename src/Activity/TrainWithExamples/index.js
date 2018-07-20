@@ -48,7 +48,14 @@ class TrainWithExamples extends React.Component {
         <ShowExamples
           parallelograms={this.getSelectedParallelograms()}
           numberOfExamples={this.numberOfExamples}
-          getBackToMenu={this.props.getBackToMenu}
+          getBackToMenu={() => {
+            this.props.getBackToMenu(
+              this.getSelectedParallelograms().map(x => {
+                var parallelogramTitle = x.src.split('/')
+                return parallelogramTitle[parallelogramTitle.length - 1]
+              })
+            )
+          }}
           updateScore={this.props.updateScore}
           student={this.props.student}
         />

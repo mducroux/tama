@@ -35,7 +35,10 @@ class TrainWithExercise extends React.Component {
       return (
         <ShowExercise
           parallelogram={parallelogramData[this.state.index]}
-          getBackToMenu={this.props.getBackToMenu}
+          getBackToMenu={() => {
+            var parallelogramTitle = (parallelogramData[this.state.index].src).split('/')
+            this.props.getBackToMenu(parallelogramTitle[parallelogramTitle.length - 1])
+          }}
           updateScore={this.props.updateScore}
           student={this.props.student}
         />
