@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import firebase from './firebase'
 import RegistrationForm from './RegistrationForm'
 import ChooseActivity from './Activity/ChooseActivity'
 import TrainWithExamples from './Activity/TrainWithExamples'
@@ -30,11 +31,12 @@ class App extends Component {
     super(props)
     this.state = {
       hasBeenWelcomed: false,
-      isRegistered: !(!(localStorage.getItem('username'))),
+      isRegistered: !(!(localStorage.getItem('user_id'))),
       hasChosenActivityType: false,
       hasChosenActivity: '',
       score: 200,
-      scoreDisplayed: '200'
+      scoreDisplayed: '200',
+      sessionId: ''
     }
     this.student = new QuickLearnerStudent()
     console.log(this.student.knowledgeParallelogram)
@@ -56,19 +58,22 @@ class App extends Component {
     if (!this.state.hasBeenWelcomed) {
       displayed = (
         <WelcomeMenu
-          onClickStart={() =>
+          onClickStart={() => {
+            if (this.state.isRegistered) {
+              var newSession = firebase.database().ref('/sessions/' + localStorage.getItem('user_id')).push().key
+              this.setState({sessionId: newSession})
+            }
             this.setState({
               hasBeenWelcomed: true
             })
-          }
+          }}
         />
       )
     } else if (!this.state.isRegistered) {
       displayed = (
         <RegistrationForm
-          onSubmit={username => {
-            this.setState({ isRegistered: true })
-            localStorage.setItem('username', username)
+          onSubmit={(newSession) => {
+            this.setState({ isRegistered: true, sessionId: newSession })
           }}
         />
       )
@@ -174,6 +179,8 @@ class App extends Component {
           }}
           onUnregister={() => {
             this.student = new QuickLearnerStudent()
+            localStorage.clear('user_id')
+            localStorage.clear('username')
             this.setState({
               isRegistered: false,
               hasBeenWelcomed: false,

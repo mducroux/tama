@@ -1,5 +1,5 @@
 import React from 'react'
-import fire from '../fire'
+import firebase from '../firebase'
 import { withStyles } from '@material-ui/core/styles'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -10,6 +10,10 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import PropTypes from 'prop-types'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 const styles = theme => ({
   root: {
@@ -38,11 +42,14 @@ class RegistrationForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      pseudo: '',
-      gender: 'femme',
-      status: 'eleve',
-      age: '',
-      knowledge: 'no'
+      form: {
+        username: '',
+        gender: 'femme',
+        status: 'eleve',
+        age: '',
+        knowledge: 'no'
+      },
+      openErrorDialog: false
     }
   }
 
@@ -50,14 +57,31 @@ class RegistrationForm extends React.Component {
     const value = event.target.value
     const name = event.target.name
 
-    this.setState({
-      [name]: value
+    this.setState(prevState => {
+      return {form: {...prevState.form, [name]: value}}
     })
   }
 
+  handleOpenErrorDialog = () => {
+    this.setState({ openErrorDialog: true })
+  }
+
+  handleCloseErrorDialog = () => {
+    this.setState({ openErrorDialog: false })
+  }
+
   handleSubmit = () => {
-    fire.database().ref().child('users').push(this.state)
-    this.props.onSubmit(this.state.pseudo)
+    var newUser = firebase.database().ref().child('users').push().key
+    var newSession = firebase.database().ref().child('sessions').push().key
+    firebase.database().ref('/users/' + newUser).set(this.state.form, (error) => {
+      if (error) {
+        this.handleOpenErrorDialog()
+      } else {
+        localStorage.setItem('user_id', newUser)
+        localStorage.setItem('username', this.state.form.username)
+        this.props.onSubmit(newSession)
+      }
+    })
   }
 
   render () {
@@ -77,8 +101,8 @@ class RegistrationForm extends React.Component {
                 </div>
                 <div className={classes.group}>
                   <TextValidator
-                    name='pseudo'
-                    value={this.state.pseudo}
+                    name='username'
+                    value={this.state.form.username}
                     className={classes.textValidator}
                     onChange={this.handleInputChange}
                     label='Mon pseudo *'
@@ -90,7 +114,7 @@ class RegistrationForm extends React.Component {
                   <FormLabel component='legend'>Je suis :</FormLabel>
                   <RadioGroup
                     name='gender'
-                    value={this.state.gender}
+                    value={this.state.form.gender}
                     onChange={this.handleInputChange}
                     row={true}
                   >
@@ -115,7 +139,7 @@ class RegistrationForm extends React.Component {
                   <FormLabel component='legend'>Je suis :</FormLabel>
                   <RadioGroup
                     name='status'
-                    value={this.state.status}
+                    value={this.state.form.status}
                     onChange={this.handleInputChange}
                     row={true}
                   >
@@ -144,7 +168,7 @@ class RegistrationForm extends React.Component {
                 <div className={classes.group}>
                   <TextValidator
                     name='age'
-                    value={this.state.age}
+                    value={this.state.form.age}
                     className={classes.textValidator}
                     onChange={this.handleInputChange}
                     label='Age *'
@@ -161,7 +185,7 @@ class RegistrationForm extends React.Component {
                   </FormLabel>
                   <RadioGroup
                     name='knowledge'
-                    value={this.state.knowledge}
+                    value={this.state.form.knowledge}
                     onChange={this.handleInputChange}
                     row={true}
                   >
@@ -195,6 +219,17 @@ class RegistrationForm extends React.Component {
             </Grid>
           </Grid>
         </Grid>
+        <Dialog
+          open={this.state.openErrorDialog}
+          onClose={this.handleCloseErrorDialog}
+        >
+          <DialogTitle>{'Connection failed'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Error establishing a database connection, please try again.
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
       </Grid>
     )
   }
