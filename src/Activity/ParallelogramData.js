@@ -19,10 +19,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -42,10 +46,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -65,10 +73,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -88,10 +100,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -111,33 +127,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
-    }
-  },
-  {
-    src: 'images/examples/parallelogram_r4.png',
-    thumbnail: 'images/examples/parallelogram_r4.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
-    isSelected: false,
-    itemType: 'parallelogram',
-    valid: true,
-    shapeFeatures: {
-      hasThreeEdges: false,
-      hasFourEdges: true,
-      hasFiveEdges: false,
-      hasSixEdges: false,
-      hasSameLengthEdges: false,
-      hasSameLengthEveryPairOppositeEdges: true,
-      hasSameLengthOnePairOppositeEdges: true,
-      hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
-      isRed: true,
-      isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -157,10 +154,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: false,
+      isThin: true,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -180,10 +181,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -203,10 +208,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -226,10 +235,41 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: true,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
+    }
+  },
+  {
+    src: 'images/examples/rectangle_r2.png',
+    thumbnail: 'images/examples/rectangle_r2.png',
+    thumbnailWidth: thumbnailWidth,
+    thumbnailHeight: thumbnailHeight,
+    isSelected: false,
+    itemType: 'rectangle',
+    valid: true,
+    shapeFeatures: {
+      hasThreeEdges: false,
+      hasFourEdges: true,
+      hasFiveEdges: false,
+      hasSixEdges: false,
+      hasSameLengthEdges: false,
+      hasSameLengthEveryPairOppositeEdges: true,
+      hasSameLengthOnePairOppositeEdges: true,
+      hasEveryPairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
+      isRed: true,
+      isGreen: false,
+      isBlue: false,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -249,10 +289,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -272,10 +316,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -295,10 +343,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -318,10 +370,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -341,10 +397,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -364,10 +424,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: true,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -387,10 +451,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: true,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -410,10 +478,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: true,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -433,10 +505,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: false,
       hasEveryPairOppositeEdgesParallel: true,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -456,10 +532,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -479,10 +559,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -502,10 +586,41 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: false,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: true
+    }
+  },
+  {
+    src: 'images/counter_examples/quadrilateral_b2.png',
+    thumbnail: 'images/counter_examples/quadrilateral_b2.png',
+    thumbnailWidth: thumbnailWidth,
+    thumbnailHeight: thumbnailHeight,
+    isSelected: false,
+    itemType: 'quadrilateral',
+    valid: false,
+    shapeFeatures: {
+      hasThreeEdges: false,
+      hasFourEdges: true,
+      hasFiveEdges: false,
+      hasSixEdges: false,
+      hasSameLengthEdges: false,
+      hasSameLengthEveryPairOppositeEdges: false,
+      hasSameLengthOnePairOppositeEdges: false,
+      hasEveryPairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
+      isRed: false,
+      isGreen: false,
+      isBlue: true,
+      isRotated: false,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -525,10 +640,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: false,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: true,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -548,33 +667,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: false,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: true,
       isGreen: false,
-      isBlue: false
-    }
-  },
-  {
-    src: 'images/counter_examples/quadrilateral_r2.png',
-    thumbnail: 'images/counter_examples/quadrilateral_r2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
-    isSelected: false,
-    itemType: 'quadrilateral',
-    valid: false,
-    shapeFeatures: {
-      hasThreeEdges: false,
-      hasFourEdges: true,
-      hasFiveEdges: false,
-      hasSixEdges: false,
-      hasSameLengthEdges: false,
-      hasSameLengthEveryPairOppositeEdges: false,
-      hasSameLengthOnePairOppositeEdges: true,
-      hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
-      isRed: true,
-      isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -594,10 +694,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: false,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: true
     }
   },
   {
@@ -617,10 +721,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -640,10 +748,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: true,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -663,10 +775,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -686,10 +802,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: false,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: true,
+      hasAtLeastOnePairOppositeEdgesParallel: true,
       isRed: true,
       isGreen: false,
-      isBlue: false
+      isBlue: false,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -709,10 +829,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: false,
       isGreen: false,
-      isBlue: true
+      isBlue: true,
+      isRotated: false,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   },
   {
@@ -732,10 +856,14 @@ var parallelogramData = [
       hasSameLengthEveryPairOppositeEdges: true,
       hasSameLengthOnePairOppositeEdges: true,
       hasEveryPairOppositeEdgesParallel: false,
-      hasOnePairOppositeEdgesParallel: false,
+      hasAtLeastOnePairOppositeEdgesParallel: false,
       isRed: false,
       isGreen: true,
-      isBlue: false
+      isBlue: false,
+      isRotated: true,
+      isThin: false,
+      hasEveryRightAngles: false,
+      hasAtLeastOneRightAngle: false
     }
   }
 ]
