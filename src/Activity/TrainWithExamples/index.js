@@ -44,6 +44,7 @@ class TrainWithExamples extends React.Component {
         />
       )
     } else {
+      this.props.updateHistory(this.getSelectedParallelograms())
       return (
         <ShowExamples
           parallelograms={this.getSelectedParallelograms()}
@@ -60,7 +61,8 @@ class TrainWithExamples extends React.Component {
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  updateHistory: PropTypes.func.isRequired
 }
 
 export default TrainWithExamples

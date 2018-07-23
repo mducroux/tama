@@ -7,23 +7,28 @@ import TrainWithLesson from './Activity/TrainWithLesson'
 import TestStudent from './Activity/TestStudent'
 import AppBarMenu from './AppBarMenu'
 import WelcomeMenu from './WelcomeMenu'
+import SessionHistory from './SessionHistory'
 import QuickLearnerStudent from './VirtualStudent/QuickLearnerStudent'
 
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
-const styles = {
+const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    height: '100%',
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+    width: '100%'
   },
-  flex: {
-    flex: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3
   }
-}
+})
 
 class App extends Component {
   constructor (props) {
@@ -33,8 +38,51 @@ class App extends Component {
       isRegistered: !(!(localStorage.getItem('username'))),
       hasChosenActivityType: false,
       hasChosenActivity: '',
+      view: 'training',
       score: 200,
-      scoreDisplayed: '200'
+      scoreDisplayed: '200',
+      history: [
+        {
+          activityType: 'example',
+          images: [
+            {
+              src: 'images/examples/parallelogram_b1.png',
+              thumbnail: 'images/examples/parallelogram_b1.png',
+              thumbnailWidth: 300,
+              thumbnailHeight: 300,
+              isSelected: false,
+              itemType: 'parallelogram',
+              valid: true,
+              shapeFeatures: {
+                hasThreeEdges: false,
+                hasFourEdges: true,
+                hasFiveEdges: false,
+                hasSixEdges: false,
+                hasSameLengthEdges: false,
+                hasSameLengthEveryPairOppositeEdges: true,
+                hasSameLengthOnePairOppositeEdges: true,
+                hasEveryPairOppositeEdgesParallel: true,
+                hasAtLeastOnePairOppositeEdgesParallel: true,
+                isRed: false,
+                isGreen: false,
+                isBlue: true,
+                isRotated: true,
+                isThin: false,
+                hasEveryRightAngles: false,
+                hasAtLeastOneRightAngle: false
+              }
+            }
+          ]
+        },
+        {
+          activityType: 'exercise',
+          images: []
+        },
+        {
+          activityType: 'lesson',
+          images: []
+        }
+      ]
     }
     this.student = new QuickLearnerStudent()
     console.log(this.student.knowledgeParallelogram)
@@ -72,90 +120,105 @@ class App extends Component {
           }}
         />
       )
-    } else if (!this.state.hasChosenActivityType) {
-      displayed = (
-        <ChooseActivity
-          onClickExample={() =>
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: 'example'
-            })
-          }
-          onClickExercise={() =>
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: 'exercise'
-            })
-          }
-          onClickLesson={() =>
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: 'lesson'
-            })
-          }
-          onConfirmTestDialog={() =>
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: 'test'
-            })
-          }
-        />
-      )
-    } else if (this.state.hasChosenActivityType) {
-      if (this.state.hasChosenActivity === 'example') {
+    } else if (this.state.view === 'history') {
+      displayed = <SessionHistory history={this.state.history} />
+    } else if (this.state.view === 'training') {
+      if (!this.state.hasChosenActivityType) {
         displayed = (
-          <TrainWithExamples
-            getBackToMenu={() =>
+          <ChooseActivity
+            onClickExample={() =>
               this.setState({
-                hasChosenActivityType: false
+                hasChosenActivityType: true,
+                hasChosenActivity: 'example'
               })
             }
-            updateScore={() => this.updateScore(-10)}
-            student={this.student}
-          />
-        )
-      } else if (this.state.hasChosenActivity === 'exercise') {
-        displayed = (
-          <TrainWithExercises
-            getBackToMenu={() =>
+            onClickExercise={() =>
               this.setState({
-                hasChosenActivityType: false
+                hasChosenActivityType: true,
+                hasChosenActivity: 'exercise'
               })
             }
-            updateScore={() => this.updateScore(-30)}
-            student={this.student}
-          />
-        )
-      } else if (this.state.hasChosenActivity === 'lesson') {
-        displayed = (
-          <TrainWithLesson
-            getBackToMenu={() =>
+            onClickLesson={() =>
               this.setState({
-                hasChosenActivityType: false
+                hasChosenActivityType: true,
+                hasChosenActivity: 'lesson'
               })
             }
-            updateScore={() => this.updateScore(-50)}
-            student={this.student}
-          />
-        )
-      } else if (this.state.hasChosenActivity === 'test') {
-        displayed = (
-          <TestStudent
-            startNewGame={() => {
-              localStorage.clear('username')
-              this.student = new QuickLearnerStudent()
+            onConfirmTestDialog={() =>
               this.setState({
-                hasBeenWelcomed: false,
-                isRegistered: false,
-                hasChosenActivityType: false,
-                hasChosenActivity: ''
+                hasChosenActivityType: true,
+                hasChosenActivity: 'test'
               })
-            }}
-            updateScore={() => this.updateScore(+50)}
-            student={this.student}
-            score={this.state.score}
+            }
+            history={this.state.history}
           />
         )
+      } else if (this.state.hasChosenActivityType) {
+        if (this.state.hasChosenActivity === 'example') {
+          displayed = (
+            <TrainWithExamples
+              getBackToMenu={() =>
+                this.setState({
+                  hasChosenActivityType: false
+                })
+              }
+              updateHistory={(images) =>
+                this.setState(prevState => ({
+                  history: [...prevState.history,
+                    {
+                      activityType: 'example',
+                      images: images
+                    }
+                  ]
+                }))
+              }
+              updateScore={() => this.updateScore(-10)}
+              student={this.student}
+            />
+          )
+        } else if (this.state.hasChosenActivity === 'exercise') {
+          displayed = (
+            <TrainWithExercises
+              getBackToMenu={() =>
+                this.setState({
+                  hasChosenActivityType: false
+                })
+              }
+              updateScore={() => this.updateScore(-30)}
+              student={this.student}
+            />
+          )
+        } else if (this.state.hasChosenActivity === 'lesson') {
+          displayed = (
+            <TrainWithLesson
+              getBackToMenu={() =>
+                this.setState({
+                  hasChosenActivityType: false
+                })
+              }
+              updateScore={() => this.updateScore(-50)}
+              student={this.student}
+            />
+          )
+        } else if (this.state.hasChosenActivity === 'test') {
+          displayed = (
+            <TestStudent
+              startNewGame={() => {
+                localStorage.clear('username')
+                this.student = new QuickLearnerStudent()
+                this.setState({
+                  hasBeenWelcomed: false,
+                  isRegistered: false,
+                  hasChosenActivityType: false,
+                  hasChosenActivity: ''
+                })
+              }}
+              updateScore={() => this.updateScore(+50)}
+              student={this.student}
+              score={this.state.score}
+            />
+          )
+        }
       }
     }
     return (
@@ -173,8 +236,12 @@ class App extends Component {
             })
           }}
           scoreDisplayed={this.state.scoreDisplayed}
+          changeView={(view) => this.setState({view: view})}
         />
-        <div>{displayed}</div>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {displayed}
+        </main>
       </div>
     )
   }
