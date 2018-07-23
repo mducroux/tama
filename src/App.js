@@ -35,8 +35,7 @@ class App extends Component {
       hasChosenActivityType: false,
       hasChosenActivity: '',
       score: 200,
-      scoreDisplayed: '200',
-      sessionId: ''
+      scoreDisplayed: '200'
     }
     this.student = new QuickLearnerStudent()
     console.log(this.student.knowledgeParallelogram)
@@ -65,7 +64,6 @@ class App extends Component {
               this.sessionRef = firebase.database().ref('/sessions/' + localStorage.getItem('user_id') + '/' + newSession)
               this.sessionRef.child('timestamp').set((new Date()).getTime())
               this.sessionRef.child('score').set(200)
-              this.setState({sessionId: newSession})
             }
             this.setState({
               hasBeenWelcomed: true
@@ -80,7 +78,7 @@ class App extends Component {
             this.sessionRef = firebase.database().ref('/sessions/' + localStorage.getItem('user_id') + '/' + newSession)
             this.sessionRef.child('timestamp').set((new Date()).getTime())
             this.sessionRef.child('score').set(200)
-            this.setState({ isRegistered: true, sessionId: newSession })
+            this.setState({ isRegistered: true })
           }}
         />
       )
@@ -154,7 +152,7 @@ class App extends Component {
                 scoreDisplayed: '200'
               })
             }}
-            updateScore={() => this.updateScore(+50)}
+            updateScore={() => this.updateScore(50)}
             student={this.student}
             score={this.state.score}
             sessionRef={this.sessionRef}

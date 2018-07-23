@@ -34,8 +34,7 @@ class TestStudent extends React.Component {
   recordTest = (indexQuestion, isCorrect) => {
     var newQuestionRef = this.testRef.child('/question_' + indexQuestion)
     var questions = this.examQuestions[indexQuestion].src.split('/')
-    var item = questions[questions.length - 1]
-    newQuestionRef.child('item').set(item)
+    newQuestionRef.child('item').set(questions[questions.length - 1])
     newQuestionRef.child('is_correct').set(isCorrect)
   }
 

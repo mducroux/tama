@@ -38,7 +38,7 @@ class TrainWithLesson extends React.Component {
       return (
         <ShowLesson
           lesson={lesson[this.state.index]}
-          getBackToMenu={() => this.props.getBackToMenu(lesson[this.state.index].title)}
+          getBackToMenu={this.props.getBackToMenu}
           updateScore={this.props.updateScore}
           student={this.props.student}
           recordLessonActivity={this.recordLessonActivity}

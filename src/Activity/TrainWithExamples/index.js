@@ -37,8 +37,7 @@ class TrainWithExamples extends React.Component {
     this.newActivityRef.child('/activity_type').set('example')
     var newSubActivityRef = this.newActivityRef.child('/example_' + indexExample)
     var parallelogramTitle = this.getSelectedParallelograms()[indexExample].src.split('/')
-    var itemTitle = parallelogramTitle[parallelogramTitle.length - 1]
-    newSubActivityRef.child('/item').set(itemTitle)
+    newSubActivityRef.child('/item').set(parallelogramTitle[parallelogramTitle.length - 1])
     newSubActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelogram)
     newSubActivityRef.child('/user_answer').set(userAnswer)
   }

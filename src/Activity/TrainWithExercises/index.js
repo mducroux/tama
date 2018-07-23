@@ -22,10 +22,9 @@ class TrainWithExercise extends React.Component {
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
     var parallelogramTitle = (parallelogramData[this.state.index].src).split('/')
-    var itemTitle = parallelogramTitle[parallelogramTitle.length - 1]
-    this.newActivityRef.child('/item_exercise').set(itemTitle)
+    this.newActivityRef.child('/item_exercise').set(parallelogramTitle[parallelogramTitle.length - 1])
     this.newActivityRef.child('/activity_type').set('exercise')
-    this.newActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelogram)
+    this.newActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelograms)
     this.newActivityRef.child('/student_answer').set(studentAnswer)
     this.newActivityRef.child('/user_answer').set(userAnswer)
   }
