@@ -1,17 +1,19 @@
 import React from 'react'
+
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Radio from '@material-ui/core/Radio'
-import lesson from '../Lesson'
 import PropTypes from 'prop-types'
+
+import lesson from './Lesson'
 
 class RadioListLesson extends React.Component {
   handleToggle = index => () => {
     this.props.onSelectLesson(index)
   }
 
-  render () {
+  render() {
     return (
       <div>
         <List>
@@ -19,7 +21,7 @@ class RadioListLesson extends React.Component {
             <ListItem
               key={value.title}
               dense={false}
-              button={true}
+              button
               onClick={this.handleToggle(index)}
             >
               <Radio
