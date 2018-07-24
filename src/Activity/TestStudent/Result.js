@@ -52,8 +52,8 @@ const Result = ({ classes, ...props }) => (
           {props.correctAnswers[index] ? (
             <CheckCircle color="primary" />
           ) : (
-            <Cancel color="error" />
-          )}
+              <Cancel color="error" />
+            )}
         </div>
       ))}
     </Grid>

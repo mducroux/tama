@@ -1,12 +1,14 @@
 import React from 'react'
+
 import { withStyles } from '@material-ui/core/styles'
-import RadioListLesson from './RadioListLesson'
 import IconButton from '@material-ui/core/IconButton'
 import BackNavigation from '@material-ui/icons/ArrowBack'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
+
+import RadioListLesson from './RadioListLesson'
 
 const styles = theme => ({
   root: {
@@ -24,14 +26,14 @@ const styles = theme => ({
 })
 
 class TrainWithLesson extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       checked: -1
     }
   }
 
-  render () {
+  render() {
     const { classes } = this.props
     return (
       <div>
@@ -45,7 +47,7 @@ class TrainWithLesson extends React.Component {
         </div>
         <div>
           <RadioListLesson
-            onSelectLesson={(index) => this.setState({checked: index})}
+            onSelectLesson={(index) => this.setState({ checked: index })}
             checked={this.state.checked}
           />
         </div>

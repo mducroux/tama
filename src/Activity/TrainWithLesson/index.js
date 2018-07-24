@@ -1,9 +1,9 @@
 import React from 'react'
 
-import ChooseLesson from './ChooseLesson'
-import ShowLesson from './ShowLesson'
 import PropTypes from 'prop-types'
 
+import ChooseLesson from './ChooseLesson'
+import ShowLesson from './ShowLesson'
 import lesson from './Lesson'
 
 class TrainWithLesson extends React.Component {

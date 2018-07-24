@@ -87,12 +87,13 @@ const images = [
 ]
 
 class ChooseActivity extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       openTestDialog: false
     }
   }
+
   handleButtonClick = (key) => {
     if (key === 'Montrer des exemples') {
       this.props.onClickExample()
@@ -103,7 +104,7 @@ class ChooseActivity extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { classes } = this.props
     return (
       <div>
@@ -159,7 +160,7 @@ class ChooseActivity extends React.Component {
               <ButtonBase
                 className={classes.button_test}
                 focusVisibleClassName={classes.focusVisible}
-                onClick={() => this.setState({openTestDialog: true})}
+                onClick={() => this.setState({ openTestDialog: true })}
               >
                 <span
                   className={classes.imageSrc}
@@ -184,7 +185,7 @@ class ChooseActivity extends React.Component {
         <TestConfirmationDialog
           onConfirmTestDialog={this.props.onConfirmTestDialog}
           openTestDialog={this.state.openTestDialog}
-          onCloseTestDialog={() => this.setState({openTestDialog: false})}
+          onCloseTestDialog={() => this.setState({ openTestDialog: false })}
         />
       </div>
     )

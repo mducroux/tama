@@ -1,11 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import VirtualStudent from '../../../VirtualStudent'
-import PropTypes from 'prop-types'
+import VirtualStudent from '../../VirtualStudent'
 
 const styles = () => ({
   root: {
@@ -20,16 +20,16 @@ const styles = () => ({
 })
 
 class ShowQuestions extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this.state = {thinking: true, indexQuestion: 0, answer: false}
+    this.state = { thinking: true, indexQuestion: 0, answer: false }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     setTimeout(() => this.answerQuestion(), 200)
   }
 
-  answerQuestion () {
+  answerQuestion() {
     const answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].shapeFeatures)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
       this.props.recordTest(this.state.indexQuestion, true)
@@ -46,7 +46,7 @@ class ShowQuestions extends React.Component {
     })
   }
 
-  handleNextQuestion () {
+  handleNextQuestion() {
     if (this.props.numberOfQuestions === this.state.indexQuestion + 1) {
       this.props.displayResultTest(this.state.grade)
     } else {
@@ -58,17 +58,17 @@ class ShowQuestions extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { classes } = this.props
 
     let bubbleText
     if (this.state.thinking === true) {
       bubbleText = this.props.student.thinkingAboutExam
     } else if (this.state.answer === true) {
-        bubbleText = this.props.student.givePositiveAnswer
-      } else {
-        bubbleText = this.props.student.giveNegativeAnswer
-      }
+      bubbleText = this.props.student.givePositiveAnswer
+    } else {
+      bubbleText = this.props.student.giveNegativeAnswer
+    }
 
     return (
       <div>
@@ -78,10 +78,10 @@ class ShowQuestions extends React.Component {
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <img src={this.props.examQuestions[this.state.indexQuestion].src} alt="parallelogram" width="300" height="300"/>
+          <img src={this.props.examQuestions[this.state.indexQuestion].src} alt="parallelogram" width="300" height="300" />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText}/>
+          <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
           {!this.state.thinking &&

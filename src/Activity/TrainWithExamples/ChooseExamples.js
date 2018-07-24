@@ -8,7 +8,7 @@ import Gallery from "react-grid-gallery";
 import IconButton from "@material-ui/core/IconButton";
 import BackNavigation from "@material-ui/icons/ArrowBack";
 
-import parallelogramData from "../../ParallelogramData";
+import parallelogramData from "../ParallelogramData";
 
 const styles = theme => ({
   root: {

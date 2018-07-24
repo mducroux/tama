@@ -11,17 +11,17 @@ class DumbStudent {
   givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme"
   giveNegativeAnswer = 'Je ne crois pas que ce soit un parallélogramme'
 
-  answerParallelogram (shapeFeatures) {
+  answerParallelogram(shapeFeatures) {
     return (Math.random() > 0.5)
   }
 
-  learn (isParallelogram, shapeFeatures) {
+  learn(isParallelogram, shapeFeatures) {
   }
 
-  learnLesson (shapeFeatures) {
+  learnLesson(shapeFeatures) {
   }
 
-  alreadyKnowLesson (shapeFeatures) {
+  alreadyKnowLesson(shapeFeatures) {
     return (Math.random() > 0.5)
   }
 }

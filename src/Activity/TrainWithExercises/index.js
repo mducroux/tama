@@ -1,13 +1,13 @@
 import React from 'react'
 
-import ChooseExercise from './ChooseExercise'
-import ShowExercise from './ShowExercise'
 import PropTypes from 'prop-types'
 
+import ChooseExercise from './ChooseExercise'
+import ShowExercise from './ShowExercise'
 import parallelogramData from '../ParallelogramData'
 
 class TrainWithExercise extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       index: 0,
@@ -17,7 +17,7 @@ class TrainWithExercise extends React.Component {
   }
 
   handleSelectExercise = (index) => {
-    this.setState({hasChosenExercise: true, index})
+    this.setState({ hasChosenExercise: true, index })
   }
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
@@ -29,7 +29,7 @@ class TrainWithExercise extends React.Component {
     this.newActivityRef.child('/user_answer').set(userAnswer)
   }
 
-  render () {
+  render() {
     if (!this.state.hasChosenExercise) {
       return (
         <ChooseExercise
@@ -37,17 +37,17 @@ class TrainWithExercise extends React.Component {
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
-    } 
-      return (
-        <ShowExercise
-          parallelogram={parallelogramData[this.state.index]}
-          getBackToMenu={this.props.getBackToMenu}
-          updateScore={this.props.updateScore}
-          student={this.props.student}
-          recordExerciseActivity={(userAnswer, studentAnswer) => this.recordExerciseActivity(userAnswer, studentAnswer)}
-        />
-      )
-    
+    }
+    return (
+      <ShowExercise
+        parallelogram={parallelogramData[this.state.index]}
+        getBackToMenu={this.props.getBackToMenu}
+        updateScore={this.props.updateScore}
+        student={this.props.student}
+        recordExerciseActivity={(userAnswer, studentAnswer) => this.recordExerciseActivity(userAnswer, studentAnswer)}
+      />
+    )
+
   }
 }
 
