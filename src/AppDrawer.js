@@ -1,4 +1,5 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
@@ -17,7 +18,6 @@ import Menu from '@material-ui/core/Menu'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-
 import SchoolIcon from '@material-ui/icons/School'
 import HistoryIcon from '@material-ui/icons/ShowChart'
 
@@ -100,8 +100,8 @@ const styles = theme => ({
   }
 })
 
-class AppBarMenu extends React.Component {
-  constructor (props) {
+class AppDrawer extends React.Component {
+  constructor(props) {
     super(props)
     this.state = {
       open: false,
@@ -159,7 +159,7 @@ class AppBarMenu extends React.Component {
     this.props.onLogout()
   }
 
-  render () {
+  render() {
     const { classes, theme } = this.props
     const openAnchorEl = Boolean(this.state.anchorEl)
 
@@ -219,7 +219,7 @@ class AppBarMenu extends React.Component {
                     onClick={this.handleMenu}
                     color="inherit"
                   >
-                    <img src='images/virtual_student/student_avatar.png' alt='student_avatar' width='40px' height='40px'/>
+                    <img src='images/virtual_student/student_avatar.png' alt='student_avatar' width='40px' height='40px' />
                   </IconButton>
                   <Menu
                     id="menu-appbar"
@@ -257,7 +257,7 @@ class AppBarMenu extends React.Component {
   }
 }
 
-AppBarMenu.propTypes = {
+AppDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   hasBeenWelcomed: PropTypes.bool.isRequired,
@@ -268,4 +268,4 @@ AppBarMenu.propTypes = {
   mainContent: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(AppBarMenu)
+export default withStyles(styles, { withTheme: true })(AppDrawer)

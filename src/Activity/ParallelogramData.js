@@ -1,12 +1,12 @@
-var thumbnailWidth = 300
-var thumbnailHeight = 300
+var thumbnailWidth = 20
+var thumbnailHeight = 120
 
 var parallelogramData = [
   {
     src: 'images/examples/parallelogram_b1.png',
     thumbnail: 'images/examples/parallelogram_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'parallelogram',
     valid: true,

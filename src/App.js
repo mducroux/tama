@@ -5,7 +5,7 @@ import TrainWithExamples from './Activity/TrainWithExamples'
 import TrainWithExercises from './Activity/TrainWithExercises'
 import TrainWithLesson from './Activity/TrainWithLesson'
 import TestStudent from './Activity/TestStudent'
-import AppBarMenu from './AppBarMenu'
+import AppDrawer from './AppDrawer'
 import WelcomeMenu from './WelcomeMenu'
 import SessionHistory from './SessionHistory'
 import QuickLearnerStudent from './VirtualStudent/QuickLearnerStudent'
@@ -43,6 +43,60 @@ class App extends Component {
         {
           activityType: 'example',
           images: [
+            {
+              src: 'images/examples/parallelogram_b1.png',
+              thumbnail: 'images/examples/parallelogram_b1.png',
+              thumbnailWidth: 300,
+              thumbnailHeight: 300,
+              isSelected: false,
+              itemType: 'parallelogram',
+              valid: true,
+              shapeFeatures: {
+                hasThreeEdges: false,
+                hasFourEdges: true,
+                hasFiveEdges: false,
+                hasSixEdges: false,
+                hasSameLengthEdges: false,
+                hasSameLengthEveryPairOppositeEdges: true,
+                hasSameLengthOnePairOppositeEdges: true,
+                hasEveryPairOppositeEdgesParallel: true,
+                hasAtLeastOnePairOppositeEdgesParallel: true,
+                isRed: false,
+                isGreen: false,
+                isBlue: true,
+                isRotated: true,
+                isThin: false,
+                hasEveryRightAngles: false,
+                hasAtLeastOneRightAngle: false
+              }
+            },
+            {
+              src: 'images/examples/parallelogram_b1.png',
+              thumbnail: 'images/examples/parallelogram_b1.png',
+              thumbnailWidth: 300,
+              thumbnailHeight: 300,
+              isSelected: false,
+              itemType: 'parallelogram',
+              valid: true,
+              shapeFeatures: {
+                hasThreeEdges: false,
+                hasFourEdges: true,
+                hasFiveEdges: false,
+                hasSixEdges: false,
+                hasSameLengthEdges: false,
+                hasSameLengthEveryPairOppositeEdges: true,
+                hasSameLengthOnePairOppositeEdges: true,
+                hasEveryPairOppositeEdgesParallel: true,
+                hasAtLeastOnePairOppositeEdgesParallel: true,
+                isRed: false,
+                isGreen: false,
+                isBlue: true,
+                isRotated: true,
+                isThin: false,
+                hasEveryRightAngles: false,
+                hasAtLeastOneRightAngle: false
+              }
+            },
             {
               src: 'images/examples/parallelogram_b1.png',
               thumbnail: 'images/examples/parallelogram_b1.png',
@@ -220,7 +274,7 @@ class App extends Component {
     }
     return (
       <MuiThemeProvider theme={theme}>
-        <AppBarMenu
+        <AppDrawer
           hasBeenWelcomed={this.state.hasBeenWelcomed}
           isRegistered={this.state.isRegistered}
           onLogout={() => {
