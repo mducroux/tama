@@ -7,7 +7,7 @@ import ShowLesson from './ShowLesson'
 import lesson from './Lesson'
 
 class TrainWithLesson extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       index: -1,
@@ -17,7 +17,7 @@ class TrainWithLesson extends React.Component {
   }
 
   handleSubmit = (index) => {
-    this.setState({index, hasChosenLesson: true})
+    this.setState({ index, hasChosenLesson: true })
   }
 
   recordLessonActivity = () => {
@@ -26,7 +26,7 @@ class TrainWithLesson extends React.Component {
     this.newActivityRef.child('/item_lesson').set(lesson[this.state.index].title)
   }
 
-  render () {
+  render() {
     if (!this.state.hasChosenLesson) {
       return (
         <ChooseLesson
@@ -34,17 +34,17 @@ class TrainWithLesson extends React.Component {
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
-    } 
-      return (
-        <ShowLesson
-          lesson={lesson[this.state.index]}
-          getBackToMenu={this.props.getBackToMenu}
-          updateScore={this.props.updateScore}
-          student={this.props.student}
-          recordLessonActivity={this.recordLessonActivity}
-        />
-      )
-    
+    }
+    return (
+      <ShowLesson
+        lesson={lesson[this.state.index]}
+        getBackToMenu={this.props.getBackToMenu}
+        updateScore={this.props.updateScore}
+        student={this.props.student}
+        recordLessonActivity={this.recordLessonActivity}
+      />
+    )
+
   }
 }
 

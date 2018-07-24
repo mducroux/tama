@@ -13,7 +13,7 @@ class RadioListLesson extends React.Component {
     this.props.onSelectLesson(index)
   }
 
-  render () {
+  render() {
     return (
       <div>
         <List>
