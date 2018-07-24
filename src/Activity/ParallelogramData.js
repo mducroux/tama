@@ -1,5 +1,5 @@
-var thumbnailWidth = 20
-var thumbnailHeight = 120
+var thumbnailWidth = 300
+var thumbnailHeight = 300
 
 var parallelogramData = [
   {
@@ -32,8 +32,8 @@ var parallelogramData = [
   {
     src: 'images/examples/parallelogram_g1.png',
     thumbnail: 'images/examples/parallelogram_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'parallelogram',
     valid: true,
@@ -59,8 +59,8 @@ var parallelogramData = [
   {
     src: 'images/examples/parallelogram_r1.png',
     thumbnail: 'images/examples/parallelogram_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'parallelogram',
     valid: true,
@@ -86,8 +86,8 @@ var parallelogramData = [
   {
     src: 'images/examples/parallelogram_r2.png',
     thumbnail: 'images/examples/parallelogram_r2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'parallelogram',
     valid: true,
@@ -113,8 +113,8 @@ var parallelogramData = [
   {
     src: 'images/examples/parallelogram_r3.png',
     thumbnail: 'images/examples/parallelogram_r3.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'parallelogram',
     valid: true,
@@ -140,8 +140,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rectangle_b1.png',
     thumbnail: 'images/examples/rectangle_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rectangle',
     valid: true,
@@ -167,8 +167,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rectangle_b2.png',
     thumbnail: 'images/examples/rectangle_b2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rectangle',
     valid: true,
@@ -194,8 +194,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rectangle_g1.png',
     thumbnail: 'images/examples/rectangle_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rectangle',
     valid: true,
@@ -221,8 +221,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rectangle_r1.png',
     thumbnail: 'images/examples/rectangle_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rectangle',
     valid: true,
@@ -248,8 +248,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rectangle_r2.png',
     thumbnail: 'images/examples/rectangle_r2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rectangle',
     valid: true,
@@ -275,8 +275,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rhombus_b1.png',
     thumbnail: 'images/examples/rhombus_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rhombus',
     valid: true,
@@ -302,8 +302,8 @@ var parallelogramData = [
   {
     src: 'images/examples/rhombus_r1.png',
     thumbnail: 'images/examples/rhombus_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'rhombus',
     valid: true,
@@ -329,8 +329,8 @@ var parallelogramData = [
   {
     src: 'images/examples/square_b1.png',
     thumbnail: 'images/examples/square_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'square',
     valid: true,
@@ -356,8 +356,8 @@ var parallelogramData = [
   {
     src: 'images/examples/square_g1.png',
     thumbnail: 'images/examples/square_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'square',
     valid: true,
@@ -383,8 +383,8 @@ var parallelogramData = [
   {
     src: 'images/examples/square_g2.png',
     thumbnail: 'images/examples/square_g2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'square',
     valid: true,
@@ -410,8 +410,8 @@ var parallelogramData = [
   {
     src: 'images/examples/square_r1.png',
     thumbnail: 'images/examples/square_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'square',
     valid: true,
@@ -437,8 +437,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/antiparallelogram_b1.png',
     thumbnail: 'images/counter_examples/antiparallelogram_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'antiparallelogram',
     valid: false,
@@ -464,8 +464,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/antiparallelogram_r1.png',
     thumbnail: 'images/counter_examples/antiparallelogram_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'antiparallelogram',
     valid: false,
@@ -491,8 +491,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/hexagon_g1.png',
     thumbnail: 'images/counter_examples/hexagon_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'hexagon',
     valid: false,
@@ -518,8 +518,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/pentagonreg_b1.png',
     thumbnail: 'images/counter_examples/pentagonreg_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'regular_pentagon',
     valid: false,
@@ -545,8 +545,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/pentagonreg_r1.png',
     thumbnail: 'images/counter_examples/pentagonreg_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'regular_pentagon',
     valid: false,
@@ -572,8 +572,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/quadrilateral_b1.png',
     thumbnail: 'images/counter_examples/quadrilateral_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'quadrilateral',
     valid: false,
@@ -599,8 +599,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/quadrilateral_b2.png',
     thumbnail: 'images/counter_examples/quadrilateral_b2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'quadrilateral',
     valid: false,
@@ -626,8 +626,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/quadrilateral_g1.png',
     thumbnail: 'images/counter_examples/quadrilateral_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'quadrilateral',
     valid: false,
@@ -653,8 +653,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/quadrilateral_r1.png',
     thumbnail: 'images/counter_examples/quadrilateral_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'quadrilateral',
     valid: false,
@@ -680,8 +680,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/trapezoid_g1.png',
     thumbnail: 'images/counter_examples/trapezoid_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'trapezoid',
     valid: false,
@@ -707,8 +707,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/trapezoidiso_b1.png',
     thumbnail: 'images/counter_examples/trapezoidiso_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'isoscele_trapezoid',
     valid: false,
@@ -734,8 +734,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/trapezoidiso_g1.png',
     thumbnail: 'images/counter_examples/trapezoidiso_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'isoscele_trapezoid',
     valid: false,
@@ -761,8 +761,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/trapezoidiso_g2.png',
     thumbnail: 'images/counter_examples/trapezoidiso_g2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'isoscele_trapezoid',
     valid: false,
@@ -788,8 +788,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/trapezoidiso_r1.png',
     thumbnail: 'images/counter_examples/trapezoidiso_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'isoscele_trapezoid',
     valid: false,
@@ -815,8 +815,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/triangleequi_b1.png',
     thumbnail: 'images/counter_examples/triangleequi_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'equilateral_triangle',
     valid: false,
@@ -842,8 +842,8 @@ var parallelogramData = [
   {
     src: 'images/counter_examples/triangleequi_g1.png',
     thumbnail: 'images/counter_examples/triangleequi_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
     itemType: 'equilateral_triangle',
     valid: false,
