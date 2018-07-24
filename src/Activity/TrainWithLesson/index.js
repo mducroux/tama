@@ -15,6 +15,10 @@ class TrainWithLesson extends React.Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.props.updateHistory()
+  }
+
   handleSubmit = (index) => {
     this.setState({index: index, hasChosenLesson: true})
   }
@@ -43,7 +47,8 @@ class TrainWithLesson extends React.Component {
 TrainWithLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  updateHistory: PropTypes.func.isRequired
 }
 
 export default TrainWithLesson

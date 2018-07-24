@@ -15,6 +15,10 @@ class TrainWithExercise extends React.Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.props.updateHistory(parallelogramData[this.state.index])
+  }
+
   handleSelectExercise = (index) => {
     this.setState({hasChosenExercise: true, index: index})
   }
@@ -47,7 +51,8 @@ class TrainWithExercise extends React.Component {
 TrainWithExercise.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  updateHistory: PropTypes.func.isRequired
 }
 
 export default TrainWithExercise

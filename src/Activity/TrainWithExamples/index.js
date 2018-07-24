@@ -16,6 +16,10 @@ class TrainWithExamples extends React.Component {
     this.numberOfExamples = 3
   }
 
+  componentWillUnmount = () => {
+    this.props.updateHistory(this.getSelectedParallelograms())
+  }
+
   handleClickExample = (index) => {
     const newExamples = this.state.examples
     newExamples[index] = !newExamples[index]
@@ -44,7 +48,6 @@ class TrainWithExamples extends React.Component {
         />
       )
     } else {
-      this.props.updateHistory(this.getSelectedParallelograms())
       return (
         <ShowExamples
           parallelograms={this.getSelectedParallelograms()}

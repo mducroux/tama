@@ -39,102 +39,7 @@ class App extends Component {
       view: 'training',
       score: 200,
       scoreDisplayed: '200',
-      history: [
-        {
-          activityType: 'example',
-          images: [
-            {
-              src: 'images/examples/parallelogram_b1.png',
-              thumbnail: 'images/examples/parallelogram_b1.png',
-              thumbnailWidth: 300,
-              thumbnailHeight: 300,
-              isSelected: false,
-              itemType: 'parallelogram',
-              valid: true,
-              shapeFeatures: {
-                hasThreeEdges: false,
-                hasFourEdges: true,
-                hasFiveEdges: false,
-                hasSixEdges: false,
-                hasSameLengthEdges: false,
-                hasSameLengthEveryPairOppositeEdges: true,
-                hasSameLengthOnePairOppositeEdges: true,
-                hasEveryPairOppositeEdgesParallel: true,
-                hasAtLeastOnePairOppositeEdgesParallel: true,
-                isRed: false,
-                isGreen: false,
-                isBlue: true,
-                isRotated: true,
-                isThin: false,
-                hasEveryRightAngles: false,
-                hasAtLeastOneRightAngle: false
-              }
-            },
-            {
-              src: 'images/examples/parallelogram_b1.png',
-              thumbnail: 'images/examples/parallelogram_b1.png',
-              thumbnailWidth: 300,
-              thumbnailHeight: 300,
-              isSelected: false,
-              itemType: 'parallelogram',
-              valid: true,
-              shapeFeatures: {
-                hasThreeEdges: false,
-                hasFourEdges: true,
-                hasFiveEdges: false,
-                hasSixEdges: false,
-                hasSameLengthEdges: false,
-                hasSameLengthEveryPairOppositeEdges: true,
-                hasSameLengthOnePairOppositeEdges: true,
-                hasEveryPairOppositeEdgesParallel: true,
-                hasAtLeastOnePairOppositeEdgesParallel: true,
-                isRed: false,
-                isGreen: false,
-                isBlue: true,
-                isRotated: true,
-                isThin: false,
-                hasEveryRightAngles: false,
-                hasAtLeastOneRightAngle: false
-              }
-            },
-            {
-              src: 'images/examples/parallelogram_b1.png',
-              thumbnail: 'images/examples/parallelogram_b1.png',
-              thumbnailWidth: 300,
-              thumbnailHeight: 300,
-              isSelected: false,
-              itemType: 'parallelogram',
-              valid: true,
-              shapeFeatures: {
-                hasThreeEdges: false,
-                hasFourEdges: true,
-                hasFiveEdges: false,
-                hasSixEdges: false,
-                hasSameLengthEdges: false,
-                hasSameLengthEveryPairOppositeEdges: true,
-                hasSameLengthOnePairOppositeEdges: true,
-                hasEveryPairOppositeEdgesParallel: true,
-                hasAtLeastOnePairOppositeEdgesParallel: true,
-                isRed: false,
-                isGreen: false,
-                isBlue: true,
-                isRotated: true,
-                isThin: false,
-                hasEveryRightAngles: false,
-                hasAtLeastOneRightAngle: false
-              }
-            }
-          ]
-        },
-        {
-          activityType: 'exercise',
-          images: []
-        },
-        {
-          activityType: 'lesson',
-          images: []
-        }
-      ]
+      history: []
     }
     this.student = new QuickLearnerStudent()
     console.log(this.student.knowledgeParallelogram)
@@ -235,6 +140,16 @@ class App extends Component {
                   hasChosenActivityType: false
                 })
               }
+              updateHistory={(images) =>
+                this.setState(prevState => ({
+                  history: [...prevState.history,
+                    {
+                      activityType: 'exercise',
+                      images: [images]
+                    }
+                  ]
+                }))
+              }
               updateScore={() => this.updateScore(-30)}
               student={this.student}
             />
@@ -246,6 +161,16 @@ class App extends Component {
                 this.setState({
                   hasChosenActivityType: false
                 })
+              }
+              updateHistory={() =>
+                this.setState(prevState => ({
+                  history: [...prevState.history,
+                    {
+                      activityType: 'lesson',
+                      images: []
+                    }
+                  ]
+                }))
               }
               updateScore={() => this.updateScore(-50)}
               student={this.student}
