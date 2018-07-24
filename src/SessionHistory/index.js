@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component'
 import 'react-vertical-timeline-component/style.min.css'
 import SvgIcon from '@material-ui/core/SvgIcon'
@@ -31,12 +30,6 @@ function LessonIcon (props) {
   )
 }
 
-const styles = theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default
-  }
-})
-
 const styleIcon = {
   example: {
     icon: <ExampleIcon/>,
@@ -54,9 +47,8 @@ const styleIcon = {
 
 class SessionHistory extends React.Component {
   render () {
-    const { classes } = this.props
     return (
-      <div className={classes.root}>
+      <div>
         <VerticalTimeline >
           {this.props.history.map((elem, index) => (
             <VerticalTimelineElement
@@ -80,9 +72,7 @@ class SessionHistory extends React.Component {
 }
 
 SessionHistory.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
   history: PropTypes.array.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(SessionHistory)
+export default SessionHistory

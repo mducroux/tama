@@ -9,6 +9,21 @@ import AppBarMenu from './AppBarMenu'
 import WelcomeMenu from './WelcomeMenu'
 import SessionHistory from './SessionHistory'
 import QuickLearnerStudent from './VirtualStudent/QuickLearnerStudent'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+
+import blue from '@material-ui/core/colors/blue'
+import deepOrange from '@material-ui/core/colors/deepOrange'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: deepOrange,
+    background: '#f1f1f1'
+  },
+  status: {
+    danger: 'red'
+  }
+})
 
 class App extends Component {
   constructor (props) {
@@ -201,23 +216,25 @@ class App extends Component {
       }
     }
     return (
-      <AppBarMenu
-        hasBeenWelcomed={this.state.hasBeenWelcomed}
-        isRegistered={this.state.isRegistered}
-        onLogout={() => {
-          localStorage.clear('username')
-          this.student = new QuickLearnerStudent()
-          this.setState({
-            hasBeenWelcomed: false,
-            isRegistered: false,
-            hasChosenActivityType: false,
-            hasChosenActivity: ''
-          })
-        }}
-        scoreDisplayed={this.state.scoreDisplayed}
-        changeView={(view) => this.setState({view: view})}
-        mainContent={displayed}
-      />
+      <MuiThemeProvider theme={theme}>
+        <AppBarMenu
+          hasBeenWelcomed={this.state.hasBeenWelcomed}
+          isRegistered={this.state.isRegistered}
+          onLogout={() => {
+            localStorage.clear('username')
+            this.student = new QuickLearnerStudent()
+            this.setState({
+              hasBeenWelcomed: false,
+              isRegistered: false,
+              hasChosenActivityType: false,
+              hasChosenActivity: ''
+            })
+          }}
+          scoreDisplayed={this.state.scoreDisplayed}
+          changeView={(view) => this.setState({view: view})}
+          mainContent={displayed}
+        />
+      </MuiThemeProvider>
     )
   }
 }
