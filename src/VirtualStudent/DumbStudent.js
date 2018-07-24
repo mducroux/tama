@@ -1,4 +1,5 @@
 class DumbStudent {
+  knowledgeParallelogram = {}
   thinkingAboutExample = '...'
   questionExample = 'Est-ce un parallélogramme ?'
   thinkingAboutExercice = '...'

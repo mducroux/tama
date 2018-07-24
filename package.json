@@ -25,7 +25,7 @@
     "predeploy": "npm run build",
     "deploy": "firebase deploy",
     "flow": "flow",
-    "eslint": "eslint --fix --ext .js,.jsx ."
+    "eslint": "eslint --fix --ext .js src"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

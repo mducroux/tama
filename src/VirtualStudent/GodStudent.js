@@ -1,4 +1,5 @@
 class GodStudent {
+  knowledgeParallelogram = {}
   thinkingAboutExample = "Trop facile";
   questionExample = "Est-ce un parallélogramme ?";
   thinkingAboutExercice = "Trop facile";
