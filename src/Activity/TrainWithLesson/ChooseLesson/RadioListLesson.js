@@ -19,7 +19,7 @@ class RadioListLesson extends React.Component {
             <ListItem
               key={value.title}
               dense={false}
-              button={true}
+              button
               onClick={this.handleToggle(index)}
             >
               <Radio

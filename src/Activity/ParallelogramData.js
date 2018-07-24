@@ -1,14 +1,14 @@
-var thumbnailWidth = 300
-var thumbnailHeight = 300
+const thumbnailWidth = 300;
+const thumbnailHeight = 300;
 
-var parallelogramData = [
+const parallelogramData = [
   {
-    src: 'images/examples/parallelogram_b1.png',
-    thumbnail: 'images/examples/parallelogram_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/parallelogram_b1.png",
+    thumbnail: "images/examples/parallelogram_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'parallelogram',
+    itemType: "parallelogram",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -26,12 +26,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/parallelogram_g1.png',
-    thumbnail: 'images/examples/parallelogram_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/parallelogram_g1.png",
+    thumbnail: "images/examples/parallelogram_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'parallelogram',
+    itemType: "parallelogram",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -49,12 +49,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/parallelogram_r1.png',
-    thumbnail: 'images/examples/parallelogram_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/parallelogram_r1.png",
+    thumbnail: "images/examples/parallelogram_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'parallelogram',
+    itemType: "parallelogram",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -72,12 +72,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/parallelogram_r2.png',
-    thumbnail: 'images/examples/parallelogram_r2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/parallelogram_r2.png",
+    thumbnail: "images/examples/parallelogram_r2.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'parallelogram',
+    itemType: "parallelogram",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -95,12 +95,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/parallelogram_r3.png',
-    thumbnail: 'images/examples/parallelogram_r3.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/parallelogram_r3.png",
+    thumbnail: "images/examples/parallelogram_r3.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'parallelogram',
+    itemType: "parallelogram",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -118,12 +118,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/parallelogram_r4.png',
-    thumbnail: 'images/examples/parallelogram_r4.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/parallelogram_r4.png",
+    thumbnail: "images/examples/parallelogram_r4.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'parallelogram',
+    itemType: "parallelogram",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -141,12 +141,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_b1.png',
-    thumbnail: 'images/examples/rectangle_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/rectangle_b1.png",
+    thumbnail: "images/examples/rectangle_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'rectangle',
+    itemType: "rectangle",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -164,12 +164,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_b2.png',
-    thumbnail: 'images/examples/rectangle_b2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/rectangle_b2.png",
+    thumbnail: "images/examples/rectangle_b2.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'rectangle',
+    itemType: "rectangle",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -187,12 +187,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_g1.png',
-    thumbnail: 'images/examples/rectangle_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/rectangle_g1.png",
+    thumbnail: "images/examples/rectangle_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'rectangle',
+    itemType: "rectangle",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -210,12 +210,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_r1.png',
-    thumbnail: 'images/examples/rectangle_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/rectangle_r1.png",
+    thumbnail: "images/examples/rectangle_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'rectangle',
+    itemType: "rectangle",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -233,12 +233,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rhombus_b1.png',
-    thumbnail: 'images/examples/rhombus_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/rhombus_b1.png",
+    thumbnail: "images/examples/rhombus_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'rhombus',
+    itemType: "rhombus",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -256,12 +256,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rhombus_r1.png',
-    thumbnail: 'images/examples/rhombus_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/rhombus_r1.png",
+    thumbnail: "images/examples/rhombus_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'rhombus',
+    itemType: "rhombus",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -279,12 +279,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/square_b1.png',
-    thumbnail: 'images/examples/square_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/square_b1.png",
+    thumbnail: "images/examples/square_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'square',
+    itemType: "square",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -302,12 +302,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/square_g1.png',
-    thumbnail: 'images/examples/square_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/square_g1.png",
+    thumbnail: "images/examples/square_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'square',
+    itemType: "square",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -325,12 +325,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/square_g2.png',
-    thumbnail: 'images/examples/square_g2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/square_g2.png",
+    thumbnail: "images/examples/square_g2.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'square',
+    itemType: "square",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -348,12 +348,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/examples/square_r1.png',
-    thumbnail: 'images/examples/square_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/examples/square_r1.png",
+    thumbnail: "images/examples/square_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'square',
+    itemType: "square",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -371,12 +371,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/antiparallelogram_b1.png',
-    thumbnail: 'images/counter_examples/antiparallelogram_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/antiparallelogram_b1.png",
+    thumbnail: "images/counter_examples/antiparallelogram_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'antiparallelogram',
+    itemType: "antiparallelogram",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -394,12 +394,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/antiparallelogram_r1.png',
-    thumbnail: 'images/counter_examples/antiparallelogram_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/antiparallelogram_r1.png",
+    thumbnail: "images/counter_examples/antiparallelogram_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'antiparallelogram',
+    itemType: "antiparallelogram",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -417,12 +417,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/hexagon_g1.png',
-    thumbnail: 'images/counter_examples/hexagon_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/hexagon_g1.png",
+    thumbnail: "images/counter_examples/hexagon_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'hexagon',
+    itemType: "hexagon",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -440,12 +440,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/pentagonreg_b1.png',
-    thumbnail: 'images/counter_examples/pentagonreg_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/pentagonreg_b1.png",
+    thumbnail: "images/counter_examples/pentagonreg_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'regular_pentagon',
+    itemType: "regular_pentagon",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -463,12 +463,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/pentagonreg_r1.png',
-    thumbnail: 'images/counter_examples/pentagonreg_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/pentagonreg_r1.png",
+    thumbnail: "images/counter_examples/pentagonreg_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'regular_pentagon',
+    itemType: "regular_pentagon",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -486,12 +486,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_b1.png',
-    thumbnail: 'images/counter_examples/quadrilateral_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/quadrilateral_b1.png",
+    thumbnail: "images/counter_examples/quadrilateral_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'quadrilateral',
+    itemType: "quadrilateral",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -509,12 +509,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_g1.png',
-    thumbnail: 'images/counter_examples/quadrilateral_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/quadrilateral_g1.png",
+    thumbnail: "images/counter_examples/quadrilateral_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'quadrilateral',
+    itemType: "quadrilateral",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -532,12 +532,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_r1.png',
-    thumbnail: 'images/counter_examples/quadrilateral_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/quadrilateral_r1.png",
+    thumbnail: "images/counter_examples/quadrilateral_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'quadrilateral',
+    itemType: "quadrilateral",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -555,12 +555,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_r2.png',
-    thumbnail: 'images/counter_examples/quadrilateral_r2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/quadrilateral_r2.png",
+    thumbnail: "images/counter_examples/quadrilateral_r2.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'quadrilateral',
+    itemType: "quadrilateral",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -578,12 +578,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/trapezoid_g1.png',
-    thumbnail: 'images/counter_examples/trapezoid_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/trapezoid_g1.png",
+    thumbnail: "images/counter_examples/trapezoid_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'trapezoid',
+    itemType: "trapezoid",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -601,12 +601,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/trapezoidiso_b1.png',
-    thumbnail: 'images/counter_examples/trapezoidiso_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/trapezoidiso_b1.png",
+    thumbnail: "images/counter_examples/trapezoidiso_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'isoscele_trapezoid',
+    itemType: "isoscele_trapezoid",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -624,12 +624,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/trapezoidiso_g1.png',
-    thumbnail: 'images/counter_examples/trapezoidiso_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/trapezoidiso_g1.png",
+    thumbnail: "images/counter_examples/trapezoidiso_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'isoscele_trapezoid',
+    itemType: "isoscele_trapezoid",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -647,12 +647,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/trapezoidiso_g2.png',
-    thumbnail: 'images/counter_examples/trapezoidiso_g2.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/trapezoidiso_g2.png",
+    thumbnail: "images/counter_examples/trapezoidiso_g2.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'isoscele_trapezoid',
+    itemType: "isoscele_trapezoid",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -670,12 +670,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/trapezoidiso_r1.png',
-    thumbnail: 'images/counter_examples/trapezoidiso_r1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/trapezoidiso_r1.png",
+    thumbnail: "images/counter_examples/trapezoidiso_r1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'isoscele_trapezoid',
+    itemType: "isoscele_trapezoid",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -693,12 +693,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/triangleequi_b1.png',
-    thumbnail: 'images/counter_examples/triangleequi_b1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/triangleequi_b1.png",
+    thumbnail: "images/counter_examples/triangleequi_b1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'equilateral_triangle',
+    itemType: "equilateral_triangle",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: true,
@@ -716,12 +716,12 @@ var parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/triangleequi_g1.png',
-    thumbnail: 'images/counter_examples/triangleequi_g1.png',
-    thumbnailWidth: thumbnailWidth,
-    thumbnailHeight: thumbnailHeight,
+    src: "images/counter_examples/triangleequi_g1.png",
+    thumbnail: "images/counter_examples/triangleequi_g1.png",
+    thumbnailWidth,
+    thumbnailHeight,
     isSelected: false,
-    itemType: 'equilateral_triangle',
+    itemType: "equilateral_triangle",
     valid: false,
     shapeFeatures: {
       hasThreeEdges: true,
@@ -738,8 +738,6 @@ var parallelogramData = [
       isBlue: false
     }
   }
-]
+].sort(() => 0.5 - Math.random());
 
-parallelogramData = parallelogramData.sort(() => 0.5 - Math.random())
-
-export default parallelogramData
+export default parallelogramData;

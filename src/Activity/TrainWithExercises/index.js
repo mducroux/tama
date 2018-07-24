@@ -17,11 +17,11 @@ class TrainWithExercise extends React.Component {
   }
 
   handleSelectExercise = (index) => {
-    this.setState({hasChosenExercise: true, index: index})
+    this.setState({hasChosenExercise: true, index})
   }
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
-    var parallelogramTitle = (parallelogramData[this.state.index].src).split('/')
+    const parallelogramTitle = (parallelogramData[this.state.index].src).split('/')
     this.newActivityRef.child('/item_exercise').set(parallelogramTitle[parallelogramTitle.length - 1])
     this.newActivityRef.child('/activity_type').set('exercise')
     this.newActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelograms)
@@ -37,7 +37,7 @@ class TrainWithExercise extends React.Component {
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
-    } else {
+    } 
       return (
         <ShowExercise
           parallelogram={parallelogramData[this.state.index]}
@@ -47,7 +47,7 @@ class TrainWithExercise extends React.Component {
           recordExerciseActivity={(userAnswer, studentAnswer) => this.recordExerciseActivity(userAnswer, studentAnswer)}
         />
       )
-    }
+    
   }
 }
 

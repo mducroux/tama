@@ -1,5 +1,27 @@
 {
-    "parser": "babel-eslint",
-    "extends": ["standard","plugin:react/recommended"],
-    "globals": {"localStorage": true, "it": true}
+  "plugins": ["flowtype", "prettier"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-filename-extension": "off",
+    "react/forbid-prop-types": "off",
+    "class-methods-use-this": "off",
+    "react/require-default-props": "off",
+    "no-plusplus": "off",
+    "react/sort-comp": "off"
+  },
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "globals": {
+    "localStorage": true,
+    "it": true,
+    "fetch": true,
+    "window": true,
+    "navigator": true,
+    "document": true
+  }
 }

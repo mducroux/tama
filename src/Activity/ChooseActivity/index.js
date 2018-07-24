@@ -144,7 +144,7 @@ class ChooseActivity extends React.Component {
                         variant='title'
                         color='inherit'
                       >
-                        {image.title} <br></br> <br></br>- {image.learningCost} points
+                        {image.title} <br /> <br />- {image.learningCost} points
                       </Typography>
                     </span>
                   </ButtonBase>

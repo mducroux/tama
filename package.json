@@ -9,6 +9,7 @@
     "firebase": "^5.2.0",
     "firebase-tools": "^3.19.3",
     "implement-js": "0.0.26",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-grid-gallery": "^0.5.1",
@@ -23,19 +24,23 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "firebase deploy",
-    "flow": "flow"
+    "flow": "flow",
+    "eslint": "eslint --fix --ext .js,.jsx ."
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.5",
     "babel-preset-flow": "^6.23.0",
-    "eslint": "^5.1.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.46.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.8.2",
     "flow-bin": "^0.75.0",
-    "gh-pages": "^1.2.0"
+    "gh-pages": "^1.2.0",
+    "prettier": "^1.13.7"
   }
 }

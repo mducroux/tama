@@ -17,7 +17,7 @@ class TrainWithLesson extends React.Component {
   }
 
   handleSubmit = (index) => {
-    this.setState({index: index, hasChosenLesson: true})
+    this.setState({index, hasChosenLesson: true})
   }
 
   recordLessonActivity = () => {
@@ -34,7 +34,7 @@ class TrainWithLesson extends React.Component {
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
-    } else {
+    } 
       return (
         <ShowLesson
           lesson={lesson[this.state.index]}
@@ -44,7 +44,7 @@ class TrainWithLesson extends React.Component {
           recordLessonActivity={this.recordLessonActivity}
         />
       )
-    }
+    
   }
 }
 

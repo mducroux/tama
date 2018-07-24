@@ -32,8 +32,8 @@ class TestStudent extends React.Component {
   }
 
   recordTest = (indexQuestion, isCorrect) => {
-    var newQuestionRef = this.testRef.child('/question_' + indexQuestion)
-    var questions = this.examQuestions[indexQuestion].src.split('/')
+    const newQuestionRef = this.testRef.child(`/question_${  indexQuestion}`)
+    const questions = this.examQuestions[indexQuestion].src.split('/')
     newQuestionRef.child('item').set(questions[questions.length - 1])
     newQuestionRef.child('is_correct').set(isCorrect)
   }
@@ -52,7 +52,7 @@ class TestStudent extends React.Component {
           recordTest={(indexQuestion, grade) => this.recordTest(indexQuestion, grade)}
         />
       )
-    } else {
+    } 
       return (
         <Result
           grade={this.state.grade}
@@ -63,7 +63,7 @@ class TestStudent extends React.Component {
           score={this.props.score}
         />
       )
-    }
+    
   }
 }
 

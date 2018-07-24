@@ -1,97 +1,118 @@
-import React from 'react'
+import React from "react";
 
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import VirtualStudent from '../../../VirtualStudent'
-import PropTypes from 'prop-types'
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
+
+import VirtualStudent from "../../../VirtualStudent";
 
 const styles = () => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginTop: '10px'
+    display: "flex",
+    flexWrap: "wrap",
+    marginTop: "10px"
   }
-})
+});
 
 class ShowExercise extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {thinking: true, learning: false, userAnswer: false, studentAnswer: false}
+  constructor(props) {
+    super(props);
+    this.state = {
+      thinking: true,
+      learning: false,
+      userAnswer: false,
+      studentAnswer: false
+    };
   }
 
-  handleClick = (userAnswer) => {
-    this.setState({learning: true, userAnswer: userAnswer})
-    this.props.student.learn(this.state.studentAnswer ? userAnswer : !userAnswer, this.props.parallelogram.shapeFeatures)
+  componentDidMount() {
     setTimeout(() => {
-      this.props.recordExerciseActivity(this.state.userAnswer, this.state.studentAnswer)
-      this.props.updateScore()
-      this.props.getBackToMenu()
-    }, 2000)
+      this.setState({
+        thinking: false,
+        studentAnswer: this.props.student.answerParallelogram(
+          this.props.parallelogram.shapeFeatures
+        )
+      });
+    }, 2000);
   }
 
-  componentDidMount () {
+  handleClick = userAnswer => {
+    this.setState({ learning: true, userAnswer });
+    this.props.student.learn(
+      this.state.studentAnswer ? userAnswer : !userAnswer,
+      this.props.parallelogram.shapeFeatures
+    );
     setTimeout(() => {
-      this.setState({thinking: false, studentAnswer: this.props.student.answerParallelogram(this.props.parallelogram.shapeFeatures)})
-    }, 2000)
-  }
+      this.props.recordExerciseActivity(
+        this.state.userAnswer,
+        this.state.studentAnswer
+      );
+      this.props.updateScore();
+      this.props.getBackToMenu();
+    }, 2000);
+  };
 
-  render () {
-    const { classes } = this.props
+  render() {
+    const { classes } = this.props;
 
-    let bubbleText
+    let bubbleText;
     if (this.state.thinking === true) {
-      bubbleText = this.props.student.thinkingAboutExercice
+      bubbleText = this.props.student.thinkingAboutExercice;
     } else if (this.state.learning === true) {
       if (this.state.userAnswer) {
-        bubbleText = this.props.student.hasRightAnswerExercice
+        bubbleText = this.props.student.hasRightAnswerExercice;
       } else {
-        bubbleText = this.props.student.hasFalseAnswerExercice
+        bubbleText = this.props.student.hasFalseAnswerExercice;
       }
+    } else if (this.state.studentAnswer) {
+      bubbleText = this.props.student.givePositiveAnswer;
     } else {
-      if (this.state.studentAnswer) {
-        bubbleText = this.props.student.givePositiveAnswer
-      } else {
-        bubbleText = this.props.student.giveNegativeAnswer
-      }
+      bubbleText = this.props.student.giveNegativeAnswer;
     }
 
     return (
       <div>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText}/>
+          <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <img src={this.props.parallelogram.src} alt="parallelogram" width="300" height="300"/>
+          <img
+            src={this.props.parallelogram.src}
+            alt="parallelogram"
+            width="300"
+            height="300"
+          />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          {!this.state.thinking && !this.state.learning && (
-            <div>
-              <Grid container justify="center" spacing={40}>
-                <Grid item >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.handleClick(true)}
-                  >
-                    Vrai
-                  </Button>
+          {!this.state.thinking &&
+            !this.state.learning && (
+              <div>
+                <Grid container justify="center" spacing={40}>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => this.handleClick(true)}
+                    >
+                      Vrai
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => this.handleClick(false)}
+                    >
+                      Faux
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.handleClick(false)}
-                  >
-                    Faux
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          )}
+              </div>
+            )}
         </Grid>
       </div>
-    )
+    );
   }
 }
 
@@ -102,6 +123,6 @@ ShowExercise.propTypes = {
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExerciseActivity: PropTypes.func.isRequired
-}
+};
 
-export default withStyles(styles)(ShowExercise)
+export default withStyles(styles)(ShowExercise);

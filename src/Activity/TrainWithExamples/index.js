@@ -24,8 +24,8 @@ class TrainWithExamples extends React.Component {
   }
 
   getSelectedParallelograms = () => {
-    var parallelograms = []
-    for (var ind = 0; ind < this.state.examples.length; ind++) {
+    const parallelograms = []
+    for (let ind = 0; ind < this.state.examples.length; ind++) {
       if (this.state.examples[ind]) {
         parallelograms.push(parallelogramData[ind])
       }
@@ -35,8 +35,8 @@ class TrainWithExamples extends React.Component {
 
   recordExampleActivity = (userAnswer, indexExample) => {
     this.newActivityRef.child('/activity_type').set('example')
-    var newSubActivityRef = this.newActivityRef.child('/example_' + indexExample)
-    var parallelogramTitle = this.getSelectedParallelograms()[indexExample].src.split('/')
+    const newSubActivityRef = this.newActivityRef.child(`/example_${  indexExample}`)
+    const parallelogramTitle = this.getSelectedParallelograms()[indexExample].src.split('/')
     newSubActivityRef.child('/item').set(parallelogramTitle[parallelogramTitle.length - 1])
     newSubActivityRef.child('/knowledge').set(this.props.student.knowledgeParallelogram)
     newSubActivityRef.child('/user_answer').set(userAnswer)
@@ -53,7 +53,7 @@ class TrainWithExamples extends React.Component {
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
       )
-    } else {
+    } 
       return (
         <ShowExamples
           parallelograms={this.getSelectedParallelograms()}
@@ -64,7 +64,7 @@ class TrainWithExamples extends React.Component {
           recordExampleActivity={(userAnswer, indexExample) => this.recordExampleActivity(userAnswer, indexExample)}
         />
       )
-    }
+    
   }
 }
 

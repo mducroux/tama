@@ -30,7 +30,7 @@ class ShowQuestions extends React.Component {
   }
 
   answerQuestion () {
-    var answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].shapeFeatures)
+    const answer = this.props.student.answerParallelogram(this.props.examQuestions[this.state.indexQuestion].shapeFeatures)
     if (answer ? this.props.examQuestions[this.state.indexQuestion].valid : !this.props.examQuestions[this.state.indexQuestion].valid) {
       this.props.recordTest(this.state.indexQuestion, true)
       this.props.increaseGrade()
@@ -42,7 +42,7 @@ class ShowQuestions extends React.Component {
     }
     this.setState({
       thinking: false,
-      answer: answer
+      answer
     })
   }
 
@@ -64,13 +64,11 @@ class ShowQuestions extends React.Component {
     let bubbleText
     if (this.state.thinking === true) {
       bubbleText = this.props.student.thinkingAboutExam
-    } else {
-      if (this.state.answer === true) {
+    } else if (this.state.answer === true) {
         bubbleText = this.props.student.givePositiveAnswer
       } else {
         bubbleText = this.props.student.giveNegativeAnswer
       }
-    }
 
     return (
       <div>
