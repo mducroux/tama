@@ -10,7 +10,7 @@ class QuickLearnerStudent {
     hasSameLengthEveryPairOppositeEdges: 0,
     hasSameLengthOnePairOppositeEdges: 0,
     hasEveryPairOppositeEdgesParallel: 0,
-    hasOnePairOppositeEdgesParallel: 0,
+    hasAtLeastOnePairOppositeEdgesParallel: 0,
     isRed: 0,
     isGreen: 0,
     isBlue: 0
