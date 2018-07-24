@@ -18,7 +18,10 @@ const theme = createMuiTheme({
   palette: {
     primary: blue,
     secondary: deepOrange,
-    background: '#f1f1f1'
+    background: {
+      paper: '#fff',
+      default: '#f1f1f1'
+    }
   },
   status: {
     danger: 'red'
