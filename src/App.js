@@ -10,26 +10,6 @@ import WelcomeMenu from './WelcomeMenu'
 import SessionHistory from './SessionHistory'
 import QuickLearnerStudent from './VirtualStudent/QuickLearnerStudent'
 
-import { withStyles } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%'
-  },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3
-  }
-})
-
 class App extends Component {
   constructor (props) {
     super(props)
@@ -99,7 +79,6 @@ class App extends Component {
   }
 
   render () {
-    const { classes } = this.props
     let displayed
     if (!this.state.hasBeenWelcomed) {
       displayed = (
@@ -222,33 +201,25 @@ class App extends Component {
       }
     }
     return (
-      <div className={classes.root}>
-        <AppBarMenu
-          isRegistered={this.state.isRegistered}
-          onLogout={() => {
-            localStorage.clear('username')
-            this.student = new QuickLearnerStudent()
-            this.setState({
-              hasBeenWelcomed: false,
-              isRegistered: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: ''
-            })
-          }}
-          scoreDisplayed={this.state.scoreDisplayed}
-          changeView={(view) => this.setState({view: view})}
-        />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          {displayed}
-        </main>
-      </div>
+      <AppBarMenu
+        hasBeenWelcomed={this.state.hasBeenWelcomed}
+        isRegistered={this.state.isRegistered}
+        onLogout={() => {
+          localStorage.clear('username')
+          this.student = new QuickLearnerStudent()
+          this.setState({
+            hasBeenWelcomed: false,
+            isRegistered: false,
+            hasChosenActivityType: false,
+            hasChosenActivity: ''
+          })
+        }}
+        scoreDisplayed={this.state.scoreDisplayed}
+        changeView={(view) => this.setState({view: view})}
+        mainContent={displayed}
+      />
     )
   }
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { withTheme: true })(App)
+export default App

@@ -31,10 +31,13 @@ function LessonIcon (props) {
   )
 }
 
-const styles = {
+const styles = theme => ({
   root: {
-    backgroundColor: '#f3f3f3'
-  },
+    backgroundColor: theme.palette.background.default
+  }
+})
+
+const styleIcon = {
   example: {
     icon: <ExampleIcon/>,
     color: '#48b02c'
@@ -58,8 +61,8 @@ class SessionHistory extends React.Component {
           {this.props.history.map((elem, index) => (
             <VerticalTimelineElement
               key={elem.activityType}
-              iconStyle={{ background: styles[elem.activityType].color, color: '#fff' }}
-              icon={styles[elem.activityType].icon}
+              iconStyle={{ background: styleIcon[elem.activityType].color, color: '#fff' }}
+              icon={styleIcon[elem.activityType].icon}
             >
               <Typography variant='title'>
                 {elem.activityType.charAt(0).toUpperCase() + elem.activityType.slice(1)}
@@ -78,7 +81,8 @@ class SessionHistory extends React.Component {
 
 SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
   history: PropTypes.array.isRequired
 }
 
-export default withStyles(styles)(SessionHistory)
+export default withStyles(styles, { withTheme: true })(SessionHistory)
