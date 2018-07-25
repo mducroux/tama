@@ -62,7 +62,11 @@ const SessionHistory = ({ history }) => (
           color: "#fff"
         }}
         icon={styles.start.icon}
-      />
+      >
+        <Typography variant="title">
+          Début du jeu
+        </Typography>
+      </VerticalTimelineElement>
       {history.map((elem, index) => (
         <VerticalTimelineElement
           key={elem.activityType}
