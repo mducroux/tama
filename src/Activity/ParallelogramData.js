@@ -1,14 +1,14 @@
-const thumbnailWidth = 300;
-const thumbnailHeight = 300;
+var thumbnailWidth = 300
+var thumbnailHeight = 300
 
-const parallelogramData = [
+var parallelogramData = [
   {
-    src: "images/examples/parallelogram_b1.png",
-    thumbnail: "images/examples/parallelogram_b1.png",
+    src: 'images/examples/parallelogram_b1.png',
+    thumbnail: 'images/examples/parallelogram_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "parallelogram",
+    itemType: 'parallelogram',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -30,12 +30,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/parallelogram_g1.png",
-    thumbnail: "images/examples/parallelogram_g1.png",
+    src: 'images/examples/parallelogram_g1.png',
+    thumbnail: 'images/examples/parallelogram_g1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "parallelogram",
+    itemType: 'parallelogram',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -57,12 +57,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/parallelogram_r1.png",
-    thumbnail: "images/examples/parallelogram_r1.png",
+    src: 'images/examples/parallelogram_r1.png',
+    thumbnail: 'images/examples/parallelogram_r1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "parallelogram",
+    itemType: 'parallelogram',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -84,12 +84,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/parallelogram_r2.png",
-    thumbnail: "images/examples/parallelogram_r2.png",
+    src: 'images/examples/parallelogram_r2.png',
+    thumbnail: 'images/examples/parallelogram_r2.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "parallelogram",
+    itemType: 'parallelogram',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -111,12 +111,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/parallelogram_r3.png",
-    thumbnail: "images/examples/parallelogram_r3.png",
+    src: 'images/examples/parallelogram_r3.png',
+    thumbnail: 'images/examples/parallelogram_r3.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "parallelogram",
+    itemType: 'parallelogram',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -170,7 +170,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "rectangle",
+    itemType: 'rectangle',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -197,7 +197,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "rectangle",
+    itemType: 'rectangle',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -224,7 +224,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "rectangle",
+    itemType: 'rectangle',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -251,7 +251,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "rectangle",
+    itemType: 'rectangle',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -273,12 +273,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/rhombus_b1.png",
-    thumbnail: "images/examples/rhombus_b1.png",
+    src: 'images/examples/rhombus_b1.png',
+    thumbnail: 'images/examples/rhombus_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "rhombus",
+    itemType: 'rhombus',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -300,12 +300,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/rhombus_r1.png",
-    thumbnail: "images/examples/rhombus_r1.png",
+    src: 'images/examples/rhombus_r1.png',
+    thumbnail: 'images/examples/rhombus_r1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "rhombus",
+    itemType: 'rhombus',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -327,12 +327,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/square_b1.png",
-    thumbnail: "images/examples/square_b1.png",
+    src: 'images/examples/square_b1.png',
+    thumbnail: 'images/examples/square_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "square",
+    itemType: 'square',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -354,12 +354,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/square_g1.png",
-    thumbnail: "images/examples/square_g1.png",
+    src: 'images/examples/square_g1.png',
+    thumbnail: 'images/examples/square_g1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "square",
+    itemType: 'square',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -381,12 +381,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/square_g2.png",
-    thumbnail: "images/examples/square_g2.png",
+    src: 'images/examples/square_g2.png',
+    thumbnail: 'images/examples/square_g2.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "square",
+    itemType: 'square',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -408,12 +408,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/examples/square_r1.png",
-    thumbnail: "images/examples/square_r1.png",
+    src: 'images/examples/square_r1.png',
+    thumbnail: 'images/examples/square_r1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "square",
+    itemType: 'square',
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -435,12 +435,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/antiparallelogram_b1.png",
-    thumbnail: "images/counter_examples/antiparallelogram_b1.png",
+    src: 'images/counter_examples/antiparallelogram_b1.png',
+    thumbnail: 'images/counter_examples/antiparallelogram_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "antiparallelogram",
+    itemType: 'antiparallelogram',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -462,12 +462,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/antiparallelogram_r1.png",
-    thumbnail: "images/counter_examples/antiparallelogram_r1.png",
+    src: 'images/counter_examples/antiparallelogram_r1.png',
+    thumbnail: 'images/counter_examples/antiparallelogram_r1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "antiparallelogram",
+    itemType: 'antiparallelogram',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -489,12 +489,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/hexagon_g1.png",
-    thumbnail: "images/counter_examples/hexagon_g1.png",
+    src: 'images/counter_examples/hexagon_g1.png',
+    thumbnail: 'images/counter_examples/hexagon_g1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "hexagon",
+    itemType: 'hexagon',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -516,12 +516,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/pentagonreg_b1.png",
-    thumbnail: "images/counter_examples/pentagonreg_b1.png",
+    src: 'images/counter_examples/pentagonreg_b1.png',
+    thumbnail: 'images/counter_examples/pentagonreg_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "regular_pentagon",
+    itemType: 'regular_pentagon',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -543,12 +543,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/pentagonreg_r1.png",
-    thumbnail: "images/counter_examples/pentagonreg_r1.png",
+    src: 'images/counter_examples/pentagonreg_r1.png',
+    thumbnail: 'images/counter_examples/pentagonreg_r1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "regular_pentagon",
+    itemType: 'regular_pentagon',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -570,12 +570,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/quadrilateral_b1.png",
-    thumbnail: "images/counter_examples/quadrilateral_b1.png",
+    src: 'images/counter_examples/quadrilateral_b1.png',
+    thumbnail: 'images/counter_examples/quadrilateral_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "quadrilateral",
+    itemType: 'quadrilateral',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -602,7 +602,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "quadrilateral",
+    itemType: 'quadrilateral',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -629,7 +629,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "quadrilateral",
+    itemType: 'quadrilateral',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -656,7 +656,7 @@ const parallelogramData = [
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "quadrilateral",
+    itemType: 'quadrilateral',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -678,12 +678,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/trapezoid_g1.png",
-    thumbnail: "images/counter_examples/trapezoid_g1.png",
+    src: 'images/counter_examples/trapezoid_g1.png',
+    thumbnail: 'images/counter_examples/trapezoid_g1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "trapezoid",
+    itemType: 'trapezoid',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -705,12 +705,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/trapezoidiso_b1.png",
-    thumbnail: "images/counter_examples/trapezoidiso_b1.png",
+    src: 'images/counter_examples/trapezoidiso_b1.png',
+    thumbnail: 'images/counter_examples/trapezoidiso_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "isoscele_trapezoid",
+    itemType: 'isoscele_trapezoid',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -732,12 +732,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/trapezoidiso_g1.png",
-    thumbnail: "images/counter_examples/trapezoidiso_g1.png",
+    src: 'images/counter_examples/trapezoidiso_g1.png',
+    thumbnail: 'images/counter_examples/trapezoidiso_g1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "isoscele_trapezoid",
+    itemType: 'isoscele_trapezoid',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -759,12 +759,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/trapezoidiso_g2.png",
-    thumbnail: "images/counter_examples/trapezoidiso_g2.png",
+    src: 'images/counter_examples/trapezoidiso_g2.png',
+    thumbnail: 'images/counter_examples/trapezoidiso_g2.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "isoscele_trapezoid",
+    itemType: 'isoscele_trapezoid',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -786,12 +786,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/trapezoidiso_r1.png",
-    thumbnail: "images/counter_examples/trapezoidiso_r1.png",
+    src: 'images/counter_examples/trapezoidiso_r1.png',
+    thumbnail: 'images/counter_examples/trapezoidiso_r1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "isoscele_trapezoid",
+    itemType: 'isoscele_trapezoid',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -813,12 +813,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/triangleequi_b1.png",
-    thumbnail: "images/counter_examples/triangleequi_b1.png",
+    src: 'images/counter_examples/triangleequi_b1.png',
+    thumbnail: 'images/counter_examples/triangleequi_b1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "equilateral_triangle",
+    itemType: 'equilateral_triangle',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: true,
@@ -840,12 +840,12 @@ const parallelogramData = [
     }
   },
   {
-    src: "images/counter_examples/triangleequi_g1.png",
-    thumbnail: "images/counter_examples/triangleequi_g1.png",
+    src: 'images/counter_examples/triangleequi_g1.png',
+    thumbnail: 'images/counter_examples/triangleequi_g1.png',
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: "equilateral_triangle",
+    itemType: 'equilateral_triangle',
     valid: false,
     shapeFeatures: {
       hasThreeEdges: true,
@@ -866,6 +866,8 @@ const parallelogramData = [
       hasAtLeastOneRightAngle: false
     }
   }
-].sort(() => 0.5 - Math.random());
+]
 
-export default parallelogramData;
+parallelogramData = parallelogramData.sort(() => 0.5 - Math.random())
+
+export default parallelogramData

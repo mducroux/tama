@@ -1,34 +1,33 @@
 class GodStudent {
-  knowledgeParallelogram = {};
-  thinkingAboutExample = "Trop facile";
-  questionExample = "Est-ce un parallélogramme ?";
-  thinkingAboutExercice = "Trop facile";
-  hasRightAnswerExercice = "J'en étais sûr";
-  hasFalseAnswerExercice = "Tu mens !";
-  feedbackLessonKnow = "Je le savais (comme toujours)";
-  feedbackLessonDontKnow = "";
-  thinkingAboutExam = "Trop facile";
-  givePositiveAnswer = "C'est un paralléĺogramme";
-  giveNegativeAnswer = "Ce n'est pas un parallélogramme";
+  thinkingAboutExample = 'Trop facile'
+  questionExample = 'Est-ce un parallélogramme ?'
+  thinkingAboutExercice = 'Trop facile'
+  hasRightAnswerExercice = "J'en étais sûr"
+  hasFalseAnswerExercice = 'Tu mens !'
+  feedbackLessonKnow = 'Je le savais (comme toujours)'
+  feedbackLessonDontKnow = ''
+  thinkingAboutExam = 'Trop facile'
+  givePositiveAnswer = "C'est un paralléĺogramme"
+  giveNegativeAnswer = "Ce n'est pas un parallélogramme"
 
-  answerParallelogram(shapeFeatures) {
+  answerParallelogram (shapeFeatures) {
     return (
       shapeFeatures.hasFourEdges &&
       shapeFeatures.hasEveryPairOppositeEdgesParallel
-    );
+    )
   }
 
-  learn(isParallelogram, shapeFeatures) {
+  learn (isParallelogram, shapeFeatures) {
     // Nothing to learn, he is God
   }
 
-  learnLesson(shapeFeatures) {
+  learnLesson (shapeFeatures) {
     // Nothing to learn, he is God
   }
 
-  alreadyKnowLesson(shapeFeatures) {
-    return true;
+  alreadyKnowLesson (shapeFeatures) {
+    return true
   }
 }
 
-export default GodStudent;
+export default GodStudent
