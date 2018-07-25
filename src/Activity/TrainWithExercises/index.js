@@ -1,53 +1,68 @@
-import React from 'react'
+import React from "react";
 
-import ChooseExercise from './ChooseExercise'
-import ShowExercise from './ShowExercise'
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
-import parallelogramData from '../ParallelogramData'
+import ChooseExercise from "./ChooseExercise";
+import ShowExercise from "./ShowExercise";
+import parallelogramData from "../ParallelogramData";
 
 class TrainWithExercise extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       index: 0,
       hasChosenExercise: false
-    }
+    };
+    this.newActivityRef = this.props.sessionRef.child("activities").push();
   }
 
-  handleSelectExercise = (index) => {
-    this.setState({hasChosenExercise: true, index: index})
-  }
+  handleSelectExercise = index => {
+    this.setState({ hasChosenExercise: true, index });
+  };
 
-  getBackToExercise = () => {
-    this.setState({hasChosenExercise: false})
-  }
+  recordExerciseActivity = (userAnswer, studentAnswer) => {
+    const parallelogramTitle = parallelogramData[this.state.index].src.split(
+      "/"
+    );
+    this.newActivityRef
+      .child("/item_exercise")
+      .set(parallelogramTitle[parallelogramTitle.length - 1]);
+    this.newActivityRef.child("/activity_type").set("exercise");
+    this.newActivityRef
+      .child("/knowledge")
+      .set(this.props.student.knowledgeParallelogram);
+    this.newActivityRef.child("/student_answer").set(studentAnswer);
+    this.newActivityRef.child("/user_answer").set(userAnswer);
+  };
 
-  render () {
+  render() {
     if (!this.state.hasChosenExercise) {
       return (
         <ChooseExercise
           onSelectExercise={this.handleSelectExercise}
-          onBackNavigation={this.props.getBackToMenu}
+          onNavigationBackToMenu={this.props.getBackToMenu}
         />
-      )
-    } else {
-      return (
-        <ShowExercise
-          parallelogram={parallelogramData[this.state.index]}
-          getBackToMenu={this.props.getBackToMenu}
-          updateScore={this.props.updateScore}
-          student={this.props.student}
-        />
-      )
+      );
     }
+    return (
+      <ShowExercise
+        parallelogram={parallelogramData[this.state.index]}
+        getBackToMenu={this.props.getBackToMenu}
+        updateScore={this.props.updateScore}
+        student={this.props.student}
+        recordExerciseActivity={(userAnswer, studentAnswer) =>
+          this.recordExerciseActivity(userAnswer, studentAnswer)
+        }
+      />
+    );
   }
 }
 
 TrainWithExercise.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired
-}
+  student: PropTypes.object.isRequired,
+  sessionRef: PropTypes.isRequired
+};
 
-export default TrainWithExercise
+export default TrainWithExercise;
