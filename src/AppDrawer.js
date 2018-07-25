@@ -91,12 +91,18 @@ const styles = theme => ({
     marginLeft: 0
   },
   welcome: {
-    flex: 1
+    flex: 1,
+    marginLeft: theme.spacing.unit * 2
   },
   scoreDisplayed: {
     flex: 1,
     textAlign: 'right',
-    marginRight: 10
+    marginRight: theme.spacing.unit * 2
+  },
+  avatar: {
+    flex: 1,
+    textAlign: 'right',
+    marginRight: theme.spacing.unit * 2
   }
 })
 
@@ -105,8 +111,7 @@ class AppDrawer extends React.Component {
     super(props)
     this.state = {
       open: false,
-      anchorEl: null,
-      anchor: 'left'
+      anchorEl: null
     }
     this.mainMenuListItems = (
       <div>
@@ -140,12 +145,6 @@ class AppDrawer extends React.Component {
     this.setState({ open: false })
   }
 
-  handleChangeAnchor = event => {
-    this.setState({
-      anchor: event.target.value
-    })
-  }
-
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget })
   }
@@ -154,10 +153,15 @@ class AppDrawer extends React.Component {
     this.setState({ anchorEl: null })
   }
 
-  handleLogout = () => {
-    this.setState({ anchorEl: null })
-    this.props.onLogout()
-  }
+  handleLeaveSession = () => {
+    this.setState({ anchorEl: null });
+    this.props.onLeaveSession();
+  };
+
+  handleUnregistrer = () => {
+    this.setState({ anchorEl: null });
+    this.props.onUnregister();
+  };
 
   render() {
     const { classes, theme } = this.props
@@ -204,7 +208,7 @@ class AppDrawer extends React.Component {
                 </IconButton>
               )}
               <Typography variant="title" color="inherit" className={classes.welcome}>
-                {!this.props.isRegistered ? 'Bienvenue à Tama !' : `Bienvenue ${  localStorage.getItem('username')  } !`}
+                {!this.props.isRegistered ? 'Bienvenue à Tama !' : `Bienvenue ${localStorage.getItem('username')} !`}
               </Typography>
               {this.props.hasBeenWelcomed && this.props.isRegistered && (
                 <Typography variant="title" color="inherit" className={classes.scoreDisplayed}>
@@ -218,6 +222,7 @@ class AppDrawer extends React.Component {
                     aria-haspopup="true"
                     onClick={this.handleMenu}
                     color="inherit"
+                    className={classes.avatar}
                   >
                     <img src='images/virtual_student/student_avatar.png' alt='student_avatar' width='40px' height='40px' />
                   </IconButton>
@@ -235,7 +240,12 @@ class AppDrawer extends React.Component {
                     open={openAnchorEl}
                     onClose={this.handleClose}
                   >
-                    <MenuItem onClick={this.handleLogout}>Quitter l'entraînement</MenuItem>
+                    <MenuItem onClick={this.handleLeaveSession}>
+                      {"Quitter l'entraînement"}
+                    </MenuItem>
+                    <MenuItem onClick={this.handleUnregistrer}>
+                      Se désinscrire
+                    </MenuItem>
                   </Menu>
                 </div>
               )}
@@ -262,9 +272,10 @@ AppDrawer.propTypes = {
   theme: PropTypes.object.isRequired,
   hasBeenWelcomed: PropTypes.bool.isRequired,
   isRegistered: PropTypes.bool.isRequired,
-  onLogout: PropTypes.func.isRequired,
   scoreDisplayed: PropTypes.string,
   changeView: PropTypes.func.isRequired,
+  onUnregister: PropTypes.func.isRequired,
+  onLeaveSession: PropTypes.func.isRequired,
   mainContent: PropTypes.object.isRequired
 }
 

@@ -40,11 +40,12 @@ class App extends Component {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
+      view: 'training',
       score: 200,
-      scoreDisplayed: "200"
+      scoreDisplayed: "200",
+      history: []
     };
     this.student = new QuickLearnerStudent();
-    console.log(this.student.knowledgeParallelogram);
   }
 
   updateScore = points => {
@@ -64,7 +65,6 @@ class App extends Component {
 
 
   render() {
-    const { classes } = this.props;
     let displayed;
     if (!this.state.hasBeenWelcomed) {
       displayed = (
@@ -133,6 +133,7 @@ class App extends Component {
               hasChosenActivity: "test"
             })
           }
+          history={this.state.history}
         />
       );
     } else if (this.state.hasChosenActivityType) {
@@ -141,6 +142,16 @@ class App extends Component {
           <TrainWithExamples
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
+            }
+            updateHistory={(images) =>
+              this.setState(prevState => ({
+                history: [...prevState.history,
+                  {
+                    activityType: 'example',
+                    images
+                  }
+                ]
+              }))
             }
             updateScore={() => this.updateScore(-10)}
             student={this.student}
@@ -153,6 +164,16 @@ class App extends Component {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
+            updateHistory={(images) =>
+              this.setState(prevState => ({
+                history: [...prevState.history,
+                  {
+                    activityType: 'exercise',
+                    images: [images]
+                  }
+                ]
+              }))
+            }
             updateScore={() => this.updateScore(-30)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -163,6 +184,16 @@ class App extends Component {
           <TrainWithLesson
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
+            }
+            updateHistory={() =>
+              this.setState(prevState => ({
+                history: [...prevState.history,
+                  {
+                    activityType: 'lesson',
+                    images: []
+                  }
+                ]
+              }))
             }
             updateScore={() => this.updateScore(-50)}
             student={this.student}
@@ -179,7 +210,8 @@ class App extends Component {
                 hasChosenActivityType: false,
                 hasChosenActivity: "",
                 score: 200,
-                scoreDisplayed: "200"
+                scoreDisplayed: "200",
+                history: []
               });
             }}
             updateScore={() => this.updateScore(50)}
@@ -202,7 +234,8 @@ class App extends Component {
               hasChosenActivityType: false,
               hasChosenActivity: "",
               score: 200,
-              scoreDisplayed: "200"
+              scoreDisplayed: "200",
+              history: []
             });
           }}
           onUnregister={() => {
@@ -215,7 +248,8 @@ class App extends Component {
               hasChosenActivityType: false,
               hasChosenActivity: "",
               score: 200,
-              scoreDisplayed: "200"
+              scoreDisplayed: "200",
+              history: []
             });
           }}
           scoreDisplayed={this.state.scoreDisplayed}

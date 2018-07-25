@@ -28,6 +28,7 @@ class ShowLesson extends React.Component {
     setTimeout(() => {
       this.props.recordLessonActivity();
       this.props.updateScore();
+      this.props.updateHistory()
       this.props.getBackToMenu();
     }, 3000);
   }
@@ -67,6 +68,7 @@ ShowLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   lesson: PropTypes.object.isRequired,
   updateScore: PropTypes.func.isRequired,
+  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordLessonActivity: PropTypes.func.isRequired
 };
