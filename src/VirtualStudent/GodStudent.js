@@ -1,4 +1,10 @@
-class GodStudent {
+// @flow
+
+import type { VirtualStudent, ShapeFeatures } from "./types";
+
+class GodStudent implements VirtualStudent {
+  state = {};
+
   knowledgeParallelogram = {};
   thinkingAboutExample = "Trop facile";
   questionExample = "Est-ce un parallélogramme ?";
@@ -11,23 +17,29 @@ class GodStudent {
   givePositiveAnswer = "C'est un paralléĺogramme";
   giveNegativeAnswer = "Ce n'est pas un parallélogramme";
 
-  answerParallelogram(shapeFeatures) {
+  answerParallelogram(shapeFeatures: ShapeFeatures) {
     return (
       shapeFeatures.hasFourEdges &&
       shapeFeatures.hasEveryPairOppositeEdgesParallel
     );
   }
 
-  learn(isParallelogram, shapeFeatures) {
+  learn() {
     // Nothing to learn, he is God
   }
 
-  learnLesson(shapeFeatures) {
+  learnLesson() {
     // Nothing to learn, he is God
   }
 
-  alreadyKnowLesson(shapeFeatures) {
+  alreadyKnowLesson() {
     return true;
+  }
+
+  setState() {}
+
+  getState() {
+    return {};
   }
 }
 

@@ -1,4 +1,8 @@
-class DumbStudent {
+// @flow
+
+import type { VirtualStudent } from "./types";
+
+class DumbStudent implements VirtualStudent {
   knowledgeParallelogram = {};
   thinkingAboutExample = "...";
   questionExample = "Est-ce un parallélogramme ?";
@@ -11,16 +15,24 @@ class DumbStudent {
   givePositiveAnswer = "Mmm je pense que c'est un paralléĺogramme";
   giveNegativeAnswer = "Je ne crois pas que ce soit un parallélogramme";
 
-  answerParallelogram(shapeFeatures) {
+  state = {};
+
+  answerParallelogram() {
     return Math.random() > 0.5;
   }
 
-  learn(isParallelogram, shapeFeatures) {}
+  learnLesson() {}
 
-  learnLesson(shapeFeatures) {}
+  learn() {}
 
-  alreadyKnowLesson(shapeFeatures) {
+  alreadyKnowLesson() {
     return Math.random() > 0.5;
+  }
+
+  setState() {}
+
+  getState() {
+    return {};
   }
 }
 
