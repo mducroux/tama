@@ -64,17 +64,18 @@ class ShowExamples extends React.Component {
 
   handleClick = userAnswer => {
     this.setState({ thinking: true, userAnswer });
-    this.props.recordExampleActivity(
-      this.state.userAnswer,
-      this.state.indexExample
-    );
     this.props.student.learn(
       userAnswer,
       this.props.parallelograms[this.state.indexExample].shapeFeatures
     );
+    this.props.recordExampleActivity(
+      userAnswer,
+      this.state.indexExample
+    );
     setTimeout(() => {
       if (this.state.indexExample + 1 === this.props.numberOfExamples) {
         this.props.updateScore();
+        this.props.updateHistory()
         this.props.getBackToMenu();
       } else {
         this.setState({
@@ -125,6 +126,7 @@ ShowExamples.propTypes = {
   parallelograms: PropTypes.array.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
+  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExampleActivity: PropTypes.func.isRequired
 };

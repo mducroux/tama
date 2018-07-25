@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import blue from '@material-ui/core/colors/blue'
+import deepOrange from '@material-ui/core/colors/deepOrange'
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -10,22 +12,25 @@ import TrainWithExamples from "./Activity/TrainWithExamples";
 import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
-import AppBarMenu from "./AppBarMenu";
 import WelcomeMenu from "./WelcomeMenu";
 import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
+import AppDrawer from './AppDrawer'
+import SessionHistory from './SessionHistory'
 
-const styles = {
-  root: {
-    flexGrow: 1
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: deepOrange,
+    background: {
+      paper: '#fff',
+      default: '#f1f1f1'
+    }
   },
-  flex: {
-    flex: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+  status: {
+    danger: 'red'
   }
-};
+})
 
 class App extends Component {
   constructor(props) {
@@ -35,11 +40,12 @@ class App extends Component {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
+      view: 'training',
       score: 200,
-      scoreDisplayed: "200"
+      scoreDisplayed: "200",
+      history: []
     };
     this.student = new QuickLearnerStudent();
-    console.log(this.student.knowledgeParallelogram);
   }
 
   updateScore = points => {
@@ -57,8 +63,8 @@ class App extends Component {
     }, 2000);
   };
 
+
   render() {
-    const { classes } = this.props;
     let displayed;
     if (!this.state.hasBeenWelcomed) {
       displayed = (
@@ -97,7 +103,9 @@ class App extends Component {
             this.setState({ isRegistered: true });
           }}
         />
-      );
+      )
+    } else if (this.state.view === 'history') {
+      displayed = <SessionHistory history={this.state.history} />
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
@@ -125,6 +133,7 @@ class App extends Component {
               hasChosenActivity: "test"
             })
           }
+          history={this.state.history}
         />
       );
     } else if (this.state.hasChosenActivityType) {
@@ -133,6 +142,16 @@ class App extends Component {
           <TrainWithExamples
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
+            }
+            updateHistory={(images) =>
+              this.setState(prevState => ({
+                history: [...prevState.history,
+                  {
+                    activityType: 'example',
+                    images
+                  }
+                ]
+              }))
             }
             updateScore={() => this.updateScore(-10)}
             student={this.student}
@@ -145,6 +164,16 @@ class App extends Component {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
+            updateHistory={(images) =>
+              this.setState(prevState => ({
+                history: [...prevState.history,
+                  {
+                    activityType: 'exercise',
+                    images: [images]
+                  }
+                ]
+              }))
+            }
             updateScore={() => this.updateScore(-30)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -155,6 +184,16 @@ class App extends Component {
           <TrainWithLesson
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
+            }
+            updateHistory={() =>
+              this.setState(prevState => ({
+                history: [...prevState.history,
+                  {
+                    activityType: 'lesson',
+                    images: []
+                  }
+                ]
+              }))
             }
             updateScore={() => this.updateScore(-50)}
             student={this.student}
@@ -171,7 +210,8 @@ class App extends Component {
                 hasChosenActivityType: false,
                 hasChosenActivity: "",
                 score: 200,
-                scoreDisplayed: "200"
+                scoreDisplayed: "200",
+                history: []
               });
             }}
             updateScore={() => this.updateScore(50)}
@@ -183,8 +223,9 @@ class App extends Component {
       }
     }
     return (
-      <div className={classes.root}>
-        <AppBarMenu
+      <MuiThemeProvider theme={theme}>
+        <AppDrawer
+          hasBeenWelcomed={this.state.hasBeenWelcomed}
           isRegistered={this.state.isRegistered}
           onLeaveSession={() => {
             this.student = new QuickLearnerStudent();
@@ -193,7 +234,8 @@ class App extends Component {
               hasChosenActivityType: false,
               hasChosenActivity: "",
               score: 200,
-              scoreDisplayed: "200"
+              scoreDisplayed: "200",
+              history: []
             });
           }}
           onUnregister={() => {
@@ -206,19 +248,17 @@ class App extends Component {
               hasChosenActivityType: false,
               hasChosenActivity: "",
               score: 200,
-              scoreDisplayed: "200"
+              scoreDisplayed: "200",
+              history: []
             });
           }}
           scoreDisplayed={this.state.scoreDisplayed}
+          changeView={(view) => this.setState({ view })}
+          mainContent={displayed}
         />
-        <div>{displayed}</div>
-      </div>
-    );
+      </MuiThemeProvider >
+    )
   }
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles, { withTheme: true })(App);
+export default App

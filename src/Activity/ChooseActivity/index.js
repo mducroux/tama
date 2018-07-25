@@ -5,7 +5,8 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
-import TestConfirmationDialog from "./TestConfirmationDialog";
+import TestConfirmationDialog from './TestConfirmationDialog';
+import SessionTimeline from './SessionTimeline';
 
 const styles = theme => ({
   root: {
@@ -108,7 +109,12 @@ class ChooseActivity extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Grid container className={classes.root} justify="center">
+        <Grid container className={classes.root} justify='center'>
+          <Grid item sm={12}>
+            <SessionTimeline history={this.props.history} />
+          </Grid >
+        </Grid >
+        <Grid container className={classes.root} justify='center'>
           <Grid item sm={6}>
             <Grid container className={classes.root} justify="center">
               <Typography variant="display1" color="inherit">
@@ -193,7 +199,8 @@ ChooseActivity.propTypes = {
   onClickExample: PropTypes.func.isRequired,
   onClickExercise: PropTypes.func.isRequired,
   onClickLesson: PropTypes.func.isRequired,
-  onConfirmTestDialog: PropTypes.func.isRequired
-};
+  onConfirmTestDialog: PropTypes.func.isRequired,
+  history: PropTypes.array.isRequired
+}
 
 export default withStyles(styles)(ChooseActivity);
