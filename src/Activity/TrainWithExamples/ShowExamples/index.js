@@ -69,6 +69,7 @@ class ShowExamples extends React.Component {
       setTimeout(() => {
         if (this.state.indexExample + 1 === this.props.numberOfExamples) {
           this.props.updateScore()
+          this.props.updateHistory()
           this.props.getBackToMenu()
         } else {
           this.setState({thinking: false, indexExample: this.state.indexExample + 1})
@@ -112,6 +113,7 @@ ShowExamples.propTypes = {
   parallelograms: PropTypes.array.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
+  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired
 }
 

@@ -27,6 +27,7 @@ class ShowLesson extends React.Component {
     this.props.student.learnLesson(this.props.lesson.shapeFeatures)
     setTimeout(() => {
       this.props.updateScore()
+      this.props.updateHistory()
       this.props.getBackToMenu()
     }, 3000)
   }
@@ -61,6 +62,7 @@ ShowLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   lesson: PropTypes.object.isRequired,
   updateScore: PropTypes.func.isRequired,
+  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired
 }
 

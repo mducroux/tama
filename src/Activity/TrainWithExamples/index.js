@@ -16,10 +16,6 @@ class TrainWithExamples extends React.Component {
     this.numberOfExamples = 3
   }
 
-  componentWillUnmount = () => {
-    this.props.updateHistory(this.getSelectedParallelograms())
-  }
-
   handleClickExample = (index) => {
     const newExamples = this.state.examples
     newExamples[index] = !newExamples[index]
@@ -54,6 +50,7 @@ class TrainWithExamples extends React.Component {
           numberOfExamples={this.numberOfExamples}
           getBackToMenu={this.props.getBackToMenu}
           updateScore={this.props.updateScore}
+          updateHistory={() => this.props.updateHistory(this.getSelectedParallelograms())}
           student={this.props.student}
         />
       )
@@ -64,8 +61,8 @@ class TrainWithExamples extends React.Component {
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired,
-  updateHistory: PropTypes.func.isRequired
+  updateHistory: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired
 }
 
 export default TrainWithExamples

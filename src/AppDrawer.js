@@ -91,12 +91,18 @@ const styles = theme => ({
     marginLeft: 0
   },
   welcome: {
-    flex: 1
+    flex: 1,
+    marginLeft: theme.spacing.unit * 2
   },
   scoreDisplayed: {
     flex: 1,
     textAlign: 'right',
-    marginRight: 10
+    marginRight: theme.spacing.unit * 2
+  },
+  avatar: {
+    flex: 1,
+    textAlign: 'right',
+    marginRight: theme.spacing.unit * 2
   }
 })
 
@@ -218,6 +224,7 @@ class AppDrawer extends React.Component {
                     aria-haspopup="true"
                     onClick={this.handleMenu}
                     color="inherit"
+                    className={classes.avatar}
                   >
                     <img src='images/virtual_student/student_avatar.png' alt='student_avatar' width='40px' height='40px' />
                   </IconButton>

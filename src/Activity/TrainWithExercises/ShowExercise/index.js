@@ -25,6 +25,7 @@ class ShowExercise extends React.Component {
     this.props.student.learn(this.state.studentAnswer ? userAnswer : !userAnswer, this.props.parallelogram.shapeFeatures)
     setTimeout(() => {
       this.props.updateScore()
+      this.props.updateHistory()
       this.props.getBackToMenu()
     }, 2000)
   }
@@ -99,6 +100,7 @@ ShowExercise.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   parallelogram: PropTypes.object.isRequired,
   updateScore: PropTypes.func.isRequired,
+  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired
 }
 
