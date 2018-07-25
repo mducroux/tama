@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepButton from '@material-ui/core/StepButton'
+import StepLabel from '@material-ui/core/StepLabel'
 import PropTypes from 'prop-types'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import StarIcon from '@material-ui/icons/Stars'
@@ -22,40 +23,35 @@ function ThreeDotsIcon(props) {
   );
 }
 
-class SessionTimeline extends React.Component {
-  render() {
-    const { classes } = this.props
-    const steps = this.props.history.map(elem => elem.activityType.charAt(0).toUpperCase() + elem.activityType.slice(1))
-    return (
-      <div>
-        <Stepper className={classes.stepper} alternativeLabel nonLinear activeStep={steps.length}>
-          <Step>
-            <StepButton disabled={true} icon={<SchoolIcon color='primary' />}>
-              Début du jeu
-            </StepButton>
+const SessionTimeline = ({ history, classes }) => (
+  const steps = history.map(elem => elem.activityType.charAt(0).toUpperCase() + elem.activityType.slice(1))
+  <div>
+    <Stepper className={classes.stepper} alternativeLabel nonLinear activeStep={steps.length}>
+      <Step>
+        <StepLabel icon={<SchoolIcon color='primary' />}>
+          Début du jeu
+        </StepLabel>
+      </Step>
+      {steps.map((label, index) => {
+        return (
+          <Step key={index}>
+            <StepLabel icon={'' + (index + 1)}>
+              {label}
+            </StepLabel >
           </Step>
-          {steps.map((label, index) => {
-            return (
-              <Step key={label}>
-                <StepButton disabled={true}>
-                  {label}
-                </StepButton>
-              </Step>
-            )
-          })}
-          <Step>
-            <StepButton disabled={true} icon={<ThreeDotsIcon color='disabled' />} />
-          </Step>
-          <Step>
-            <StepButton disabled={true} icon={<StarIcon color='secondary' />}>
-              Test
-            </StepButton>
-          </Step>
-        </Stepper>
-      </div>
-    )
-  }
-}
+        )
+      })}
+      <Step>
+        <StepLabel icon={<ThreeDotsIcon color='disabled' />} />
+      </Step>
+      <Step>
+        <StepLabel icon={<StarIcon color='secondary' />}>
+          Test
+        </StepLabel>
+      </Step>
+    </Stepper>
+  </div>
+)
 
 SessionTimeline.propTypes = {
   classes: PropTypes.object.isRequired,
