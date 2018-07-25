@@ -1,0 +1,8 @@
+{
+    "appDrawer.welcome": "Bienvenue à Tama !",
+    "appDrawer.welcomeCustomized": "Bienvenue {username} !",
+    "appDrawer.training":  "Entraînement",
+    "appDrawer.history":  "Historique",
+    "appDrawer.score":  "Score",
+    "appDrawer.unregister":  "Se désinscrire"
+}

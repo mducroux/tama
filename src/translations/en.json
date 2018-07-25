@@ -1,0 +1,8 @@
+{
+    "appDrawer.welcome": "Welcome to Tama !",
+    "appDrawer.welcomeCustomized": "Welcome {username} !",
+    "appDrawer.training":  "Training",
+    "appDrawer.history":  "History",
+    "appDrawer.score":  "Score",
+    "appDrawer.unregister":  "Unregister"
+}
