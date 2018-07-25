@@ -204,7 +204,7 @@ class AppDrawer extends React.Component {
                 </IconButton>
               )}
               <Typography variant="title" color="inherit" className={classes.welcome}>
-                {!this.props.isRegistered ? 'Bienvenue à Tama !' : 'Bienvenue ' + localStorage.getItem('username') + ' !'}
+                {!this.props.isRegistered ? 'Bienvenue à Tama !' : `Bienvenue ${  localStorage.getItem('username')  } !`}
               </Typography>
               {this.props.hasBeenWelcomed && this.props.isRegistered && (
                 <Typography variant="title" color="inherit" className={classes.scoreDisplayed}>
@@ -235,7 +235,7 @@ class AppDrawer extends React.Component {
                     open={openAnchorEl}
                     onClose={this.handleClose}
                   >
-                    <MenuItem onClick={this.handleLogout}>{"Quitter l'entraînement"}</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>Quitter l'entraînement</MenuItem>
                   </Menu>
                 </div>
               )}

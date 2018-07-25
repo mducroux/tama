@@ -12,21 +12,19 @@ const styles = theme => ({
 })
 
 class SessionTimeline extends React.Component {
-  render () {
+  render() {
     const { classes } = this.props
-    const steps = this.props.history.map(elem => elem.activityType.charAt(0).toUpperCase() + elem.activityType.slice(1))
+    const steps = this.props.history ? this.props.history.map(elem => elem.activityType.charAt(0).toUpperCase() + elem.activityType.slice(1)) : []
     return (
       <div>
         <Stepper className={classes.stepper} alternativeLabel nonLinear activeStep={steps.length - 1}>
-          {steps.map((label, index) => {
-            return (
-              <Step key={label}>
-                <StepButton disabled={true}>
-                  {label}
-                </StepButton>
-              </Step>
-            )
-          })}
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepButton disabled>
+                {label}
+              </StepButton>
+            </Step>
+          ))}
         </Stepper>
       </div>
     )
