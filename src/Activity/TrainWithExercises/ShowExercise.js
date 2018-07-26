@@ -1,5 +1,6 @@
 import React from "react";
 
+import { FormattedMessage } from 'react-intl';
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -62,9 +63,9 @@ class ShowExercise extends React.Component {
       bubbleText = this.props.student.thinkingAboutExercice;
     } else if (this.state.learning === true) {
       if (this.state.userAnswer) {
-        bubbleText = this.props.student.hasRightAnswerExercice;
+        bubbleText = this.props.student.hasRightAnswerExercise;
       } else {
-        bubbleText = this.props.student.hasFalseAnswerExercice;
+        bubbleText = this.props.student.hasFalseAnswerExercise;
       }
     } else if (this.state.studentAnswer) {
       bubbleText = this.props.student.givePositiveAnswer;
@@ -96,7 +97,8 @@ class ShowExercise extends React.Component {
                       color="primary"
                       onClick={() => this.handleClick(true)}
                     >
-                      Vrai
+                      <FormattedMessage id="showExercise.true"
+                        defaultMessage="True" />
                     </Button>
                   </Grid>
                   <Grid item>
@@ -105,7 +107,8 @@ class ShowExercise extends React.Component {
                       color="primary"
                       onClick={() => this.handleClick(false)}
                     >
-                      Faux
+                      <FormattedMessage id="showExercise.false"
+                        defaultMessage="False" />
                     </Button>
                   </Grid>
                 </Grid>

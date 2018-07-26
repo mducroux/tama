@@ -1,5 +1,6 @@
 import React from "react";
 
+import { FormattedMessage } from 'react-intl';
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -14,22 +15,26 @@ const TestConfirmationDialog = ({
   onCloseTestDialog
 }) => (
   <Dialog open={openTestDialog} onClose={onCloseTestDialog}>
-    <DialogTitle>Passer le test</DialogTitle>
+    <DialogTitle>
+      <FormattedMessage id="testConfirmationDialog.takeTheTest"
+        defaultMessage="Take the test" />
+    </DialogTitle>
     <DialogContent>
       <DialogContentText>
-        {
-          "5 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, tu gagnes 50 points. Une fois le test complété, le jeu sera fini et tu ne pourras plus revenir à l'entraînement. Es-tu sûr de vouloir continuer ? "
-        }
+        <FormattedMessage id="testConfirmationDialog.statement"
+          defaultMessage="Are you sure you want to continue?" />
       </DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button onClick={onConfirmTestDialog} color="primary">
-        {"Oui je veux passer le test"}
+        <FormattedMessage id="testConfirmationDialog.continue"
+          defaultMessage="Yes, I want to take the test" />
       </Button>
     </DialogActions>
     <DialogActions>
       <Button onClick={onCloseTestDialog} color="primary">
-        {"Non je veux revenir à l'entraînement"}
+        <FormattedMessage id="testConfirmationDialog.goBack"
+          defaultMessage="No I want to go back to training" />
       </Button>
     </DialogActions>
   </Dialog>

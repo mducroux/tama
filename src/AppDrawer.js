@@ -121,14 +121,14 @@ class AppDrawer extends React.Component {
             <SchoolIcon />
           </ListItemIcon>
           <ListItemText primary={<FormattedMessage id="appDrawer.training"
-            description="Training tab" />} />
+            defaultMessage="Training" />} />
         </ListItem>
         <ListItem button onClick={() => this.props.changeView("history")}>
           <ListItemIcon>
             <HistoryIcon />
           </ListItemIcon>
           <ListItemText primary={<FormattedMessage id="appDrawer.history"
-            description="History tab" />} />
+            defaultMessage="History" />} />
         </ListItem>
       </div>
     );
@@ -219,10 +219,9 @@ class AppDrawer extends React.Component {
               >
                 {!this.props.isRegistered
                   ? <FormattedMessage id="appDrawer.welcome"
-                    description="Welcome header"
-                    values={{ username: localStorage.getItem("username") }} />
+                    defaultMessage="Welcome to Tama !" />
                   : <FormattedMessage id="appDrawer.welcomeCustomized"
-                    description="Welcome header"
+                    defaultMessage="Welcome {username}"
                     values={{ username: localStorage.getItem("username") }} />}
               </Typography>
               {this.props.hasBeenWelcomed &&
@@ -233,7 +232,7 @@ class AppDrawer extends React.Component {
                     className={classes.scoreDisplayed}
                   >
                     <FormattedMessage id="appDrawer.score"
-                      description="User score" /> {this.props.scoreDisplayed}
+                      defaultMessage="Score:" /> {this.props.scoreDisplayed}
                   </Typography>
                 )}
               {this.props.hasBeenWelcomed &&
@@ -269,11 +268,11 @@ class AppDrawer extends React.Component {
                     >
                       <MenuItem onClick={this.handleLeaveSession}>
                         <FormattedMessage id="appDrawer.leaveSession"
-                          description="Leave session" />
+                          defaultMessage="Leave session" />
                       </MenuItem>
                       <MenuItem onClick={this.handleUnregistrer}>
                         <FormattedMessage id="appDrawer.unregister"
-                          description="Unregister" />
+                          defaultMessage="Unregister" />
                       </MenuItem>
                     </Menu>
                   </div>

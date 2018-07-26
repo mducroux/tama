@@ -1,4 +1,6 @@
 import React from "react";
+
+import { FormattedMessage } from 'react-intl';
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Gallery from "react-grid-gallery";
@@ -40,24 +42,25 @@ const ChooseExercise = ({
   onSelectExercise,
   classes
 }) => (
-  <div>
-    <div className={classes.root}>
-      <IconButton
-        className={classes.button}
-        onClick={onNavigationBackToMenu}
-        color="inherit"
-      >
-        <BackNavigation />
-      </IconButton>
-      <Typography variant="headline" className={classes.title}>
-        {"Choisit une forme pour l'exercice"}
-      </Typography>
+    <div>
+      <div className={classes.root}>
+        <IconButton
+          className={classes.button}
+          onClick={onNavigationBackToMenu}
+          color="inherit"
+        >
+          <BackNavigation />
+        </IconButton>
+        <Typography variant="headline" className={classes.title}>
+          <FormattedMessage id="chooseExercise.statement"
+            defaultMessage="Choose a shape for the exercise" />
+        </Typography>
+      </div>
+      <div className={classes.gallery}>
+        <Gallery images={parallelogramData} onClickThumbnail={onSelectExercise} />
+      </div>
     </div>
-    <div className={classes.gallery}>
-      <Gallery images={parallelogramData} onClickThumbnail={onSelectExercise} />
-    </div>
-  </div>
-);
+  );
 
 ChooseExercise.propTypes = {
   classes: PropTypes.object.isRequired,

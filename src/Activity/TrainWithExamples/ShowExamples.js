@@ -1,5 +1,6 @@
 import React from "react";
 
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -32,7 +33,11 @@ class ShowExamples extends React.Component {
     if (this.state.thinking) {
       return (
         <Typography variant="title">
-          {this.state.userAnswer ? "OUI" : "NON"}
+          {this.state.userAnswer
+            ? <FormattedMessage id="showExamples.yes"
+              defaultMessage="Yes" />
+            : <FormattedMessage id="showExamples.no"
+              defaultMessage="No" />}
         </Typography>
       );
     }
@@ -45,7 +50,8 @@ class ShowExamples extends React.Component {
               color="primary"
               onClick={() => this.handleClick(true)}
             >
-              Oui
+              <FormattedMessage id="showExamples.yes"
+                defaultMessage="Yes" />
             </Button>
           </Grid>
           <Grid item>
@@ -54,7 +60,8 @@ class ShowExamples extends React.Component {
               color="primary"
               onClick={() => this.handleClick(false)}
             >
-              Non
+              <FormattedMessage id="showExamples.no"
+                defaultMessage="No" />
             </Button>
           </Grid>
         </Grid>
@@ -102,7 +109,9 @@ class ShowExamples extends React.Component {
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          Exemple : {this.state.indexExample + 1} / 3
+          <FormattedMessage id="showExamples.indexExample"
+            defaultMessage="Example:" />
+          {this.state.indexExample + 1} / 3
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <img
