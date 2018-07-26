@@ -81,7 +81,6 @@
 	"testResult.description": "Ton élève a obtenu",
 	"testResult.finalScore": "Ton score final : {score} points",
 	"testResult.startAgain": "Recommencer une partie",
-	"testShowQuestions.isItPara": "",
 	"testShowQuestions.nextQuestion": "Question suivante",
 	"testShowQuestions.question": "Question : {indexQuestion} / {numberOfQuestions} : Est-ce un parallélogramme ?",
 	"testShowQuestions.seeResult": "Voir le résultat",
