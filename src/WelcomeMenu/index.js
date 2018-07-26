@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
@@ -33,6 +35,11 @@ const WelcomeMenu = ({ classes, onClickStart }) => (
         height="200"
         alt="virtual_student"
       />
+    </Grid>
+    <Grid container justify="center" className={classes.root}>
+      <Typography className={classes.title} variant="subheading" color="inherit">
+        {"Prénom de l'élève :"}
+      </Typography>
     </Grid>
     <Grid container justify="center" className={classes.root}>
       <Button variant="contained" color="primary" onClick={onClickStart}>
