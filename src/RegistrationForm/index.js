@@ -221,7 +221,7 @@ class RegistrationForm extends React.Component {
                 <div className={classes.group}>
                   <FormLabel component="legend">
                     <FormattedMessage id="registrationForm.knowledgeParallelograms"
-                      defaultMessage="My knowledge of parallelograms:"/>
+                      defaultMessage="My knowledge of parallelograms:" />
                   </FormLabel>
                   <RadioGroup
                     name="knowledge"
@@ -233,25 +233,25 @@ class RegistrationForm extends React.Component {
                       value="no"
                       control={<Radio />}
                       label={<FormattedMessage id="registrationForm.knowledgeParallelogramsNo"
-                              defaultMessage="No"/>}
+                        defaultMessage="No" />}
                     />
                     <FormControlLabel
                       value="poor"
                       control={<Radio />}
                       label={<FormattedMessage id="registrationForm.knowledgeParallelogramsPoor"
-                              defaultMessage="Poor"/>}
+                        defaultMessage="Poor" />}
                     />
                     <FormControlLabel
                       value="average"
                       control={<Radio />}
                       label={<FormattedMessage id="registrationForm.knowledgeParallelogramsAverage"
-                              defaultMessage="Average"/>}
+                        defaultMessage="Average" />}
                     />
                     <FormControlLabel
                       value="solid"
                       control={<Radio />}
                       label={<FormattedMessage id="registrationForm.knowledgeParallelogramsSolid"
-                              defaultMessage="Solid"/>}
+                        defaultMessage="Solid" />}
                     />
                   </RadioGroup>
                 </div>

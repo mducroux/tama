@@ -75,19 +75,19 @@ const images = [
   {
     url: "images/example_512x512.png",
     title: <FormattedMessage id="chooseActivity.showExample"
-            defaultMessage="Show examples" />,
+      defaultMessage="Show examples" />,
     learningCost: "10"
   },
   {
     url: "images/exercise_512x512.png",
     title: <FormattedMessage id="chooseActivity.giveExercise"
-            defaultMessage="Give an exercise" />,
+      defaultMessage="Give an exercise" />,
     learningCost: "30"
   },
   {
     url: "images/lesson_512x512.png",
     title: <FormattedMessage id="chooseActivity.giveLesson"
-            defaultMessage="Give a lesson" />,
+      defaultMessage="Give a lesson" />,
     learningCost: "50"
   }
 ];
@@ -123,8 +123,8 @@ class ChooseActivity extends React.Component {
           <Grid item sm={6}>
             <Grid container className={classes.root} justify="center">
               <Typography variant="display1" color="inherit">
-                  <FormattedMessage id="chooseActivity.chooseActivity"
-                    defaultMessage="Choose an activity" />
+                <FormattedMessage id="chooseActivity.chooseActivity"
+                  defaultMessage="Choose an activity" />
               </Typography>
             </Grid>
           </Grid>
@@ -183,8 +183,8 @@ class ChooseActivity extends React.Component {
                 <span className={classes.imageBackdrop} />
                 <span className={classes.textButton}>
                   <Typography component="span" variant="title" color="inherit">
-                    <FormattedMessage id="chooseActivity.passTest"
-                      defaultMessage="Take test" />
+                    <FormattedMessage id="chooseActivity.takeTest"
+                      defaultMessage="Take the test" />
                   </Typography>
                 </span>
               </ButtonBase>

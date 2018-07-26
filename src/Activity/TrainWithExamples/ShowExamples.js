@@ -33,11 +33,11 @@ class ShowExamples extends React.Component {
     if (this.state.thinking) {
       return (
         <Typography variant="title">
-          {this.state.userAnswer
-            ? <FormattedMessage id="showExamples.yes"
-              defaultMessage="Yes" />
-            : <FormattedMessage id="showExamples.no"
-              defaultMessage="No" />}
+          {this.state.userAnswer ? (
+            <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
+          ) : (
+            <FormattedMessage id="showExamples.no" defaultMessage="No" />
+          )}
         </Typography>
       );
     }
@@ -50,8 +50,7 @@ class ShowExamples extends React.Component {
               color="primary"
               onClick={() => this.handleClick(true)}
             >
-              <FormattedMessage id="showExamples.yes"
-                defaultMessage="Yes" />
+              <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
             </Button>
           </Grid>
           <Grid item>
@@ -60,8 +59,7 @@ class ShowExamples extends React.Component {
               color="primary"
               onClick={() => this.handleClick(false)}
             >
-              <FormattedMessage id="showExamples.no"
-                defaultMessage="No" />
+              <FormattedMessage id="showExamples.no" defaultMessage="No" />
             </Button>
           </Grid>
         </Grid>
@@ -75,14 +73,11 @@ class ShowExamples extends React.Component {
       userAnswer,
       this.props.parallelograms[this.state.indexExample].shapeFeatures
     );
-    this.props.recordExampleActivity(
-      userAnswer,
-      this.state.indexExample
-    );
+    this.props.recordExampleActivity(userAnswer, this.state.indexExample);
     setTimeout(() => {
       if (this.state.indexExample + 1 === this.props.numberOfExamples) {
         this.props.updateScore();
-        this.props.updateHistory()
+        this.props.updateHistory();
         this.props.getBackToMenu();
       } else {
         this.setState({
@@ -109,9 +104,11 @@ class ShowExamples extends React.Component {
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <FormattedMessage id="showExamples.indexExample"
-            defaultMessage="Example:" />
-          {this.state.indexExample + 1} / 3
+          <FormattedMessage
+            id="showExamples.indexExample"
+            defaultMessage="Example:"
+          />
+          {this.state.indexExample + 1} / {this.props.numberOfExamples}
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <img

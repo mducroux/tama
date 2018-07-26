@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -24,43 +24,38 @@ function ThreeDotsIcon(props) {
   );
 }
 
-const SessionTimeline = ({ history, classes }) => {
-  const steps = history.map(
-    elem =>
-      elem.activityType.charAt(0).toUpperCase() + elem.activityType.slice(1)
-  );
-  return (
-    <div>
-      <Stepper
-        className={classes.stepper}
-        alternativeLabel
-        nonLinear
-        activeStep={steps.length}
-      >
-        <Step>
-          <StepLabel icon={<SchoolIcon color="primary" />}>
-            <FormattedMessage id="sessionTimeline.startOfGame"
-              defaultMessage="Start of the game" />
-          </StepLabel>
+const SessionTimeline = ({ history, classes }) => (
+  <div>
+    <Stepper
+      className={classes.stepper}
+      alternativeLabel
+      nonLinear
+      activeStep={history.length}
+    >
+      <Step>
+        <StepLabel icon={<SchoolIcon color="primary" />}>
+          <FormattedMessage
+            id="sessionTimeline.startOfGame"
+            defaultMessage="Start of the game"
+          />
+        </StepLabel>
+      </Step>
+      {history.map((elem, index) => (
+        <Step key={index}>
+          <StepLabel icon={`${index + 1}`}>{elem.title}</StepLabel>
         </Step>
-        {steps.map((label, index) => (
-          <Step key={index}>
-            <StepLabel icon={`${index + 1}`}>{label}</StepLabel>
-          </Step>
-        ))}
-        <Step>
-          <StepLabel icon={<ThreeDotsIcon color="disabled" />} />
-        </Step>
-        <Step>
-          <StepLabel icon={<StarIcon color="secondary" />}>
-            <FormattedMessage id="sessionTimeline.test"
-              defaultMessage="Test" />
-          </StepLabel>
-        </Step>
-      </Stepper>
-    </div>
-  );
-};
+      ))}
+      <Step>
+        <StepLabel icon={<ThreeDotsIcon color="disabled" />} />
+      </Step>
+      <Step>
+        <StepLabel icon={<StarIcon color="secondary" />}>
+          <FormattedMessage id="sessionTimeline.test" defaultMessage="Test" />
+        </StepLabel>
+      </Step>
+    </Stepper>
+  </div>
+);
 
 SessionTimeline.propTypes = {
   classes: PropTypes.object.isRequired,

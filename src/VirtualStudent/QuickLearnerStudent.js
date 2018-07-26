@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 
 class QuickLearnerStudent {
   // At first he doesn't know what a parallelogram looks like
@@ -18,36 +18,66 @@ class QuickLearnerStudent {
     isGreen: 0,
     isBlue: 0
   };
-  thinkingAboutExample =
-    <FormattedMessage id="quickLearnerStudent.thinkingAboutExample"
-      defaultMessage="..." />;
-  questionExample =
-    <FormattedMessage id="quickLearnerStudent.questionExample"
-      defaultMessage="Is it a parallelogram?" />;
-  thinkingAboutExercice =
-    <FormattedMessage id="quickLearnerStudent.thinkingAboutExercise"
-      defaultMessage="..." />;
-  hasRightAnswerExercise =
-    <FormattedMessage id="quickLearnerStudent.hasRightAnswerExercise"
-      defaultMessage="Super!" />;
-  hasFalseAnswerExercise =
-    <FormattedMessage id="quickLearnerStudent.hasFalseAnswerExercise"
-      defaultMessage="Ohh!" />;
-  feedbackLessonAlreadyKnow =
-    <FormattedMessage id="quickLearnerStudent.feedbackLessonAlreadyKnow"
-      defaultMessage="I already know that" />;
-  feedbackLessonDidntKnow =
-    <FormattedMessage id="quickLearnerStudent.feedbackLessonDidntKnow"
-      defaultMessage="Oh I didn't know that" />;
-  thinkingAboutExam =
-    <FormattedMessage id="quickLearnerStudent.thinkingAboutExam"
-      defaultMessage="..." />;
-  givePositiveAnswer =
-    <FormattedMessage id="quickLearnerStudent.givePositiveAnswer"
-      defaultMessage="Mmm I think this is a parallelogram" />;
-  giveNegativeAnswer =
-    <FormattedMessage id="quickLearnerStudent.giveNegativeAnswer"
-      defaultMessage="I don't think this is a parallelogram" />;
+  thinkingAboutExample = (
+    <FormattedMessage
+      id="quickLearnerStudent.thinkingAboutExample"
+      defaultMessage="..."
+    />
+  );
+  questionExample = (
+    <FormattedMessage
+      id="quickLearnerStudent.questionExample"
+      defaultMessage="Is it a parallelogram?"
+    />
+  );
+  thinkingAboutExercice = (
+    <FormattedMessage
+      id="quickLearnerStudent.thinkingAboutExercise"
+      defaultMessage="..."
+    />
+  );
+  hasRightAnswerExercise = (
+    <FormattedMessage
+      id="quickLearnerStudent.hasRightAnswerExercise"
+      defaultMessage="Super!"
+    />
+  );
+  hasFalseAnswerExercise = (
+    <FormattedMessage
+      id="quickLearnerStudent.hasFalseAnswerExercise"
+      defaultMessage="Ohh!"
+    />
+  );
+  feedbackLessonAlreadyKnow = (
+    <FormattedMessage
+      id="quickLearnerStudent.feedbackLessonAlreadyKnow"
+      defaultMessage="I already know that"
+    />
+  );
+  feedbackLessonDidntKnow = (
+    <FormattedMessage
+      id="quickLearnerStudent.feedbackLessonDidntKnow"
+      defaultMessage="Oh I didn't know that"
+    />
+  );
+  thinkingAboutExam = (
+    <FormattedMessage
+      id="quickLearnerStudent.thinkingAboutExam"
+      defaultMessage="..."
+    />
+  );
+  givePositiveAnswer = (
+    <FormattedMessage
+      id="quickLearnerStudent.givePositiveAnswer"
+      defaultMessage="Mmm I think this is a parallelogram"
+    />
+  );
+  giveNegativeAnswer = (
+    <FormattedMessage
+      id="quickLearnerStudent.giveNegativeAnswer"
+      defaultMessage="I don't think this is a parallelogram"
+    />
+  );
 
   // All necessary features should correspond to identify the shape as a parallelogram
   answerParallelogram(shapeFeatures) {

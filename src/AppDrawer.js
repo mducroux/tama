@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -120,15 +120,27 @@ class AppDrawer extends React.Component {
           <ListItemIcon>
             <SchoolIcon />
           </ListItemIcon>
-          <ListItemText primary={<FormattedMessage id="appDrawer.training"
-            defaultMessage="Training" />} />
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.training"
+                defaultMessage="Training"
+              />
+            }
+          />
         </ListItem>
         <ListItem button onClick={() => this.props.changeView("history")}>
           <ListItemIcon>
             <HistoryIcon />
           </ListItemIcon>
-          <ListItemText primary={<FormattedMessage id="appDrawer.history"
-            defaultMessage="History" />} />
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.history"
+                defaultMessage="History"
+              />
+            }
+          />
         </ListItem>
       </div>
     );
@@ -217,12 +229,18 @@ class AppDrawer extends React.Component {
                 color="inherit"
                 className={classes.welcome}
               >
-                {!this.props.isRegistered
-                  ? <FormattedMessage id="appDrawer.welcome"
-                    defaultMessage="Welcome to Tama !" />
-                  : <FormattedMessage id="appDrawer.welcomeCustomized"
-                    defaultMessage="Welcome {username}"
-                    values={{ username: localStorage.getItem("username") }} />}
+                {!this.props.isRegistered ? (
+                  <FormattedMessage
+                    id="appDrawer.welcome"
+                    defaultMessage="Welcome to Tama !"
+                  />
+                ) : (
+                    <FormattedMessage
+                      id="appDrawer.welcomeCustomized"
+                      defaultMessage="Welcome {username} !"
+                      values={{ username: localStorage.getItem("username") }}
+                    />
+                  )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
@@ -231,8 +249,11 @@ class AppDrawer extends React.Component {
                     color="inherit"
                     className={classes.scoreDisplayed}
                   >
-                    <FormattedMessage id="appDrawer.score"
-                      defaultMessage="Score:" /> {this.props.scoreDisplayed}
+                    <FormattedMessage
+                      id="appDrawer.score"
+                      defaultMessage="Score:"
+                    />{" "}
+                    {this.props.scoreDisplayed}
                   </Typography>
                 )}
               {this.props.hasBeenWelcomed &&
@@ -267,12 +288,16 @@ class AppDrawer extends React.Component {
                       onClose={this.handleClose}
                     >
                       <MenuItem onClick={this.handleLeaveSession}>
-                        <FormattedMessage id="appDrawer.leaveSession"
-                          defaultMessage="Leave session" />
+                        <FormattedMessage
+                          id="appDrawer.leaveSession"
+                          defaultMessage="Leave session"
+                        />
                       </MenuItem>
                       <MenuItem onClick={this.handleUnregistrer}>
-                        <FormattedMessage id="appDrawer.unregister"
-                          defaultMessage="Unregister" />
+                        <FormattedMessage
+                          id="appDrawer.unregister"
+                          defaultMessage="Unregister"
+                        />
                       </MenuItem>
                     </Menu>
                   </div>

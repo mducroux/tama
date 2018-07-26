@@ -14,31 +14,31 @@ const TestConfirmationDialog = ({
   openTestDialog,
   onCloseTestDialog
 }) => (
-  <Dialog open={openTestDialog} onClose={onCloseTestDialog}>
-    <DialogTitle>
-      <FormattedMessage id="testConfirmationDialog.takeTheTest"
-        defaultMessage="Take the test" />
-    </DialogTitle>
-    <DialogContent>
-      <DialogContentText>
-        <FormattedMessage id="testConfirmationDialog.statement"
-          defaultMessage="Are you sure you want to continue?" />
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={onConfirmTestDialog} color="primary">
-        <FormattedMessage id="testConfirmationDialog.continue"
-          defaultMessage="Yes, I want to take the test" />
-      </Button>
-    </DialogActions>
-    <DialogActions>
-      <Button onClick={onCloseTestDialog} color="primary">
-        <FormattedMessage id="testConfirmationDialog.goBack"
-          defaultMessage="No I want to go back to training" />
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+    <Dialog open={openTestDialog} onClose={onCloseTestDialog}>
+      <DialogTitle>
+        <FormattedMessage id="testConfirmationDialog.takeTheTest"
+          defaultMessage="Take the test" />
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          <FormattedMessage id="testConfirmationDialog.statement"
+            defaultMessage="Are you sure you want to continue?" />
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onConfirmTestDialog} color="primary">
+          <FormattedMessage id="testConfirmationDialog.continue"
+            defaultMessage="Yes, I want to take the test" />
+        </Button>
+      </DialogActions>
+      <DialogActions>
+        <Button onClick={onCloseTestDialog} color="primary">
+          <FormattedMessage id="testConfirmationDialog.goBack"
+            defaultMessage="No, I want to go back to training" />
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 
 TestConfirmationDialog.propTypes = {
   onConfirmTestDialog: PropTypes.func.isRequired,

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import blue from '@material-ui/core/colors/blue'
-import deepOrange from '@material-ui/core/colors/deepOrange'
+import { FormattedMessage } from "react-intl";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import blue from "@material-ui/core/colors/blue";
+import deepOrange from "@material-ui/core/colors/deepOrange";
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -14,23 +14,22 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
 import WelcomeMenu from "./WelcomeMenu";
 import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
-import AppDrawer from './AppDrawer'
-import SessionHistory from './SessionHistory'
-
+import AppDrawer from "./AppDrawer";
+import SessionHistory from "./SessionHistory";
 
 const theme = createMuiTheme({
   palette: {
     primary: blue,
     secondary: deepOrange,
     background: {
-      paper: '#fff',
-      default: '#f1f1f1'
+      paper: "#fff",
+      default: "#f1f1f1"
     }
   },
   status: {
-    danger: 'red'
+    danger: "red"
   }
-})
+});
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +39,7 @@ class App extends Component {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      view: 'training',
+      view: "training",
       score: 200,
       scoreDisplayed: "200",
       history: []
@@ -62,7 +61,6 @@ class App extends Component {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
-
 
   render() {
     let displayed;
@@ -103,9 +101,9 @@ class App extends Component {
             this.setState({ isRegistered: true });
           }}
         />
-      )
-    } else if (this.state.view === 'history') {
-      displayed = <SessionHistory history={this.state.history} />
+      );
+    } else if (this.state.view === "history") {
+      displayed = <SessionHistory history={this.state.history} />;
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
@@ -143,12 +141,19 @@ class App extends Component {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={(images) =>
+            updateHistory={images =>
               this.setState(prevState => ({
-                history: [...prevState.history,
+                history: [
+                  ...prevState.history,
                   {
-                    activityType: 'example',
-                    images
+                    activityType: "example",
+                    images,
+                    title: (
+                      <FormattedMessage
+                        id="app.example"
+                        defaultMessage="Example"
+                      />
+                    )
                   }
                 ]
               }))
@@ -164,12 +169,19 @@ class App extends Component {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={(images) =>
+            updateHistory={images =>
               this.setState(prevState => ({
-                history: [...prevState.history,
+                history: [
+                  ...prevState.history,
                   {
-                    activityType: 'exercise',
-                    images: [images]
+                    activityType: "exercise",
+                    images: [images],
+                    title: (
+                      <FormattedMessage
+                        id="app.exercise"
+                        defaultMessage="Exercise"
+                      />
+                    )
                   }
                 ]
               }))
@@ -187,10 +199,17 @@ class App extends Component {
             }
             updateHistory={() =>
               this.setState(prevState => ({
-                history: [...prevState.history,
+                history: [
+                  ...prevState.history,
                   {
-                    activityType: 'lesson',
-                    images: []
+                    activityType: "lesson",
+                    images: [],
+                    title: (
+                      <FormattedMessage
+                        id="app.lesson"
+                        defaultMessage="Lesson"
+                      />
+                    )
                   }
                 ]
               }))
@@ -253,12 +272,12 @@ class App extends Component {
             });
           }}
           scoreDisplayed={this.state.scoreDisplayed}
-          changeView={(view) => this.setState({ view })}
+          changeView={view => this.setState({ view })}
           mainContent={displayed}
         />
-      </MuiThemeProvider >
-    )
+      </MuiThemeProvider>
+    );
   }
 }
 
-export default App
+export default App;

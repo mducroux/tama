@@ -6,6 +6,62 @@
         <name></name>
         <children>
             <folder_node>
+                <name>app</name>
+                <children>
+                    <concept_node>
+                        <name>example</name>
+                        <definition_loaded>true</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text>Example</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>exercise</name>
+                        <definition_loaded>true</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text>Exercise</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>lesson</name>
+                        <definition_loaded>true</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text>Lesson</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
                 <name>appDrawer</name>
                 <children>
                     <concept_node>
@@ -184,11 +240,11 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>passTest</name>
+                        <name>showExample</name>
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Take test</default_text>
+                        <default_text>Show examples</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -201,11 +257,11 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>showExample</name>
+                        <name>takeTest</name>
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Show examples</default_text>
+                        <default_text>Take test</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1426,23 +1482,6 @@
             <folder_node>
                 <name>testShowQuestions</name>
                 <children>
-                    <concept_node>
-                        <name>isItPara</name>
-                        <definition_loaded>true</definition_loaded>
-                        <description></description>
-                        <comment></comment>
-                        <default_text>: Is it a parallelogram?</default_text>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>false</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>false</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
                     <concept_node>
                         <name>nextQuestion</name>
                         <definition_loaded>true</definition_loaded>

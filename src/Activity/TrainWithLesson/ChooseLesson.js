@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import BackNavigation from "@material-ui/icons/ArrowBack";
@@ -47,8 +47,10 @@ class TrainWithLesson extends React.Component {
             <BackNavigation />
           </IconButton>
           <Typography variant="headline" className={classes.title}>
-            <FormattedMessage id="chooseLesson.statement"
-              defaultMessage="Choose a lesson to give" />
+            <FormattedMessage
+              id="chooseLesson.statement"
+              defaultMessage="Choose a lesson to give"
+            />
           </Typography>
         </div>
         <div>

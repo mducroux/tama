@@ -1,7 +1,7 @@
 import React from "react";
 
 import ReactDOM from "react-dom";
-import {IntlProvider, addLocaleData} from "react-intl";
+import { IntlProvider, addLocaleData } from "react-intl";
 import localeEn from 'react-intl/locale-data/en';
 import localeFr from 'react-intl/locale-data/fr';
 
@@ -18,5 +18,7 @@ const messages = {
   'en': messagesEn
 };
 
-ReactDOM.render(<IntlProvider locale='en' messages={messages.en}><App /></IntlProvider>, document.getElementById("root"));
+const language = navigator.language.split(/[-_]/)[0];
+
+ReactDOM.render(<IntlProvider locale={language} messages={messages[language]}><App /></IntlProvider>, document.getElementById("root"));
 registerServiceWorker();

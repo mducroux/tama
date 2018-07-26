@@ -82,11 +82,14 @@ class ShowQuestions extends React.Component {
       <div>
         <Grid container justify="center" className={classes.root}>
           <Typography variant="title" className={classes.title}>
-            <FormattedMessage id="testShowQuestions.question"
-              defaultMessage="Question\u00A0" />
-            {this.state.indexQuestion + 1} / {this.props.numberOfQuestions}
-            <FormattedMessage id="testShowQuestions.isItPara"
-              defaultMessage=": Is it a parallelogram?" />
+            <FormattedMessage
+              id="testShowQuestions.question"
+              defaultMessage="Question: {indexQuestion} / {numberOfQuestions}: Is it a parallelogram?"
+              values={{
+                indexQuestion: this.state.indexQuestion + 1,
+                numberOfQuestions: this.props.numberOfQuestions
+              }}
+            />
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
@@ -108,11 +111,17 @@ class ShowQuestions extends React.Component {
               color="primary"
               size="large"
             >
-              {this.props.numberOfQuestions !== this.state.indexQuestion + 1
-                ? <FormattedMessage id="testShowQuestions.nextQuestion"
-                    defaultMessage="Next question" />
-                : <FormattedMessage id="testShowQuestions.seeResult"
-                    defaultMessage="See result" />}
+              {this.props.numberOfQuestions !== this.state.indexQuestion + 1 ? (
+                <FormattedMessage
+                  id="testShowQuestions.nextQuestion"
+                  defaultMessage="Next question"
+                />
+              ) : (
+                <FormattedMessage
+                  id="testShowQuestions.seeResult"
+                  defaultMessage="See result"
+                />
+              )}
             </Button>
           )}
         </Grid>

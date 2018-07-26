@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -45,10 +45,7 @@ class ShowExercise extends React.Component {
       this.props.parallelogram.shapeFeatures
     );
     setTimeout(() => {
-      this.props.recordExerciseActivity(
-        userAnswer,
-        this.state.studentAnswer
-      );
+      this.props.recordExerciseActivity(userAnswer, this.state.studentAnswer);
       this.props.updateScore();
       this.props.updateHistory();
       this.props.getBackToMenu();
@@ -97,8 +94,10 @@ class ShowExercise extends React.Component {
                       color="primary"
                       onClick={() => this.handleClick(true)}
                     >
-                      <FormattedMessage id="showExercise.true"
-                        defaultMessage="True" />
+                      <FormattedMessage
+                        id="showExercise.true"
+                        defaultMessage="True"
+                      />
                     </Button>
                   </Grid>
                   <Grid item>
@@ -107,8 +106,10 @@ class ShowExercise extends React.Component {
                       color="primary"
                       onClick={() => this.handleClick(false)}
                     >
-                      <FormattedMessage id="showExercise.false"
-                        defaultMessage="False" />
+                      <FormattedMessage
+                        id="showExercise.false"
+                        defaultMessage="False"
+                      />
                     </Button>
                   </Grid>
                 </Grid>
