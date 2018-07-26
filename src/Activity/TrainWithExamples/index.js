@@ -10,65 +10,43 @@ class TrainWithExamples extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      examples: Array(parallelogramData.length).fill(false),
-      hasChosenExamples: false
+      hasChosenExample: false
     };
-    this.numberOfExamples = 3;
     this.newActivityRef = this.props.sessionRef.child("activities").push();
   }
 
-  handleClickExample = index => {
-    const newExamples = this.state.examples;
-    newExamples[index] = !newExamples[index];
-    this.setState({ examples: newExamples });
+  handleSelectExample = index => {
+    this.setState({ hasChosenExample: true, index });
   };
 
-  getSelectedParallelograms = () => {
-    const parallelograms = [];
-    for (let ind = 0; ind < this.state.examples.length; ind++) {
-      if (this.state.examples[ind]) {
-        parallelograms.push(parallelogramData[ind]);
-      }
-    }
-    return parallelograms;
-  };
-
-  recordExampleActivity = (userAnswer, indexExample) => {
+  recordExampleActivity = (userAnswer) => {
     this.newActivityRef.child("/activity_type").set("example");
-    const newSubActivityRef = this.newActivityRef.child(
-      `/example_${indexExample}`
-    );
-    const parallelogramTitle = this.getSelectedParallelograms()[
-      indexExample
-    ].src.split("/");
-    newSubActivityRef
+    const parallelogramTitle = parallelogramData[this.state.index].src.split("/");
+    this.newActivityRef
       .child("/item")
       .set(parallelogramTitle[parallelogramTitle.length - 1]);
-    newSubActivityRef
+    this.newActivityRef
       .child("/knowledge")
       .set(this.props.student.knowledgeParallelogram);
-    newSubActivityRef.child("/user_answer").set(userAnswer);
+    this.newActivityRef.child("/user_answer").set(userAnswer);
   };
 
   render() {
-    if (!this.state.hasChosenExamples) {
+    if (!this.state.hasChosenExample) {
       return (
         <ChooseExamples
-          onSubmit={() => this.setState({ hasChosenExamples: true })}
-          onClickExample={this.handleClickExample}
-          numberOfExamples={this.numberOfExamples}
-          examples={this.state.examples}
+          onSelectExample={this.handleSelectExample}
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
       );
     }
+    const parallelogram = parallelogramData[this.state.index]
     return (
       <ShowExamples
-        parallelograms={this.getSelectedParallelograms()}
-        numberOfExamples={this.numberOfExamples}
+        parallelogram={parallelogram}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
-        updateHistory={() => this.props.updateHistory(this.getSelectedParallelograms())}
+        updateHistory={() => this.props.updateHistory(parallelogram)}
         student={this.props.student}
         recordExampleActivity={(userAnswer, indexExample) =>
           this.recordExampleActivity(userAnswer, indexExample)

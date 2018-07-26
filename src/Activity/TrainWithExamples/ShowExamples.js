@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -25,7 +25,7 @@ const styles = () => ({
 class ShowExamples extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { indexExample: 0, thinking: false, userAnswer: false };
+    this.state = { thinking: false, userAnswer: false };
   }
 
   choiceOrAnswer = () => {
@@ -37,76 +37,55 @@ class ShowExamples extends React.Component {
       );
     }
     return (
-      <div>
-        <Grid container justify="center" spacing={40}>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.handleClick(true)}
-            >
-              Oui
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.handleClick(false)}
-            >
-              Non
-            </Button>
-          </Grid>
+      <Grid container justify="center" spacing={40}>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.handleClick(true)}
+          >
+            Oui
+          </Button>
         </Grid>
-      </div>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.handleClick(false)}
+          >
+            Non
+          </Button>
+        </Grid>
+      </Grid>
     );
   };
 
   handleClick = userAnswer => {
     this.setState({ thinking: true, userAnswer });
-    this.props.student.learn(
-      userAnswer,
-      this.props.parallelograms[this.state.indexExample].shapeFeatures
-    );
-    this.props.recordExampleActivity(
-      userAnswer,
-      this.state.indexExample
-    );
+    const { student, parallelogram, recordExampleActivity } = this.props
+    student.learn(userAnswer, parallelogram.shapeFeatures);
+    recordExampleActivity(userAnswer);
     setTimeout(() => {
-      if (this.state.indexExample + 1 === this.props.numberOfExamples) {
-        this.props.updateScore();
-        this.props.updateHistory()
-        this.props.getBackToMenu();
-      } else {
-        this.setState({
-          thinking: false,
-          indexExample: this.state.indexExample + 1
-        });
-      }
+      this.props.updateScore();
+      this.props.updateHistory()
+      this.props.getBackToMenu();
+      this.setState({ thinking: false });
     }, 2000);
   };
 
   render() {
-    const { classes } = this.props;
-
-    let bubbleText;
-    if (this.state.thinking) {
-      bubbleText = this.props.student.thinkingAboutExample;
-    } else {
-      bubbleText = this.props.student.questionExample;
-    }
-
+    console.log('render')
+    const { classes, student, parallelogram } = this.props;
+    const { thinking } = this.state;
+    const bubbleText = thinking ? student.thinkingAboutExample : student.questionExample;
     return (
-      <div>
+      <React.Fragement>
         <Grid container justify="center" className={classes.root}>
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          Exemple : {this.state.indexExample + 1} / 3
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
           <img
-            src={this.props.parallelograms[this.state.indexExample].src}
+            src={parallelogram.src}
             alt="parallelogram"
             width="300"
             height="300"
@@ -115,15 +94,14 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           {this.choiceOrAnswer()}
         </Grid>
-      </div>
+      </React.Fragement>
     );
   }
 }
 
 ShowExamples.propTypes = {
   classes: PropTypes.object.isRequired,
-  numberOfExamples: PropTypes.number.isRequired,
-  parallelograms: PropTypes.array.isRequired,
+  parallelogram: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   updateHistory: PropTypes.func.isRequired,
