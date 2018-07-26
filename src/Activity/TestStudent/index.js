@@ -77,7 +77,7 @@ TestStudent.propTypes = {
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   score: PropTypes.number.isRequired,
-  sessionRef: PropTypes.isRequired
+  sessionRef: PropTypes.object.isRequired
 };
 
 export default TestStudent;
