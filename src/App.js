@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
-import { FormattedMessage } from "react-intl";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import deepOrange from "@material-ui/core/colors/deepOrange";
+import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
+import localeEn from 'react-intl/locale-data/en';
+import localeFr from 'react-intl/locale-data/fr';
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -16,6 +18,8 @@ import WelcomeMenu from "./WelcomeMenu";
 import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
+import messagesFr from "./translations/fr.json";
+import messagesEn from "./translations/en.json";
 
 const theme = createMuiTheme({
   palette: {
@@ -31,6 +35,11 @@ const theme = createMuiTheme({
   }
 });
 
+const messages = {
+  'fr': messagesFr,
+  'en': messagesEn
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -42,9 +51,11 @@ class App extends Component {
       view: "training",
       score: 200,
       scoreDisplayed: "200",
-      history: []
+      history: [],
+      language: navigator.language.split(/[-_]/)[0]
     };
     this.student = new QuickLearnerStudent();
+    addLocaleData([...localeEn, ...localeFr]);
   }
 
   updateScore = points => {
@@ -242,40 +253,43 @@ class App extends Component {
       }
     }
     return (
-      <MuiThemeProvider theme={theme}>
-        <AppDrawer
-          hasBeenWelcomed={this.state.hasBeenWelcomed}
-          isRegistered={this.state.isRegistered}
-          onLeaveSession={() => {
-            this.student = new QuickLearnerStudent();
-            this.setState({
-              hasBeenWelcomed: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: "",
-              score: 200,
-              scoreDisplayed: "200",
-              history: []
-            });
-          }}
-          onUnregister={() => {
-            this.student = new QuickLearnerStudent();
-            localStorage.clear("user_id");
-            localStorage.clear("username");
-            this.setState({
-              isRegistered: false,
-              hasBeenWelcomed: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: "",
-              score: 200,
-              scoreDisplayed: "200",
-              history: []
-            });
-          }}
-          scoreDisplayed={this.state.scoreDisplayed}
-          changeView={view => this.setState({ view })}
-          mainContent={displayed}
-        />
-      </MuiThemeProvider>
+      <IntlProvider locale={this.state.language} messages={messages[this.state.language]}>
+        <MuiThemeProvider theme={theme}>
+          <AppDrawer
+            hasBeenWelcomed={this.state.hasBeenWelcomed}
+            isRegistered={this.state.isRegistered}
+            onLeaveSession={() => {
+              this.student = new QuickLearnerStudent();
+              this.setState({
+                hasBeenWelcomed: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: "",
+                score: 200,
+                scoreDisplayed: "200",
+                history: []
+              });
+            }}
+            onUnregister={() => {
+              this.student = new QuickLearnerStudent();
+              localStorage.clear("user_id");
+              localStorage.clear("username");
+              this.setState({
+                isRegistered: false,
+                hasBeenWelcomed: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: "",
+                score: 200,
+                scoreDisplayed: "200",
+                history: []
+              });
+            }}
+            scoreDisplayed={this.state.scoreDisplayed}
+            changeView={view => this.setState({ view })}
+            mainContent={displayed}
+            changeLanguage={(language) => this.setState({ language })}
+          />
+        </MuiThemeProvider>
+      </IntlProvider>
     );
   }
 }
