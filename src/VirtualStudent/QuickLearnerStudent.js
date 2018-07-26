@@ -1,7 +1,12 @@
+// @flow
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-class QuickLearnerStudent {
+import type { VirtualStudent, ShapeFeatures } from "./types";
+
+class QuickLearnerStudent implements VirtualStudent {
+  state = {};
+
   // At first he doesn't know what a parallelogram looks like
   // so he thinks that everything is a parallelogram
   knowledgeParallelogram = {
@@ -80,7 +85,7 @@ class QuickLearnerStudent {
   );
 
   // All necessary features should correspond to identify the shape as a parallelogram
-  answerParallelogram(shapeFeatures) {
+  answerParallelogram(shapeFeatures: ShapeFeatures) {
     return Object.keys(this.knowledgeParallelogram).reduce(
       (acc, feature) =>
         acc &&
@@ -91,7 +96,7 @@ class QuickLearnerStudent {
     );
   }
 
-  learn(isParallelogram, shapeFeatures) {
+  learn(isParallelogram: boolean, shapeFeatures: ShapeFeatures) {
     if (!isParallelogram) {
       Object.keys(this.knowledgeParallelogram).forEach(feature => {
         this.knowledgeParallelogram[feature] += !shapeFeatures[feature]
@@ -109,7 +114,7 @@ class QuickLearnerStudent {
   }
 
   // The lesson is the truth (weight of 1 or -1)
-  learnLesson(shapeFeatures) {
+  learnLesson(shapeFeatures: ShapeFeatures) {
     Object.keys(shapeFeatures).forEach(feature => {
       this.knowledgeParallelogram[feature] = shapeFeatures[feature] ? 1 : -1;
     });
@@ -117,7 +122,7 @@ class QuickLearnerStudent {
 
   // check if there is a feature he didn't know it was necessary or not
   // return true even if it increased his certainty
-  alreadyKnowLesson(shapeFeatures) {
+  alreadyKnowLesson(shapeFeatures: ShapeFeatures) {
     return Object.keys(shapeFeatures).reduce(
       (acc, feature) =>
         acc &&
@@ -126,6 +131,12 @@ class QuickLearnerStudent {
           : shapeFeatures[feature]),
       true
     );
+  }
+
+  setState() {}
+
+  getState() {
+    return this.knowledgeParallelogram;
   }
 }
 

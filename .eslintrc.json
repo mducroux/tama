@@ -7,7 +7,8 @@
     "class-methods-use-this": "off",
     "react/require-default-props": "off",
     "no-plusplus": "off",
-    "react/sort-comp": "off"
+    "react/sort-comp": "off",
+    "react/no-array-index-key": "off"
   },
   "extends": [
     "airbnb",

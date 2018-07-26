@@ -1,7 +1,10 @@
+// @flow
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-class DumbStudent {
+import type { VirtualStudent } from "./types";
+
+class DumbStudent implements VirtualStudent {
   knowledgeParallelogram = {};
   thinkingAboutExample = (
     <FormattedMessage
@@ -61,16 +64,24 @@ class DumbStudent {
     />
   );
 
-  answerParallelogram(shapeFeatures) {
+  state = {};
+
+  answerParallelogram() {
     return Math.random() > 0.5;
   }
 
-  learn(isParallelogram, shapeFeatures) {}
+  learnLesson() {}
 
-  learnLesson(shapeFeatures) {}
+  learn() {}
 
-  alreadyKnowLesson(shapeFeatures) {
+  alreadyKnowLesson() {
     return Math.random() > 0.5;
+  }
+
+  setState() {}
+
+  getState() {
+    return {};
   }
 }
 
