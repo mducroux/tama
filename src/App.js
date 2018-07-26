@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+// @flow
 
+import * as React from "react";
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import blue from '@material-ui/core/colors/blue'
@@ -17,6 +18,8 @@ import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
 import AppDrawer from './AppDrawer'
 import SessionHistory from './SessionHistory'
 
+import type { VirtualStudent } from './VirtualStudent/types';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -32,8 +35,24 @@ const theme = createMuiTheme({
   }
 })
 
-class App extends Component {
-  constructor(props) {
+type PropsT = {}
+
+type StateT = {
+  hasBeenWelcomed: boolean,
+  isRegistered: boolean,
+  hasChosenActivityType: boolean,
+  hasChosenActivity: string,
+  view: string,
+  score: number,
+  scoreDisplayed: string,
+  history: Object[]
+}
+
+class App extends React.Component<PropsT, StateT> {
+  student: VirtualStudent;
+  sessionRef: Object;
+
+  constructor(props: PropsT) {
     super(props);
     this.state = {
       hasBeenWelcomed: false,
@@ -48,7 +67,7 @@ class App extends Component {
     this.student = new QuickLearnerStudent();
   }
 
-  updateScore = points => {
+  updateScore = (points: number) => {
     this.sessionRef.update({ score: this.state.score + points });
     this.setState({ score: this.state.score + points });
     if (points < 0) {
@@ -66,6 +85,7 @@ class App extends Component {
 
   render() {
     let displayed;
+    const userId: string = localStorage.getItem("user_id") || 'anonymous'
     if (!this.state.hasBeenWelcomed) {
       displayed = (
         <WelcomeMenu
@@ -73,12 +93,12 @@ class App extends Component {
             if (this.state.isRegistered) {
               const newSession = firebase
                 .database()
-                .ref(`/sessions/${localStorage.getItem("user_id")}`)
+                .ref(`/sessions/${userId}`)
                 .push().key;
               this.sessionRef = firebase
                 .database()
                 .ref(
-                  `/sessions/${localStorage.getItem("user_id")}/${newSession}`
+                  `/sessions/${userId}/${newSession}`
                 );
               this.sessionRef.child("timestamp").set(new Date().getTime());
               this.sessionRef.child("score").set(200);
@@ -96,7 +116,7 @@ class App extends Component {
             this.sessionRef = firebase
               .database()
               .ref(
-                `/sessions/${localStorage.getItem("user_id")}/${newSession}`
+                `/sessions/${userId}/${newSession}`
               );
             this.sessionRef.child("timestamp").set(new Date().getTime());
             this.sessionRef.child("score").set(200);
@@ -146,10 +166,10 @@ class App extends Component {
             updateHistory={(images) =>
               this.setState(prevState => ({
                 history: [...prevState.history,
-                  {
-                    activityType: 'example',
-                    images
-                  }
+                {
+                  activityType: 'example',
+                  images
+                }
                 ]
               }))
             }
@@ -167,10 +187,10 @@ class App extends Component {
             updateHistory={(images) =>
               this.setState(prevState => ({
                 history: [...prevState.history,
-                  {
-                    activityType: 'exercise',
-                    images: [images]
-                  }
+                {
+                  activityType: 'exercise',
+                  images: [images]
+                }
                 ]
               }))
             }
@@ -188,10 +208,10 @@ class App extends Component {
             updateHistory={() =>
               this.setState(prevState => ({
                 history: [...prevState.history,
-                  {
-                    activityType: 'lesson',
-                    images: []
-                  }
+                {
+                  activityType: 'lesson',
+                  images: []
+                }
                 ]
               }))
             }
@@ -240,8 +260,8 @@ class App extends Component {
           }}
           onUnregister={() => {
             this.student = new QuickLearnerStudent();
-            localStorage.clear("user_id");
-            localStorage.clear("username");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("username");
             this.setState({
               isRegistered: false,
               hasBeenWelcomed: false,
