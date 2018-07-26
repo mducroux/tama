@@ -81,6 +81,7 @@
 	"testResult.description": "Your student obtained",
 	"testResult.finalScore": "Your final score: {score} points",
 	"testResult.startAgain": "Start a new game",
+	"testShowQuestions.isItPara": "",
 	"testShowQuestions.nextQuestion": "Next question",
 	"testShowQuestions.question": "Question: {indexQuestion} / {numberOfQuestions}: Is it a parallelogram?",
 	"testShowQuestions.seeResult": "See result",
