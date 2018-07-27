@@ -52,7 +52,8 @@ type StateT = {
   view: string,
   score: number,
   scoreDisplayed: string,
-  history: Object[]
+  history: Object[],
+  language: string
 }
 
 class App extends React.Component<PropsT, StateT> {
