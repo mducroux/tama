@@ -1,4 +1,6 @@
 import React from "react";
+
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -82,8 +84,11 @@ class ChooseExamples extends React.Component {
             <BackNavigation />
           </IconButton>
           <Typography variant="headline" className={classes.title}>
-            Choisit {this.state.numberOfExamplesLeft}{" "}
-            {this.state.numberOfExamplesLeft > 1 ? "formes" : "forme"} à montrer
+            <FormattedMessage
+              id="chooseExamples.statement"
+              defaultMessage="Choose {numberOfExamplesLeft} shapes to show"
+              values={{ numberOfExamplesLeft: this.state.numberOfExamplesLeft }}
+            />
           </Typography>
         </div>
         <div className={classes.gallery}>

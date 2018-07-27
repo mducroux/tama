@@ -1,6 +1,8 @@
 // @flow
 
 import React from "react";
+
+import { FormattedMessage } from "react-intl";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
@@ -819,7 +821,10 @@ class WelcomeMenu extends React.Component {
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <Typography className={classes.title} variant="title" color="inherit">
-            Apprends à reconnaître les parallélogrammes à ton élève virtuel
+            <FormattedMessage
+              id="welcomeMenu.descriptionApp"
+              defaultMessage="Learn how a parallelogram looks like to your virtual student"
+            />
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
@@ -863,7 +868,10 @@ class WelcomeMenu extends React.Component {
             color="primary"
             onClick={this.props.onClickStart}
           >
-            Commencer à jouer
+            <FormattedMessage
+              id="welcomeMenu.startPlaying"
+              defaultMessage="Start playing"
+            />
           </Button>
         </Grid>
       </div>

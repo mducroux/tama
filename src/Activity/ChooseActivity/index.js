@@ -1,4 +1,6 @@
 import React from "react";
+
+import { FormattedMessage } from 'react-intl';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -72,17 +74,20 @@ const styles = theme => ({
 const images = [
   {
     url: "images/example_512x512.png",
-    title: "Montrer des exemples",
+    title: <FormattedMessage id="chooseActivity.showExample"
+      defaultMessage="Show examples" />,
     learningCost: "10"
   },
   {
     url: "images/exercise_512x512.png",
-    title: "Donner un exercice",
+    title: <FormattedMessage id="chooseActivity.giveExercise"
+      defaultMessage="Give an exercise" />,
     learningCost: "30"
   },
   {
     url: "images/lesson_512x512.png",
-    title: "Donner une leçon",
+    title: <FormattedMessage id="chooseActivity.giveLesson"
+      defaultMessage="Give a lesson" />,
     learningCost: "50"
   }
 ];
@@ -96,11 +101,11 @@ class ChooseActivity extends React.Component {
   }
 
   handleButtonClick = key => {
-    if (key === "Montrer des exemples") {
+    if (key === 0) {
       this.props.onClickExample();
-    } else if (key === "Donner un exercice") {
+    } else if (key === 1) {
       this.props.onClickExercise();
-    } else if (key === "Donner une leçon") {
+    } else if (key === 2) {
       this.props.onClickLesson();
     }
   };
@@ -118,7 +123,8 @@ class ChooseActivity extends React.Component {
           <Grid item sm={6}>
             <Grid container className={classes.root} justify="center">
               <Typography variant="display1" color="inherit">
-                Choisit une activité
+                <FormattedMessage id="chooseActivity.chooseActivity"
+                  defaultMessage="Choose an activity" />
               </Typography>
             </Grid>
           </Grid>
@@ -131,12 +137,12 @@ class ChooseActivity extends React.Component {
               justify="center"
               spacing={0}
             >
-              {images.map(image => (
-                <Grid item xs={12} sm={4} key={image.title}>
+              {images.map((image, index) => (
+                <Grid item xs={12} sm={4} key={image.url}>
                   <ButtonBase
                     className={classes.button}
                     focusVisibleClassName={classes.focusVisible}
-                    onClick={() => this.handleButtonClick(image.title)}
+                    onClick={() => this.handleButtonClick(index)}
                   >
                     <span
                       className={classes.imageSrc}
@@ -177,7 +183,8 @@ class ChooseActivity extends React.Component {
                 <span className={classes.imageBackdrop} />
                 <span className={classes.textButton}>
                   <Typography component="span" variant="title" color="inherit">
-                    {"Passer le test"}
+                    <FormattedMessage id="chooseActivity.takeTest"
+                      defaultMessage="Take the test" />
                   </Typography>
                 </span>
               </ButtonBase>

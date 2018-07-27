@@ -1,4 +1,6 @@
 import React from "react";
+
+import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import {
   VerticalTimeline,
@@ -63,7 +65,12 @@ const SessionHistory = ({ history }) => (
         }}
         icon={styles.start.icon}
       >
-        <Typography variant="title">Début du jeu</Typography>
+        <Typography variant="title">
+          <FormattedMessage
+            id="sessionHistory.startGame"
+            defaultMessage="Start of the game"
+          />
+        </Typography>
       </VerticalTimelineElement>
       {history.map((elem, index) => (
         <VerticalTimelineElement
@@ -74,10 +81,7 @@ const SessionHistory = ({ history }) => (
           }}
           icon={styles[elem.activityType].icon}
         >
-          <Typography variant="title">
-            {elem.activityType.charAt(0).toUpperCase() +
-              elem.activityType.slice(1)}
-          </Typography>
+          <Typography variant="title">{elem.title}</Typography>
           <Gallery
             images={elem.images}
             enableLightbox={false}

@@ -1,10 +1,12 @@
 // @flow
-
 import * as React from "react";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import deepOrange from "@material-ui/core/colors/deepOrange";
+import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
+import localeEn from 'react-intl/locale-data/en';
+import localeFr from 'react-intl/locale-data/fr';
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -17,8 +19,9 @@ import WelcomeMenu from "./WelcomeMenu";
 import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
-
-import type { VirtualStudent } from "./VirtualStudent/types";
+import messagesFr from "./translations/fr.json";
+import messagesEn from "./translations/en.json";
+import type { VirtualStudent } from './VirtualStudent/types';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,6 +37,11 @@ const theme = createMuiTheme({
   }
 });
 
+const messages = {
+  'fr': messagesFr,
+  'en': messagesEn
+};
+
 type PropsT = {};
 
 type StateT = {
@@ -44,8 +52,9 @@ type StateT = {
   view: string,
   score: number,
   scoreDisplayed: string,
-  history: Object[]
-};
+  history: Object[],
+  language: string
+}
 
 class App extends React.Component<PropsT, StateT> {
   student: VirtualStudent;
@@ -61,9 +70,11 @@ class App extends React.Component<PropsT, StateT> {
       view: "training",
       score: 200,
       scoreDisplayed: "200",
-      history: []
+      history: [],
+      language: navigator.language.split(/[-_]/)[0]
     };
     this.student = new QuickLearnerStudent();
+    addLocaleData([...localeEn, ...localeFr]);
   }
 
   updateScore = (points: number) => {
@@ -163,7 +174,13 @@ class App extends React.Component<PropsT, StateT> {
                   ...prevState.history,
                   {
                     activityType: "example",
-                    images
+                    images,
+                    title: (
+                      <FormattedMessage
+                        id="app.example"
+                        defaultMessage="Example"
+                      />
+                    )
                   }
                 ]
               }))
@@ -185,7 +202,13 @@ class App extends React.Component<PropsT, StateT> {
                   ...prevState.history,
                   {
                     activityType: "exercise",
-                    images: [images]
+                    images: [images],
+                    title: (
+                      <FormattedMessage
+                        id="app.exercise"
+                        defaultMessage="Exercise"
+                      />
+                    )
                   }
                 ]
               }))
@@ -207,7 +230,13 @@ class App extends React.Component<PropsT, StateT> {
                   ...prevState.history,
                   {
                     activityType: "lesson",
-                    images: []
+                    images: [],
+                    title: (
+                      <FormattedMessage
+                        id="app.lesson"
+                        defaultMessage="Lesson"
+                      />
+                    )
                   }
                 ]
               }))
@@ -240,40 +269,43 @@ class App extends React.Component<PropsT, StateT> {
       }
     }
     return (
-      <MuiThemeProvider theme={theme}>
-        <AppDrawer
-          hasBeenWelcomed={this.state.hasBeenWelcomed}
-          isRegistered={this.state.isRegistered}
-          onLeaveSession={() => {
-            this.student = new QuickLearnerStudent();
-            this.setState({
-              hasBeenWelcomed: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: "",
-              score: 200,
-              scoreDisplayed: "200",
-              history: []
-            });
-          }}
-          onUnregister={() => {
-            this.student = new QuickLearnerStudent();
-            localStorage.removeItem("user_id");
-            localStorage.removeItem("username");
-            this.setState({
-              isRegistered: false,
-              hasBeenWelcomed: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: "",
-              score: 200,
-              scoreDisplayed: "200",
-              history: []
-            });
-          }}
-          scoreDisplayed={this.state.scoreDisplayed}
-          changeView={view => this.setState({ view })}
-          mainContent={displayed}
-        />
-      </MuiThemeProvider>
+      <IntlProvider locale={this.state.language} messages={messages[this.state.language]}>
+        <MuiThemeProvider theme={theme}>
+          <AppDrawer
+            hasBeenWelcomed={this.state.hasBeenWelcomed}
+            isRegistered={this.state.isRegistered}
+            onLeaveSession={() => {
+              this.student = new QuickLearnerStudent();
+              this.setState({
+                hasBeenWelcomed: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: "",
+                score: 200,
+                scoreDisplayed: "200",
+                history: []
+              });
+            }}
+            onUnregister={() => {
+              this.student = new QuickLearnerStudent();
+              localStorage.removeItem("user_id");
+              localStorage.removeItem("username");
+              this.setState({
+                isRegistered: false,
+                hasBeenWelcomed: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: "",
+                score: 200,
+                scoreDisplayed: "200",
+                history: []
+              });
+            }}
+            scoreDisplayed={this.state.scoreDisplayed}
+            changeView={view => this.setState({ view })}
+            mainContent={displayed}
+            changeLanguage={(language) => this.setState({ language })}
+          />
+        </MuiThemeProvider>
+      </IntlProvider>
     );
   }
 }
