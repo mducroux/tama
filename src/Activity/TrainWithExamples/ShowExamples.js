@@ -72,18 +72,15 @@ class ShowExamples extends React.Component {
       this.props.updateScore();
       this.props.updateHistory()
       this.props.getBackToMenu();
-      this.setState({ thinking: false });
     }, 2000);
   };
 
   render() {
-    console.log('render')
     const { classes, student, parallelogram } = this.props;
     const { thinking } = this.state;
     const bubbleText = thinking ? student.thinkingAboutExample : student.questionExample;
-    console.log(bubbleText)
     return (
-      <React.Fragement>
+      <React.Fragment>
         <Grid container justify="center" className={classes.root}>
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
@@ -98,7 +95,7 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           {this.choiceOrAnswer()}
         </Grid>
-      </React.Fragement>
+      </React.Fragment>
     );
   }
 }
