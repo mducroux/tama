@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -29,10 +30,12 @@ class ShowExamples extends React.Component {
   }
 
   choiceOrAnswer = () => {
-    if (this.state.thinking) {
+    const { thinking, userAnswer } = this.state
+    if (thinking) {
       return (
         <Typography variant="title">
-          {this.state.userAnswer ? "OUI" : "NON"}
+          {userAnswer && <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />}
+          {!userAnswer && <FormattedMessage id="showExamples.no" defaultMessage="No" />}
         </Typography>
       );
     }
@@ -44,7 +47,7 @@ class ShowExamples extends React.Component {
             color="primary"
             onClick={() => this.handleClick(true)}
           >
-            Oui
+            <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
           </Button>
         </Grid>
         <Grid item>
@@ -53,7 +56,7 @@ class ShowExamples extends React.Component {
             color="primary"
             onClick={() => this.handleClick(false)}
           >
-            Non
+            <FormattedMessage id="showExamples.no" defaultMessage="No" />
           </Button>
         </Grid>
       </Grid>

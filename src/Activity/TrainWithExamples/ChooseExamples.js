@@ -1,4 +1,6 @@
 import React from "react";
+
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
@@ -46,8 +48,11 @@ const ChooseExamples = ({ onNavigationBackToMenu, onSelectExample, classes }) =>
         <BackNavigation />
       </IconButton>
       <Typography variant="headline" className={classes.title}>
-        Choisit un exemple à montrer
-        </Typography>
+        <FormattedMessage
+          id="chooseExamples.statement"
+          defaultMessage="Choose a shape to show"
+        />
+      </Typography>
     </div>
     <div className={classes.gallery}>
       <Gallery

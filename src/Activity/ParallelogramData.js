@@ -138,12 +138,12 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_b1.png',
-    thumbnail: 'images/examples/rectangle_b1.png',
+    src: "images/examples/rectangle_b1.png",
+    thumbnail: "images/examples/rectangle_b1.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
-    itemType: 'rectangle',
+    itemType: "rectangle",
     valid: true,
     shapeFeatures: {
       hasThreeEdges: false,
@@ -165,8 +165,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_b2.png',
-    thumbnail: 'images/examples/rectangle_b2.png',
+    src: "images/examples/rectangle_b2.png",
+    thumbnail: "images/examples/rectangle_b2.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
@@ -192,8 +192,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_g1.png',
-    thumbnail: 'images/examples/rectangle_g1.png',
+    src: "images/examples/rectangle_g1.png",
+    thumbnail: "images/examples/rectangle_g1.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
@@ -219,8 +219,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_r1.png',
-    thumbnail: 'images/examples/rectangle_r1.png',
+    src: "images/examples/rectangle_r1.png",
+    thumbnail: "images/examples/rectangle_r1.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
@@ -246,8 +246,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/examples/rectangle_r2.png',
-    thumbnail: 'images/examples/rectangle_r2.png',
+    src: "images/examples/rectangle_r2.png",
+    thumbnail: "images/examples/rectangle_r2.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
@@ -597,8 +597,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_b2.png',
-    thumbnail: 'images/counter_examples/quadrilateral_b2.png',
+    src: "images/counter_examples/quadrilateral_b2.png",
+    thumbnail: "images/counter_examples/quadrilateral_b2.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
@@ -624,8 +624,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_g1.png',
-    thumbnail: 'images/counter_examples/quadrilateral_g1.png',
+    src: "images/counter_examples/quadrilateral_g1.png",
+    thumbnail: "images/counter_examples/quadrilateral_g1.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,
@@ -651,8 +651,8 @@ const parallelogramData = [
     }
   },
   {
-    src: 'images/counter_examples/quadrilateral_r1.png',
-    thumbnail: 'images/counter_examples/quadrilateral_r1.png',
+    src: "images/counter_examples/quadrilateral_r1.png",
+    thumbnail: "images/counter_examples/quadrilateral_r1.png",
     thumbnailWidth,
     thumbnailHeight,
     isSelected: false,

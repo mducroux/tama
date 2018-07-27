@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 
+import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+
 import VirtualStudent from "../../VirtualStudent";
 
 const styles = () => ({
@@ -80,8 +82,14 @@ class ShowQuestions extends React.Component {
       <div>
         <Grid container justify="center" className={classes.root}>
           <Typography variant="title" className={classes.title}>
-            Question {this.state.indexQuestion + 1} /{" "}
-            {this.props.numberOfQuestions} : Est-ce un parallélogramme ?
+            <FormattedMessage
+              id="testShowQuestions.question"
+              defaultMessage="Question: {indexQuestion} / {numberOfQuestions}: Is it a parallelogram?"
+              values={{
+                indexQuestion: this.state.indexQuestion + 1,
+                numberOfQuestions: this.props.numberOfQuestions
+              }}
+            />
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
@@ -103,9 +111,17 @@ class ShowQuestions extends React.Component {
               color="primary"
               size="large"
             >
-              {this.props.numberOfQuestions !== this.state.indexQuestion + 1
-                ? "Question suivante"
-                : "Voir le résultat"}
+              {this.props.numberOfQuestions !== this.state.indexQuestion + 1 ? (
+                <FormattedMessage
+                  id="testShowQuestions.nextQuestion"
+                  defaultMessage="Next question"
+                />
+              ) : (
+                <FormattedMessage
+                  id="testShowQuestions.seeResult"
+                  defaultMessage="See result"
+                />
+              )}
             </Button>
           )}
         </Grid>

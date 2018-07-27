@@ -46,7 +46,13 @@ class TrainWithExamples extends React.Component {
         parallelogram={parallelogram}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
+<<<<<<< HEAD
         updateHistory={() => this.props.updateHistory(parallelogram)}
+=======
+        updateHistory={() =>
+          this.props.updateHistory(this.getSelectedParallelograms())
+        }
+>>>>>>> master
         student={this.props.student}
         recordExampleActivity={(userAnswer, indexExample) =>
           this.recordExampleActivity(userAnswer, indexExample)

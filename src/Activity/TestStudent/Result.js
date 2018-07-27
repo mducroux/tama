@@ -1,5 +1,6 @@
 import React from "react";
 
+import { FormattedMessage } from "react-intl";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
@@ -39,7 +40,10 @@ const Result = ({ classes, ...props }) => (
     <Grid container justify="center" className={classes.root}>
       <div className={classes.group}>
         <img src="images/diploma.jpg" alt="Diploma" width="400" height="300" />
-        <div className={classes.textImage}>Votre élève a obtenu </div>
+        <div className={classes.textImage}>
+          <FormattedMessage id="testResult.description"
+            defaultMessage="Your student obtained" />
+        </div>
         <div className={classes.textGrade}>
           {props.grade} / {props.numberOfQuestions}
         </div>
@@ -52,14 +56,16 @@ const Result = ({ classes, ...props }) => (
           {props.correctAnswers[index] ? (
             <CheckCircle color="primary" />
           ) : (
-            <Cancel color="error" />
-          )}
+              <Cancel color="error" />
+            )}
         </div>
       ))}
     </Grid>
     <Grid container justify="center" className={classes.root}>
       <Typography variant="display1" className={classes.finalScore}>
-        Votre score final : {props.score} points
+        <FormattedMessage id="testResult.finalScore"
+          defaultMessage="Your final score: {score} points"
+          values={{ score: props.score }} />
       </Typography>
     </Grid>
     <Grid container justify="center" className={classes.root}>
@@ -68,7 +74,8 @@ const Result = ({ classes, ...props }) => (
         color="primary"
         onClick={() => props.startNewGame()}
       >
-        Recommencer une partie
+        <FormattedMessage id="testResult.startAgain"
+          defaultMessage="Start a new game" />
       </Button>
     </Grid>
   </div>
