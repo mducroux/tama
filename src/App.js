@@ -71,7 +71,7 @@ class App extends React.Component<PropsT, StateT> {
       score: 200,
       scoreDisplayed: "200",
       history: [],
-      language: navigator.language.split(/[-_]/)[0]
+      language: localStorage.getItem('lang') || navigator.language.split(/[-_]/)[0]
     };
     this.student = new QuickLearnerStudent();
     addLocaleData([...localeEn, ...localeFr]);
@@ -306,7 +306,10 @@ class App extends React.Component<PropsT, StateT> {
             scoreDisplayed={this.state.scoreDisplayed}
             changeView={view => this.setState({ view })}
             mainContent={displayed}
-            changeLanguage={(language) => this.setState({ language })}
+            changeLanguage={(language) => {
+              localStorage.setItem('lang', language)
+              this.setState({ language })
+            }}
           />
         </MuiThemeProvider>
       </IntlProvider>
