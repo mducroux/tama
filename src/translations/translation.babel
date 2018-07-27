@@ -1590,7 +1590,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>studenName</name>
+                        <name>studentName</name>
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>

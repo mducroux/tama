@@ -83,7 +83,7 @@ class WelcomeMenu extends React.Component<PropsT, StateT> {
             color="inherit"
           >
             <FormattedMessage
-              id="welcomeMenu.studenName"
+              id="welcomeMenu.studentName"
               defaultMessage="Student Name"
             />{" "}
             {this.state.firstName} {this.state.lastName}
