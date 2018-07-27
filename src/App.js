@@ -2,9 +2,9 @@
 
 import * as React from "react";
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import blue from '@material-ui/core/colors/blue'
-import deepOrange from '@material-ui/core/colors/deepOrange'
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import blue from "@material-ui/core/colors/blue";
+import deepOrange from "@material-ui/core/colors/deepOrange";
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -15,27 +15,26 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
 import WelcomeMenu from "./WelcomeMenu";
 import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
-import AppDrawer from './AppDrawer'
-import SessionHistory from './SessionHistory'
+import AppDrawer from "./AppDrawer";
+import SessionHistory from "./SessionHistory";
 
-import type { VirtualStudent } from './VirtualStudent/types';
-
+import type { VirtualStudent } from "./VirtualStudent/types";
 
 const theme = createMuiTheme({
   palette: {
     primary: blue,
     secondary: deepOrange,
     background: {
-      paper: '#fff',
-      default: '#f1f1f1'
+      paper: "#fff",
+      default: "#f1f1f1"
     }
   },
   status: {
-    danger: 'red'
+    danger: "red"
   }
-})
+});
 
-type PropsT = {}
+type PropsT = {};
 
 type StateT = {
   hasBeenWelcomed: boolean,
@@ -46,7 +45,7 @@ type StateT = {
   score: number,
   scoreDisplayed: string,
   history: Object[]
-}
+};
 
 class App extends React.Component<PropsT, StateT> {
   student: VirtualStudent;
@@ -59,7 +58,7 @@ class App extends React.Component<PropsT, StateT> {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      view: 'training',
+      view: "training",
       score: 200,
       scoreDisplayed: "200",
       history: []
@@ -82,10 +81,9 @@ class App extends React.Component<PropsT, StateT> {
     }, 2000);
   };
 
-
   render() {
     let displayed;
-    const userId: string = localStorage.getItem("user_id") || 'anonymous'
+    const userId: string = localStorage.getItem("user_id") || "anonymous";
     if (!this.state.hasBeenWelcomed) {
       displayed = (
         <WelcomeMenu
@@ -97,9 +95,7 @@ class App extends React.Component<PropsT, StateT> {
                 .push().key;
               this.sessionRef = firebase
                 .database()
-                .ref(
-                  `/sessions/${userId}/${newSession}`
-                );
+                .ref(`/sessions/${userId}/${newSession}`);
               this.sessionRef.child("timestamp").set(new Date().getTime());
               this.sessionRef.child("score").set(200);
             }
@@ -115,17 +111,15 @@ class App extends React.Component<PropsT, StateT> {
           onSubmit={newSession => {
             this.sessionRef = firebase
               .database()
-              .ref(
-                `/sessions/${userId}/${newSession}`
-              );
+              .ref(`/sessions/${userId}/${newSession}`);
             this.sessionRef.child("timestamp").set(new Date().getTime());
             this.sessionRef.child("score").set(200);
             this.setState({ isRegistered: true });
           }}
         />
-      )
-    } else if (this.state.view === 'history') {
-      displayed = <SessionHistory history={this.state.history} />
+      );
+    } else if (this.state.view === "history") {
+      displayed = <SessionHistory history={this.state.history} />;
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
@@ -163,13 +157,14 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={(images) =>
+            updateHistory={images =>
               this.setState(prevState => ({
-                history: [...prevState.history,
-                {
-                  activityType: 'example',
-                  images
-                }
+                history: [
+                  ...prevState.history,
+                  {
+                    activityType: "example",
+                    images
+                  }
                 ]
               }))
             }
@@ -184,13 +179,14 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={(images) =>
+            updateHistory={images =>
               this.setState(prevState => ({
-                history: [...prevState.history,
-                {
-                  activityType: 'exercise',
-                  images: [images]
-                }
+                history: [
+                  ...prevState.history,
+                  {
+                    activityType: "exercise",
+                    images: [images]
+                  }
                 ]
               }))
             }
@@ -207,11 +203,12 @@ class App extends React.Component<PropsT, StateT> {
             }
             updateHistory={() =>
               this.setState(prevState => ({
-                history: [...prevState.history,
-                {
-                  activityType: 'lesson',
-                  images: []
-                }
+                history: [
+                  ...prevState.history,
+                  {
+                    activityType: "lesson",
+                    images: []
+                  }
                 ]
               }))
             }
@@ -273,12 +270,12 @@ class App extends React.Component<PropsT, StateT> {
             });
           }}
           scoreDisplayed={this.state.scoreDisplayed}
-          changeView={(view) => this.setState({ view })}
+          changeView={view => this.setState({ view })}
           mainContent={displayed}
         />
-      </MuiThemeProvider >
-    )
+      </MuiThemeProvider>
+    );
   }
 }
 
-export default App
+export default App;
