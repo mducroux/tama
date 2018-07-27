@@ -81,6 +81,7 @@ class ShowExamples extends React.Component {
     const { classes, student, parallelogram } = this.props;
     const { thinking } = this.state;
     const bubbleText = thinking ? student.thinkingAboutExample : student.questionExample;
+    console.log(bubbleText)
     return (
       <React.Fragement>
         <Grid container justify="center" className={classes.root}>
