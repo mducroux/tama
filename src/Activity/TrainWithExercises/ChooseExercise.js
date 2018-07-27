@@ -1,4 +1,6 @@
 import React from "react";
+
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Gallery from "react-grid-gallery";
@@ -50,7 +52,10 @@ const ChooseExercise = ({
         <BackNavigation />
       </IconButton>
       <Typography variant="headline" className={classes.title}>
-        {"Choisit une forme pour l'exercice"}
+        <FormattedMessage
+          id="chooseExercise.statement"
+          defaultMessage="Choose a shape for the exercise"
+        />
       </Typography>
     </div>
     <div className={classes.gallery}>

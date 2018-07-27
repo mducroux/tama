@@ -28,7 +28,7 @@ class ShowLesson extends React.Component {
     setTimeout(() => {
       this.props.recordLessonActivity();
       this.props.updateScore();
-      this.props.updateHistory()
+      this.props.updateHistory();
       this.props.getBackToMenu();
     }, 3000);
   }

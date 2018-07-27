@@ -49,7 +49,9 @@ class TrainWithExercise extends React.Component {
         parallelogram={parallelogramData[this.state.index]}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
-        updateHistory={() => this.props.updateHistory(parallelogramData[this.state.index])}
+        updateHistory={() =>
+          this.props.updateHistory(parallelogramData[this.state.index])
+        }
         student={this.props.student}
         recordExerciseActivity={(userAnswer, studentAnswer) =>
           this.recordExerciseActivity(userAnswer, studentAnswer)

@@ -1,10 +1,12 @@
 // @flow
-
 import * as React from "react";
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import blue from '@material-ui/core/colors/blue'
-import deepOrange from '@material-ui/core/colors/deepOrange'
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import blue from "@material-ui/core/colors/blue";
+import deepOrange from "@material-ui/core/colors/deepOrange";
+import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
+import localeEn from 'react-intl/locale-data/en';
+import localeFr from 'react-intl/locale-data/fr';
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -15,25 +17,30 @@ import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
 import WelcomeMenu from "./WelcomeMenu";
 import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
-import AppDrawer from './AppDrawer'
-import SessionHistory from './SessionHistory'
-
+import AppDrawer from "./AppDrawer";
+import SessionHistory from "./SessionHistory";
+import messagesFr from "./translations/fr.json";
+import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from './VirtualStudent/types';
-
 
 const theme = createMuiTheme({
   palette: {
     primary: blue,
     secondary: deepOrange,
     background: {
-      paper: '#fff',
-      default: '#f1f1f1'
+      paper: "#fff",
+      default: "#f1f1f1"
     }
   },
   status: {
-    danger: 'red'
+    danger: "red"
   }
-})
+});
+
+const messages = {
+  'fr': messagesFr,
+  'en': messagesEn
+};
 
 type PropsT = {}
 
@@ -45,7 +52,8 @@ type StateT = {
   view: string,
   score: number,
   scoreDisplayed: string,
-  history: Object[]
+  history: Object[],
+  language: string
 }
 
 class App extends React.Component<PropsT, StateT> {
@@ -59,12 +67,14 @@ class App extends React.Component<PropsT, StateT> {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      view: 'training',
+      view: "training",
       score: 200,
       scoreDisplayed: "200",
-      history: []
+      history: [],
+      language: navigator.language.split(/[-_]/)[0]
     };
     this.student = new QuickLearnerStudent();
+    addLocaleData([...localeEn, ...localeFr]);
   }
 
   updateScore = (points: number) => {
@@ -81,7 +91,6 @@ class App extends React.Component<PropsT, StateT> {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
-
 
   render() {
     let displayed;
@@ -123,9 +132,9 @@ class App extends React.Component<PropsT, StateT> {
             this.setState({ isRegistered: true });
           }}
         />
-      )
-    } else if (this.state.view === 'history') {
-      displayed = <SessionHistory history={this.state.history} />
+      );
+    } else if (this.state.view === "history") {
+      displayed = <SessionHistory history={this.state.history} />;
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
@@ -163,13 +172,20 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={(images) =>
+            updateHistory={images =>
               this.setState(prevState => ({
-                history: [...prevState.history,
-                {
-                  activityType: 'example',
-                  images
-                }
+                history: [
+                  ...prevState.history,
+                  {
+                    activityType: "example",
+                    images,
+                    title: (
+                      <FormattedMessage
+                        id="app.example"
+                        defaultMessage="Example"
+                      />
+                    )
+                  }
                 ]
               }))
             }
@@ -184,13 +200,20 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={(images) =>
+            updateHistory={images =>
               this.setState(prevState => ({
-                history: [...prevState.history,
-                {
-                  activityType: 'exercise',
-                  images: [images]
-                }
+                history: [
+                  ...prevState.history,
+                  {
+                    activityType: "exercise",
+                    images: [images],
+                    title: (
+                      <FormattedMessage
+                        id="app.exercise"
+                        defaultMessage="Exercise"
+                      />
+                    )
+                  }
                 ]
               }))
             }
@@ -207,11 +230,18 @@ class App extends React.Component<PropsT, StateT> {
             }
             updateHistory={() =>
               this.setState(prevState => ({
-                history: [...prevState.history,
-                {
-                  activityType: 'lesson',
-                  images: []
-                }
+                history: [
+                  ...prevState.history,
+                  {
+                    activityType: "lesson",
+                    images: [],
+                    title: (
+                      <FormattedMessage
+                        id="app.lesson"
+                        defaultMessage="Lesson"
+                      />
+                    )
+                  }
                 ]
               }))
             }
@@ -243,42 +273,45 @@ class App extends React.Component<PropsT, StateT> {
       }
     }
     return (
-      <MuiThemeProvider theme={theme}>
-        <AppDrawer
-          hasBeenWelcomed={this.state.hasBeenWelcomed}
-          isRegistered={this.state.isRegistered}
-          onLeaveSession={() => {
-            this.student = new QuickLearnerStudent();
-            this.setState({
-              hasBeenWelcomed: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: "",
-              score: 200,
-              scoreDisplayed: "200",
-              history: []
-            });
-          }}
-          onUnregister={() => {
-            this.student = new QuickLearnerStudent();
-            localStorage.removeItem("user_id");
-            localStorage.removeItem("username");
-            this.setState({
-              isRegistered: false,
-              hasBeenWelcomed: false,
-              hasChosenActivityType: false,
-              hasChosenActivity: "",
-              score: 200,
-              scoreDisplayed: "200",
-              history: []
-            });
-          }}
-          scoreDisplayed={this.state.scoreDisplayed}
-          changeView={(view) => this.setState({ view })}
-          mainContent={displayed}
-        />
-      </MuiThemeProvider >
-    )
+      <IntlProvider locale={this.state.language} messages={messages[this.state.language]}>
+        <MuiThemeProvider theme={theme}>
+          <AppDrawer
+            hasBeenWelcomed={this.state.hasBeenWelcomed}
+            isRegistered={this.state.isRegistered}
+            onLeaveSession={() => {
+              this.student = new QuickLearnerStudent();
+              this.setState({
+                hasBeenWelcomed: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: "",
+                score: 200,
+                scoreDisplayed: "200",
+                history: []
+              });
+            }}
+            onUnregister={() => {
+              this.student = new QuickLearnerStudent();
+              localStorage.removeItem("user_id");
+              localStorage.removeItem("username");
+              this.setState({
+                isRegistered: false,
+                hasBeenWelcomed: false,
+                hasChosenActivityType: false,
+                hasChosenActivity: "",
+                score: 200,
+                scoreDisplayed: "200",
+                history: []
+              });
+            }}
+            scoreDisplayed={this.state.scoreDisplayed}
+            changeView={view => this.setState({ view })}
+            mainContent={displayed}
+            changeLanguage={(language) => this.setState({ language })}
+          />
+        </MuiThemeProvider>
+      </IntlProvider>
+    );
   }
 }
 
-export default App
+export default App;
