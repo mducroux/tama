@@ -85,5 +85,6 @@
 	"testShowQuestions.question": "Question : {indexQuestion} / {numberOfQuestions} : Est-ce un parallélogramme ?",
 	"testShowQuestions.seeResult": "Voir le résultat",
 	"welcomeMenu.descriptionApp": "Apprends à reconnaître les parallélogrammes à ton élève virtuel",
-	"welcomeMenu.startPlaying": "Commencer à jouer"
+	"welcomeMenu.startPlaying": "Commencer à jouer",
+	"welcomeMenu.studenName": "Nom de l'élève :"
 }

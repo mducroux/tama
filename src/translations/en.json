@@ -85,5 +85,6 @@
 	"testShowQuestions.question": "Question: {indexQuestion} / {numberOfQuestions}: Is it a parallelogram?",
 	"testShowQuestions.seeResult": "See result",
 	"welcomeMenu.descriptionApp": "Learn how a parallelogram looks like to your virtual student",
-	"welcomeMenu.startPlaying": "Start playing"
+	"welcomeMenu.startPlaying": "Start playing",
+	"welcomeMenu.studenName": "Student name:"
 }

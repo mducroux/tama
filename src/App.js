@@ -5,8 +5,8 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
-import localeEn from 'react-intl/locale-data/en';
-import localeFr from 'react-intl/locale-data/fr';
+import localeEn from "react-intl/locale-data/en";
+import localeFr from "react-intl/locale-data/fr";
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -21,7 +21,7 @@ import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
 import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
-import type { VirtualStudent } from './VirtualStudent/types';
+import type { VirtualStudent } from "./VirtualStudent/types";
 
 const theme = createMuiTheme({
   palette: {
@@ -38,8 +38,8 @@ const theme = createMuiTheme({
 });
 
 const messages = {
-  'fr': messagesFr,
-  'en': messagesEn
+  fr: messagesFr,
+  en: messagesEn
 };
 
 type PropsT = {};
@@ -54,7 +54,7 @@ type StateT = {
   scoreDisplayed: string,
   history: Object[],
   language: string
-}
+};
 
 class App extends React.Component<PropsT, StateT> {
   student: VirtualStudent;
@@ -114,6 +114,7 @@ class App extends React.Component<PropsT, StateT> {
               hasBeenWelcomed: true
             });
           }}
+          language={this.state.language}
         />
       );
     } else if (!this.state.isRegistered) {
@@ -269,7 +270,10 @@ class App extends React.Component<PropsT, StateT> {
       }
     }
     return (
-      <IntlProvider locale={this.state.language} messages={messages[this.state.language]}>
+      <IntlProvider
+        locale={this.state.language}
+        messages={messages[this.state.language]}
+      >
         <MuiThemeProvider theme={theme}>
           <AppDrawer
             hasBeenWelcomed={this.state.hasBeenWelcomed}
@@ -302,7 +306,7 @@ class App extends React.Component<PropsT, StateT> {
             scoreDisplayed={this.state.scoreDisplayed}
             changeView={view => this.setState({ view })}
             mainContent={displayed}
-            changeLanguage={(language) => this.setState({ language })}
+            changeLanguage={language => this.setState({ language })}
           />
         </MuiThemeProvider>
       </IntlProvider>
