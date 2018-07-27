@@ -1,5 +1,4 @@
 // @flow
-
 import React from "react";
 
 import { FormattedMessage } from "react-intl";
@@ -27,7 +26,7 @@ const styles = () => ({
 type PropsT = {
   language: string,
   classes: Object,
-  onClickStart: () => void
+  onClickStart: string => void
 };
 
 type StateT = {
@@ -118,7 +117,11 @@ class WelcomeMenu extends React.Component<PropsT, StateT> {
           <Button
             variant="contained"
             color="primary"
-            onClick={this.props.onClickStart}
+            onClick={() =>
+              this.props.onClickStart(
+                `${this.state.firstName} ${this.state.lastName}`
+              )
+            }
           >
             <FormattedMessage
               id="welcomeMenu.startPlaying"

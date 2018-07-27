@@ -53,7 +53,8 @@ type StateT = {
   score: number,
   scoreDisplayed: string,
   history: Object[],
-  language: string
+  language: string,
+  studentName: string
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -71,7 +72,8 @@ class App extends React.Component<PropsT, StateT> {
       score: 200,
       scoreDisplayed: "200",
       history: [],
-      language: navigator.language.split(/[-_]/)[0]
+      language: navigator.language.split(/[-_]/)[0],
+      studentName: ""
     };
     this.student = new QuickLearnerStudent();
     addLocaleData([...localeEn, ...localeFr]);
@@ -98,7 +100,7 @@ class App extends React.Component<PropsT, StateT> {
     if (!this.state.hasBeenWelcomed) {
       displayed = (
         <WelcomeMenu
-          onClickStart={() => {
+          onClickStart={studentName => {
             if (this.state.isRegistered) {
               const newSession = firebase
                 .database()
@@ -109,9 +111,11 @@ class App extends React.Component<PropsT, StateT> {
                 .ref(`/sessions/${userId}/${newSession}`);
               this.sessionRef.child("timestamp").set(new Date().getTime());
               this.sessionRef.child("score").set(200);
+              this.sessionRef.child("student_name").set(studentName);
             }
             this.setState({
-              hasBeenWelcomed: true
+              hasBeenWelcomed: true,
+              studentName
             });
           }}
           language={this.state.language}
@@ -126,12 +130,18 @@ class App extends React.Component<PropsT, StateT> {
               .ref(`/sessions/${userId}/${newSession}`);
             this.sessionRef.child("timestamp").set(new Date().getTime());
             this.sessionRef.child("score").set(200);
+            this.sessionRef.child("student_name").set(this.state.studentName);
             this.setState({ isRegistered: true });
           }}
         />
       );
     } else if (this.state.view === "history") {
-      displayed = <SessionHistory history={this.state.history} />;
+      displayed = (
+        <SessionHistory
+          history={this.state.history}
+          studentName={this.state.studentName}
+        />
+      );
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
@@ -265,6 +275,7 @@ class App extends React.Component<PropsT, StateT> {
             student={this.student}
             score={this.state.score}
             sessionRef={this.sessionRef}
+            studentName={this.state.studentName}
           />
         );
       }

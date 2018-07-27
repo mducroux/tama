@@ -35,14 +35,17 @@ const styles = () => ({
   }
 });
 
-const Result = ({ classes, ...props }) => (
+const Result = ({ studentName, classes, ...props }) => (
   <div>
     <Grid container justify="center" className={classes.root}>
       <div className={classes.group}>
         <img src="images/diploma.jpg" alt="Diploma" width="400" height="300" />
         <div className={classes.textImage}>
-          <FormattedMessage id="testResult.description"
-            defaultMessage="Your student obtained" />
+          <FormattedMessage
+            id="testResult.description"
+            defaultMessage="{studentName} obtained"
+            values={{ studentName }}
+          />
         </div>
         <div className={classes.textGrade}>
           {props.grade} / {props.numberOfQuestions}
@@ -56,16 +59,18 @@ const Result = ({ classes, ...props }) => (
           {props.correctAnswers[index] ? (
             <CheckCircle color="primary" />
           ) : (
-              <Cancel color="error" />
-            )}
+            <Cancel color="error" />
+          )}
         </div>
       ))}
     </Grid>
     <Grid container justify="center" className={classes.root}>
       <Typography variant="display1" className={classes.finalScore}>
-        <FormattedMessage id="testResult.finalScore"
+        <FormattedMessage
+          id="testResult.finalScore"
           defaultMessage="Your final score: {score} points"
-          values={{ score: props.score }} />
+          values={{ score: props.score }}
+        />
       </Typography>
     </Grid>
     <Grid container justify="center" className={classes.root}>
@@ -74,8 +79,10 @@ const Result = ({ classes, ...props }) => (
         color="primary"
         onClick={() => props.startNewGame()}
       >
-        <FormattedMessage id="testResult.startAgain"
-          defaultMessage="Start a new game" />
+        <FormattedMessage
+          id="testResult.startAgain"
+          defaultMessage="Start a new game"
+        />
       </Button>
     </Grid>
   </div>
@@ -88,7 +95,8 @@ Result.propTypes = {
   examQuestions: PropTypes.array.isRequired,
   correctAnswers: PropTypes.array.isRequired,
   startNewGame: PropTypes.func.isRequired,
-  score: PropTypes.number.isRequired
+  score: PropTypes.number.isRequired,
+  studentName: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Result);

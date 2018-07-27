@@ -1,12 +1,31 @@
+// @flow
 import React from "react";
-import PropTypes from "prop-types";
 
 import Result from "./Result";
 import ShowQuestions from "./ShowQuestions";
 import parallelogramData from "../ParallelogramData";
 
-class TestStudent extends React.Component {
-  constructor(props) {
+type PropsT = {
+  startNewGame: () => void,
+  updateScore: () => void,
+  student: Object,
+  score: number,
+  sessionRef: Object,
+  studentName: string
+};
+
+type StateT = {
+  tookTest: boolean,
+  grade: number
+};
+
+class TestStudent extends React.Component<PropsT, StateT> {
+  numberOfQuestions: number;
+  examQuestions: Object[];
+  correctAnswers: Array<boolean>;
+  testRef: Object;
+
+  constructor(props: PropsT) {
     super(props);
     this.numberOfQuestions = 5;
     try {
@@ -29,11 +48,11 @@ class TestStudent extends React.Component {
     };
   }
 
-  handleAnswerQuestion = (index, isCorrect) => {
+  handleAnswerQuestion = (index: number, isCorrect: boolean) => {
     this.correctAnswers[index] = isCorrect;
   };
 
-  recordTest = (indexQuestion, isCorrect) => {
+  recordTest = (indexQuestion: number, isCorrect: boolean) => {
     const newQuestionRef = this.testRef.child(`/question_${indexQuestion}`);
     const questions = this.examQuestions[indexQuestion].src.split("/");
     newQuestionRef.child("item").set(questions[questions.length - 1]);
@@ -67,17 +86,10 @@ class TestStudent extends React.Component {
         correctAnswers={this.correctAnswers}
         startNewGame={this.props.startNewGame}
         score={this.props.score}
+        studentName={this.props.studentName}
       />
     );
   }
 }
-
-TestStudent.propTypes = {
-  startNewGame: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired,
-  score: PropTypes.number.isRequired,
-  sessionRef: PropTypes.object.isRequired
-};
 
 export default TestStudent;
