@@ -5,8 +5,8 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
-import localeEn from 'react-intl/locale-data/en';
-import localeFr from 'react-intl/locale-data/fr';
+import localeEn from "react-intl/locale-data/en";
+import localeFr from "react-intl/locale-data/fr";
 
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
@@ -21,7 +21,7 @@ import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
 import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
-import type { VirtualStudent } from './VirtualStudent/types';
+import type { VirtualStudent } from "./VirtualStudent/types";
 
 const theme = createMuiTheme({
   palette: {
@@ -38,11 +38,11 @@ const theme = createMuiTheme({
 });
 
 const messages = {
-  'fr': messagesFr,
-  'en': messagesEn
+  fr: messagesFr,
+  en: messagesEn
 };
 
-type PropsT = {}
+type PropsT = {};
 
 type StateT = {
   hasBeenWelcomed: boolean,
@@ -53,8 +53,9 @@ type StateT = {
   score: number,
   scoreDisplayed: string,
   history: Object[],
-  language: string
-}
+  language: string,
+  studentName: string
+};
 
 class App extends React.Component<PropsT, StateT> {
   student: VirtualStudent;
@@ -71,7 +72,8 @@ class App extends React.Component<PropsT, StateT> {
       score: 200,
       scoreDisplayed: "200",
       history: [],
-      language: localStorage.getItem('lang') || navigator.language.split(/[-_]/)[0]
+      language: localStorage.getItem('lang') || navigator.language.split(/[-_]/)[0],
+      studentName: ""
     };
     this.student = new QuickLearnerStudent();
     addLocaleData([...localeEn, ...localeFr]);
@@ -112,11 +114,11 @@ class App extends React.Component<PropsT, StateT> {
 
   render() {
     let displayed;
-    const userId: string = localStorage.getItem("user_id") || 'anonymous'
+    const userId: string = localStorage.getItem("user_id") || "anonymous";
     if (!this.state.hasBeenWelcomed) {
       displayed = (
         <WelcomeMenu
-          onClickStart={() => {
+          onClickStart={studentName => {
             if (this.state.isRegistered) {
               const newSession = firebase
                 .database()
@@ -124,16 +126,17 @@ class App extends React.Component<PropsT, StateT> {
                 .push().key;
               this.sessionRef = firebase
                 .database()
-                .ref(
-                  `/sessions/${userId}/${newSession}`
-                );
+                .ref(`/sessions/${userId}/${newSession}`);
               this.sessionRef.child("timestamp").set(new Date().getTime());
               this.sessionRef.child("score").set(200);
+              this.sessionRef.child("student_name").set(studentName);
             }
             this.setState({
-              hasBeenWelcomed: true
+              hasBeenWelcomed: true,
+              studentName
             });
           }}
+          language={this.state.language}
         />
       );
     } else if (!this.state.isRegistered) {
@@ -142,17 +145,21 @@ class App extends React.Component<PropsT, StateT> {
           onSubmit={newSession => {
             this.sessionRef = firebase
               .database()
-              .ref(
-                `/sessions/${userId}/${newSession}`
-              );
+              .ref(`/sessions/${userId}/${newSession}`);
             this.sessionRef.child("timestamp").set(new Date().getTime());
             this.sessionRef.child("score").set(200);
+            this.sessionRef.child("student_name").set(this.state.studentName);
             this.setState({ isRegistered: true });
           }}
         />
       );
     } else if (this.state.view === "history") {
-      displayed = <SessionHistory history={this.state.history} />;
+      displayed = (
+        <SessionHistory
+          history={this.state.history}
+          studentName={this.state.studentName}
+        />
+      );
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
@@ -240,12 +247,16 @@ class App extends React.Component<PropsT, StateT> {
             student={this.student}
             score={this.state.score}
             sessionRef={this.sessionRef}
+            studentName={this.state.studentName}
           />
         );
       }
     }
     return (
-      <IntlProvider locale={this.state.language} messages={messages[this.state.language]}>
+      <IntlProvider
+        locale={this.state.language}
+        messages={messages[this.state.language]}
+      >
         <MuiThemeProvider theme={theme}>
           <AppDrawer
             hasBeenWelcomed={this.state.hasBeenWelcomed}

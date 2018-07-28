@@ -171,7 +171,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Welcome {username}</default_text>
+                        <default_text>Welcome {username} !</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -261,7 +261,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Take test</default_text>
+                        <default_text>Take the test</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1214,6 +1214,23 @@
                             </translation>
                         </translations>
                     </concept_node>
+                    <concept_node>
+                        <name>studentName</name>
+                        <definition_loaded>true</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text>{studentName}'s history</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
                 </children>
             </folder_node>
             <folder_node>
@@ -1375,7 +1392,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>No I want to go back to training</default_text>
+                        <default_text>No, I want to go back to training</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1431,7 +1448,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Your student obtained</default_text>
+                        <default_text>{studentName} obtained</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1504,7 +1521,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Question </default_text>
+                        <default_text>Question: {indexQuestion} / {numberOfQuestions}: Is it a parallelogram?</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1561,6 +1578,23 @@
                         <description></description>
                         <comment></comment>
                         <default_text>Start playing</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>studentName</name>
+                        <definition_loaded>true</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text>Student Name</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>

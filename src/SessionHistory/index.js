@@ -1,7 +1,9 @@
 import React from "react";
 
+import { withStyles } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
+import Grid from "@material-ui/core/Grid";
 import {
   VerticalTimeline,
   VerticalTimelineElement
@@ -36,7 +38,15 @@ function LessonIcon(props) {
   );
 }
 
-const styles = {
+const styles = () => ({
+  title: {
+    display: "flex",
+    flexWrap: "wrap",
+    marginTop: "75px"
+  }
+});
+
+const icons = {
   start: {
     icon: <SchoolIcon />,
     color: "#1996ef"
@@ -55,15 +65,24 @@ const styles = {
   }
 };
 
-const SessionHistory = ({ history }) => (
+const SessionHistory = ({ classes, history, studentName }) => (
   <div>
+    <Grid container justify="center" className={classes.title}>
+      <Typography variant="display1">
+        <FormattedMessage
+          id="sessionHistory.studentName"
+          defaultMessage="{studentName}'s history"
+          values={{ studentName }}
+        />
+      </Typography>
+    </Grid>
     <VerticalTimeline>
       <VerticalTimelineElement
         iconStyle={{
-          background: styles.start.color,
+          background: icons.start.color,
           color: "#fff"
         }}
-        icon={styles.start.icon}
+        icon={icons.start.icon}
       >
         <Typography variant="title">
           <FormattedMessage
@@ -76,10 +95,10 @@ const SessionHistory = ({ history }) => (
         <VerticalTimelineElement
           key={index}
           iconStyle={{
-            background: styles[elem.activityType].color,
+            background: icons[elem.activityType].color,
             color: "#fff"
           }}
-          icon={styles[elem.activityType].icon}
+          icon={icons[elem.activityType].icon}
         >
           <Typography variant="title">{elem.title}</Typography>
           <Gallery
@@ -95,7 +114,9 @@ const SessionHistory = ({ history }) => (
 );
 
 SessionHistory.propTypes = {
-  history: PropTypes.array.isRequired
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.array.isRequired,
+  studentName: PropTypes.string.isRequired
 };
 
-export default SessionHistory;
+export default withStyles(styles)(SessionHistory);
