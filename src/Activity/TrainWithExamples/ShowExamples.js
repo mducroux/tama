@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
@@ -26,93 +26,67 @@ const styles = () => ({
 class ShowExamples extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { indexExample: 0, thinking: false, userAnswer: false };
+    this.state = { thinking: false, userAnswer: false };
   }
 
   choiceOrAnswer = () => {
-    if (this.state.thinking) {
+    const { thinking, userAnswer } = this.state
+    if (thinking) {
       return (
         <Typography variant="title">
-          {this.state.userAnswer ? (
-            <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
-          ) : (
-            <FormattedMessage id="showExamples.no" defaultMessage="No" />
-          )}
+          {userAnswer && <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />}
+          {!userAnswer && <FormattedMessage id="showExamples.no" defaultMessage="No" />}
         </Typography>
       );
     }
     return (
-      <div>
-        <Grid container justify="center" spacing={40}>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.handleClick(true)}
-            >
-              <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.handleClick(false)}
-            >
-              <FormattedMessage id="showExamples.no" defaultMessage="No" />
-            </Button>
-          </Grid>
+      <Grid container justify="center" spacing={40}>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.handleClick(true)}
+          >
+            <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
+          </Button>
         </Grid>
-      </div>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.handleClick(false)}
+          >
+            <FormattedMessage id="showExamples.no" defaultMessage="No" />
+          </Button>
+        </Grid>
+      </Grid>
     );
   };
 
   handleClick = userAnswer => {
     this.setState({ thinking: true, userAnswer });
-    this.props.student.learn(
-      userAnswer,
-      this.props.parallelograms[this.state.indexExample].shapeFeatures
-    );
-    this.props.recordExampleActivity(userAnswer, this.state.indexExample);
+    const { student, parallelogram, recordExampleActivity } = this.props
+    student.learn(userAnswer, parallelogram.shapeFeatures);
+    recordExampleActivity(userAnswer);
     setTimeout(() => {
-      if (this.state.indexExample + 1 === this.props.numberOfExamples) {
-        this.props.updateScore();
-        this.props.updateHistory();
-        this.props.getBackToMenu();
-      } else {
-        this.setState({
-          thinking: false,
-          indexExample: this.state.indexExample + 1
-        });
-      }
+      this.props.updateScore();
+      this.props.updateHistory()
+      this.props.getBackToMenu();
     }, 2000);
   };
 
   render() {
-    const { classes } = this.props;
-
-    let bubbleText;
-    if (this.state.thinking) {
-      bubbleText = this.props.student.thinkingAboutExample;
-    } else {
-      bubbleText = this.props.student.questionExample;
-    }
-
+    const { classes, student, parallelogram } = this.props;
+    const { thinking } = this.state;
+    const bubbleText = thinking ? student.thinkingAboutExample : student.questionExample;
     return (
-      <div>
+      <React.Fragment>
         <Grid container justify="center" className={classes.root}>
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <FormattedMessage
-            id="showExamples.indexExample"
-            defaultMessage="Example:"
-          />
-          {this.state.indexExample + 1} / {this.props.numberOfExamples}
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
           <img
-            src={this.props.parallelograms[this.state.indexExample].src}
+            src={parallelogram.src}
             alt="parallelogram"
             width="300"
             height="300"
@@ -121,15 +95,14 @@ class ShowExamples extends React.Component {
         <Grid container justify="center" className={classes.root}>
           {this.choiceOrAnswer()}
         </Grid>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
 ShowExamples.propTypes = {
   classes: PropTypes.object.isRequired,
-  numberOfExamples: PropTypes.number.isRequired,
-  parallelograms: PropTypes.array.isRequired,
+  parallelogram: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   updateHistory: PropTypes.func.isRequired,

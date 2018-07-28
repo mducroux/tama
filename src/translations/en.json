@@ -14,7 +14,7 @@
 	"chooseActivity.giveLesson": "Give a lesson",
 	"chooseActivity.showExample": "Show examples",
 	"chooseActivity.takeTest": "Take the test",
-	"chooseExamples.statement": "Choose {numberOfExamplesLeft} shapes to show",
+	"chooseExamples.statement": "Choose a shape to show",
 	"chooseExercise.statement": "Choose a shape for the exercise",
 	"chooseLesson.statement": "Choose a lesson to give",
 	"dumbStudent.feedbackLessonAlreadyKnow": "I already know that",

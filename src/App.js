@@ -94,6 +94,24 @@ class App extends React.Component<PropsT, StateT> {
     }, 2000);
   };
 
+  updateHistory(activityType: string, image: any) {
+    this.setState(prevState => ({
+      history: [
+        ...prevState.history,
+        {
+          activityType,
+          images: image ? [image] : [],
+          title: (
+            <FormattedMessage
+              id={`app.${activityType}`}
+              defaultMessage={activityType}
+            />
+          )
+        }
+      ]
+    }))
+  }
+
   render() {
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "anonymous";
@@ -179,23 +197,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={images =>
-              this.setState(prevState => ({
-                history: [
-                  ...prevState.history,
-                  {
-                    activityType: "example",
-                    images,
-                    title: (
-                      <FormattedMessage
-                        id="app.example"
-                        defaultMessage="Example"
-                      />
-                    )
-                  }
-                ]
-              }))
-            }
+            updateHistory={image => this.updateHistory('example', image)}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -207,22 +209,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={images =>
-              this.setState(prevState => ({
-                history: [
-                  ...prevState.history,
-                  {
-                    activityType: "exercise",
-                    images: [images],
-                    title: (
-                      <FormattedMessage
-                        id="app.exercise"
-                        defaultMessage="Exercise"
-                      />
-                    )
-                  }
-                ]
-              }))
+            updateHistory={image => this.updateHistory('exercise', image)
             }
             updateScore={() => this.updateScore(-30)}
             student={this.student}
@@ -235,22 +222,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={() =>
-              this.setState(prevState => ({
-                history: [
-                  ...prevState.history,
-                  {
-                    activityType: "lesson",
-                    images: [],
-                    title: (
-                      <FormattedMessage
-                        id="app.lesson"
-                        defaultMessage="Lesson"
-                      />
-                    )
-                  }
-                ]
-              }))
+            updateHistory={() => this.updateHistory('lesson', null)
             }
             updateScore={() => this.updateScore(-50)}
             student={this.student}
