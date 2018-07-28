@@ -14,7 +14,7 @@
 	"chooseActivity.giveLesson": "Donner une leçon",
 	"chooseActivity.showExample": "Montrer des exemples",
 	"chooseActivity.takeTest": "Passer le test",
-	"chooseExamples.statement": "Choisis {numberOfExamplesLeft} formes à montrer",
+	"chooseExamples.statement": "Choisis une forme à montrer",
 	"chooseExercise.statement": "Choisis une forme pour l'exercice",
 	"chooseLesson.statement": "Choisis une leçon à donner",
 	"dumbStudent.feedbackLessonAlreadyKnow": "Je le savais déjà",

@@ -41,7 +41,7 @@ const VirtualStudent = ({ classes, bubbleText }) => (
 
 VirtualStudent.propTypes = {
   classes: PropTypes.object.isRequired,
-  bubbleText: PropTypes.string.isRequired
+  bubbleText: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(VirtualStudent);
