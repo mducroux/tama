@@ -3,6 +3,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,6 +15,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -21,8 +23,11 @@ import SchoolIcon from "@material-ui/icons/School";
 import HistoryIcon from "@material-ui/icons/ShowChart";
 import UnregisterIcon from "@material-ui/icons/ExitToApp";
 import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
+import SettingsIcon from "@material-ui/icons/Settings";
+import RulesIcon from "@material-ui/icons/Assignment";
+import SettingsDialog from "./SidePanel/SettingsDialog";
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const styles = theme => ({
   root: {
@@ -67,9 +72,12 @@ const styles = theme => ({
   drawerHeader: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     padding: "0 8px",
     ...theme.mixins.toolbar
+  },
+  studentName: {
+    marginLeft: theme.spacing.unit * 2
   },
   content: {
     flexGrow: 1,
@@ -97,12 +105,8 @@ const styles = theme => ({
   },
   scoreDisplayed: {
     flex: 1,
-    marginRight: theme.spacing.unit * 2
-  },
-  flag: {
-    flex: 1,
-    textAlign: 'right',
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit * 3,
+    textAlign: "right"
   }
 });
 
@@ -111,6 +115,7 @@ class AppDrawer extends React.Component {
     super(props);
     this.state = {
       open: false,
+      openSettingsDialog: false
     };
     this.mainMenuListItems = (
       <div>
@@ -137,6 +142,16 @@ class AppDrawer extends React.Component {
                 id="appDrawer.history"
                 defaultMessage="History"
               />
+            }
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <RulesIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage id="appDrawer.rules" defaultMessage="Rules" />
             }
           />
         </ListItem>
@@ -170,8 +185,24 @@ class AppDrawer extends React.Component {
             }
           />
         </ListItem>
+        <ListItem
+          button
+          onClick={() => this.setState({ openSettingsDialog: true })}
+        >
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.settings"
+                defaultMessage="Settings"
+              />
+            }
+          />
+        </ListItem>
       </div>
-    )
+    );
   }
 
   handleDrawerOpen = () => {
@@ -203,12 +234,15 @@ class AppDrawer extends React.Component {
         }}
       >
         <div className={classes.drawerHeader}>
+          <Typography variant="subheading" className={classes.studentName}>
+            {this.props.studentName}
+          </Typography>
           <IconButton onClick={this.handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
-                <ChevronLeftIcon />
-              )}
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -253,12 +287,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                    <FormattedMessage
-                      id="appDrawer.welcomeCustomized"
-                      defaultMessage="Welcome {username} !"
-                      values={{ username: localStorage.getItem("username") }}
-                    />
-                  )}
+                  <FormattedMessage
+                    id="appDrawer.welcomeCustomized"
+                    defaultMessage="Welcome {username} !"
+                    values={{ username: localStorage.getItem("username") }}
+                  />
+                )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
@@ -269,29 +303,11 @@ class AppDrawer extends React.Component {
                   >
                     <FormattedMessage
                       id="appDrawer.score"
-                      defaultMessage="Score:"
+                      defaultMessage="Your score:"
                     />{" "}
                     {this.props.scoreDisplayed}
                   </Typography>
                 )}
-              <div>
-                <IconButton
-                  onClick={() => this.props.changeLanguage('fr')}
-                  color="inherit"
-                  className={classes.flag}
-                >
-                  <img src='images/fr.svg' alt='icon_french' width='24px' height='24px' />
-                </IconButton>
-              </div>
-              <div>
-                <IconButton
-                  onClick={() => this.props.changeLanguage('en')}
-                  color="inherit"
-                  className={classes.flag}
-                >
-                  <img src='images/en.svg' alt='icon_english' width='24px' height='24px' />
-                </IconButton>
-              </div>
             </Toolbar>
           </AppBar>
           {drawer}
@@ -305,6 +321,13 @@ class AppDrawer extends React.Component {
             {this.props.mainContent}
           </main>
         </div>
+        <SettingsDialog
+          openSettingsDialog={this.state.openSettingsDialog}
+          onCloseSettingsDialog={() =>
+            this.setState({ openSettingsDialog: false })
+          }
+          changeLanguage={this.props.changeLanguage}
+        />
       </div>
     );
   }
@@ -320,6 +343,7 @@ AppDrawer.propTypes = {
   onUnregister: PropTypes.func.isRequired,
   onLeaveSession: PropTypes.func.isRequired,
   mainContent: PropTypes.object.isRequired,
+  studentName: PropTypes.bool.isRequired,
   changeLanguage: PropTypes.func.isRequired
 };
 

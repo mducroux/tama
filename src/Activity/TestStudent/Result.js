@@ -39,7 +39,7 @@ const Result = ({ studentName, classes, ...props }) => (
   <div>
     <Grid container justify="center" className={classes.root}>
       <div className={classes.group}>
-        <img src="images/diploma.jpg" alt="Diploma" width="400" height="300" />
+        <img src="images/diploma.png" alt="Diploma" width="400" height="300" />
         <div className={classes.textImage}>
           <FormattedMessage
             id="testResult.description"
