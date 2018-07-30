@@ -107,8 +107,10 @@ const SessionHistory = ({ classes, history, studentName }) => {
               <FormattedMessage
                 id={`app.${elem.activity_type}`}
                 defaultMessage={elem.activity_type}
-              /></Typography>
-            <img src={elem.item} alt={elem.item} />
+              />
+            </Typography>
+            {elem.activity_type !== 'lesson' && <img src={elem.item} alt={elem.activity_type} width="200px" height="200px" />}
+            {elem.activity_type === 'lesson' && <p>{elem.item}</p>}
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>

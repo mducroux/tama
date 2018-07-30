@@ -21,10 +21,10 @@ class TrainWithExamples extends React.Component {
 
   recordExampleActivity = (userAnswer) => {
     this.newActivityRef.child("activity_type").set("example");
-    const parallelogramTitle = parallelogramData[this.state.index].src.split("/");
+    const image = parallelogramData[this.state.index].src;
     this.newActivityRef
       .child("item")
-      .set(parallelogramTitle[parallelogramTitle.length - 1]);
+      .set(image);
     this.newActivityRef
       .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);

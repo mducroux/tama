@@ -26,7 +26,7 @@ class TrainWithLesson extends React.Component {
       .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);
     this.newActivityRef
-      .child("item_lesson")
+      .child("item")
       .set(lesson[this.state.index].title);
     this.newActivityRef
       .child("time")
