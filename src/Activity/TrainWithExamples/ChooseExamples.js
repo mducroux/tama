@@ -37,7 +37,11 @@ const styles = theme => ({
   }
 });
 
-const ChooseExamples = ({ onNavigationBackToMenu, onSelectExample, classes }) => (
+const ChooseExamples = ({
+  onNavigationBackToMenu,
+  onSelectExample,
+  classes
+}) => (
   <div>
     <div className={classes.root}>
       <IconButton
@@ -58,10 +62,12 @@ const ChooseExamples = ({ onNavigationBackToMenu, onSelectExample, classes }) =>
       <Gallery
         images={parallelogramData}
         onClickThumbnail={onSelectExample}
+        enableImageSelection={false}
+        margin={0}
       />
     </div>
   </div>
-)
+);
 
 ChooseExamples.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -80,6 +80,9 @@ class App extends React.Component<PropsT, StateT> {
     };
     this.student = new QuickLearnerStudent();
     addLocaleData([...localeEn, ...localeFr]);
+    if (!localStorage.getItem("lang")) {
+      localStorage.setItem("lang", this.state.language);
+    }
   }
 
   updateScore = (points: number) => {
@@ -103,7 +106,7 @@ class App extends React.Component<PropsT, StateT> {
         ...prevState.history,
         {
           activityType,
-          images: image ? [image] : [],
+          images: image ? [{ thumbnail: image.thumbnail }] : [],
           title: (
             <FormattedMessage
               id={`app.${activityType}`}
@@ -112,7 +115,7 @@ class App extends React.Component<PropsT, StateT> {
           )
         }
       ]
-    }))
+    }));
   }
 
   runTest = () => {
@@ -226,7 +229,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={image => this.updateHistory('example', image)}
+            updateHistory={image => this.updateHistory("example", image)}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -238,8 +241,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={image => this.updateHistory('exercise', image)
-            }
+            updateHistory={image => this.updateHistory("exercise", image)}
             updateScore={() => this.updateScore(-30)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -251,8 +253,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={() => this.updateHistory('lesson', null)
-            }
+            updateHistory={() => this.updateHistory("lesson", null)}
             updateScore={() => this.updateScore(-50)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -307,10 +308,11 @@ class App extends React.Component<PropsT, StateT> {
             scoreDisplayed={this.state.scoreDisplayed}
             changeView={view => this.setState({ view })}
             mainContent={displayed}
-            changeLanguage={(language) => {
-              localStorage.setItem('lang', language)
-              this.setState({ language })
+            changeLanguage={language => {
+              localStorage.setItem("lang", language);
+              this.setState({ language });
             }}
+            studentName={this.state.studentName}
           />
         </MuiThemeProvider>
       </IntlProvider>

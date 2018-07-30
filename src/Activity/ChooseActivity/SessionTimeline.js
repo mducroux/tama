@@ -12,7 +12,8 @@ import SchoolIcon from "@material-ui/icons/School";
 
 const styles = theme => ({
   stepper: {
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
+    padding: "5px"
   }
 });
 
