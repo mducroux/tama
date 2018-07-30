@@ -1,7 +1,8 @@
+// @flow
+
 import React from "react";
 
 import { FormattedMessage } from "react-intl";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -21,49 +22,39 @@ const styles = () => ({
   }
 });
 
-class ShowQuestions extends React.Component {
+type StateT = { thinking: boolean, index: number, answer: boolean };
+
+type PropsT = {
+  classes: Object,
+  displayResultTest: () => void,
+  questions: Object[],
+  answers: boolean[],
+  student: any,
+}
+
+class ShowQuestions extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
-    this.state = { thinking: true, indexQuestion: 0, answer: false };
+    this.state = { thinking: true, index: 0, answer: false };
   }
 
   componentDidMount() {
-    setTimeout(() => this.answerQuestion(), 200);
+    setTimeout(() => this.answerQuestion(), 500);
   }
 
   answerQuestion() {
-    const answer = this.props.student.answerParallelogram(
-      this.props.examQuestions[this.state.indexQuestion].shapeFeatures
-    );
-    if (
-      answer
-        ? this.props.examQuestions[this.state.indexQuestion].valid
-        : !this.props.examQuestions[this.state.indexQuestion].valid
-    ) {
-      this.props.recordTest(this.state.indexQuestion, true);
-      this.props.increaseGrade();
-      this.props.updateScore();
-      this.props.onAnswerQuestion(this.state.indexQuestion, true);
-    } else {
-      this.props.recordTest(this.state.indexQuestion, false);
-      this.props.onAnswerQuestion(this.state.indexQuestion, false);
-    }
     this.setState({
       thinking: false,
-      answer
+      answer: this.props.answers[this.state.index]
     });
   }
 
-  handleNextQuestion() {
-    if (this.props.numberOfQuestions === this.state.indexQuestion + 1) {
-      this.props.displayResultTest(this.state.grade);
-    } else {
-      this.setState({
-        indexQuestion: this.state.indexQuestion + 1,
-        thinking: true
-      });
-      setTimeout(() => this.answerQuestion(), 200);
-    }
+  handleNextQuestion = () => {
+    this.setState({
+      index: this.state.index + 1,
+      thinking: true
+    });
+    setTimeout(() => this.answerQuestion(), 500);
   }
 
   render() {
@@ -84,17 +75,17 @@ class ShowQuestions extends React.Component {
           <Typography variant="title" className={classes.title}>
             <FormattedMessage
               id="testShowQuestions.question"
-              defaultMessage="Question: {indexQuestion} / {numberOfQuestions}: Is it a parallelogram?"
+              defaultMessage="Question: {index} / {numberOfQuestions}: Is it a parallelogram?"
               values={{
-                indexQuestion: this.state.indexQuestion + 1,
-                numberOfQuestions: this.props.numberOfQuestions
+                index: this.state.index + 1,
+                numberOfQuestions: this.props.questions.length
               }}
             />
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <img
-            src={this.props.examQuestions[this.state.indexQuestion].src}
+            src={this.props.questions[this.state.index].src}
             alt="parallelogram"
             width="300"
             height="300"
@@ -104,42 +95,33 @@ class ShowQuestions extends React.Component {
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          {!this.state.thinking && (
-            <Button
-              className={classes.button}
-              onClick={() => this.handleNextQuestion()}
-              color="primary"
-              size="large"
-            >
-              {this.props.numberOfQuestions !== this.state.indexQuestion + 1 ? (
-                <FormattedMessage
-                  id="testShowQuestions.nextQuestion"
-                  defaultMessage="Next question"
-                />
-              ) : (
-                <FormattedMessage
-                  id="testShowQuestions.seeResult"
-                  defaultMessage="See result"
-                />
-              )}
-            </Button>
-          )}
+          {this.props.questions.length !== this.state.index + 1 && <Button
+            className={classes.button}
+            onClick={this.handleNextQuestion}
+            color="primary"
+            size="large"
+          >
+            <FormattedMessage
+              id="testShowQuestions.nextQuestion"
+              defaultMessage="Next question"
+            />
+          </Button>
+          }
+          <Button
+            className={classes.button}
+            onClick={this.props.displayResultTest}
+            color="primary"
+            size="large"
+          >
+            <FormattedMessage
+              id="testShowQuestions.seeResult"
+              defaultMessage="See result"
+            />
+          </Button>
         </Grid>
       </div>
     );
   }
 }
-
-ShowQuestions.propTypes = {
-  classes: PropTypes.object.isRequired,
-  displayResultTest: PropTypes.func.isRequired,
-  numberOfQuestions: PropTypes.number.isRequired,
-  examQuestions: PropTypes.array.isRequired,
-  onAnswerQuestion: PropTypes.func.isRequired,
-  updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired,
-  increaseGrade: PropTypes.func.isRequired,
-  recordTest: PropTypes.func.isRequired
-};
 
 export default withStyles(styles)(ShowQuestions);
