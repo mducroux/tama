@@ -100,7 +100,10 @@ class App extends React.Component<PropsT, StateT> {
   };
 
   runTest = () => {
-    const questions = [...parallelogramData].sort(() => 0.5 - Math.random()).slice(0, 10);
+    const questions = [...parallelogramData]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 10)
+      .map(x => ({ src: x.src, shapeFeatures: x.shapeFeatures }));
     const answers = questions.map((q) => this.student.answerParallelogram(q.shapeFeatures))
     const grade = questions.reduce((g, q, i) => q.valid === answers[i] ? g + 1 : g, 0)
     const testScore = [0, 0, 0, 25, 50, 100, 200, 300, 500, 700, 1000][grade]
