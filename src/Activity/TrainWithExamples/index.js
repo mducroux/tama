@@ -20,15 +20,16 @@ class TrainWithExamples extends React.Component {
   };
 
   recordExampleActivity = (userAnswer) => {
-    this.newActivityRef.child("/activity_type").set("example");
+    this.newActivityRef.child("activity_type").set("example");
     const parallelogramTitle = parallelogramData[this.state.index].src.split("/");
     this.newActivityRef
-      .child("/item")
+      .child("item")
       .set(parallelogramTitle[parallelogramTitle.length - 1]);
     this.newActivityRef
-      .child("/knowledge")
+      .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);
-    this.newActivityRef.child("/user_answer").set(userAnswer);
+    this.newActivityRef.child("user_answer").set(userAnswer);
+    this.newActivityRef.child("time").set(new Date().getTime());
   };
 
   render() {
@@ -48,9 +49,7 @@ class TrainWithExamples extends React.Component {
         updateScore={this.props.updateScore}
         updateHistory={() => this.props.updateHistory(parallelogram)}
         student={this.props.student}
-        recordExampleActivity={(userAnswer, indexExample) =>
-          this.recordExampleActivity(userAnswer, indexExample)
-        }
+        recordExampleActivity={this.recordExampleActivity}
       />
     );
   }

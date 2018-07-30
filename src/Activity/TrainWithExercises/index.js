@@ -25,14 +25,15 @@ class TrainWithExercise extends React.Component {
       "/"
     );
     this.newActivityRef
-      .child("/item_exercise")
+      .child("item_exercise")
       .set(parallelogramTitle[parallelogramTitle.length - 1]);
-    this.newActivityRef.child("/activity_type").set("exercise");
+    this.newActivityRef.child("activity_type").set("exercise");
     this.newActivityRef
-      .child("/knowledge")
+      .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);
-    this.newActivityRef.child("/student_answer").set(studentAnswer);
-    this.newActivityRef.child("/user_answer").set(userAnswer);
+    this.newActivityRef.child("student_answer").set(studentAnswer);
+    this.newActivityRef.child("user_answer").set(userAnswer);
+    this.newActivityRef.child("time").set(new Date().getTime());
   };
 
   render() {
@@ -53,9 +54,7 @@ class TrainWithExercise extends React.Component {
           this.props.updateHistory(parallelogramData[this.state.index])
         }
         student={this.props.student}
-        recordExerciseActivity={(userAnswer, studentAnswer) =>
-          this.recordExerciseActivity(userAnswer, studentAnswer)
-        }
+        recordExerciseActivity={this.recordExerciseActivity}
       />
     );
   }

@@ -21,13 +21,16 @@ class TrainWithLesson extends React.Component {
   };
 
   recordLessonActivity = () => {
-    this.newActivityRef.child("/activity_type").set("lesson");
+    this.newActivityRef.child("activity_type").set("lesson");
     this.newActivityRef
-      .child("/knowledge")
+      .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);
     this.newActivityRef
-      .child("/item_lesson")
+      .child("item_lesson")
       .set(lesson[this.state.index].title);
+    this.newActivityRef
+      .child("time")
+      .set(new Date().getTime());
   };
 
   render() {
