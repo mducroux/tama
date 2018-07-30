@@ -76,18 +76,22 @@ const StyledTimeLine = withStyles(styles, { withTheme: true })(SessionTimeline);
 
 class FirebaseWrapper extends React.Component<
   { sessionRef: any },
-  { history: Object[] }
+  { history: Object }
 > {
   state = { history: {} };
+  mounted = true;
 
-  componentWillMount() {
-    this.props.sessionRef.on("value", session => {
-      this.setState({ history: session.val() });
+  constructor(props) {
+    super(props);
+    this.props.sessionRef.once("value").then(session => {
+      if (this.mounted) {
+        this.setState({ history: session.val() });
+      }
     });
   }
 
   componentWillUnmount() {
-    this.props.sessionRef.off();
+    this.mounted = false;
   }
 
   render() {

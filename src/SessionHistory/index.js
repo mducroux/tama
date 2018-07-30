@@ -65,8 +65,7 @@ const icons = {
 };
 
 const SessionHistory = ({ classes, history, studentName }) => {
-
-  const { activities } = history
+  const { activities } = history;
 
   return (
     <div>
@@ -94,29 +93,37 @@ const SessionHistory = ({ classes, history, studentName }) => {
             />
           </Typography>
         </VerticalTimelineElement>
-        {activities && Object.values(activities).map((elem, index) => (
-          <VerticalTimelineElement
-            key={index}
-            iconStyle={{
-              background: icons[elem.activity_type].color,
-              color: "#fff"
-            }}
-            icon={icons[elem.activity_type].icon}
-          >
-            <Typography variant="title">
-              <FormattedMessage
-                id={`app.${elem.activity_type}`}
-                defaultMessage={elem.activity_type}
-              />
-            </Typography>
-            {elem.activity_type !== 'lesson' && <img src={elem.item} alt={elem.activity_type} width="200px" height="200px" />}
-            {elem.activity_type === 'lesson' && <p>{elem.item}</p>}
-          </VerticalTimelineElement>
-        ))}
+        {activities &&
+          Object.values(activities).map((elem, index) => (
+            <VerticalTimelineElement
+              key={index}
+              iconStyle={{
+                background: icons[elem.activity_type].color,
+                color: "#fff"
+              }}
+              icon={icons[elem.activity_type].icon}
+            >
+              <Typography variant="title">
+                <FormattedMessage
+                  id={`app.${elem.activity_type}`}
+                  defaultMessage={elem.activity_type}
+                />
+              </Typography>
+              {elem.activity_type !== "lesson" && (
+                <img
+                  src={elem.item}
+                  alt={elem.activity_type}
+                  width="200px"
+                  height="200px"
+                />
+              )}
+              {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+            </VerticalTimelineElement>
+          ))}
       </VerticalTimeline>
     </div>
-  )
-}
+  );
+};
 
 SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -124,23 +131,32 @@ SessionHistory.propTypes = {
   studentName: PropTypes.string.isRequired
 };
 
-const StyledSessionHistory = withStyles(styles)(SessionHistory)
+const StyledSessionHistory = withStyles(styles)(SessionHistory);
 
-class FirebaseWrapper extends React.Component<{ sessionRef: any }, { history: Object[] }> {
-  state = { history: {} }
+class FirebaseWrapper extends React.Component<
+  { sessionRef: any },
+  { history: Object }
+> {
+  state = { history: {} };
+  mounted = true;
 
-  componentWillMount() {
-    this.props.sessionRef.on('value', session => {
-      this.setState({ history: session.val() })
-    })
+  constructor(props) {
+    super(props);
+    this.props.sessionRef.once("value").then(session => {
+      if (this.mounted) {
+        this.setState({ history: session.val() });
+      }
+    });
   }
 
   componentWillUnmount() {
-    this.props.sessionRef.off()
+    this.mounted = false;
   }
 
   render() {
-    return <StyledSessionHistory history={this.state.history} {...this.props} />
+    return (
+      <StyledSessionHistory history={this.state.history} {...this.props} />
+    );
   }
 }
 
