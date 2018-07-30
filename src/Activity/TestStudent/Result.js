@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 
 import { FormattedMessage } from "react-intl";
@@ -35,8 +37,8 @@ const styles = () => ({
   }
 });
 
-const Result = ({ studentName, classes, ...props }) => (
-  <div>
+const Result = ({ studentName, classes, activityScore, score, ...props }) => (
+  <React.Fragment>
     <Grid container justify="center" className={classes.root}>
       <div className={classes.group}>
         <img src="images/diploma.jpg" alt="Diploma" width="400" height="300" />
@@ -48,30 +50,30 @@ const Result = ({ studentName, classes, ...props }) => (
           />
         </div>
         <div className={classes.textGrade}>
-          {props.grade} / {props.numberOfQuestions}
+          {props.grade} / {props.questions.length}
         </div>
       </div>
-    </Grid>
-    <Grid container justify="center" className={classes.root}>
-      {props.examQuestions.map((img, index) => (
-        <div key={img.src}>
-          <img src={img.src} alt={img.src} width="200" height="200" />
-          {props.correctAnswers[index] ? (
-            <CheckCircle color="primary" />
-          ) : (
-            <Cancel color="error" />
-          )}
-        </div>
-      ))}
     </Grid>
     <Grid container justify="center" className={classes.root}>
       <Typography variant="display1" className={classes.finalScore}>
         <FormattedMessage
           id="testResult.finalScore"
-          defaultMessage="Your final score: {score} points"
-          values={{ score: props.score }}
+          defaultMessage="Your final score: {activityScore} + {score} = {totalScore} points"
+          values={{ activityScore, score, totalScore: activityScore + score }}
         />
       </Typography>
+    </Grid>
+    <Grid container justify="center" className={classes.root}>
+      {props.questions.map((img, index) => (
+        <div key={img.src}>
+          <img src={img.src} alt={img.src} width="200" height="200" />
+          {props.answers[index] === img.valid ? (
+            <CheckCircle color="primary" />
+          ) : (
+              <Cancel color="error" />
+            )}
+        </div>
+      ))}
     </Grid>
     <Grid container justify="center" className={classes.root}>
       <Button
@@ -85,17 +87,17 @@ const Result = ({ studentName, classes, ...props }) => (
         />
       </Button>
     </Grid>
-  </div>
+  </React.Fragment>
 );
 
 Result.propTypes = {
   classes: PropTypes.object.isRequired,
   grade: PropTypes.number.isRequired,
-  numberOfQuestions: PropTypes.number.isRequired,
-  examQuestions: PropTypes.array.isRequired,
-  correctAnswers: PropTypes.array.isRequired,
+  questions: PropTypes.array.isRequired,
+  answers: PropTypes.array.isRequired,
   startNewGame: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
+  activityScore: PropTypes.number.isRequired,
   studentName: PropTypes.string.isRequired
 };
 
