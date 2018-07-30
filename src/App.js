@@ -107,7 +107,7 @@ class App extends React.Component<PropsT, StateT> {
               this.sessionRef = firebase
                 .database()
                 .ref(`/sessions/${userId}/${newSession}`);
-              this.sessionRef.child("timestamp").set(new Date().getTime());
+              this.sessionRef.child("start_time").set(new Date().getTime());
               this.sessionRef.child("score").set(200);
               this.sessionRef.child("student_name").set(studentName);
             }
@@ -126,7 +126,7 @@ class App extends React.Component<PropsT, StateT> {
             this.sessionRef = firebase
               .database()
               .ref(`/sessions/${userId}/${newSession}`);
-            this.sessionRef.child("timestamp").set(new Date().getTime());
+            this.sessionRef.child("start_time").set(new Date().getTime());
             this.sessionRef.child("score").set(200);
             this.sessionRef.child("student_name").set(this.state.studentName);
             this.setState({ isRegistered: true });
