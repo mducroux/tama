@@ -44,7 +44,6 @@ class TrainWithLesson extends React.Component {
         lesson={lesson[this.state.index]}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
-        updateHistory={this.props.updateHistory}
         student={this.props.student}
         recordLessonActivity={this.recordLessonActivity}
       />
@@ -55,7 +54,6 @@ class TrainWithLesson extends React.Component {
 TrainWithLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired
 };

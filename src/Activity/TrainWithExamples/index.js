@@ -46,7 +46,6 @@ class TrainWithExamples extends React.Component {
         parallelogram={parallelogram}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
-        updateHistory={() => this.props.updateHistory(parallelogram)}
         student={this.props.student}
         recordExampleActivity={(userAnswer, indexExample) =>
           this.recordExampleActivity(userAnswer, indexExample)
@@ -59,7 +58,6 @@ class TrainWithExamples extends React.Component {
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired
 };

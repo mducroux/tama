@@ -70,7 +70,6 @@ class ShowExamples extends React.Component {
     recordExampleActivity(userAnswer);
     setTimeout(() => {
       this.props.updateScore();
-      this.props.updateHistory()
       this.props.getBackToMenu();
     }, 2000);
   };
@@ -105,7 +104,6 @@ ShowExamples.propTypes = {
   parallelogram: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExampleActivity: PropTypes.func.isRequired
 };

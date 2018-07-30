@@ -4,7 +4,7 @@ import * as React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import deepOrange from "@material-ui/core/colors/deepOrange";
-import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
+import { IntlProvider, addLocaleData } from "react-intl";
 import localeEn from "react-intl/locale-data/en";
 import localeFr from "react-intl/locale-data/fr";
 
@@ -52,7 +52,6 @@ type StateT = {
   view: string,
   score: number,
   scoreDisplayed: string,
-  history: Object[],
   language: string,
   studentName: string
 };
@@ -71,7 +70,6 @@ class App extends React.Component<PropsT, StateT> {
       view: "training",
       score: 200,
       scoreDisplayed: "200",
-      history: [],
       language: localStorage.getItem('lang') || navigator.language.split(/[-_]/)[0],
       studentName: ""
     };
@@ -93,24 +91,6 @@ class App extends React.Component<PropsT, StateT> {
       this.setState({ scoreDisplayed: this.state.score.toString() });
     }, 2000);
   };
-
-  updateHistory(activityType: string, image: any) {
-    this.setState(prevState => ({
-      history: [
-        ...prevState.history,
-        {
-          activityType,
-          images: image ? [image] : [],
-          title: (
-            <FormattedMessage
-              id={`app.${activityType}`}
-              defaultMessage={activityType}
-            />
-          )
-        }
-      ]
-    }))
-  }
 
   render() {
     let displayed;
@@ -156,13 +136,14 @@ class App extends React.Component<PropsT, StateT> {
     } else if (this.state.view === "history") {
       displayed = (
         <SessionHistory
-          history={this.state.history}
           studentName={this.state.studentName}
+          sessionRef={this.sessionRef}
         />
       );
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
+          sessionRef={this.sessionRef}
           onClickExample={() => {
             this.setState({
               hasChosenActivityType: true,
@@ -187,7 +168,6 @@ class App extends React.Component<PropsT, StateT> {
               hasChosenActivity: "test"
             })
           }
-          history={this.state.history}
         />
       );
     } else if (this.state.hasChosenActivityType) {
@@ -197,7 +177,6 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={image => this.updateHistory('example', image)}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -208,8 +187,6 @@ class App extends React.Component<PropsT, StateT> {
           <TrainWithExercises
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
-            }
-            updateHistory={image => this.updateHistory('exercise', image)
             }
             updateScore={() => this.updateScore(-30)}
             student={this.student}
@@ -222,9 +199,8 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={() => this.updateHistory('lesson', null)
+            updateScore={() => this.updateScore(-50)
             }
-            updateScore={() => this.updateScore(-50)}
             student={this.student}
             sessionRef={this.sessionRef}
           />
@@ -239,8 +215,7 @@ class App extends React.Component<PropsT, StateT> {
                 hasChosenActivityType: false,
                 hasChosenActivity: "",
                 score: 200,
-                scoreDisplayed: "200",
-                history: []
+                scoreDisplayed: "200"
               });
             }}
             updateScore={() => this.updateScore(50)}
@@ -268,8 +243,7 @@ class App extends React.Component<PropsT, StateT> {
                 hasChosenActivityType: false,
                 hasChosenActivity: "",
                 score: 200,
-                scoreDisplayed: "200",
-                history: []
+                scoreDisplayed: "200"
               });
             }}
             onUnregister={() => {
@@ -282,8 +256,7 @@ class App extends React.Component<PropsT, StateT> {
                 hasChosenActivityType: false,
                 hasChosenActivity: "",
                 score: 200,
-                scoreDisplayed: "200",
-                history: []
+                scoreDisplayed: "200"
               });
             }}
             scoreDisplayed={this.state.scoreDisplayed}

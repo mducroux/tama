@@ -24,42 +24,70 @@ function ThreeDotsIcon(props) {
   );
 }
 
-const SessionTimeline = ({ history, classes }) => (
-  <div>
-    <Stepper
-      className={classes.stepper}
-      alternativeLabel
-      nonLinear
-      activeStep={history.length}
-    >
-      <Step>
-        <StepLabel icon={<SchoolIcon color="primary" />}>
-          <FormattedMessage
-            id="sessionTimeline.startOfGame"
-            defaultMessage="Start of the game"
-          />
-        </StepLabel>
-      </Step>
-      {history.map((elem, index) => (
-        <Step key={index}>
-          <StepLabel icon={`${index + 1}`}>{elem.title}</StepLabel>
+const SessionTimeline = ({ history, classes }) => {
+  const { activities } = history
+  return (
+    <div>
+      <Stepper
+        className={classes.stepper}
+        alternativeLabel
+        nonLinear
+        activeStep={activities && Object.values(activities).length || 0}
+      >
+        <Step>
+          <StepLabel icon={<SchoolIcon color="primary" />}>
+            <FormattedMessage
+              id="sessionTimeline.startOfGame"
+              defaultMessage="Start of the game"
+            />
+          </StepLabel>
         </Step>
-      ))}
-      <Step>
-        <StepLabel icon={<ThreeDotsIcon color="disabled" />} />
-      </Step>
-      <Step>
-        <StepLabel icon={<StarIcon color="secondary" />}>
-          <FormattedMessage id="sessionTimeline.test" defaultMessage="Test" />
-        </StepLabel>
-      </Step>
-    </Stepper>
-  </div>
-);
+        {activities && Object.values(activities).map((elem, index) => (
+          <Step key={index}>
+            <StepLabel icon={`${index + 1}`}>
+              <FormattedMessage
+                id={`app.${elem.activity_type}`}
+                defaultMessage={elem.activity_type}
+              />
+            </StepLabel>
+          </Step>
+        ))}
+        <Step>
+          <StepLabel icon={<ThreeDotsIcon color="disabled" />} />
+        </Step>
+        <Step>
+          <StepLabel icon={<StarIcon color="secondary" />}>
+            <FormattedMessage id="sessionTimeline.test" defaultMessage="Test" />
+          </StepLabel>
+        </Step>
+      </Stepper>
+    </div>
+  )
+}
 
 SessionTimeline.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.array.isRequired
+  history: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(SessionTimeline);
+const StyledTimeLine = withStyles(styles, { withTheme: true })(SessionTimeline);
+
+class FirebaseWrapper extends React.Component<{ sessionRef: any }, { history: Object[] }> {
+  state = { history: {} }
+
+  componentWillMount() {
+    this.props.sessionRef.on('value', session => {
+      this.setState({ history: session.val() })
+    })
+  }
+
+  componentWillUnmount() {
+    this.props.sessionRef.off()
+  }
+
+  render() {
+    return <StyledTimeLine history={this.state.history} />
+  }
+}
+
+export default FirebaseWrapper
