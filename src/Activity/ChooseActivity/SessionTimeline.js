@@ -26,14 +26,14 @@ function ThreeDotsIcon(props) {
 }
 
 const SessionTimeline = ({ history, classes }) => {
-  const { activities } = history
+  const { activities } = history;
   return (
     <div>
       <Stepper
         className={classes.stepper}
         alternativeLabel
         nonLinear
-        activeStep={activities && Object.values(activities).length || 0}
+        activeStep={activities ? Object.values(activities).length : 0}
       >
         <Step>
           <StepLabel icon={<SchoolIcon color="primary" />}>
@@ -43,16 +43,17 @@ const SessionTimeline = ({ history, classes }) => {
             />
           </StepLabel>
         </Step>
-        {activities && Object.values(activities).map((elem, index) => (
-          <Step key={index}>
-            <StepLabel icon={`${index + 1}`}>
-              <FormattedMessage
-                id={`app.${elem.activity_type}`}
-                defaultMessage={elem.activity_type}
-              />
-            </StepLabel>
-          </Step>
-        ))}
+        {activities &&
+          Object.values(activities).map((elem, index) => (
+            <Step key={index}>
+              <StepLabel icon={`${index + 1}`}>
+                <FormattedMessage
+                  id={`app.${elem.activity_type}`}
+                  defaultMessage={elem.activity_type}
+                />
+              </StepLabel>
+            </Step>
+          ))}
         <Step>
           <StepLabel icon={<ThreeDotsIcon color="disabled" />} />
         </Step>
@@ -63,8 +64,8 @@ const SessionTimeline = ({ history, classes }) => {
         </Step>
       </Stepper>
     </div>
-  )
-}
+  );
+};
 
 SessionTimeline.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -73,22 +74,25 @@ SessionTimeline.propTypes = {
 
 const StyledTimeLine = withStyles(styles, { withTheme: true })(SessionTimeline);
 
-class FirebaseWrapper extends React.Component<{ sessionRef: any }, { history: Object[] }> {
-  state = { history: {} }
+class FirebaseWrapper extends React.Component<
+  { sessionRef: any },
+  { history: Object[] }
+> {
+  state = { history: {} };
 
   componentWillMount() {
-    this.props.sessionRef.on('value', session => {
-      this.setState({ history: session.val() })
-    })
+    this.props.sessionRef.on("value", session => {
+      this.setState({ history: session.val() });
+    });
   }
 
   componentWillUnmount() {
-    this.props.sessionRef.off()
+    this.props.sessionRef.off();
   }
 
   render() {
-    return <StyledTimeLine history={this.state.history} />
+    return <StyledTimeLine history={this.state.history} />;
   }
 }
 
-export default FirebaseWrapper
+export default FirebaseWrapper;

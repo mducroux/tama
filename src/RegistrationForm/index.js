@@ -47,7 +47,7 @@ class RegistrationForm extends React.Component {
     this.state = {
       form: {
         username: "",
-        gender: "women",
+        gender: "female",
         status: "student",
         age: "",
         knowledge: "no"
@@ -78,11 +78,6 @@ class RegistrationForm extends React.Component {
       .ref()
       .child("users")
       .push().key;
-    const newSession = firebase
-      .database()
-      .ref()
-      .child("sessions")
-      .push().key;
     firebase
       .database()
       .ref(`/users/${newUser}`)
@@ -92,7 +87,7 @@ class RegistrationForm extends React.Component {
         } else {
           localStorage.setItem("user_id", newUser);
           localStorage.setItem("username", this.state.form.username);
-          this.props.onSubmit(newSession);
+          this.props.onSubmit(newUser);
         }
       });
   };
@@ -111,8 +106,10 @@ class RegistrationForm extends React.Component {
               >
                 <div className={classes.title}>
                   <Typography variant="display1">
-                    <FormattedMessage id="registrationForm.statement"
-                      defaultMessage="Registration to Tama" />
+                    <FormattedMessage
+                      id="registrationForm.statement"
+                      defaultMessage="Registration to Tama"
+                    />
                   </Typography>
                 </div>
                 <div className={classes.group}>
@@ -121,20 +118,30 @@ class RegistrationForm extends React.Component {
                     value={this.state.form.username}
                     className={classes.textValidator}
                     onChange={this.handleInputChange}
-                    label={<FormattedMessage id="registrationForm.username"
-                      defaultMessage="Your pseudo *" />}
+                    label={
+                      <FormattedMessage
+                        id="registrationForm.username"
+                        defaultMessage="Your pseudo *"
+                      />
+                    }
                     validators={["required"]}
                     errorMessages={[
-                      <FormattedMessage id="registrationForm.requiredField"
+                      <FormattedMessage
+                        id="registrationForm.requiredField"
                         defaultMessage="this field is required"
-                        key={this.id} />
+                        key={this.id}
+                      />
                     ]}
                   />
                 </div>
                 <div className={classes.group}>
                   <FormLabel component="legend">
-                    {<FormattedMessage id="registrationForm.gender"
-                      defaultMessage="I am:" />}
+                    {
+                      <FormattedMessage
+                        id="registrationForm.gender"
+                        defaultMessage="I am:"
+                      />
+                    }
                   </FormLabel>
                   <RadioGroup
                     name="gender"
@@ -145,27 +152,43 @@ class RegistrationForm extends React.Component {
                     <FormControlLabel
                       value="female"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.genderFemale"
-                        defaultMessage="Female" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.genderFemale"
+                          defaultMessage="Female"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="male"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.genderMale"
-                        defaultMessage="Male" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.genderMale"
+                          defaultMessage="Male"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="other"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.genderOther"
-                        defaultMessage="Other" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.genderOther"
+                          defaultMessage="Other"
+                        />
+                      }
                     />
                   </RadioGroup>
                 </div>
                 <div className={classes.group}>
                   <FormLabel component="legend">
-                    {<FormattedMessage id="registrationForm.status"
-                      defaultMessage="I am:" />}
+                    {
+                      <FormattedMessage
+                        id="registrationForm.status"
+                        defaultMessage="I am:"
+                      />
+                    }
                   </FormLabel>
                   <RadioGroup
                     name="status"
@@ -176,26 +199,42 @@ class RegistrationForm extends React.Component {
                     <FormControlLabel
                       value="student"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.statusStudent"
-                        defaultMessage="Student" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.statusStudent"
+                          defaultMessage="Student"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="teacher"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.statusTeacher"
-                        defaultMessage="Teacher" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.statusTeacher"
+                          defaultMessage="Teacher"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="parent"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.statusParent"
-                        defaultMessage="Parent" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.statusParent"
+                          defaultMessage="Parent"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="other"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.statusOther"
-                        defaultMessage="Other" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.statusOther"
+                          defaultMessage="Other"
+                        />
+                      }
                     />
                   </RadioGroup>
                 </div>
@@ -205,23 +244,33 @@ class RegistrationForm extends React.Component {
                     value={this.state.form.age}
                     className={classes.textValidator}
                     onChange={this.handleInputChange}
-                    label={<FormattedMessage id="registrationForm.age"
-                      defaultMessage="Age *" />}
+                    label={
+                      <FormattedMessage
+                        id="registrationForm.age"
+                        defaultMessage="Age *"
+                      />
+                    }
                     validators={["required", "isNumber"]}
                     errorMessages={[
-                      <FormattedMessage id="registrationForm.requiredField"
+                      <FormattedMessage
+                        id="registrationForm.requiredField"
                         defaultMessage="this field is required"
-                        key={this.id} />,
-                      <FormattedMessage id="registrationForm.numberRequired"
+                        key={this.id}
+                      />,
+                      <FormattedMessage
+                        id="registrationForm.numberRequired"
                         defaultMessage="please enter a number"
-                        key={this.id} />
+                        key={this.id}
+                      />
                     ]}
                   />
                 </div>
                 <div className={classes.group}>
                   <FormLabel component="legend">
-                    <FormattedMessage id="registrationForm.knowledgeParallelograms"
-                      defaultMessage="My knowledge of parallelograms:" />
+                    <FormattedMessage
+                      id="registrationForm.knowledgeParallelograms"
+                      defaultMessage="My knowledge of parallelograms:"
+                    />
                   </FormLabel>
                   <RadioGroup
                     name="knowledge"
@@ -232,26 +281,42 @@ class RegistrationForm extends React.Component {
                     <FormControlLabel
                       value="no"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.knowledgeParallelogramsNo"
-                        defaultMessage="No" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.knowledgeParallelogramsNo"
+                          defaultMessage="No"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="poor"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.knowledgeParallelogramsPoor"
-                        defaultMessage="Poor" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.knowledgeParallelogramsPoor"
+                          defaultMessage="Poor"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="average"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.knowledgeParallelogramsAverage"
-                        defaultMessage="Average" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.knowledgeParallelogramsAverage"
+                          defaultMessage="Average"
+                        />
+                      }
                     />
                     <FormControlLabel
                       value="solid"
                       control={<Radio />}
-                      label={<FormattedMessage id="registrationForm.knowledgeParallelogramsSolid"
-                        defaultMessage="Solid" />}
+                      label={
+                        <FormattedMessage
+                          id="registrationForm.knowledgeParallelogramsSolid"
+                          defaultMessage="Solid"
+                        />
+                      }
                     />
                   </RadioGroup>
                 </div>
