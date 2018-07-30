@@ -59,7 +59,12 @@ const ChooseExercise = ({
       </Typography>
     </div>
     <div className={classes.gallery}>
-      <Gallery images={parallelogramData} onClickThumbnail={onSelectExercise} />
+      <Gallery
+        images={parallelogramData}
+        onClickThumbnail={onSelectExercise}
+        enableImageSelection={false}
+        margin={0}
+      />
     </div>
   </div>
 );

@@ -21,7 +21,7 @@ const VirtualStudent = ({ classes, bubbleText }) => (
   <div>
     <div className={classes.group}>
       <img
-        src="images/virtual_student/bubble.jpg"
+        src="images/virtual_student/bubble.png"
         width="200"
         height="150"
         alt="bubble"
@@ -30,7 +30,7 @@ const VirtualStudent = ({ classes, bubbleText }) => (
     </div>
     <div>
       <img
-        src="images/virtual_student/student.jpg"
+        src="images/virtual_student/student.png"
         width="200"
         height="200"
         alt="virtual_student"

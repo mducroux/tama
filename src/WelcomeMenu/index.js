@@ -6,8 +6,6 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import RefreshIcon from "@material-ui/icons/Refresh";
 
 import nameData from "./NameData";
 
@@ -70,7 +68,7 @@ class WelcomeMenu extends React.Component<PropsT, StateT> {
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <img
-            src="images/virtual_student/student.jpg"
+            src="images/virtual_student/student.png"
             width="200"
             height="200"
             alt="virtual_student"
@@ -88,30 +86,6 @@ class WelcomeMenu extends React.Component<PropsT, StateT> {
             />{" "}
             {this.state.firstName} {this.state.lastName}
           </Typography>
-          <IconButton
-            color="inherit"
-            className={classes.studentName}
-            onClick={() =>
-              this.setState({
-                firstName:
-                  nameData[this.props.language].firstNames[
-                    Math.floor(
-                      Math.random() *
-                        nameData[this.props.language].firstNames.length
-                    )
-                  ],
-                lastName:
-                  nameData[this.props.language].lastNames[
-                    Math.floor(
-                      Math.random() *
-                        nameData[this.props.language].lastNames.length
-                    )
-                  ]
-              })
-            }
-          >
-            <RefreshIcon />
-          </IconButton>
         </Grid>
         <Grid container justify="center" className={classes.root}>
           <Button
