@@ -22,6 +22,7 @@ import SessionHistory from "./SessionHistory";
 import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
+import parallelogramData from "./Activity/ParallelogramData";
 
 const theme = createMuiTheme({
   palette: {
@@ -54,7 +55,8 @@ type StateT = {
   scoreDisplayed: string,
   history: Object[],
   language: string,
-  studentName: string
+  studentName: string,
+  test: Object
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -72,9 +74,9 @@ class App extends React.Component<PropsT, StateT> {
       score: 200,
       scoreDisplayed: "200",
       history: [],
-      language:
-        localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
-      studentName: ""
+      language: localStorage.getItem('lang') || navigator.language.split(/[-_]/)[0],
+      studentName: "",
+      test: {}
     };
     this.student = new QuickLearnerStudent();
     addLocaleData([...localeEn, ...localeFr]);
@@ -116,6 +118,36 @@ class App extends React.Component<PropsT, StateT> {
     }));
   }
 
+  runTest = () => {
+    const questions = [...parallelogramData].sort(() => 0.5 - Math.random()).slice(0, 10);
+    const answers = questions.map((q) => this.student.answerParallelogram(q.shapeFeatures))
+    const grade = questions.reduce((g, q, i) => q.valid === answers[i] ? g + 1 : g, 0)
+    const testScore = [0, 0, 0, 25, 50, 100, 200, 300, 500, 700, 1000][grade]
+    const test = { questions, answers, grade, score: testScore }
+
+    const testRef = this.sessionRef.child("test");
+    testRef.set(test)
+    this.sessionRef.child('finalScore/').set(testScore + this.state.score)
+
+    this.setState({
+      hasChosenActivityType: true,
+      hasChosenActivity: "test",
+      test
+    })
+  }
+
+  startNewGame = () => {
+    this.student = new QuickLearnerStudent();
+    this.setState({
+      hasBeenWelcomed: false,
+      hasChosenActivityType: false,
+      hasChosenActivity: "",
+      score: 200,
+      scoreDisplayed: "200",
+      history: []
+    });
+  }
+
   render() {
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "anonymous";
@@ -131,7 +163,7 @@ class App extends React.Component<PropsT, StateT> {
               this.sessionRef = firebase
                 .database()
                 .ref(`/sessions/${userId}/${newSession}`);
-              this.sessionRef.child("timestamp").set(new Date().getTime());
+              this.sessionRef.child("start_time").set(new Date().getTime());
               this.sessionRef.child("score").set(200);
               this.sessionRef.child("student_name").set(studentName);
             }
@@ -150,7 +182,7 @@ class App extends React.Component<PropsT, StateT> {
             this.sessionRef = firebase
               .database()
               .ref(`/sessions/${userId}/${newSession}`);
-            this.sessionRef.child("timestamp").set(new Date().getTime());
+            this.sessionRef.child("start_time").set(new Date().getTime());
             this.sessionRef.child("score").set(200);
             this.sessionRef.child("student_name").set(this.state.studentName);
             this.setState({ isRegistered: true });
@@ -185,11 +217,7 @@ class App extends React.Component<PropsT, StateT> {
               hasChosenActivity: "lesson"
             });
           }}
-          onConfirmTestDialog={() =>
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: "test"
-            })
+          onConfirmTestDialog={this.runTest
           }
           history={this.state.history}
         />
@@ -234,21 +262,10 @@ class App extends React.Component<PropsT, StateT> {
       } else if (this.state.hasChosenActivity === "test") {
         displayed = (
           <TestStudent
-            startNewGame={() => {
-              this.student = new QuickLearnerStudent();
-              this.setState({
-                hasBeenWelcomed: false,
-                hasChosenActivityType: false,
-                hasChosenActivity: "",
-                score: 200,
-                scoreDisplayed: "200",
-                history: []
-              });
-            }}
-            updateScore={() => this.updateScore(50)}
+            startNewGame={this.startNewGame}
             student={this.student}
             score={this.state.score}
-            sessionRef={this.sessionRef}
+            test={this.state.test}
             studentName={this.state.studentName}
           />
         );
