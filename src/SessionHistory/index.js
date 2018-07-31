@@ -135,22 +135,18 @@ const StyledSessionHistory = withStyles(styles)(SessionHistory);
 
 class FirebaseWrapper extends React.Component<
   { sessionRef: any },
-  { history: Object }
+  { history: Object[] }
 > {
   state = { history: {} };
-  mounted = true;
 
-  constructor(props) {
-    super(props);
-    this.props.sessionRef.once("value").then(session => {
-      if (this.mounted) {
-        this.setState({ history: session.val() });
-      }
+  componentWillMount() {
+    this.props.sessionRef.on("value", session => {
+      this.setState({ history: session.val() });
     });
   }
 
   componentWillUnmount() {
-    this.mounted = false;
+    this.props.sessionRef.off();
   }
 
   render() {
