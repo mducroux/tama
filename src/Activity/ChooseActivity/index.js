@@ -111,12 +111,12 @@ class ChooseActivity extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, sessionRef } = this.props;
     return (
       <div>
         <Grid container className={classes.root} justify='center'>
           <Grid item sm={12}>
-            <SessionTimeline history={this.props.history} />
+            <SessionTimeline sessionRef={sessionRef} />
           </Grid >
         </Grid >
         <Grid container className={classes.root} justify='center'>
@@ -207,7 +207,7 @@ ChooseActivity.propTypes = {
   onClickExercise: PropTypes.func.isRequired,
   onClickLesson: PropTypes.func.isRequired,
   onConfirmTestDialog: PropTypes.func.isRequired,
-  history: PropTypes.array.isRequired
+  sessionRef: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(ChooseActivity);

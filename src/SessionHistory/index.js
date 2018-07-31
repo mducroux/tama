@@ -11,7 +11,6 @@ import {
 import "react-vertical-timeline-component/style.min.css";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { Typography } from "@material-ui/core";
-import Gallery from "react-grid-gallery";
 import SchoolIcon from "@material-ui/icons/School";
 
 function ExampleIcon(props) {
@@ -65,58 +64,100 @@ const icons = {
   }
 };
 
-const SessionHistory = ({ classes, history, studentName }) => (
-  <div>
-    <Grid container justify="center" className={classes.title}>
-      <Typography variant="display1">
-        <FormattedMessage
-          id="sessionHistory.studentName"
-          defaultMessage="{studentName}'s history"
-          values={{ studentName }}
-        />
-      </Typography>
-    </Grid>
-    <VerticalTimeline>
-      <VerticalTimelineElement
-        iconStyle={{
-          background: icons.start.color,
-          color: "#fff"
-        }}
-        icon={icons.start.icon}
-      >
-        <Typography variant="title">
+const SessionHistory = ({ classes, history, studentName }) => {
+  const { activities } = history;
+
+  return (
+    <div>
+      <Grid container justify="center" className={classes.title}>
+        <Typography variant="display1">
           <FormattedMessage
-            id="sessionHistory.startGame"
-            defaultMessage="Start of the game"
+            id="sessionHistory.studentName"
+            defaultMessage="{studentName}'s history"
+            values={{ studentName }}
           />
         </Typography>
-      </VerticalTimelineElement>
-      {history.map((elem, index) => (
+      </Grid>
+      <VerticalTimeline>
         <VerticalTimelineElement
-          key={index}
           iconStyle={{
-            background: icons[elem.activityType].color,
+            background: icons.start.color,
             color: "#fff"
           }}
-          icon={icons[elem.activityType].icon}
+          icon={icons.start.icon}
         >
-          <Typography variant="title">{elem.title}</Typography>
-          <Gallery
-            images={elem.images}
-            enableLightbox={false}
-            enableImageSelection={false}
-            tagStyle={{ color: "red" }}
-          />
+          <Typography variant="title">
+            <FormattedMessage
+              id="sessionHistory.startGame"
+              defaultMessage="Start of the game"
+            />
+          </Typography>
         </VerticalTimelineElement>
-      ))}
-    </VerticalTimeline>
-  </div>
-);
+        {activities &&
+          Object.values(activities).map((elem, index) => (
+            <VerticalTimelineElement
+              key={index}
+              iconStyle={{
+                background: icons[elem.activity_type].color,
+                color: "#fff"
+              }}
+              icon={icons[elem.activity_type].icon}
+            >
+              <Typography variant="title">
+                <FormattedMessage
+                  id={`app.${elem.activity_type}`}
+                  defaultMessage={elem.activity_type}
+                />
+              </Typography>
+              {elem.activity_type !== "lesson" && (
+                <img
+                  src={elem.item}
+                  alt={elem.activity_type}
+                  width="200px"
+                  height="200px"
+                />
+              )}
+              {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+            </VerticalTimelineElement>
+          ))}
+      </VerticalTimeline>
+    </div>
+  );
+};
 
 SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.array.isRequired,
+  history: PropTypes.object.isRequired,
   studentName: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(SessionHistory);
+const StyledSessionHistory = withStyles(styles)(SessionHistory);
+
+class FirebaseWrapper extends React.Component<
+  { sessionRef: any },
+  { history: Object }
+> {
+  state = { history: {} };
+  mounted = true;
+
+  constructor(props) {
+    super(props);
+    this.props.sessionRef.once("value").then(session => {
+      if (this.mounted) {
+        this.setState({ history: session.val() });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  render() {
+    return (
+      <StyledSessionHistory history={this.state.history} {...this.props} />
+    );
+  }
+}
+
+export default FirebaseWrapper;

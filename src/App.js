@@ -1,10 +1,11 @@
 // @flow
+
 import * as React from "react";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import deepOrange from "@material-ui/core/colors/deepOrange";
-import { IntlProvider, addLocaleData, FormattedMessage } from "react-intl";
+import { IntlProvider, addLocaleData } from "react-intl";
 import localeEn from "react-intl/locale-data/en";
 import localeFr from "react-intl/locale-data/fr";
 
@@ -23,6 +24,7 @@ import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
+import nameData from "./NameData";
 
 const theme = createMuiTheme({
   palette: {
@@ -53,14 +55,13 @@ type StateT = {
   view: string,
   score: number,
   scoreDisplayed: string,
-  history: Object[],
   language: string,
-  studentName: string,
   test: Object
 };
 
 class App extends React.Component<PropsT, StateT> {
   student: VirtualStudent;
+  studentName: string;
   sessionRef: Object;
 
   constructor(props: PropsT) {
@@ -73,12 +74,32 @@ class App extends React.Component<PropsT, StateT> {
       view: "training",
       score: 200,
       scoreDisplayed: "200",
-      history: [],
-      language: localStorage.getItem('lang') || navigator.language.split(/[-_]/)[0],
-      studentName: "",
+      language:
+        localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
       test: {}
     };
     this.student = new QuickLearnerStudent();
+    this.studentName = `${
+      nameData[this.state.language].firstNames[
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].firstNames.length
+        )
+      ]
+    } ${
+      nameData[this.state.language].lastNames[
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].lastNames.length
+        )
+      ]
+    }`;
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
       localStorage.setItem("lang", this.state.language);
@@ -100,91 +121,106 @@ class App extends React.Component<PropsT, StateT> {
     }, 2000);
   };
 
-  updateHistory(activityType: string, image: any) {
-    this.setState(prevState => ({
-      history: [
-        ...prevState.history,
-        {
-          activityType,
-          images: image ? [{ thumbnail: image.thumbnail }] : [],
-          title: (
-            <FormattedMessage
-              id={`app.${activityType}`}
-              defaultMessage={activityType}
-            />
-          )
-        }
-      ]
-    }));
-  }
-
   runTest = () => {
-    const questions = [...parallelogramData].sort(() => 0.5 - Math.random()).slice(0, 10);
-    const answers = questions.map((q) => this.student.answerParallelogram(q.shapeFeatures))
-    const grade = questions.reduce((g, q, i) => q.valid === answers[i] ? g + 1 : g, 0)
-    const testScore = [0, 0, 0, 25, 50, 100, 200, 300, 500, 700, 1000][grade]
-    const test = { questions, answers, grade, score: testScore }
+    const questions = [...parallelogramData]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 10)
+      .map(x => ({
+        src: x.src,
+        shapeFeatures: x.shapeFeatures,
+        valid: x.valid
+      }));
+    const answers = questions.map(q =>
+      this.student.answerParallelogram(q.shapeFeatures)
+    );
+    const grade = questions.reduce(
+      (g, q, i) => (q.valid === answers[i] ? g + 1 : g),
+      0
+    );
+    const testScore = [0, 0, 0, 25, 50, 100, 200, 300, 500, 700, 1000][grade];
+    const test = { questions, answers, grade, score: testScore };
 
     const testRef = this.sessionRef.child("test");
-    testRef.set(test)
-    this.sessionRef.child('finalScore/').set(testScore + this.state.score)
+    testRef.set(test);
+    this.sessionRef.child("finalScore/").set(testScore + this.state.score);
 
     this.setState({
       hasChosenActivityType: true,
       hasChosenActivity: "test",
       test
-    })
-  }
+    });
+  };
 
   startNewGame = () => {
     this.student = new QuickLearnerStudent();
+    this.studentName = `${
+      nameData[this.state.language].firstNames[
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].firstNames.length
+        )
+      ]
+    } ${
+      nameData[this.state.language].lastNames[
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].lastNames.length
+        )
+      ]
+    }`;
     this.setState({
       hasBeenWelcomed: false,
       hasChosenActivityType: false,
       hasChosenActivity: "",
       score: 200,
       scoreDisplayed: "200",
-      history: []
+      view: "training",
+      test: {}
     });
-  }
+  };
+
+  recordNewSession = (userId: string) => {
+    const sessionId = firebase
+      .database()
+      .ref()
+      .child("sessions")
+      .push().key;
+    this.sessionRef = firebase
+      .database()
+      .ref(`/sessions/${userId}/${sessionId}`);
+    this.sessionRef.child("start_time").set(new Date().getTime());
+    this.sessionRef.child("score").set(200);
+    this.sessionRef.child("student_name").set(this.studentName);
+  };
 
   render() {
     let displayed;
-    const userId: string = localStorage.getItem("user_id") || "anonymous";
+    const userId: string = localStorage.getItem("user_id") || "";
     if (!this.state.hasBeenWelcomed) {
       displayed = (
         <WelcomeMenu
-          onClickStart={studentName => {
-            if (this.state.isRegistered) {
-              const newSession = firebase
-                .database()
-                .ref(`/sessions/${userId}`)
-                .push().key;
-              this.sessionRef = firebase
-                .database()
-                .ref(`/sessions/${userId}/${newSession}`);
-              this.sessionRef.child("start_time").set(new Date().getTime());
-              this.sessionRef.child("score").set(200);
-              this.sessionRef.child("student_name").set(studentName);
-            }
+          onClickStart={() => {
             this.setState({
-              hasBeenWelcomed: true,
-              studentName
+              hasBeenWelcomed: true
             });
+            if (this.state.isRegistered && userId) {
+              this.recordNewSession(userId);
+            }
           }}
-          language={this.state.language}
+          studentName={this.studentName}
         />
       );
     } else if (!this.state.isRegistered) {
       displayed = (
         <RegistrationForm
-          onSubmit={newSession => {
-            this.sessionRef = firebase
-              .database()
-              .ref(`/sessions/${userId}/${newSession}`);
-            this.sessionRef.child("start_time").set(new Date().getTime());
-            this.sessionRef.child("score").set(200);
-            this.sessionRef.child("student_name").set(this.state.studentName);
+          onSubmit={newUserId => {
+            this.recordNewSession(newUserId);
             this.setState({ isRegistered: true });
           }}
         />
@@ -192,13 +228,14 @@ class App extends React.Component<PropsT, StateT> {
     } else if (this.state.view === "history") {
       displayed = (
         <SessionHistory
-          history={this.state.history}
-          studentName={this.state.studentName}
+          studentName={this.studentName}
+          sessionRef={this.sessionRef}
         />
       );
     } else if (!this.state.hasChosenActivityType) {
       displayed = (
         <ChooseActivity
+          sessionRef={this.sessionRef}
           onClickExample={() => {
             this.setState({
               hasChosenActivityType: true,
@@ -217,9 +254,7 @@ class App extends React.Component<PropsT, StateT> {
               hasChosenActivity: "lesson"
             });
           }}
-          onConfirmTestDialog={this.runTest
-          }
-          history={this.state.history}
+          onConfirmTestDialog={this.runTest}
         />
       );
     } else if (this.state.hasChosenActivityType) {
@@ -229,7 +264,6 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={image => this.updateHistory("example", image)}
             updateScore={() => this.updateScore(-10)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -241,7 +275,6 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={image => this.updateHistory("exercise", image)}
             updateScore={() => this.updateScore(-30)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -253,7 +286,6 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateHistory={() => this.updateHistory("lesson", null)}
             updateScore={() => this.updateScore(-50)}
             student={this.student}
             sessionRef={this.sessionRef}
@@ -266,7 +298,7 @@ class App extends React.Component<PropsT, StateT> {
             student={this.student}
             score={this.state.score}
             test={this.state.test}
-            studentName={this.state.studentName}
+            studentName={this.studentName}
           />
         );
       }
@@ -280,29 +312,13 @@ class App extends React.Component<PropsT, StateT> {
           <AppDrawer
             hasBeenWelcomed={this.state.hasBeenWelcomed}
             isRegistered={this.state.isRegistered}
-            onLeaveSession={() => {
-              this.student = new QuickLearnerStudent();
-              this.setState({
-                hasBeenWelcomed: false,
-                hasChosenActivityType: false,
-                hasChosenActivity: "",
-                score: 200,
-                scoreDisplayed: "200",
-                history: []
-              });
-            }}
+            onLeaveSession={this.startNewGame}
             onUnregister={() => {
-              this.student = new QuickLearnerStudent();
+              this.startNewGame();
               localStorage.removeItem("user_id");
               localStorage.removeItem("username");
               this.setState({
-                isRegistered: false,
-                hasBeenWelcomed: false,
-                hasChosenActivityType: false,
-                hasChosenActivity: "",
-                score: 200,
-                scoreDisplayed: "200",
-                history: []
+                isRegistered: false
               });
             }}
             scoreDisplayed={this.state.scoreDisplayed}
@@ -312,7 +328,7 @@ class App extends React.Component<PropsT, StateT> {
               localStorage.setItem("lang", language);
               this.setState({ language });
             }}
-            studentName={this.state.studentName}
+            studentName={this.studentName}
           />
         </MuiThemeProvider>
       </IntlProvider>
