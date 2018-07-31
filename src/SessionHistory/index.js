@@ -37,6 +37,14 @@ function LessonIcon(props) {
   );
 }
 
+function TestIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M 5.6138006,9.3570506 C 5.869878,7.8082938 6.0840921,6.9834418 7.1699484,5.7375345 9.8759756,2.640013 15.275694,2.6474026 17.688713,6.1782789 c 1.492131,2.1864849 1.836852,7.0198991 -0.714057,8.5267981 0,0 1.477363,4.185845 1.477363,4.185845 0,0 -2.417947,-0.167436 -2.417947,-0.167436 0,0 -2.014127,1.644777 -2.014127,1.644777 0,0 -0.984905,-3.447159 -0.984905,-3.447159 0,0 -1.47735,0 -1.47735,0 0,0 -1.231131,3.447159 -1.231131,3.447159 0,0 -0.4924564,0 -0.4924564,0 C 8.2090242,17.974951 8.366606,18.770269 5.894502,18.890922 c 0,0 1.477352,-4.185845 1.477352,-4.185845 C 5.9043465,13.757109 5.3429548,11.011689 5.6138006,9.3570506 Z" />
+    </SvgIcon>
+  );
+}
+
 const styles = () => ({
   title: {
     display: "flex",
@@ -61,11 +69,20 @@ const icons = {
   lesson: {
     icon: <LessonIcon />,
     color: "#4992af"
+  },
+  test: {
+    icon: <TestIcon />,
+    color: "#f54f33"
   }
 };
 
+// temporary work-around (see https://github.com/yahoo/babel-plugin-react-intl/issues/119)
+function FormattedMessageFixed(props) {
+  return <FormattedMessage {...props} />;
+}
+
 const SessionHistory = ({ classes, history, studentName }) => {
-  const { activities } = history;
+  const { activities, test } = history;
 
   return (
     <div>
@@ -104,7 +121,7 @@ const SessionHistory = ({ classes, history, studentName }) => {
               icon={icons[elem.activity_type].icon}
             >
               <Typography variant="title">
-                <FormattedMessage
+                <FormattedMessageFixed
                   id={`app.${elem.activity_type}`}
                   defaultMessage={elem.activity_type}
                 />
@@ -120,6 +137,33 @@ const SessionHistory = ({ classes, history, studentName }) => {
               {elem.activity_type === "lesson" && <p>{elem.item}</p>}
             </VerticalTimelineElement>
           ))}
+        {test && (
+          <VerticalTimelineElement
+            iconStyle={{
+              background: icons.test.color,
+              color: "#fff"
+            }}
+            icon={icons.test.icon}
+          >
+            <Typography variant="title">
+              <FormattedMessage
+                id="sessionHistory.test"
+                defaultMessage="Test"
+              />
+            </Typography>
+            <br />
+            <Typography variant="title">
+              <FormattedMessage
+                id="sessionHistory.grade"
+                defaultMessage="Grade {grade} / {maxGrade}"
+                values={{
+                  grade: test.grade,
+                  maxGrade: Object.keys(test.questions).length
+                }}
+              />
+            </Typography>
+          </VerticalTimelineElement>
+        )}
       </VerticalTimeline>
     </div>
   );
