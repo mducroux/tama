@@ -234,7 +234,7 @@ class AppDrawer extends React.Component {
         }}
       >
         <div className={classes.drawerHeader}>
-          <Typography variant="subheading" className={classes.studentName}>
+          <Typography variant="title" className={classes.studentName}>
             {this.props.studentName}
           </Typography>
           <IconButton onClick={this.handleDrawerClose}>

@@ -1,67 +1,91 @@
 // @flow
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { Typography } from "@material-ui/core";
 
 import type { VirtualStudent } from "./types";
 
 class DumbStudent implements VirtualStudent {
   knowledgeParallelogram = {};
   thinkingAboutExample = (
-    <FormattedMessage
-      id="dumbStudent.thinkingAboutExample"
-      defaultMessage="..."
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.thinkingAboutExample"
+        defaultMessage="..."
+      />
+    </Typography>
   );
   questionExample = (
-    <FormattedMessage
-      id="dumbStudent.questionExample"
-      defaultMessage="Is it a parallelogram?"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.questionExample"
+        defaultMessage="Is it a parallelogram?"
+      />
+    </Typography>
   );
   thinkingAboutExercice = (
-    <FormattedMessage
-      id="dumbStudent.thinkingAboutExercise"
-      defaultMessage="..."
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.thinkingAboutExercise"
+        defaultMessage="..."
+      />
+    </Typography>
   );
   hasRightAnswerExercise = (
-    <FormattedMessage
-      id="dumbStudent.hasRightAnswerExercise"
-      defaultMessage="Super!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.hasRightAnswerExercise"
+        defaultMessage="Super!"
+      />
+    </Typography>
   );
   hasFalseAnswerExercise = (
-    <FormattedMessage
-      id="dumbStudent.hasFalseAnswerExercise"
-      defaultMessage="Ohh!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.hasFalseAnswerExercise"
+        defaultMessage="Ohh!"
+      />
+    </Typography>
   );
   feedbackLessonAlreadyKnow = (
-    <FormattedMessage
-      id="dumbStudent.feedbackLessonAlreadyKnow"
-      defaultMessage="I already know that"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.feedbackLessonAlreadyKnow"
+        defaultMessage="I already know that"
+      />
+    </Typography>
   );
   feedbackLessonDidntKnow = (
-    <FormattedMessage
-      id="dumbStudent.feedbackLessonDidntKnow"
-      defaultMessage="Oh I didn't know that!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.feedbackLessonDidntKnow"
+        defaultMessage="Oh I didn't know that!"
+      />
+    </Typography>
   );
   thinkingAboutExam = (
-    <FormattedMessage id="dumbStudent.thinkingAboutExam" defaultMessage="..." />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.thinkingAboutExam"
+        defaultMessage="..."
+      />
+    </Typography>
   );
   givePositiveAnswer = (
-    <FormattedMessage
-      id="dumbStudent.givePositiveAnswer"
-      defaultMessage="Mmm I think this is a parallelogram"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.givePositiveAnswer"
+        defaultMessage="Mmm I think this is a parallelogram"
+      />
+    </Typography>
   );
   giveNegativeAnswer = (
-    <FormattedMessage
-      id="dumbStudent.giveNegativeAnswer"
-      defaultMessage="I don't think this is a parallelogram"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="dumbStudent.giveNegativeAnswer"
+        defaultMessage="I don't think this is a parallelogram"
+      />
+    </Typography>
   );
 
   state = {};

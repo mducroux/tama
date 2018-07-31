@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { FormattedMessage } from "react-intl";
+import { Typography } from "@material-ui/core";
 
 import type { VirtualStudent, ShapeFeatures } from "./types";
 
@@ -9,64 +10,84 @@ class GodStudent implements VirtualStudent {
 
   knowledgeParallelogram = {};
   thinkingAboutExample = (
-    <FormattedMessage
-      id="godStudent.thinkingAboutExample"
-      defaultMessage="Too easy!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.thinkingAboutExample"
+        defaultMessage="Too easy!"
+      />
+    </Typography>
   );
   questionExample = (
-    <FormattedMessage
-      id="godStudent.questionExample"
-      defaultMessage="Is it a parallelogram?"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.questionExample"
+        defaultMessage="Is it a parallelogram?"
+      />
+    </Typography>
   );
   thinkingAboutExercice = (
-    <FormattedMessage
-      id="godStudent.thinkingAboutExercise"
-      defaultMessage="Too easy!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.thinkingAboutExercise"
+        defaultMessage="Too easy!"
+      />
+    </Typography>
   );
   hasRightAnswerExercise = (
-    <FormattedMessage
-      id="godStudent.hasRightAnswerExercise"
-      defaultMessage="I was sure about that!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.hasRightAnswerExercise"
+        defaultMessage="I was sure about that!"
+      />
+    </Typography>
   );
   hasFalseAnswerExercise = (
-    <FormattedMessage
-      id="godStudent.hasFalseAnswerExercise"
-      defaultMessage="You're lying!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.hasFalseAnswerExercise"
+        defaultMessage="You're lying!"
+      />
+    </Typography>
   );
   feedbackLessonAlreadyKnow = (
-    <FormattedMessage
-      id="godStudent.feedbackLessonAlreadyKnow"
-      defaultMessage="I already know that (as always)"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.feedbackLessonAlreadyKnow"
+        defaultMessage="I already know that (as always)"
+      />
+    </Typography>
   );
   feedbackLessonDidnKnow = (
-    <FormattedMessage
-      id="godStudent.feedbackLessonDidntKnow"
-      defaultMessage="Impossible!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.feedbackLessonDidntKnow"
+        defaultMessage="Impossible!"
+      />
+    </Typography>
   );
   thinkingAboutExam = (
-    <FormattedMessage
-      id="godStudent.thinkingAboutExam"
-      defaultMessage="Too easy!"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.thinkingAboutExam"
+        defaultMessage="Too easy!"
+      />
+    </Typography>
   );
   givePositiveAnswer = (
-    <FormattedMessage
-      id="godStudent.givePositiveAnswer"
-      defaultMessage="This is a parallelogram"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.givePositiveAnswer"
+        defaultMessage="This is a parallelogram"
+      />
+    </Typography>
   );
   giveNegativeAnswer = (
-    <FormattedMessage
-      id="godStudent.giveNegativeAnswer"
-      defaultMessage="This is not a parallelogram"
-    />
+    <Typography variant="title">
+      <FormattedMessage
+        id="godStudent.giveNegativeAnswer"
+        defaultMessage="This is not a parallelogram"
+      />
+    </Typography>
   );
 
   answerParallelogram(shapeFeatures: ShapeFeatures) {

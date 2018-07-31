@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { Typography } from "@material-ui/core";
 
 const styles = () => ({
   root: {
@@ -33,14 +34,21 @@ const styles = () => ({
     outline: "none",
     border: "none"
   },
-  textImage1: {
+  textImageThinking1: {
     position: "absolute",
-    top: "45%",
-    left: "50%",
+    top: "39%",
+    left: "52%",
     transform: "translate(-50%, -50%) scaleX(-1)",
     textAlign: "center"
   },
-  textImage2: {
+  textImageThinking2: {
+    position: "absolute",
+    top: "39%",
+    left: "53%",
+    transform: "translate(-50%, -50%)",
+    textAlign: "center"
+  },
+  textImageAnswer: {
     position: "absolute",
     top: "45%",
     left: "50%",
@@ -92,9 +100,10 @@ class Teacher extends React.Component {
                     height="150"
                     alt="bubble"
                   />
-                  <div className={classes.textImage1}>
-                    {" "}
-                    {this.props.positiveAnswer}{" "}
+                  <div className={classes.textImageThinking1}>
+                    <Typography variant="title">
+                      {this.props.positiveAnswer}
+                    </Typography>
                   </div>
                 </button>
                 <button
@@ -121,9 +130,10 @@ class Teacher extends React.Component {
                     height="150"
                     alt="bubble"
                   />
-                  <div className={classes.textImage2}>
-                    {" "}
-                    {this.props.negativeAnswer}{" "}
+                  <div className={classes.textImageThinking2}>
+                    <Typography variant="title">
+                      {this.props.negativeAnswer}
+                    </Typography>
                   </div>
                 </button>
               </div>
@@ -136,11 +146,12 @@ class Teacher extends React.Component {
                   height="150"
                   alt="bubble"
                 />
-                <div className={classes.textImage2}>
-                  {" "}
-                  {this.state.answer
-                    ? this.props.positiveAnswer
-                    : this.props.negativeAnswer}{" "}
+                <div className={classes.textImageAnswer}>
+                  <Typography variant="title">
+                    {this.state.answer
+                      ? this.props.positiveAnswer
+                      : this.props.negativeAnswer}
+                  </Typography>
                 </div>
               </div>
             )}
