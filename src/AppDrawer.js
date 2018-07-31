@@ -248,6 +248,33 @@ class AppDrawer extends React.Component {
         <Divider />
         <List>{this.mainMenuListItems}</List>
         <Divider />
+        <ListItem button onClick={() => window.alert('this feature is not yet implemented')}>
+          <ListItemIcon>
+            <HistoryIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.stats"
+                defaultMessage="My Statistics"
+              />
+            }
+          />
+        </ListItem>
+        <ListItem button onClick={() => this.props.changeView("leaderboard")}>
+          <ListItemIcon>
+            <HistoryIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.leaderboard"
+                defaultMessage="Leaderboard"
+              />
+            }
+          />
+        </ListItem>
+        <Divider />
         <List>{this.secondaryMenuListItems}</List>
       </Drawer>
     );

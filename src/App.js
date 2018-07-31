@@ -23,6 +23,7 @@ import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
+import Leaderboard from './Leaderboard'
 
 const theme = createMuiTheme({
   palette: {
@@ -188,6 +189,10 @@ class App extends React.Component<PropsT, StateT> {
             this.setState({ isRegistered: true });
           }}
         />
+      );
+    } else if (this.state.view === "leaderboard") {
+      displayed = (
+        <Leaderboard />
       );
     } else if (this.state.view === "history") {
       displayed = (
