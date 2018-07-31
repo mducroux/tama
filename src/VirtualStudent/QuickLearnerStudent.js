@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { Typography } from "@material-ui/core";
 
 import type { VirtualStudent, ShapeFeatures } from "./types";
 
@@ -25,84 +24,64 @@ class QuickLearnerStudent implements VirtualStudent {
     isBlue: 0
   };
   thinkingAboutExample = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.thinkingAboutExample"
-        defaultMessage="..."
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.thinkingAboutExample"
+      defaultMessage="..."
+    />
   );
   questionExample = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.questionExample"
-        defaultMessage="Is it a parallelogram?"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.questionExample"
+      defaultMessage="Is it a parallelogram?"
+    />
   );
   thinkingAboutExercice = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.thinkingAboutExercise"
-        defaultMessage="..."
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.thinkingAboutExercise"
+      defaultMessage="..."
+    />
   );
   hasRightAnswerExercise = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.hasRightAnswerExercise"
-        defaultMessage="Super!"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.hasRightAnswerExercise"
+      defaultMessage="Super!"
+    />
   );
   hasFalseAnswerExercise = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.hasFalseAnswerExercise"
-        defaultMessage="Ohh!"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.hasFalseAnswerExercise"
+      defaultMessage="Ohh!"
+    />
   );
   feedbackLessonAlreadyKnow = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.feedbackLessonAlreadyKnow"
-        defaultMessage="I already know that"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.feedbackLessonAlreadyKnow"
+      defaultMessage="I already know that"
+    />
   );
   feedbackLessonDidntKnow = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.feedbackLessonDidntKnow"
-        defaultMessage="Oh I didn't know that"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.feedbackLessonDidntKnow"
+      defaultMessage="Oh I didn't know that"
+    />
   );
   thinkingAboutExam = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.thinkingAboutExam"
-        defaultMessage="..."
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.thinkingAboutExam"
+      defaultMessage="..."
+    />
   );
   givePositiveAnswer = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.givePositiveAnswer"
-        defaultMessage="Mmm I think this is a parallelogram"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.givePositiveAnswer"
+      defaultMessage="Mmm I think this is a parallelogram"
+    />
   );
   giveNegativeAnswer = (
-    <Typography variant="title">
-      <FormattedMessage
-        id="quickLearnerStudent.giveNegativeAnswer"
-        defaultMessage="I don't think this is a parallelogram"
-      />
-    </Typography>
+    <FormattedMessage
+      id="quickLearnerStudent.giveNegativeAnswer"
+      defaultMessage="I don't think this is a parallelogram"
+    />
   );
 
   // All necessary features should correspond to identify the shape as a parallelogram
