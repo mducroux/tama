@@ -230,6 +230,7 @@ class App extends React.Component<PropsT, StateT> {
         <SessionHistory
           studentName={this.studentName}
           sessionRef={this.sessionRef}
+          student={this.student}
         />
       );
     } else if (!this.state.hasChosenActivityType) {

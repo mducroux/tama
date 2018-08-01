@@ -64,7 +64,13 @@ const icons = {
   }
 };
 
-const SessionHistory = ({ classes, history, studentName }) => {
+const SessionHistory = ({
+  classes,
+  history,
+  studentName,
+  student,
+  teacher
+}) => {
   const { activities } = history;
 
   return (
@@ -103,21 +109,65 @@ const SessionHistory = ({ classes, history, studentName }) => {
               }}
               icon={icons[elem.activity_type].icon}
             >
-              <Typography variant="title">
-                <FormattedMessage
-                  id={`app.${elem.activity_type}`}
-                  defaultMessage={elem.activity_type}
-                />
-              </Typography>
-              {elem.activity_type !== "lesson" && (
-                <img
-                  src={elem.item}
-                  alt={elem.activity_type}
-                  width="200px"
-                  height="200px"
-                />
-              )}
-              {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+              <Grid container spacing={16}>
+                <Grid item>
+                  <Typography variant="title">
+                    <FormattedMessage
+                      id={`app.${elem.activity_type}`}
+                      defaultMessage={elem.activity_type}
+                    />
+                  </Typography>
+                  {elem.activity_type !== "lesson" && (
+                    <img
+                      src={elem.item}
+                      alt={elem.activity_type}
+                      width="200px"
+                      height="200px"
+                    />
+                  )}
+                  {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+                </Grid>
+                <Grid item>
+                  <Grid
+                    container
+                    spacing={40}
+                    justify="space-around"
+                    direction="column"
+                  >
+                    {elem.activity_type === "exercise" && (
+                      <Grid
+                        container
+                        justify="space-around"
+                        alignItems="center"
+                        spacing={16}
+                      >
+                        <Grid item>
+                          <img
+                            src="images/virtual_student/student_avatar.png"
+                            alt="student-avatar"
+                            width="50px"
+                            height="50px"
+                          />
+                        </Grid>
+                        <Grid item>
+                          {elem.student_answer
+                            ? student.givePositiveAnswer
+                            : student.giveNegativeAnswer}
+                        </Grid>
+                      </Grid>
+                    )}
+                    <Grid item>
+                      <img
+                        src="images/teacher/teacher_avatar.png"
+                        alt="teacher-avatar"
+                        width="50px"
+                        height="50px"
+                      />
+                      {/* { need teacher answer } */}
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
             </VerticalTimelineElement>
           ))}
       </VerticalTimeline>
@@ -128,7 +178,9 @@ const SessionHistory = ({ classes, history, studentName }) => {
 SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  studentName: PropTypes.string.isRequired
+  studentName: PropTypes.string.isRequired,
+  student: PropTypes.object.isRequired,
+  teacher: PropTypes.object.isRequired
 };
 
 const StyledSessionHistory = withStyles(styles)(SessionHistory);
