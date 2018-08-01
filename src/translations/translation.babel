@@ -1236,7 +1236,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Grade</default_text>
+                        <default_text>Grade {grade} / {maxGrade}</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1735,7 +1735,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Learn how a parallelogram looks like to your virtual student</default_text>
+                        <default_text>Teach the concept of parallelogram !</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -1769,7 +1769,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Student Name</default_text>
+                        <default_text>Hello ! I'm {studentName} !</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>

@@ -12,7 +12,7 @@ const styles = () => ({
   },
   textImage: {
     position: "absolute",
-    top: "45%",
+    top: "42%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center"

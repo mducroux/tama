@@ -87,7 +87,7 @@
 	"showExercise.true": "",
 	"testConfirmationDialog.continue": "Yes, I want to take the test",
 	"testConfirmationDialog.goBack": "No, I want to go back to training",
-	"testConfirmationDialog.statement": "5 questions will be drawn to determine the student's level. For each right answer, you earn 50 points. Once the test is completed, the game will be over and you will not be able to train the student again. Are you sure you want to continue?",
+	"testConfirmationDialog.statement": "10 questions will be drawn to determine the student's level. For each right answer, you earn 50 points. Once the test is completed, the game will be over and you will not be able to train the student again. Are you sure you want to continue?",
 	"testConfirmationDialog.takeTheTest": "Take the test",
 	"testResult.description": "{studentName} obtained",
 	"testResult.finalScore": "Your final score: {activityScore} + {score} = {totalScore} points",
@@ -97,5 +97,5 @@
 	"testShowQuestions.seeResult": "See result",
 	"welcomeMenu.descriptionApp": "Teach the concept of parallelogram",
 	"welcomeMenu.startPlaying": "Start playing",
-	"welcomeMenu.studentName": "Student name:"
+	"welcomeMenu.studentName": "Hello! My name is {studentName}!"
 }

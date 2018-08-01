@@ -87,7 +87,7 @@
 	"showExercise.true": "",
 	"testConfirmationDialog.continue": "Oui, je veux passer le test",
 	"testConfirmationDialog.goBack": "Non, je veux revenir à l'entraînement",
-	"testConfirmationDialog.statement": "5 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, tu gagnes 50 points. Une fois le test complété, le jeu sera fini et tu ne pourras plus revenir à l'entraînement. Es-tu sûr de vouloir continuer ?",
+	"testConfirmationDialog.statement": "10 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, tu gagnes 50 points. Une fois le test complété, le jeu sera fini et tu ne pourras plus revenir à l'entraînement. Es-tu sûr de vouloir continuer ?",
 	"testConfirmationDialog.takeTheTest": "Passer le test",
 	"testResult.description": "{studentName} a obtenu",
 	"testResult.finalScore": "Ton score final: {activityScore} + {score} = {totalScore} points",
@@ -97,5 +97,5 @@
 	"testShowQuestions.seeResult": "Voir le résultat",
 	"welcomeMenu.descriptionApp": "Enseigne le concept de parallélogramme",
 	"welcomeMenu.startPlaying": "Commencer à jouer",
-	"welcomeMenu.studentName": "Nom de l'élève :"
+	"welcomeMenu.studentName": "Bonjour ! Je m'appelle {studentName} !"
 }
