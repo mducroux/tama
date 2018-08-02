@@ -99,7 +99,6 @@ class AppDrawer extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -156,7 +155,7 @@ class AppDrawer extends React.Component {
                     {this.props.scoreDisplayed}
                   </Typography>
                 )}
-              {!this.props.hasBeenWelcomed && (
+              {(!this.props.hasBeenWelcomed || !this.props.isRegistered) && (
                 <div>
                   <IconButton
                     onClick={() => this.props.changeLanguage("fr")}

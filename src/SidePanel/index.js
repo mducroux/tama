@@ -132,7 +132,13 @@ class SidePanel extends React.Component<PropsT, StateT> {
 
     this.secondaryMenuListItems = (
       <div>
-        <ListItem button onClick={this.handleLeaveSession}>
+        <ListItem
+          button
+          onClick={() => {
+            this.handleLeaveSession();
+            this.handleSidePanelClose();
+          }}
+        >
           <ListItemIcon>
             <LeaveSessionIcon />
           </ListItemIcon>
@@ -145,7 +151,13 @@ class SidePanel extends React.Component<PropsT, StateT> {
             }
           />
         </ListItem>
-        <ListItem button onClick={this.handleUnregistrer}>
+        <ListItem
+          button
+          onClick={() => {
+            this.handleUnregistrer();
+            this.handleSidePanelClose();
+          }}
+        >
           <ListItemIcon>
             <UnregisterIcon />
           </ListItemIcon>
@@ -177,6 +189,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
       </div>
     );
   }
+
   render() {
     const { classes, theme } = this.props;
     return (

@@ -56,7 +56,8 @@ type StateT = {
   score: number,
   scoreDisplayed: string,
   language: string,
-  test: Object
+  test: Object,
+  alreadyShownRules: boolean
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -76,7 +77,8 @@ class App extends React.Component<PropsT, StateT> {
       scoreDisplayed: "200",
       language:
         localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
-      test: {}
+      test: {},
+      alreadyShownRules: false
     };
     this.student = new QuickLearnerStudent();
     this.studentName = `${
@@ -255,6 +257,8 @@ class App extends React.Component<PropsT, StateT> {
             });
           }}
           onConfirmTestDialog={this.runTest}
+          alreadyShownRules={this.state.alreadyShownRules}
+          hasShownRules={() => this.setState({ alreadyShownRules: true })}
         />
       );
     } else if (this.state.hasChosenActivityType) {
