@@ -20,7 +20,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import SchoolIcon from "@material-ui/icons/School";
-import HistoryIcon from "@material-ui/icons/ShowChart";
+import HistoryIcon from "@material-ui/icons/Timeline";
+import StatisticsIcon from "@material-ui/icons/InsertChart";
+import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
 import UnregisterIcon from "@material-ui/icons/ExitToApp";
 import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -157,7 +159,41 @@ class AppDrawer extends React.Component {
         </ListItem>
       </div>
     );
+
     this.secondaryMenuListItems = (
+      <div>
+        <ListItem
+          button
+          onClick={() => window.alert("this feature is not yet implemented")}
+        >
+          <ListItemIcon>
+            <StatisticsIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.stats"
+                defaultMessage="My Statistics"
+              />
+            }
+          />
+        </ListItem>
+        <ListItem button onClick={() => this.props.changeView("leaderboard")}>
+          <ListItemIcon>
+            <LeaderboardIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.leaderboard"
+                defaultMessage="Leaderboard"
+              />
+            }
+          />
+        </ListItem>
+      </div>
+    );
+    this.tertiaryMenuListItems = (
       <div>
         <ListItem button onClick={this.handleLeaveSession}>
           <ListItemIcon>
@@ -248,34 +284,9 @@ class AppDrawer extends React.Component {
         <Divider />
         <List>{this.mainMenuListItems}</List>
         <Divider />
-        <ListItem button onClick={() => window.alert('this feature is not yet implemented')}>
-          <ListItemIcon>
-            <HistoryIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="appDrawer.stats"
-                defaultMessage="My Statistics"
-              />
-            }
-          />
-        </ListItem>
-        <ListItem button onClick={() => this.props.changeView("leaderboard")}>
-          <ListItemIcon>
-            <HistoryIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="appDrawer.leaderboard"
-                defaultMessage="Leaderboard"
-              />
-            }
-          />
-        </ListItem>
-        <Divider />
         <List>{this.secondaryMenuListItems}</List>
+        <Divider />
+        <List>{this.tertiaryMenuListItems}</List>
       </Drawer>
     );
 
