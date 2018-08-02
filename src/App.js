@@ -26,6 +26,7 @@ import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
 import Leaderboard, { updateLeaderboard } from './Leaderboard';
 import nameData from "./NameData";
+import Stats from './Stats'
 
 const theme = createMuiTheme({
   palette: {
@@ -236,6 +237,10 @@ class App extends React.Component<PropsT, StateT> {
     } else if (this.state.view === "leaderboard") {
       displayed = (
         <Leaderboard />
+      );
+    } else if (this.state.view === "stats") {
+      displayed = (
+        <Stats />
       );
     } else if (this.state.view === "history") {
       displayed = (

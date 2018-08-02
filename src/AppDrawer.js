@@ -241,14 +241,14 @@ class AppDrawer extends React.Component {
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
-              <ChevronLeftIcon />
-            )}
+                <ChevronLeftIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
         <List>{this.mainMenuListItems}</List>
         <Divider />
-        <ListItem button onClick={() => window.alert('this feature is not yet implemented')}>
+        <ListItem button onClick={() => this.props.changeView("stats")}>
           <ListItemIcon>
             <HistoryIcon />
           </ListItemIcon>
@@ -314,12 +314,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                  <FormattedMessage
-                    id="appDrawer.welcomeCustomized"
-                    defaultMessage="Welcome {username} !"
-                    values={{ username: localStorage.getItem("username") }}
-                  />
-                )}
+                    <FormattedMessage
+                      id="appDrawer.welcomeCustomized"
+                      defaultMessage="Welcome {username} !"
+                      values={{ username: localStorage.getItem("username") }}
+                    />
+                  )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
