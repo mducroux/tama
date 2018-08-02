@@ -141,7 +141,7 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                   )}
                   {elem.activity_type === "lesson" && <p>{elem.item}</p>}
                 </Grid>
-                <Grid item sm={12}>
+                <Grid item xs={12} sm={12}>
                   {elem.activity_type === "exercise" && (
                     <div className={classes.answers}>
                       <Grid container alignItems="center" spacing={16}>
