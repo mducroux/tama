@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+import VirtualStudent from "../VirtualStudent";
+
 const styles = () => ({
   root: {
     display: "flex",
@@ -34,30 +36,20 @@ const WelcomeMenu = ({ classes, onClickStart, studentName }: PropsT) => (
       <Typography className={classes.title} variant="title" color="inherit">
         <FormattedMessage
           id="welcomeMenu.descriptionApp"
-          defaultMessage="Learn how a parallelogram looks like to your virtual student"
+          defaultMessage="Teach the concept of parallelogram"
         />
       </Typography>
     </Grid>
     <Grid container justify="center" className={classes.root}>
-      <img
-        src="images/virtual_student/student.png"
-        width="200"
-        height="200"
-        alt="virtual_student"
+      <VirtualStudent
+        bubbleText={
+          <FormattedMessage
+            id="welcomeMenu.studentName"
+            defaultMessage="Hello! My name is {studentName}!"
+            values={{ studentName }}
+          />
+        }
       />
-    </Grid>
-    <Grid container justify="center" className={classes.root}>
-      <Typography
-        className={classes.studentName}
-        variant="title"
-        color="inherit"
-      >
-        <FormattedMessage
-          id="welcomeMenu.studentName"
-          defaultMessage="Student Name"
-        />{" "}
-        {studentName}
-      </Typography>
     </Grid>
     <Grid container justify="center" className={classes.root}>
       <Button variant="contained" color="primary" onClick={onClickStart}>

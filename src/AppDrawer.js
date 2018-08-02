@@ -20,7 +20,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import SchoolIcon from "@material-ui/icons/School";
-import HistoryIcon from "@material-ui/icons/ShowChart";
+import HistoryIcon from "@material-ui/icons/Timeline";
+import StatisticsIcon from "@material-ui/icons/InsertChart";
+import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
 import UnregisterIcon from "@material-ui/icons/ExitToApp";
 import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -157,7 +159,41 @@ class AppDrawer extends React.Component {
         </ListItem>
       </div>
     );
+
     this.secondaryMenuListItems = (
+      <div>
+        <ListItem
+          button
+          onClick={() => window.alert("this feature is not yet implemented")}
+        >
+          <ListItemIcon>
+            <StatisticsIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.stats"
+                defaultMessage="My Statistics"
+              />
+            }
+          />
+        </ListItem>
+        <ListItem button onClick={() => this.props.changeView("leaderboard")}>
+          <ListItemIcon>
+            <LeaderboardIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <FormattedMessage
+                id="appDrawer.leaderboard"
+                defaultMessage="Leaderboard"
+              />
+            }
+          />
+        </ListItem>
+      </div>
+    );
+    this.tertiaryMenuListItems = (
       <div>
         <ListItem button onClick={this.handleLeaveSession}>
           <ListItemIcon>
@@ -234,7 +270,7 @@ class AppDrawer extends React.Component {
         }}
       >
         <div className={classes.drawerHeader}>
-          <Typography variant="subheading" className={classes.studentName}>
+          <Typography variant="title" className={classes.studentName}>
             {this.props.studentName}
           </Typography>
           <IconButton onClick={this.handleDrawerClose}>
@@ -249,6 +285,8 @@ class AppDrawer extends React.Component {
         <List>{this.mainMenuListItems}</List>
         <Divider />
         <List>{this.secondaryMenuListItems}</List>
+        <Divider />
+        <List>{this.tertiaryMenuListItems}</List>
       </Drawer>
     );
 
@@ -308,6 +346,34 @@ class AppDrawer extends React.Component {
                     {this.props.scoreDisplayed}
                   </Typography>
                 )}
+              {!this.props.hasBeenWelcomed && (
+                <div>
+                  <IconButton
+                    onClick={() => this.props.changeLanguage("fr")}
+                    color="inherit"
+                    className={classes.flag}
+                  >
+                    <img
+                      src="images/fr.svg"
+                      alt="icon_french"
+                      width="24px"
+                      height="24px"
+                    />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => this.props.changeLanguage("en")}
+                    color="inherit"
+                    className={classes.flag}
+                  >
+                    <img
+                      src="images/en.svg"
+                      alt="icon_english"
+                      width="24px"
+                      height="24px"
+                    />
+                  </IconButton>
+                </div>
+              )}
             </Toolbar>
           </AppBar>
           {drawer}
