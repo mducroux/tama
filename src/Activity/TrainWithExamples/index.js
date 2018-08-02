@@ -21,10 +21,10 @@ class TrainWithExamples extends React.Component {
 
   recordExampleActivity = (userAnswer) => {
     this.newActivityRef.child("activity_type").set("example");
-    const parallelogramTitle = parallelogramData[this.state.index].src.split("/");
+    const image = parallelogramData[this.state.index].src;
     this.newActivityRef
       .child("item")
-      .set(parallelogramTitle[parallelogramTitle.length - 1]);
+      .set(image);
     this.newActivityRef
       .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);
@@ -47,7 +47,6 @@ class TrainWithExamples extends React.Component {
         parallelogram={parallelogram}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
-        updateHistory={() => this.props.updateHistory(parallelogram)}
         student={this.props.student}
         recordExampleActivity={this.recordExampleActivity}
       />
@@ -58,7 +57,6 @@ class TrainWithExamples extends React.Component {
 TrainWithExamples.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
-  updateHistory: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired
 };

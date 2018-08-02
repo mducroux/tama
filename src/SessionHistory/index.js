@@ -11,7 +11,6 @@ import {
 import "react-vertical-timeline-component/style.min.css";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { Typography } from "@material-ui/core";
-import Gallery from "react-grid-gallery";
 import SchoolIcon from "@material-ui/icons/School";
 
 function ExampleIcon(props) {
@@ -34,6 +33,14 @@ function LessonIcon(props) {
   return (
     <SvgIcon {...props}>
       <path d="M 3.742199,4.6088167 C 3.7497581,4.1637666 3.980625,4.1620145 4.3787984,4.0676981 4.9957566,3.9218285 5.7185987,3.8234536 6.3465376,3.9108437 c 0,0 0.4629817,0 0.4629817,0 0.3426107,0.046318 0.9398783,0.1771207 1.2732286,0.2766602 1.202627,0.3582522 2.5284861,1.1574907 3.4139991,2.0423647 0,0 0.810812,0.9254009 0.810812,0.9254009 0.20198,-0.4357786 0.894726,-1.0995971 1.273227,-1.4115496 1.382622,-1.137808 2.747853,-1.6679339 4.514176,-1.839223 0.654599,-0.063102 1.325902,-0.012774 1.967711,0.1469998 0.156849,0.039396 0.541719,0.1238509 0.637203,0.2505944 0.09144,0.1221261 0.05731,0.7610334 0.05731,0.9433324 0.216418,0.019642 0.742498,0.1261777 0.866936,0.3136833 0.09898,0.1487209 0.059,1.0203151 0.059,1.2488999 0,0 1.157473,0 1.157473,0 0,0 0,12.3272023 0,12.3272023 0,0 -0.578738,0.05556 -0.578738,0.05556 0,0 -0.868103,0 -0.868103,0 0,0 -0.92599,0.06019 -0.92599,0.06019 0,0 -1.909857,0.05789 -1.909857,0.05789 0,0 -0.983844,0.0602 -0.983844,0.0602 0,0 -0.810237,0 -0.810237,0 0,0 -0.694498,0.05557 -0.694498,0.05557 0,0 -2.257081,0.05791 -2.257081,0.05791 -0.263331,1.671402 -2.861297,1.712486 -3.183083,0 0,0 -3.7039256,-0.11575 -3.7039256,-0.11575 0,0 -0.9259852,-0.06021 -0.9259852,-0.06021 0,0 -0.8102407,0 -0.8102407,0 0,0 -0.6944793,-0.05557 -0.6944793,-0.05557 0,0 -2.0256041,-0.05789 -2.0256041,-0.05789 0,0 -0.7523621,-0.05788 -0.7523621,-0.05788 0,0 0,-12.3272055 0,-12.3272055 0,0 1.1574766,0 1.1574766,0 0,0 0,-1.3310726 0,-1.3310726 0,0 0.8681108,-0.2315105 0.8681108,-0.2315105 0,0 0,-0.6366074 0,-0.6366084 z" />
+    </SvgIcon>
+  );
+}
+
+function TestIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M 5.6138006,9.3570506 C 5.869878,7.8082938 6.0840921,6.9834418 7.1699484,5.7375345 9.8759756,2.640013 15.275694,2.6474026 17.688713,6.1782789 c 1.492131,2.1864849 1.836852,7.0198991 -0.714057,8.5267981 0,0 1.477363,4.185845 1.477363,4.185845 0,0 -2.417947,-0.167436 -2.417947,-0.167436 0,0 -2.014127,1.644777 -2.014127,1.644777 0,0 -0.984905,-3.447159 -0.984905,-3.447159 0,0 -1.47735,0 -1.47735,0 0,0 -1.231131,3.447159 -1.231131,3.447159 0,0 -0.4924564,0 -0.4924564,0 C 8.2090242,17.974951 8.366606,18.770269 5.894502,18.890922 c 0,0 1.477352,-4.185845 1.477352,-4.185845 C 5.9043465,13.757109 5.3429548,11.011689 5.6138006,9.3570506 Z" />
     </SvgIcon>
   );
 }
@@ -62,61 +69,135 @@ const icons = {
   lesson: {
     icon: <LessonIcon />,
     color: "#4992af"
+  },
+  test: {
+    icon: <TestIcon />,
+    color: "#f54f33"
   }
 };
 
-const SessionHistory = ({ classes, history, studentName }) => (
-  <div>
-    <Grid container justify="center" className={classes.title}>
-      <Typography variant="display1">
-        <FormattedMessage
-          id="sessionHistory.studentName"
-          defaultMessage="{studentName}'s history"
-          values={{ studentName }}
-        />
-      </Typography>
-    </Grid>
-    <VerticalTimeline>
-      <VerticalTimelineElement
-        iconStyle={{
-          background: icons.start.color,
-          color: "#fff"
-        }}
-        icon={icons.start.icon}
-      >
-        <Typography variant="title">
+// temporary work-around (see https://github.com/yahoo/babel-plugin-react-intl/issues/119)
+function FormattedMessageFixed(props) {
+  return <FormattedMessage {...props} />;
+}
+
+const SessionHistory = ({ classes, history, studentName }) => {
+  const { activities, test } = history;
+
+  return (
+    <div>
+      <Grid container justify="center" className={classes.title}>
+        <Typography variant="display1">
           <FormattedMessage
-            id="sessionHistory.startGame"
-            defaultMessage="Start of the game"
+            id="sessionHistory.studentName"
+            defaultMessage="{studentName}'s history"
+            values={{ studentName }}
           />
         </Typography>
-      </VerticalTimelineElement>
-      {history.map((elem, index) => (
+      </Grid>
+      <VerticalTimeline>
         <VerticalTimelineElement
-          key={index}
           iconStyle={{
-            background: icons[elem.activityType].color,
+            background: icons.start.color,
             color: "#fff"
           }}
-          icon={icons[elem.activityType].icon}
+          icon={icons.start.icon}
         >
-          <Typography variant="title">{elem.title}</Typography>
-          <Gallery
-            images={elem.images}
-            enableLightbox={false}
-            enableImageSelection={false}
-            tagStyle={{ color: "red" }}
-          />
+          <Typography variant="title">
+            <FormattedMessage
+              id="sessionHistory.startGame"
+              defaultMessage="Start of the game"
+            />
+          </Typography>
         </VerticalTimelineElement>
-      ))}
-    </VerticalTimeline>
-  </div>
-);
+        {activities &&
+          Object.values(activities).map((elem, index) => (
+            <VerticalTimelineElement
+              key={index}
+              iconStyle={{
+                background: icons[elem.activity_type].color,
+                color: "#fff"
+              }}
+              icon={icons[elem.activity_type].icon}
+            >
+              <Typography variant="title">
+                <FormattedMessageFixed
+                  id={`app.${elem.activity_type}`}
+                  defaultMessage={elem.activity_type}
+                />
+              </Typography>
+              {elem.activity_type !== "lesson" && (
+                <img
+                  src={elem.item}
+                  alt={elem.activity_type}
+                  width="200px"
+                  height="200px"
+                />
+              )}
+              {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+            </VerticalTimelineElement>
+          ))}
+        {test && (
+          <VerticalTimelineElement
+            iconStyle={{
+              background: icons.test.color,
+              color: "#fff"
+            }}
+            icon={icons.test.icon}
+          >
+            <Typography variant="title">
+              <FormattedMessage
+                id="sessionHistory.test"
+                defaultMessage="Test"
+              />
+            </Typography>
+            <br />
+            <Typography variant="title">
+              <FormattedMessage
+                id="sessionHistory.grade"
+                defaultMessage="Grade {grade} / {maxGrade}"
+                values={{
+                  grade: test.grade,
+                  maxGrade: Object.keys(test.questions).length
+                }}
+              />
+            </Typography>
+          </VerticalTimelineElement>
+        )}
+      </VerticalTimeline>
+    </div>
+  );
+};
 
 SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.array.isRequired,
+  history: PropTypes.object.isRequired,
   studentName: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(SessionHistory);
+const StyledSessionHistory = withStyles(styles)(SessionHistory);
+
+class FirebaseWrapper extends React.Component<
+  { sessionRef: any },
+  { history: Object[] }
+> {
+  state = { history: {} };
+
+  componentWillMount() {
+    this.props.sessionRef.on("value", session => {
+      this.setState({ history: session.val() });
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.sessionRef.off();
+  }
+
+  render() {
+    return (
+      <StyledSessionHistory history={this.state.history} {...this.props} />
+    );
+  }
+}
+
+export default FirebaseWrapper;

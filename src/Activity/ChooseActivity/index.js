@@ -1,14 +1,14 @@
 import React from "react";
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
-import TestConfirmationDialog from './TestConfirmationDialog';
-import SessionTimeline from './SessionTimeline';
+import TestConfirmationDialog from "./TestConfirmationDialog";
+import SessionTimeline from "./SessionTimeline";
 
 const styles = theme => ({
   root: {
@@ -74,20 +74,32 @@ const styles = theme => ({
 const images = [
   {
     url: "images/example_512x512.png",
-    title: <FormattedMessage id="chooseActivity.showExample"
-      defaultMessage="Show examples" />,
+    title: (
+      <FormattedMessage
+        id="chooseActivity.showExample"
+        defaultMessage="Show examples"
+      />
+    ),
     learningCost: "10"
   },
   {
     url: "images/exercise_512x512.png",
-    title: <FormattedMessage id="chooseActivity.giveExercise"
-      defaultMessage="Give an exercise" />,
+    title: (
+      <FormattedMessage
+        id="chooseActivity.giveExercise"
+        defaultMessage="Give an exercise"
+      />
+    ),
     learningCost: "30"
   },
   {
     url: "images/lesson_512x512.png",
-    title: <FormattedMessage id="chooseActivity.giveLesson"
-      defaultMessage="Give a lesson" />,
+    title: (
+      <FormattedMessage
+        id="chooseActivity.giveLesson"
+        defaultMessage="Give a lesson"
+      />
+    ),
     learningCost: "50"
   }
 ];
@@ -111,20 +123,22 @@ class ChooseActivity extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, sessionRef } = this.props;
     return (
       <div>
-        <Grid container className={classes.root} justify='center'>
+        <Grid container className={classes.root} justify="center">
           <Grid item sm={12}>
-            <SessionTimeline history={this.props.history} />
-          </Grid >
-        </Grid >
-        <Grid container className={classes.root} justify='center'>
+            <SessionTimeline sessionRef={sessionRef} />
+          </Grid>
+        </Grid>
+        <Grid container className={classes.root} justify="center">
           <Grid item sm={6}>
             <Grid container className={classes.root} justify="center">
               <Typography variant="display1" color="inherit">
-                <FormattedMessage id="chooseActivity.chooseActivity"
-                  defaultMessage="Choose an activity" />
+                <FormattedMessage
+                  id="chooseActivity.chooseActivity"
+                  defaultMessage="Choose an activity"
+                />
               </Typography>
             </Grid>
           </Grid>
@@ -183,8 +197,10 @@ class ChooseActivity extends React.Component {
                 <span className={classes.imageBackdrop} />
                 <span className={classes.textButton}>
                   <Typography component="span" variant="title" color="inherit">
-                    <FormattedMessage id="chooseActivity.takeTest"
-                      defaultMessage="Take the test" />
+                    <FormattedMessage
+                      id="chooseActivity.takeTest"
+                      defaultMessage="Take the test"
+                    />
                   </Typography>
                 </span>
               </ButtonBase>
@@ -207,7 +223,7 @@ ChooseActivity.propTypes = {
   onClickExercise: PropTypes.func.isRequired,
   onClickLesson: PropTypes.func.isRequired,
   onConfirmTestDialog: PropTypes.func.isRequired,
-  history: PropTypes.array.isRequired
-}
+  sessionRef: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(ChooseActivity);

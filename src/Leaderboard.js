@@ -24,20 +24,6 @@ const styles = () => ({
   },
 });
 
-let id = 0;
-function createData(name, score) {
-  id += 1;
-  return { id, name, score, rank: id };
-}
-
-const data = [
-  createData('Louis', 159),
-  createData('Mathieu', 237),
-  createData('Stian', 262),
-  createData('Jenny', 305),
-  createData('Romain', 356),
-];
-
 const Leaderboard = withStyles(styles)(({ classes, data }) => (
   <Paper className={classes.root}>
     <Table className={classes.table}>

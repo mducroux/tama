@@ -234,15 +234,15 @@ class AppDrawer extends React.Component {
         }}
       >
         <div className={classes.drawerHeader}>
-          <Typography variant="subheading" className={classes.studentName}>
+          <Typography variant="title" className={classes.studentName}>
             {this.props.studentName}
           </Typography>
           <IconButton onClick={this.handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
-                <ChevronLeftIcon />
-              )}
+              <ChevronLeftIcon />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -314,12 +314,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                    <FormattedMessage
-                      id="appDrawer.welcomeCustomized"
-                      defaultMessage="Welcome {username} !"
-                      values={{ username: localStorage.getItem("username") }}
-                    />
-                  )}
+                  <FormattedMessage
+                    id="appDrawer.welcomeCustomized"
+                    defaultMessage="Welcome {username} !"
+                    values={{ username: localStorage.getItem("username") }}
+                  />
+                )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
@@ -335,6 +335,34 @@ class AppDrawer extends React.Component {
                     {this.props.scoreDisplayed}
                   </Typography>
                 )}
+              {!this.props.hasBeenWelcomed && (
+                <div>
+                  <IconButton
+                    onClick={() => this.props.changeLanguage("fr")}
+                    color="inherit"
+                    className={classes.flag}
+                  >
+                    <img
+                      src="images/fr.svg"
+                      alt="icon_french"
+                      width="24px"
+                      height="24px"
+                    />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => this.props.changeLanguage("en")}
+                    color="inherit"
+                    className={classes.flag}
+                  >
+                    <img
+                      src="images/en.svg"
+                      alt="icon_english"
+                      width="24px"
+                      height="24px"
+                    />
+                  </IconButton>
+                </div>
+              )}
             </Toolbar>
           </AppBar>
           {drawer}
