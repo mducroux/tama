@@ -1,71 +1,32 @@
 import * as React from "react";
 
-import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 
 import VirtualStudent from "../../VirtualStudent";
+import Teacher from "../../Teacher";
+import { FormattedMessage } from "react-intl";
 
-const styles = () => ({
+const styles = {
   root: {
     display: "flex",
-    flexWrap: "wrap",
-    marginTop: "10px"
+    marginTop: "5%"
   },
-  textImage: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)"
+  imagePara: {
+    marginBottom: "300px"
   }
-});
+};
 
 class ShowExamples extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { thinking: false, userAnswer: false };
+    this.state = { thinking: false };
   }
 
-  choiceOrAnswer = () => {
-    const { thinking, userAnswer } = this.state
-    if (thinking) {
-      return (
-        <Typography variant="title">
-          {userAnswer && <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />}
-          {!userAnswer && <FormattedMessage id="showExamples.no" defaultMessage="No" />}
-        </Typography>
-      );
-    }
-    return (
-      <Grid container justify="center" spacing={40}>
-        <Grid item>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => this.handleClick(true)}
-          >
-            <FormattedMessage id="showExamples.yes" defaultMessage="Yes" />
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => this.handleClick(false)}
-          >
-            <FormattedMessage id="showExamples.no" defaultMessage="No" />
-          </Button>
-        </Grid>
-      </Grid>
-    );
-  };
-
   handleClick = userAnswer => {
-    this.setState({ thinking: true, userAnswer });
-    const { student, parallelogram, recordExampleActivity } = this.props
+    this.setState({ thinking: true });
+    const { student, parallelogram, recordExampleActivity } = this.props;
     student.learn(userAnswer, parallelogram.shapeFeatures);
     recordExampleActivity(userAnswer);
     setTimeout(() => {
@@ -77,22 +38,45 @@ class ShowExamples extends React.Component {
   render() {
     const { classes, student, parallelogram } = this.props;
     const { thinking } = this.state;
-    const bubbleText = thinking ? student.thinkingAboutExample : student.questionExample;
+    const bubbleText = thinking
+      ? student.thinkingAboutExample
+      : student.questionExample;
     return (
       <React.Fragment>
-        <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText} />
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <img
-            src={parallelogram.src}
-            alt="parallelogram"
-            width="300"
-            height="300"
-          />
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
-          {this.choiceOrAnswer()}
+        <Grid container alignItems="flex-end" className={classes.root}>
+          <Grid item xs={12} sm={4}>
+            <VirtualStudent bubbleText={bubbleText} />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Grid container justify="center">
+              <img
+                className={classes.imagePara}
+                src={parallelogram.src}
+                alt="parallelogram"
+                width="300"
+                height="300"
+                border="1px solid"
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Teacher
+              onClickBubble={this.handleClick}
+              positiveAnswer={
+                <FormattedMessage
+                  id="showExamples.positiveAnswer"
+                  defaultMessage="Yes"
+                />
+              }
+              negativeAnswer={
+                <FormattedMessage
+                  id="showExamples.negativeAnswer"
+                  defaultMessage="No"
+                />
+              }
+              waitingForAnswer={false}
+            />
+          </Grid>
         </Grid>
       </React.Fragment>
     );

@@ -2,17 +2,19 @@ import React from "react";
 
 import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
 import VirtualStudent from "../../VirtualStudent";
+import Teacher from "../../Teacher";
 
 const styles = () => ({
   root: {
     display: "flex",
-    flexWrap: "wrap",
-    marginTop: "10px"
+    marginTop: "5%"
+  },
+  imagePara: {
+    marginBottom: "300px"
   }
 });
 
@@ -70,52 +72,49 @@ class ShowExercise extends React.Component {
     }
 
     return (
-      <div>
-        <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText} />
+      <React.Fragment>
+        <Grid container alignItems="flex-end" className={classes.root}>
+          <Grid item xs={12} sm={4}>
+            <VirtualStudent bubbleText={bubbleText} />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Grid container justify="center">
+              <img
+                className={classes.imagePara}
+                src={this.props.parallelogram.src}
+                alt="parallelogram"
+                width="300"
+                height="300"
+                border="1px solid"
+              />
+            </Grid>
+          </Grid>
+          {this.state.thinking ? (
+            <Grid item xs={12} sm={4}>
+              <Teacher onClickBubble={this.handleClick} waitingForAnswer />
+            </Grid>
+          ) : (
+            <Grid item xs={12} sm={4}>
+              <Teacher
+                onClickBubble={this.handleClick}
+                positiveAnswer={
+                  <FormattedMessage
+                    id="showExercise.positiveAnswer"
+                    defaultMessage="True"
+                  />
+                }
+                negativeAnswer={
+                  <FormattedMessage
+                    id="showExercise.negativeAnswer"
+                    defaultMessage="False"
+                  />
+                }
+                waitingForAnswer={false}
+              />
+            </Grid>
+          )}
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <img
-            src={this.props.parallelogram.src}
-            alt="parallelogram"
-            width="300"
-            height="300"
-          />
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
-          {!this.state.thinking &&
-            !this.state.learning && (
-              <div>
-                <Grid container justify="center" spacing={40}>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => this.handleClick(true)}
-                    >
-                      <FormattedMessage
-                        id="showExercise.true"
-                        defaultMessage="True"
-                      />
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => this.handleClick(false)}
-                    >
-                      <FormattedMessage
-                        id="showExercise.false"
-                        defaultMessage="False"
-                      />
-                    </Button>
-                  </Grid>
-                </Grid>
-              </div>
-            )}
-        </Grid>
-      </div>
+      </React.Fragment>
     );
   }
 }

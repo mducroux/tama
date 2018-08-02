@@ -25,6 +25,11 @@ function ThreeDotsIcon(props) {
   );
 }
 
+// temporary work-around (see https://github.com/yahoo/babel-plugin-react-intl/issues/119)
+function FormattedMessageFixed(props) {
+  return <FormattedMessage {...props} />;
+}
+
 const SessionTimeline = ({ history, classes }) => {
   const { activities } = history;
   return (
@@ -47,7 +52,7 @@ const SessionTimeline = ({ history, classes }) => {
           Object.values(activities).map((elem, index) => (
             <Step key={index}>
               <StepLabel icon={`${index + 1}`}>
-                <FormattedMessage
+                <FormattedMessageFixed
                   id={`app.${elem.activity_type}`}
                   defaultMessage={elem.activity_type}
                 />

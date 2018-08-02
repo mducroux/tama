@@ -3,14 +3,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 
 const styles = () => ({
-  group: {
-    position: "relative"
+  bubble: {
+    position: "relative",
+    left: "25%"
   },
   textImage: {
     position: "absolute",
-    top: "45%",
+    top: "42%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center"
@@ -19,23 +21,27 @@ const styles = () => ({
 
 const VirtualStudent = ({ classes, bubbleText }) => (
   <div>
-    <div className={classes.group}>
-      <img
-        src="images/virtual_student/bubble.png"
-        width="200"
-        height="150"
-        alt="bubble"
-      />
-      <div className={classes.textImage}>{bubbleText}</div>
-    </div>
-    <div>
-      <img
-        src="images/virtual_student/student.png"
-        width="200"
-        height="200"
-        alt="virtual_student"
-      />
-    </div>
+    <Grid container justify="center">
+      <div className={classes.bubble}>
+        <img
+          src="images/virtual_student/bubble.png"
+          width="200"
+          height="150"
+          alt="bubble"
+        />
+        <div className={classes.textImage}>{bubbleText}</div>
+      </div>
+    </Grid>
+    <Grid container justify="center">
+      <div>
+        <img
+          src="images/virtual_student/student.png"
+          width="200"
+          height="200"
+          alt="virtual_student"
+        />
+      </div>
+    </Grid>
   </div>
 );
 
