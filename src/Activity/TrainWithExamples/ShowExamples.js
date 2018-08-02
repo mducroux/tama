@@ -1,12 +1,12 @@
 import * as React from "react";
 
+import { FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
 import VirtualStudent from "../../VirtualStudent";
 import Teacher from "../../Teacher";
-import { FormattedMessage } from "react-intl";
 
 const styles = {
   root: {
