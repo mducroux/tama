@@ -93,7 +93,7 @@ class LeaderboardView extends React.Component<PropsT, StateT> {
           const tabsData = val
             ? Object.keys(val)
               .map(x => val[x])
-              .sort(({ score }) => -score)
+              .sort((a, b) => b.score - a.score)
               .map(({ score, name }, i) => [name, score, i + 1])
             : []
           this.setState({ [ref.split('/')[0]]: tabsData })
