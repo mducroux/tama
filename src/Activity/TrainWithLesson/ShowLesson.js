@@ -23,10 +23,19 @@ const styles = () => ({
 });
 
 class ShowLesson extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      studentAlreadyKnow: this.props.student.alreadyKnowLesson(
+        this.props.lesson.shapeFeatures
+      )
+    };
+  }
+
   componentDidMount() {
     this.props.student.learnLesson(this.props.lesson.shapeFeatures);
     setTimeout(() => {
-      this.props.recordLessonActivity();
+      this.props.recordLessonActivity(this.state.studentAlreadyKnow);
       this.props.updateScore();
       this.props.getBackToMenu();
     }, 3000);
@@ -35,7 +44,7 @@ class ShowLesson extends React.Component {
   render() {
     const { classes } = this.props;
     let bubbleText;
-    if (this.props.student.alreadyKnowLesson(this.props.lesson.shapeFeatures)) {
+    if (this.state.studentAlreadyKnow) {
       bubbleText = this.props.student.feedbackLessonAlreadyKnow;
     } else {
       bubbleText = this.props.student.feedbackLessonDidntKnow;
