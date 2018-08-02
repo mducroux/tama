@@ -112,15 +112,15 @@ class ChooseActivity extends React.Component {
       openTestDialog: false,
       openRulesDialog: false
     };
-    this.props.sessionRef.parent
-      .once("value")
-      .then(
-        snapshot =>
-          !this.props.alreadyShownRules &&
-          Object.keys(snapshot.val()).length === 1 &&
-          (this.setState({ openRulesDialog: true }) ||
-            this.props.hasShownRules())
-      );
+    this.props.sessionRef.parent.once("value").then(snapshot => {
+      if (
+        !this.props.alreadyShownRules &&
+        Object.keys(snapshot.val()).length === 1
+      ) {
+        this.setState({ openRulesDialog: true });
+        this.props.hasShownRules();
+      }
+    });
   }
 
   handleButtonClick = key => {

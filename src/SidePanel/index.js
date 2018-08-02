@@ -32,7 +32,6 @@ type PropsT = {
   classes: Object,
   onUnregister: void => void,
   onLeaveSession: void => void,
-  handleSidePanelOpen: void => void,
   handleSidePanelClose: void => void
 };
 
@@ -60,25 +59,32 @@ const styles = theme => ({
   }
 });
 
+const LI = ({
+  Icon,
+  onClick,
+  id,
+  title
+}: {
+  Icon: Object,
+  onClick: void => void,
+  id: string,
+  title: string
+}) => (
+  <ListItem button onClick={onClick}>
+    <ListItemIcon>
+      <Icon />
+    </ListItemIcon>
+    <ListItemText
+      primary={
+        <FormattedMessage id={`sidePanel.${id}`} defaultMessage={title} />
+      }
+    />
+  </ListItem>
+);
+
 class SidePanel extends React.Component<PropsT, StateT> {
   mainMenuListItems: React.Element<*>;
   secondaryMenuListItems: React.Element<*>;
-
-  handleSidePanelOpen = () => {
-    this.props.handleSidePanelOpen();
-  };
-
-  handleSidePanelClose = () => {
-    this.props.handleSidePanelClose();
-  };
-
-  handleLeaveSession = () => {
-    this.props.onLeaveSession();
-  };
-
-  handleUnregistrer = () => {
-    this.props.onUnregister();
-  };
 
   constructor(props) {
     super(props);
@@ -88,104 +94,53 @@ class SidePanel extends React.Component<PropsT, StateT> {
     };
     this.mainMenuListItems = (
       <div>
-        <ListItem button onClick={() => this.props.changeView("training")}>
-          <ListItemIcon>
-            <SchoolIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="sidePanel.training"
-                defaultMessage="Training"
-              />
-            }
-          />
-        </ListItem>
-        <ListItem button onClick={() => this.props.changeView("history")}>
-          <ListItemIcon>
-            <HistoryIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="sidePanel.history"
-                defaultMessage="History"
-              />
-            }
-          />
-        </ListItem>
-        <ListItem
-          button
+        <LI
+          Icon={SchoolIcon}
+          onClick={() => this.props.changeView("training")}
+          id="training"
+          title="Training"
+        />
+        <LI
+          Icon={HistoryIcon}
+          onClick={() => this.props.changeView("history")}
+          id="history"
+          title="History"
+        />
+        <LI
+          Icon={RulesIcon}
           onClick={() => this.setState({ openRulesDialog: true })}
-        >
-          <ListItemIcon>
-            <RulesIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage id="sidePanel.rules" defaultMessage="Rules" />
-            }
-          />
-        </ListItem>
+          id="rules"
+          title="Rules"
+        />
       </div>
     );
 
     this.secondaryMenuListItems = (
       <div>
-        <ListItem
-          button
+        <LI
+          Icon={LeaveSessionIcon}
           onClick={() => {
-            this.handleLeaveSession();
-            this.handleSidePanelClose();
+            this.props.onLeaveSession();
+            this.props.handleSidePanelClose();
           }}
-        >
-          <ListItemIcon>
-            <LeaveSessionIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="sidePanel.leaveSession"
-                defaultMessage="Leave session"
-              />
-            }
-          />
-        </ListItem>
-        <ListItem
-          button
+          id="leaveSession"
+          title="Leave session"
+        />
+        <LI
+          Icon={UnregisterIcon}
           onClick={() => {
-            this.handleUnregistrer();
-            this.handleSidePanelClose();
+            this.props.onUnregister();
+            this.props.handleSidePanelClose();
           }}
-        >
-          <ListItemIcon>
-            <UnregisterIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="sidePanel.unregister"
-                defaultMessage="Unregister"
-              />
-            }
-          />
-        </ListItem>
-        <ListItem
-          button
+          id="unregister"
+          title="Unregister"
+        />
+        <LI
+          Icon={SettingsIcon}
           onClick={() => this.setState({ openSettingsDialog: true })}
-        >
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <FormattedMessage
-                id="sidePanel.settings"
-                defaultMessage="Settings"
-              />
-            }
-          />
-        </ListItem>
+          id="settings"
+          title="Settings"
+        />
       </div>
     );
   }
@@ -206,7 +161,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
             <Typography variant="title" className={classes.studentName}>
               {this.props.studentName}
             </Typography>
-            <IconButton onClick={this.handleSidePanelClose}>
+            <IconButton onClick={this.props.handleSidePanelClose}>
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
               ) : (

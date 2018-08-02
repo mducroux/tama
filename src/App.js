@@ -322,7 +322,8 @@ class App extends React.Component<PropsT, StateT> {
               localStorage.removeItem("user_id");
               localStorage.removeItem("username");
               this.setState({
-                isRegistered: false
+                isRegistered: false,
+                alreadyShownRules: false
               });
             }}
             scoreDisplayed={this.state.scoreDisplayed}
