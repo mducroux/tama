@@ -24,6 +24,7 @@ import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
+import Leaderboard, { updateLeaderboard } from "./Leaderboard/index";
 import nameData from "./NameData";
 
 const theme = createMuiTheme({
@@ -144,13 +145,20 @@ class App extends React.Component<PropsT, StateT> {
 
     const testRef = this.sessionRef.child("test");
     testRef.set(test);
-    this.sessionRef.child("finalScore/").set(testScore + this.state.score);
+    const finalScore = testScore + this.state.score;
+    this.sessionRef.child("finalScore/").set(finalScore);
 
     this.setState({
       hasChosenActivityType: true,
       hasChosenActivity: "test",
       test
     });
+
+    const userId = localStorage.getItem("user_id");
+    const username = localStorage.getItem("username");
+    if (userId && username) {
+      updateLeaderboard(userId, username, finalScore);
+    }
   };
 
   startNewGame = () => {
@@ -227,6 +235,8 @@ class App extends React.Component<PropsT, StateT> {
           }}
         />
       );
+    } else if (this.state.view === "leaderboard") {
+      displayed = <Leaderboard />;
     } else if (this.state.view === "history") {
       displayed = (
         <SessionHistory

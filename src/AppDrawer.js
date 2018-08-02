@@ -192,7 +192,6 @@ class AppDrawer extends React.Component {
             onLeaveSession={this.props.onLeaveSession}
             onUnregister={this.props.onUnregister}
             changeView={this.props.changeView}
-            handleSidePanelOpen={() => this.setState({ openSidePanel: true })}
             handleSidePanelClose={() => this.setState({ openSidePanel: false })}
           />
           <main

@@ -11,7 +11,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Divider from "@material-ui/core/Divider";
 import SchoolIcon from "@material-ui/icons/School";
-import HistoryIcon from "@material-ui/icons/ShowChart";
+import HistoryIcon from "@material-ui/icons/Timeline";
+import StatisticsIcon from "@material-ui/icons/InsertChart";
+import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
 import UnregisterIcon from "@material-ui/icons/ExitToApp";
 import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -85,6 +87,7 @@ const LI = ({
 class SidePanel extends React.Component<PropsT, StateT> {
   mainMenuListItems: React.Element<*>;
   secondaryMenuListItems: React.Element<*>;
+  tertiaryMenuListItems: React.Element<*>;
 
   constructor(props) {
     super(props);
@@ -116,6 +119,23 @@ class SidePanel extends React.Component<PropsT, StateT> {
     );
 
     this.secondaryMenuListItems = (
+      <div>
+        <LI
+          Icon={StatisticsIcon}
+          onClick={() => window.alert("this feature is not yet implemented")}
+          id="stats"
+          title="My statistics"
+        />
+        <LI
+          Icon={LeaderboardIcon}
+          onClick={() => this.props.changeView("leaderboard")}
+          id="leaderboard"
+          title="Leaderboard"
+        />
+      </div>
+    );
+
+    this.tertiaryMenuListItems = (
       <div>
         <LI
           Icon={LeaveSessionIcon}
@@ -173,6 +193,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
           <List>{this.mainMenuListItems}</List>
           <Divider />
           <List>{this.secondaryMenuListItems}</List>
+          <Divider />
+          <List>{this.tertiaryMenuListItems}</List>
         </Drawer>
         <SettingsDialog
           openSettingsDialog={this.state.openSettingsDialog}
