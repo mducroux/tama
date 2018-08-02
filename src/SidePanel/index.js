@@ -21,6 +21,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 
 import SettingsDialog from "./SettingsDialog";
+import RulesDialog from "./RulesDialog";
 
 type PropsT = {
   open: boolean,
@@ -36,7 +37,8 @@ type PropsT = {
 };
 
 type StateT = {
-  openSettingsDialog: boolean
+  openSettingsDialog: boolean,
+  openRulesDialog: boolean
 };
 
 const sidePanelWidth = 280;
@@ -81,7 +83,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
     this.state = {
-      openSettingsDialog: false
+      openSettingsDialog: false,
+      openRulesDialog: false
     };
     this.mainMenuListItems = (
       <div>
@@ -111,7 +114,10 @@ class SidePanel extends React.Component<PropsT, StateT> {
             }
           />
         </ListItem>
-        <ListItem button>
+        <ListItem
+          button
+          onClick={() => this.setState({ openRulesDialog: true })}
+        >
           <ListItemIcon>
             <RulesIcon />
           </ListItemIcon>
@@ -206,6 +212,10 @@ class SidePanel extends React.Component<PropsT, StateT> {
             this.setState({ openSettingsDialog: false })
           }
           changeLanguage={this.props.changeLanguage}
+        />
+        <RulesDialog
+          openRulesDialog={this.state.openRulesDialog}
+          onCloseRulesDialog={() => this.setState({ openRulesDialog: false })}
         />
       </div>
     );
