@@ -25,12 +25,13 @@ class ShowExamples extends React.Component {
   }
 
   handleClick = userAnswer => {
-    this.setState({ thinking: true });
     const { student, parallelogram, recordExampleActivity } = this.props;
-    student.learn(userAnswer, parallelogram.shapeFeatures);
+
     recordExampleActivity(userAnswer);
+    this.props.updateScore();
+    this.setState({ thinking: true });
+    student.learn(userAnswer, parallelogram.shapeFeatures);
     setTimeout(() => {
-      this.props.updateScore();
       this.props.getBackToMenu();
     }, 2000);
   };
