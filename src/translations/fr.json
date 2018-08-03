@@ -48,6 +48,8 @@
   "quickLearnerStudent.thinkingAboutExam": "...",
   "quickLearnerStudent.thinkingAboutExample": "...",
   "quickLearnerStudent.thinkingAboutExercise": "...",
+  "notEnoughPointsSnackbar.message":
+    "Vous n'avez pas assez de points pour faire cette activité",
   "registrationForm.age": "Age *",
   "registrationForm.gender": "Je suis :",
   "registrationForm.genderFemale": "Femme",

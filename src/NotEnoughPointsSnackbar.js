@@ -51,8 +51,8 @@ const NotEnoughPointsSnackbar = ({ classes, open, handleClose }: PropsT) => (
             <span id="client-snackbar" className={classes.message}>
               <ErrorIcon className={classes.icon} />
               <FormattedMessage
-                id="NotEnoughPointsSnackbar.message"
-                defaultMessage="You don't have enough points for this activity"
+                id="notEnoughPointsSnackbar.message"
+                defaultMessage="You don't have enough points to do this activity"
               />
             </span>
           }
