@@ -33,10 +33,10 @@ class ShowLesson extends React.Component {
   }
 
   componentDidMount() {
+    this.props.recordLessonActivity(this.state.studentAlreadyKnow);
+    this.props.updateScore();
     this.props.student.learnLesson(this.props.lesson.shapeFeatures);
     setTimeout(() => {
-      this.props.recordLessonActivity(this.state.studentAlreadyKnow);
-      this.props.updateScore();
       this.props.getBackToMenu();
     }, 3000);
   }
