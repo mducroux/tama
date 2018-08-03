@@ -2,7 +2,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { Typography } from "@material-ui/core";
 
 type PropsT = {
   classes: Object,
