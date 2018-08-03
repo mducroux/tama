@@ -5,7 +5,6 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 import Cancel from "@material-ui/icons/Cancel";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import Button from "@material-ui/core/Button";
@@ -37,68 +36,124 @@ const styles = () => ({
   }
 });
 
-const Result = ({ studentName, classes, activityScore, score, ...props }) => (
-  <React.Fragment>
-    <Grid container justify="center" className={classes.root}>
-      <div className={classes.group}>
-        <img src="images/diploma.png" alt="Diploma" width="400" height="300" />
-        <div className={classes.textImage}>
-          <FormattedMessage
-            id="testResult.description"
-            defaultMessage="{studentName} obtained"
-            values={{ studentName }}
-          />
-        </div>
-        <div className={classes.textGrade}>
-          {props.grade} / {props.questions.length}
-        </div>
-      </div>
-    </Grid>
-    <Grid container justify="center" className={classes.root}>
-      <Typography variant="display1" className={classes.finalScore}>
-        <FormattedMessage
-          id="testResult.finalScore"
-          defaultMessage="Your final score: {activityScore} + {score} = {totalScore} points"
-          values={{ activityScore, score, totalScore: activityScore + score }}
-        />
-      </Typography>
-    </Grid>
-    <Grid container justify="center" className={classes.root}>
-      {props.questions.map((img, index) => (
-        <div key={img.src}>
-          <img src={img.src} alt={img.src} width="200" height="200" />
-          {props.answers[index] === img.valid ? (
-            <CheckCircle color="primary" />
-          ) : (
-              <Cancel color="error" />
-            )}
-        </div>
-      ))}
-    </Grid>
-    <Grid container justify="center" className={classes.root}>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => props.startNewGame()}
-      >
-        <FormattedMessage
-          id="testResult.startAgain"
-          defaultMessage="Start a new game"
-        />
-      </Button>
-    </Grid>
-  </React.Fragment>
-);
-
-Result.propTypes = {
-  classes: PropTypes.object.isRequired,
-  grade: PropTypes.number.isRequired,
-  questions: PropTypes.array.isRequired,
-  answers: PropTypes.array.isRequired,
-  startNewGame: PropTypes.func.isRequired,
-  score: PropTypes.number.isRequired,
-  activityScore: PropTypes.number.isRequired,
-  studentName: PropTypes.string.isRequired
+type PropsT = {
+  studentName: string,
+  classes: Object,
+  finalScore: number,
+  testScore: number,
+  activityScore: number,
+  updateScore: void => void,
+  grade: number,
+  questions: Object[],
+  answers: Array<boolean>,
+  startNewGame: void => void
 };
+
+type StateT = {
+  finalScore: Object
+};
+
+class Result extends React.Component<PropsT, StateT> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      finalScore: (
+        <FormattedMessage
+          id="testResult.finalScoreBefore"
+          defaultMessage="Your final score: {activityScore} + {testScore} = {totalScore} points"
+          values={{
+            totalScore: this.props.finalScore,
+            testScore: this.props.testScore,
+            activityScore: this.props.activityScore
+          }}
+        />
+      )
+    };
+  }
+
+  componentDidMount() {
+    this.props.updateScore();
+    setTimeout(
+      () =>
+        this.setState({
+          finalScore: (
+            <FormattedMessage
+              id="testResult.finalScoreAfter"
+              defaultMessage="Your final score: {totalScore} points"
+              values={{
+                totalScore: this.props.finalScore
+              }}
+            />
+          )
+        }),
+      2000
+    );
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <Grid container justify="center" className={classes.root}>
+          <Typography variant="headline" className={classes.finalScore}>
+            <FormattedMessage
+              id="testResult.finalScore"
+              defaultMessage={this.state.finalScore}
+              values={{
+                totalScore: this.props.finalScore,
+                testScore: this.props.testScore,
+                activityScore: this.props.activityScore
+              }}
+            />
+          </Typography>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <div className={classes.group}>
+            <img
+              src="images/diploma.png"
+              alt="Diploma"
+              width="400"
+              height="300"
+            />
+            <div className={classes.textImage}>
+              <FormattedMessage
+                id="testResult.description"
+                defaultMessage="{studentName} obtained"
+                values={{ studentName: this.props.studentName }}
+              />
+            </div>
+            <div className={classes.textGrade}>
+              {this.props.grade} / {this.props.questions.length}
+            </div>
+          </div>
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          {this.props.questions.map((img, index) => (
+            <div key={img.src}>
+              <img src={img.src} alt={img.src} width="200" height="200" />
+              {this.props.answers[index] === img.valid ? (
+                <CheckCircle color="primary" />
+              ) : (
+                <Cancel color="error" />
+              )}
+            </div>
+          ))}
+        </Grid>
+        <Grid container justify="center" className={classes.root}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.props.startNewGame()}
+          >
+            <FormattedMessage
+              id="testResult.startAgain"
+              defaultMessage="Start a new game"
+            />
+          </Button>
+        </Grid>
+      </React.Fragment>
+    );
+  }
+}
 
 export default withStyles(styles)(Result);

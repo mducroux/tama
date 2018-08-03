@@ -46,6 +46,8 @@ const messages = {
   en: messagesEn
 };
 
+const gridScores = [0, 5, 10, 20, 50, 75, 100, 150, 250, 500, 1000];
+
 type PropsT = {};
 
 type StateT = {
@@ -65,6 +67,8 @@ class App extends React.Component<PropsT, StateT> {
   student: VirtualStudent;
   studentName: string;
   sessionRef: Object;
+  finalScore: number;
+  activityScore: number;
 
   constructor(props: PropsT) {
     super(props);
@@ -84,25 +88,25 @@ class App extends React.Component<PropsT, StateT> {
     this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].firstNames.length
-      )
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].firstNames.length
+        )
       ]
-      } ${
+    } ${
       nameData[this.state.language].lastNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].lastNames.length
-      )
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].lastNames.length
+        )
       ]
-      }`;
+    }`;
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
       localStorage.setItem("lang", this.state.language);
@@ -140,13 +144,14 @@ class App extends React.Component<PropsT, StateT> {
       (g, q, i) => (q.valid === answers[i] ? g + 1 : g),
       0
     );
-    const testScore = [0, 0, 0, 25, 50, 100, 200, 300, 500, 700, 1000][grade];
-    const test = { questions, answers, grade, score: testScore };
+    const testScore = gridScores[grade];
+    const test = { questions, answers, grade, testScore };
 
     const testRef = this.sessionRef.child("test");
     testRef.set(test);
-    const finalScore = testScore + this.state.score;
-    this.sessionRef.child("finalScore/").set(finalScore);
+    this.activityScore = this.state.score;
+    this.finalScore = testScore + this.activityScore;
+    this.sessionRef.child("finalScore/").set(this.finalScore);
 
     this.setState({
       hasChosenActivityType: true,
@@ -157,7 +162,7 @@ class App extends React.Component<PropsT, StateT> {
     const userId = localStorage.getItem("user_id");
     const username = localStorage.getItem("username");
     if (userId && username) {
-      updateLeaderboard(userId, username, finalScore);
+      updateLeaderboard(userId, username, this.finalScore);
     }
   };
 
@@ -165,25 +170,25 @@ class App extends React.Component<PropsT, StateT> {
     this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].firstNames.length
-      )
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].firstNames.length
+        )
       ]
-      } ${
+    } ${
       nameData[this.state.language].lastNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].lastNames.length
-      )
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].lastNames.length
+        )
       ]
-      }`;
+    }`;
     this.setState({
       hasBeenWelcomed: false,
       hasChosenActivityType: false,
@@ -311,9 +316,17 @@ class App extends React.Component<PropsT, StateT> {
           <TestStudent
             startNewGame={this.startNewGame}
             student={this.student}
-            score={this.state.score}
+            finalScore={this.finalScore}
+            activityScore={this.activityScore}
             test={this.state.test}
             studentName={this.studentName}
+            gridScores={gridScores}
+            updateScore={() =>
+              this.setState({
+                score: this.finalScore,
+                scoreDisplayed: String(this.finalScore)
+              })
+            }
           />
         );
       }
