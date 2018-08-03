@@ -24,7 +24,7 @@ import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
-import Leaderboard, { updateLeaderboard } from "./Leaderboard/index";
+import Leaderboard, { updateLeaderboard } from "./Leaderboard";
 import nameData from "./NameData";
 import NotEnoughPointsSnackbar from "./NotEnoughPointsSnackbar";
 
@@ -93,25 +93,25 @@ class App extends React.Component<PropsT, StateT> {
     this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].firstNames.length
+      )
       ]
-    } ${
+      } ${
       nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].lastNames.length
+      )
       ]
-    }`;
+      }`;
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
       localStorage.setItem("lang", this.state.language);
@@ -174,25 +174,25 @@ class App extends React.Component<PropsT, StateT> {
     this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].firstNames.length
+      )
       ]
-    } ${
+      } ${
       nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].lastNames.length
+      )
       ]
-    }`;
+      }`;
     this.setState({
       hasBeenWelcomed: false,
       hasChosenActivityType: false,
@@ -251,6 +251,7 @@ class App extends React.Component<PropsT, StateT> {
         <SessionHistory
           studentName={this.studentName}
           sessionRef={this.sessionRef}
+          student={this.student}
         />
       );
     } else if (!this.state.hasChosenActivityType) {
