@@ -9,7 +9,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { VictoryChart, VictoryLabel, VictoryBar, VictoryTheme } from 'victory'
+import { VictoryChart, VictoryAxis, VictoryLine, VictoryLabel, VictoryBar } from 'victory'
 
 import firebase from './firebase'
 
@@ -26,39 +26,54 @@ const styles = () => ({
 });
 
 const GradeHistogram = ({ data }: any) =>
-  <VictoryChart
-    theme={VictoryTheme.material}
-    domainPadding={25}
-    domain={{ x: [-0.5, 10.5] }}
-    x
-  >
-    <VictoryLabel text="Grades" x={5} y={10} textAnchor="middle" />
+  <VictoryChart>
     <VictoryBar
-      cornerRadius={8}
-      style={{ data: { fill: "#313ac4" } }}
+      cornerRadius={2}
+      style={{ data: { fill: "#313ac4" }, labels: { fill: "white" } }}
       data={data}
+      labels={d => d.y > 0 ? `${d.y}` : ''}
+      labelComponent={<VictoryLabel dy={30} />}
+      barRatio={0.9}
+    />
+    <VictoryAxis
+      crossAxis={false}
+      domain={[-0.5, 10.5]}
+      tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+      label="Student's Grades"
     />
   </VictoryChart>
 
+const GradeLine = ({ data }: any) =>
+  <VictoryChart>
+    <VictoryLine
+      data={data}
+      style={{ data: { stroke: "#c43a31" } }}
+      labels={d => d.y > 0 ? `${d.y}` : ''}
+      domain={{ y: [0, 10] }}
+    />
+    <VictoryAxis
+      crossAxis={false}
+      label="Sequence of students"
+    />
+  </VictoryChart>
 
-
-const SessionTable = ({ classes, data }: { classes: Object, data: any[][] }) => (
+const SessionTable = ({ classes, data }: { classes: Object, data: any[] }) => (
   <Table className={classes.table}>
     <TableHead>
       <TableRow>
         <TableCell>Name</TableCell>
-        <TableCell numeric>Score</TableCell>
-        <TableCell numeric>Rank</TableCell>
+        <TableCell >Score</TableCell>
+        <TableCell >Grade</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
-      {data.map(([name, score, rank]) => (
+      {data.map(({ student_name: name, finalScore, test: { grade } }, rank) => (
         <TableRow key={rank}>
           <TableCell component="th" scope="row">
             {name}
           </TableCell>
-          <TableCell numeric>{score}</TableCell>
-          <TableCell numeric>{rank}</TableCell>
+          <TableCell >{finalScore}</TableCell>
+          <TableCell >{grade}</TableCell>
         </TableRow>
       ))}
     </TableBody>
@@ -67,23 +82,41 @@ const SessionTable = ({ classes, data }: { classes: Object, data: any[][] }) => 
 
 type PropsT = { classes: Object }
 
-type StateT = { data: any }
+type StateT = {
+  tableData: any[],
+  histogramData: any[],
+  lineData: any[]
+}
 
 class StatsView extends React.Component<PropsT, StateT> {
-  state = { data: [] }
+  state = { tableData: [], histogramData: [], lineData: [] }
 
   constructor(props: PropsT) {
     super(props)
+    const userId = localStorage.getItem('user_id')
+    if (userId) {
+      firebase.database().ref(`sessions/${userId}`).once('value').then(d => {
+        const val = d.val()
+        const tableData = Object.keys(val).map(k => val[k]).filter(s => s.finalScore !== undefined)
+        const histogramData = tableData.reduce((acc, session) => {
+          acc[session.test.grade].y += 1
+          return acc
+        }, new Array(11).fill().map((_, x) => ({ x, y: 0 })))
 
-    const userRef = firebase.database().ref(`leaderboard/`)
+        const lineData = tableData.map((session, idx) => ({ x: idx + 1, y: session.test.grade }))
+
+        this.setState({ tableData, histogramData, lineData })
+      })
+    }
   }
 
   render() {
-    const { data } = this.state
+    const { tableData, histogramData, lineData } = this.state
     return (
       <Paper className={this.props.classes.root}>
-        <GradeHistogram data={[{ x: 1, y: 200 }, { x: 2, y: 204 }, { x: 3, y: 206 }, { x: 4, y: 200 }, { x: 5, y: 204 }, { x: 6, y: 206 }]} />
-        <SessionTable data={data} classes={this.props.classes} />
+        <GradeHistogram data={histogramData} />
+        <GradeLine data={lineData} />
+        <SessionTable data={tableData} classes={this.props.classes} />
       </Paper>
     )
   }
