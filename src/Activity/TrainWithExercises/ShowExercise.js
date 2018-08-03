@@ -30,7 +30,8 @@ class ShowExercise extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.props.updateScore();
+    this.timeout = setTimeout(() => {
       this.setState({
         thinking: false,
         studentAnswer: this.props.student.answerParallelogram(
@@ -41,17 +42,23 @@ class ShowExercise extends React.Component {
   }
 
   handleClick = userAnswer => {
+    this.props.recordExerciseActivity(userAnswer, this.state.studentAnswer);
     this.setState({ learning: true, userAnswer });
     this.props.student.learn(
       this.state.studentAnswer ? userAnswer : !userAnswer,
       this.props.parallelogram.shapeFeatures
     );
     setTimeout(() => {
-      this.props.recordExerciseActivity(userAnswer, this.state.studentAnswer);
-      this.props.updateScore();
       this.props.getBackToMenu();
     }, 2000);
   };
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+  }
 
   render() {
     const { classes } = this.props;

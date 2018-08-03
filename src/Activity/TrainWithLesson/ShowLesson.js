@@ -24,10 +24,10 @@ const styles = () => ({
 
 class ShowLesson extends React.Component {
   componentDidMount() {
+    this.props.updateScore();
     this.props.student.learnLesson(this.props.lesson.shapeFeatures);
+    this.props.recordLessonActivity();
     setTimeout(() => {
-      this.props.recordLessonActivity();
-      this.props.updateScore();
       this.props.getBackToMenu();
     }, 3000);
   }
