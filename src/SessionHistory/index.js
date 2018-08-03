@@ -45,11 +45,14 @@ function TestIcon(props) {
   );
 }
 
-const styles = () => ({
+const styles = theme => ({
   title: {
     display: "flex",
     flexWrap: "wrap",
     marginTop: "75px"
+  },
+  answers: {
+    backgroundColor: theme.palette.background.default
   }
 });
 
@@ -81,7 +84,7 @@ function FormattedMessageFixed(props) {
   return <FormattedMessage {...props} />;
 }
 
-const SessionHistory = ({ classes, history, studentName }) => {
+const SessionHistory = ({ classes, history, studentName, student }) => {
   const { activities, test } = history;
 
   return (
@@ -120,21 +123,119 @@ const SessionHistory = ({ classes, history, studentName }) => {
               }}
               icon={icons[elem.activity_type].icon}
             >
-              <Typography variant="title">
-                <FormattedMessageFixed
-                  id={`app.${elem.activity_type}`}
-                  defaultMessage={elem.activity_type}
-                />
-              </Typography>
-              {elem.activity_type !== "lesson" && (
-                <img
-                  src={elem.item}
-                  alt={elem.activity_type}
-                  width="200px"
-                  height="200px"
-                />
-              )}
-              {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+              <Grid container spacing={40}>
+                <Grid item>
+                  <Typography variant="title">
+                    <FormattedMessageFixed
+                      id={`app.${elem.activity_type}`}
+                      defaultMessage={elem.activity_type}
+                    />
+                  </Typography>
+                  {elem.activity_type !== "lesson" && (
+                    <img
+                      src={elem.item}
+                      alt={elem.activity_type}
+                      width="200px"
+                      height="200px"
+                    />
+                  )}
+                  {elem.activity_type === "lesson" && <p>{elem.item}</p>}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  {elem.activity_type === "exercise" && (
+                    <div className={classes.answers}>
+                      <Grid container alignItems="center" spacing={16}>
+                        <Grid item>
+                          <img
+                            src="images/virtual_student/student_avatar.png"
+                            alt="student-avatar"
+                            width="40px"
+                            height="40px"
+                          />
+                        </Grid>
+                        <Grid item>
+                          {'"'}
+                          {elem.student_answer
+                            ? student.givePositiveAnswer
+                            : student.giveNegativeAnswer}
+                          {'"'}
+                        </Grid>
+                      </Grid>
+                      <Grid container alignItems="center" spacing={16}>
+                        <Grid item>
+                          <img
+                            src="images/teacher/teacher_avatar.png"
+                            alt="teacher-avatar"
+                            width="40px"
+                            height="40px"
+                          />
+                        </Grid>
+                        <Grid item>
+                          {elem.user_answer ? (
+                            <FormattedMessage
+                              id="sessionHistory.positiveAnswerTeacherExercise"
+                              defaultMessage="&quot;This is true&quot;"
+                            />
+                          ) : (
+                            <FormattedMessage
+                              id="sessionHistory.negativeAnswerTeacherExercise"
+                              defaultMessage="&quot;This is false&quot;"
+                            />
+                          )}
+                        </Grid>
+                      </Grid>
+                    </div>
+                  )}
+                  {elem.activity_type === "example" && (
+                    <div className={classes.answers}>
+                      <Grid container alignItems="center" spacing={16}>
+                        <Grid item>
+                          <img
+                            src="images/teacher/teacher_avatar.png"
+                            alt="teacher-avatar"
+                            width="40px"
+                            height="40px"
+                          />
+                        </Grid>
+                        <Grid item>
+                          {elem.user_answer ? (
+                            <FormattedMessage
+                              id="sessionHistory.positiveAnswerTeacherExample"
+                              defaultMessage="&quot;This is a parallelogram&quot;"
+                            />
+                          ) : (
+                            <FormattedMessage
+                              id="sessionHistory.negativeAnswerTeacherExample"
+                              defaultMessage="&quot;This is not a parallelogram&quot;"
+                            />
+                          )}
+                        </Grid>
+                      </Grid>
+                    </div>
+                  )}
+                  {elem.activity_type === "lesson" && (
+                    <div className={classes.answers}>
+                      <Grid container alignItems="center" spacing={16}>
+                        <Grid item>
+                          <img
+                            src="images/virtual_student/student_avatar.png"
+                            alt="student-avatar"
+                            width="40px"
+                            height="40px"
+                          />
+                        </Grid>
+                        <Grid item>
+                          {'"'}
+                          {elem.student_already_know
+                            ? student.feedbackLessonAlreadyKnow
+                            : student.feedbackLessonDidntKnow}
+                          {'"'}
+                        </Grid>
+                      </Grid>
+                    </div>
+                  )}
+                </Grid>
+              </Grid>
             </VerticalTimelineElement>
           ))}
         {test && (
@@ -172,10 +273,13 @@ const SessionHistory = ({ classes, history, studentName }) => {
 SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  studentName: PropTypes.string.isRequired
+  studentName: PropTypes.string.isRequired,
+  student: PropTypes.object.isRequired
 };
 
-const StyledSessionHistory = withStyles(styles)(SessionHistory);
+const StyledSessionHistory = withStyles(styles, { withTheme: true })(
+  SessionHistory
+);
 
 class FirebaseWrapper extends React.Component<
   { sessionRef: any },

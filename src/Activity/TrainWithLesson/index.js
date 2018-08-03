@@ -20,17 +20,14 @@ class TrainWithLesson extends React.Component {
     this.setState({ index, hasChosenLesson: true });
   };
 
-  recordLessonActivity = () => {
+  recordLessonActivity = studentAlreadyKnow => {
     this.newActivityRef.child("activity_type").set("lesson");
     this.newActivityRef
       .child("knowledge")
       .set(this.props.student.knowledgeParallelogram);
-    this.newActivityRef
-      .child("item")
-      .set(lesson[this.state.index].title);
-    this.newActivityRef
-      .child("time")
-      .set(new Date().getTime());
+    this.newActivityRef.child("item").set(lesson[this.state.index].title);
+    this.newActivityRef.child("time").set(new Date().getTime());
+    this.newActivityRef.child("student_already_know").set(studentAlreadyKnow);
   };
 
   render() {

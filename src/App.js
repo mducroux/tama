@@ -24,7 +24,7 @@ import messagesFr from "./translations/fr.json";
 import messagesEn from "./translations/en.json";
 import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
-import Leaderboard, { updateLeaderboard } from './Leaderboard';
+import Leaderboard, { updateLeaderboard } from "./Leaderboard";
 import nameData from "./NameData";
 import Stats from './Stats'
 
@@ -58,7 +58,8 @@ type StateT = {
   score: number,
   scoreDisplayed: string,
   language: string,
-  test: Object
+  test: Object,
+  alreadyShownRules: boolean
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -78,7 +79,8 @@ class App extends React.Component<PropsT, StateT> {
       scoreDisplayed: "200",
       language:
         localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
-      test: {}
+      test: {},
+      alreadyShownRules: false
     };
     this.student = new QuickLearnerStudent();
     this.studentName = `${
@@ -144,7 +146,7 @@ class App extends React.Component<PropsT, StateT> {
 
     const testRef = this.sessionRef.child("test");
     testRef.set(test);
-    const finalScore = testScore + this.state.score
+    const finalScore = testScore + this.state.score;
     this.sessionRef.child("finalScore/").set(finalScore);
 
     this.setState({
@@ -153,10 +155,10 @@ class App extends React.Component<PropsT, StateT> {
       test
     });
 
-    const userId = localStorage.getItem("user_id")
-    const username = localStorage.getItem("username")
+    const userId = localStorage.getItem("user_id");
+    const username = localStorage.getItem("username");
     if (userId && username) {
-      updateLeaderboard(userId, username, finalScore)
+      updateLeaderboard(userId, username, finalScore);
     }
   };
 
@@ -247,6 +249,7 @@ class App extends React.Component<PropsT, StateT> {
         <SessionHistory
           studentName={this.studentName}
           sessionRef={this.sessionRef}
+          student={this.student}
         />
       );
     } else if (!this.state.hasChosenActivityType) {
@@ -272,6 +275,8 @@ class App extends React.Component<PropsT, StateT> {
             });
           }}
           onConfirmTestDialog={this.runTest}
+          alreadyShownRules={this.state.alreadyShownRules}
+          hasShownRules={() => this.setState({ alreadyShownRules: true })}
         />
       );
     } else if (this.state.hasChosenActivityType) {
@@ -335,7 +340,8 @@ class App extends React.Component<PropsT, StateT> {
               localStorage.removeItem("user_id");
               localStorage.removeItem("username");
               this.setState({
-                isRegistered: false
+                isRegistered: false,
+                alreadyShownRules: false
               });
             }}
             scoreDisplayed={this.state.scoreDisplayed}

@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 
 import TestConfirmationDialog from "./TestConfirmationDialog";
 import SessionTimeline from "./SessionTimeline";
+import RulesDialog from "../../SidePanel/RulesDialog";
 
 const styles = theme => ({
   root: {
@@ -108,8 +109,18 @@ class ChooseActivity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openTestDialog: false
+      openTestDialog: false,
+      openRulesDialog: false
     };
+    this.props.sessionRef.parent.once("value").then(snapshot => {
+      if (
+        !this.props.alreadyShownRules &&
+        Object.keys(snapshot.val()).length === 1
+      ) {
+        this.setState({ openRulesDialog: true });
+        this.props.hasShownRules();
+      }
+    });
   }
 
   handleButtonClick = key => {
@@ -212,6 +223,10 @@ class ChooseActivity extends React.Component {
           openTestDialog={this.state.openTestDialog}
           onCloseTestDialog={() => this.setState({ openTestDialog: false })}
         />
+        <RulesDialog
+          openRulesDialog={this.state.openRulesDialog}
+          onCloseRulesDialog={() => this.setState({ openRulesDialog: false })}
+        />
       </div>
     );
   }
@@ -223,7 +238,9 @@ ChooseActivity.propTypes = {
   onClickExercise: PropTypes.func.isRequired,
   onClickLesson: PropTypes.func.isRequired,
   onConfirmTestDialog: PropTypes.func.isRequired,
-  sessionRef: PropTypes.object.isRequired
+  sessionRef: PropTypes.object.isRequired,
+  hasShownRules: PropTypes.func.isRequired,
+  alreadyShownRules: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(ChooseActivity);
