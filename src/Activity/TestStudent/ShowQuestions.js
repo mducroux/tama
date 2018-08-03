@@ -22,48 +22,27 @@ const styles = () => ({
   }
 });
 
-type StateT = { thinking: boolean, index: number, answer: boolean };
+type StateT = { index: number, answer: boolean };
 
 type PropsT = {
   classes: Object,
   displayResultTest: () => void,
   questions: Object[],
   answers: boolean[],
-  student: any,
-}
+  student: any
+};
 
 class ShowQuestions extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
-    this.state = { thinking: true, index: 0, answer: false };
-  }
-
-  componentDidMount() {
-    setTimeout(() => this.answerQuestion(), 500);
-  }
-
-  answerQuestion() {
-    this.setState({
-      thinking: false,
-      answer: this.props.answers[this.state.index]
-    });
-  }
-
-  handleNextQuestion = () => {
-    this.setState({
-      index: this.state.index + 1,
-      thinking: true
-    });
-    setTimeout(() => this.answerQuestion(), 500);
+    this.state = { index: 0, answer: this.props.answers[0] };
   }
 
   render() {
     const { classes } = this.props;
 
     let bubbleText;
-    if (this.state.thinking === true) {
-      bubbleText = this.props.student.thinkingAboutExam;
-    } else if (this.state.answer === true) {
+    if (this.state.answer === true) {
       bubbleText = this.props.student.givePositiveAnswer;
     } else {
       bubbleText = this.props.student.giveNegativeAnswer;
@@ -95,18 +74,24 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
           <VirtualStudent bubbleText={bubbleText} />
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          {this.props.questions.length !== this.state.index + 1 && <Button
-            className={classes.button}
-            onClick={this.handleNextQuestion}
-            color="primary"
-            size="large"
-          >
-            <FormattedMessage
-              id="testShowQuestions.nextQuestion"
-              defaultMessage="Next question"
-            />
-          </Button>
-          }
+          {this.props.questions.length !== this.state.index + 1 && (
+            <Button
+              className={classes.button}
+              onClick={() =>
+                this.setState({
+                  index: this.state.index + 1,
+                  answer: this.props.answers[this.state.index + 1]
+                })
+              }
+              color="primary"
+              size="large"
+            >
+              <FormattedMessage
+                id="testShowQuestions.nextQuestion"
+                defaultMessage="Next question"
+              />
+            </Button>
+          )}
           <Button
             className={classes.button}
             onClick={this.props.displayResultTest}
