@@ -177,11 +177,11 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                               defaultMessage="&quot;This is true&quot;"
                             />
                           ) : (
-                            <FormattedMessage
-                              id="sessionHistory.negativeAnswerTeacherExercise"
-                              defaultMessage="&quot;This is false&quot;"
-                            />
-                          )}
+                              <FormattedMessage
+                                id="sessionHistory.negativeAnswerTeacherExercise"
+                                defaultMessage="&quot;This is false&quot;"
+                              />
+                            )}
                         </Grid>
                       </Grid>
                     </div>
@@ -204,11 +204,11 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                               defaultMessage="&quot;This is a parallelogram&quot;"
                             />
                           ) : (
-                            <FormattedMessage
-                              id="sessionHistory.negativeAnswerTeacherExample"
-                              defaultMessage="&quot;This is not a parallelogram&quot;"
-                            />
-                          )}
+                              <FormattedMessage
+                                id="sessionHistory.negativeAnswerTeacherExample"
+                                defaultMessage="&quot;This is not a parallelogram&quot;"
+                              />
+                            )}
                         </Grid>
                       </Grid>
                     </div>
@@ -277,14 +277,14 @@ SessionHistory.propTypes = {
   student: PropTypes.object.isRequired
 };
 
-const StyledSessionHistory = withStyles(styles, { withTheme: true })(
+export const StyledSessionHistory = withStyles(styles, { withTheme: true })(
   SessionHistory
 );
 
 class FirebaseWrapper extends React.Component<
   { sessionRef: any },
   { history: Object[] }
-> {
+  > {
   state = { history: {} };
 
   componentWillMount() {
