@@ -6,7 +6,16 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 const styles = () => ({
+  root: {
+    height: "100%"
+  },
   bubble: {
+    height: "50%"
+  },
+  student: {
+    height: "50%"
+  },
+  bubbleItem: {
     position: "relative",
     left: "25%"
   },
@@ -20,27 +29,35 @@ const styles = () => ({
 });
 
 const VirtualStudent = ({ classes, bubbleText }) => (
-  <div>
-    <Grid container justify="center">
-      <div className={classes.bubble}>
+  <div className={classes.root}>
+    <Grid
+      container
+      justify="center"
+      alignItems="flex-end"
+      className={classes.bubble}
+    >
+      <div className={classes.bubbleItem}>
         <img
           src="images/virtual_student/bubble.png"
-          width="200"
-          height="150"
+          width="180"
+          height="130"
           alt="bubble"
         />
         <div className={classes.textImage}>{bubbleText}</div>
       </div>
     </Grid>
-    <Grid container justify="center">
-      <div>
-        <img
-          src="images/virtual_student/student.png"
-          width="200"
-          height="200"
-          alt="virtual_student"
-        />
-      </div>
+    <Grid
+      container
+      justify="center"
+      alignItems="flex-start"
+      className={classes.student}
+    >
+      <img
+        src="images/virtual_student/student.png"
+        width="180"
+        height="180"
+        alt="virtual_student"
+      />
     </Grid>
   </div>
 );

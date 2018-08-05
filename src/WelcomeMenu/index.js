@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
 
 import VirtualStudent from "../VirtualStudent";
 
@@ -13,11 +14,23 @@ const styles = () => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "50px"
+    marginTop: "1%"
+  },
+  welcome: {
+    height: "100%"
   },
   studentName: {
     textAlign: "center",
     alignSelf: "center"
+  },
+  logo: {
+    height: "10%"
+  },
+  title: {
+    height: "3%"
+  },
+  student: {
+    height: "60%"
   }
 });
 
@@ -28,11 +41,19 @@ type PropsT = {
 };
 
 const WelcomeMenu = ({ classes, onClickStart, studentName }: PropsT) => (
-  <div>
-    <Grid container justify="center" className={classes.root}>
-      <img src="images/logo.png" alt="logo" />
+  <div className={classes.welcome}>
+    <Grid
+      container
+      justify="center"
+      className={classNames(classes.root, classes.logo)}
+    >
+      <img src="images/logo.png" width="110" height="60" alt="logo" />
     </Grid>
-    <Grid container justify="center" className={classes.root}>
+    <Grid
+      container
+      justify="center"
+      className={classNames(classes.root, classes.title)}
+    >
       <Typography className={classes.title} variant="title" color="inherit">
         <FormattedMessage
           id="welcomeMenu.descriptionApp"
@@ -40,7 +61,11 @@ const WelcomeMenu = ({ classes, onClickStart, studentName }: PropsT) => (
         />
       </Typography>
     </Grid>
-    <Grid container justify="center" className={classes.root}>
+    <Grid
+      container
+      justify="center"
+      className={classNames(classes.root, classes.student)}
+    >
       <VirtualStudent
         bubbleText={
           <FormattedMessage

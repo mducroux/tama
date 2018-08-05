@@ -57,6 +57,7 @@ const GradeLine = ({ data }: any) => (
       style={{ data: { stroke: "#c43a31" } }}
       labels={d => (d.y > 0 ? `${d.y}` : "")}
       domain={{ y: [0, 10] }}
+      animate
     />
     <VictoryAxis
       crossAxis={false}

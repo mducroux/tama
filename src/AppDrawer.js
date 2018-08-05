@@ -57,7 +57,8 @@ const styles = theme => ({
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    height: "100%"
   },
   "content-left": {
     marginLeft: -drawerWidth
@@ -134,12 +135,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                    <FormattedMessage
-                      id="appDrawer.welcomeCustomized"
-                      defaultMessage="Welcome {username} !"
-                      values={{ username: localStorage.getItem("username") }}
-                    />
-                  )}
+                  <FormattedMessage
+                    id="appDrawer.welcomeCustomized"
+                    defaultMessage="Welcome {username} !"
+                    values={{ username: localStorage.getItem("username") }}
+                  />
+                )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
