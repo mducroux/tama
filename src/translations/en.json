@@ -96,7 +96,7 @@
 	"testConfirmationDialog.takeTheTest": "Take the test",
 	"testResult.description": "{studentName} obtained",
 	"testResult.finalScoreAfter": "Your final score: {totalScore} points",
-	"testResult.finalScoreBefore": "Your final score: {activityScore} + {score} = {totalScore} points",
+	"testResult.finalScoreBefore": "Your final score: {activityScore} + {testScore} = {totalScore} points",
 	"testResult.startAgain": "Start a new game",
 	"testShowQuestions.nextQuestion": "Next question",
 	"testShowQuestions.question": "Question: {index} / {numberOfQuestions}: Is it a parallelogram?",

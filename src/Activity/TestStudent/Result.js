@@ -96,15 +96,7 @@ class Result extends React.Component<PropsT, StateT> {
       <React.Fragment>
         <Grid container justify="center" className={classes.root}>
           <Typography variant="headline" className={classes.finalScore}>
-            <FormattedMessage
-              id="testResult.finalScore"
-              defaultMessage={this.state.finalScore}
-              values={{
-                totalScore: this.props.finalScore,
-                testScore: this.props.testScore,
-                activityScore: this.props.activityScore
-              }}
-            />
+            {this.state.finalScore}
           </Typography>
         </Grid>
         <Grid container justify="center" className={classes.root}>
@@ -134,8 +126,8 @@ class Result extends React.Component<PropsT, StateT> {
               {this.props.answers[index] === img.valid ? (
                 <CheckCircle color="primary" />
               ) : (
-                <Cancel color="error" />
-              )}
+                  <Cancel color="error" />
+                )}
             </div>
           ))}
         </Grid>
