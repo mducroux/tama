@@ -101,7 +101,7 @@
   "testConfirmationDialog.takeTheTest": "Passer le test",
   "testResult.description": "{studentName} a obtenu",
   "testResult.finalScoreAfter": "Votre score final : {totalScore} points",
-  "testResult.finalScoreBefore": "Votre score final : {activityScore} + {score} = {totalScore} points",
+  "testResult.finalScoreBefore": "Votre score final : {activityScore} + {testScore} = {totalScore} points",
   "testResult.startAgain": "Recommencer une partie",
   "testShowQuestions.nextQuestion": "Question suivante",
   "testShowQuestions.question": "Question : {index} / {numberOfQuestions} : Est-ce un parallélogramme ?",
