@@ -8,9 +8,12 @@ import ShowQuestions from "./ShowQuestions";
 type PropsT = {
   startNewGame: () => void,
   student: Object,
-  score: number,
+  finalScore: number,
+  activityScore: number,
   studentName: string,
-  test: Object
+  test: Object,
+  gridScores: Array<number>,
+  updateScore: void => void
 };
 
 type StateT = {
@@ -20,7 +23,6 @@ type StateT = {
 class TestStudent extends React.Component<PropsT, StateT> {
   numberOfQuestions: number;
   examQuestions: Object[];
-  correctAnswers: Array<boolean>;
 
   constructor(props: PropsT) {
     super(props);
@@ -36,6 +38,8 @@ class TestStudent extends React.Component<PropsT, StateT> {
           {...this.props.test}
           displayResultTest={() => this.setState({ tookTest: true })}
           student={this.props.student}
+          gridScores={this.props.gridScores}
+          test={this.props.test}
         />
       );
     }
@@ -44,7 +48,9 @@ class TestStudent extends React.Component<PropsT, StateT> {
         {...this.props.test}
         startNewGame={this.props.startNewGame}
         studentName={this.props.studentName}
-        activityScore={this.props.score}
+        finalScore={this.props.finalScore}
+        activityScore={this.props.activityScore}
+        updateScore={() => this.props.updateScore()}
       />
     );
   }
