@@ -26,6 +26,8 @@ import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
 import Leaderboard, { updateLeaderboard } from "./Leaderboard";
 import nameData from "./NameData";
+import Stats from "./Stats";
+import NotEnoughPointsSnackbar from "./NotEnoughPointsSnackbar";
 
 const theme = createMuiTheme({
   palette: {
@@ -48,6 +50,12 @@ const messages = {
 
 const gridScores = [0, 5, 10, 20, 50, 75, 100, 150, 250, 500, 1000];
 
+const scoreCost = {
+  example: -10,
+  exercise: -30,
+  lesson: -50
+};
+
 type PropsT = {};
 
 type StateT = {
@@ -60,7 +68,8 @@ type StateT = {
   scoreDisplayed: string,
   language: string,
   test: Object,
-  alreadyShownRules: boolean
+  alreadyShownRules: boolean,
+  openSnackbar: boolean
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -78,35 +87,36 @@ class App extends React.Component<PropsT, StateT> {
       hasChosenActivityType: false,
       hasChosenActivity: "",
       view: "training",
-      score: 200,
-      scoreDisplayed: "200",
+      score: 50,
+      scoreDisplayed: "50",
       language:
         localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
       test: {},
-      alreadyShownRules: false
+      alreadyShownRules: false,
+      openSnackbar: false
     };
     this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].firstNames.length
+      )
       ]
-    } ${
+      } ${
       nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].lastNames.length
+      )
       ]
-    }`;
+      }`;
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
       localStorage.setItem("lang", this.state.language);
@@ -170,25 +180,25 @@ class App extends React.Component<PropsT, StateT> {
     this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].firstNames.length
+      )
       ]
-    } ${
+      } ${
       nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].lastNames.length
+      )
       ]
-    }`;
+      }`;
     this.setState({
       hasBeenWelcomed: false,
       hasChosenActivityType: false,
@@ -242,6 +252,8 @@ class App extends React.Component<PropsT, StateT> {
       );
     } else if (this.state.view === "leaderboard") {
       displayed = <Leaderboard />;
+    } else if (this.state.view === "stats") {
+      displayed = <Stats />;
     } else if (this.state.view === "history") {
       displayed = (
         <SessionHistory
@@ -255,22 +267,34 @@ class App extends React.Component<PropsT, StateT> {
         <ChooseActivity
           sessionRef={this.sessionRef}
           onClickExample={() => {
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: "example"
-            });
+            if (this.state.score + scoreCost.example >= 0) {
+              this.setState({
+                hasChosenActivityType: true,
+                hasChosenActivity: "example"
+              });
+            } else {
+              this.setState({ openSnackbar: true });
+            }
           }}
           onClickExercise={() => {
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: "exercise"
-            });
+            if (this.state.score + scoreCost.exercise >= 0) {
+              this.setState({
+                hasChosenActivityType: true,
+                hasChosenActivity: "exercise"
+              });
+            } else {
+              this.setState({ openSnackbar: true });
+            }
           }}
           onClickLesson={() => {
-            this.setState({
-              hasChosenActivityType: true,
-              hasChosenActivity: "lesson"
-            });
+            if (this.state.score + scoreCost.lesson >= 0) {
+              this.setState({
+                hasChosenActivityType: true,
+                hasChosenActivity: "lesson"
+              });
+            } else {
+              this.setState({ openSnackbar: true });
+            }
           }}
           onConfirmTestDialog={this.runTest}
           alreadyShownRules={this.state.alreadyShownRules}
@@ -284,7 +308,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateScore={() => this.updateScore(-10)}
+            updateScore={() => this.updateScore(scoreCost.example)}
             student={this.student}
             sessionRef={this.sessionRef}
           />
@@ -295,7 +319,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateScore={() => this.updateScore(-30)}
+            updateScore={() => this.updateScore(scoreCost.exercise)}
             student={this.student}
             sessionRef={this.sessionRef}
           />
@@ -306,7 +330,7 @@ class App extends React.Component<PropsT, StateT> {
             getBackToMenu={() =>
               this.setState({ hasChosenActivityType: false })
             }
-            updateScore={() => this.updateScore(-50)}
+            updateScore={() => this.updateScore(scoreCost.lesson)}
             student={this.student}
             sessionRef={this.sessionRef}
           />
@@ -358,6 +382,10 @@ class App extends React.Component<PropsT, StateT> {
               this.setState({ language });
             }}
             studentName={this.studentName}
+          />
+          <NotEnoughPointsSnackbar
+            open={this.state.openSnackbar}
+            handleClose={() => this.setState({ openSnackbar: false })}
           />
         </MuiThemeProvider>
       </IntlProvider>

@@ -69,8 +69,8 @@ const LI = ({
 }: {
   Icon: Object,
   onClick: void => void,
-  id: string,
-  title: string
+    id: string,
+      title: string
 }) => (
   <ListItem button onClick={onClick}>
     <ListItemIcon>
@@ -122,7 +122,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
       <div>
         <LI
           Icon={StatisticsIcon}
-          onClick={() => window.alert("this feature is not yet implemented")}
+          onClick={() => this.props.changeView("stats")}
           id="stats"
           title="My statistics"
         />
@@ -185,8 +185,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
               ) : (
-                <ChevronLeftIcon />
-              )}
+                  <ChevronLeftIcon />
+                )}
             </IconButton>
           </div>
           <Divider />
