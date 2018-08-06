@@ -98,7 +98,7 @@ class ShowExercise extends React.Component {
           </Grid>
           {this.state.thinking ? (
             <Grid item xs={12} sm={4}>
-              <Teacher onClickBubble={this.handleClick} waitingForAnswer />
+              <Teacher onClickBubble={this.handleClick} waitingForStudent />
             </Grid>
           ) : (
             <Grid item xs={12} sm={4}>
@@ -116,7 +116,7 @@ class ShowExercise extends React.Component {
                     defaultMessage="False"
                   />
                 }
-                waitingForAnswer={false}
+                waitingForStudent={false}
               />
             </Grid>
           )}

@@ -64,6 +64,7 @@ const WelcomeMenu = ({ classes, onClickStart, studentName }: PropsT) => (
     <Grid
       container
       justify="center"
+      alignItems="center"
       className={classNames(classes.root, classes.student)}
     >
       <VirtualStudent

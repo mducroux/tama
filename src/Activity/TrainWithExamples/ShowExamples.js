@@ -10,11 +10,13 @@ import Teacher from "../../Teacher";
 
 const styles = {
   root: {
-    display: "flex",
-    marginTop: "5%"
+    height: "100%"
   },
-  imagePara: {
-    marginBottom: "300px"
+  group: {
+    height: "80%"
+  },
+  shape: {
+    marginTop: "5%"
   }
 };
 
@@ -44,12 +46,24 @@ class ShowExamples extends React.Component {
       : student.questionExample;
     return (
       <React.Fragment>
-        <Grid container alignItems="flex-end" className={classes.root}>
+        <Grid container className={classes.root}>
           <Grid item xs={12} sm={4}>
-            <VirtualStudent bubbleText={bubbleText} />
+            <Grid
+              container
+              justify="center"
+              alignItems="flex-end"
+              className={classes.group}
+            >
+              <VirtualStudent bubbleText={bubbleText} />
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Grid container justify="center">
+            <Grid
+              container
+              justify="center"
+              alignItems="flex-start"
+              className={classes.shape}
+            >
               <img
                 className={classes.imagePara}
                 src={parallelogram.src}
@@ -61,22 +75,29 @@ class ShowExamples extends React.Component {
             </Grid>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Teacher
-              onClickBubble={this.handleClick}
-              positiveAnswer={
-                <FormattedMessage
-                  id="showExamples.positiveAnswer"
-                  defaultMessage="Yes"
-                />
-              }
-              negativeAnswer={
-                <FormattedMessage
-                  id="showExamples.negativeAnswer"
-                  defaultMessage="No"
-                />
-              }
-              waitingForAnswer={false}
-            />
+            <Grid
+              container
+              justify="center"
+              alignItems="flex-end"
+              className={classes.group}
+            >
+              <Teacher
+                onClickBubble={this.handleClick}
+                positiveAnswer={
+                  <FormattedMessage
+                    id="showExamples.positiveAnswer"
+                    defaultMessage="Yes"
+                  />
+                }
+                negativeAnswer={
+                  <FormattedMessage
+                    id="showExamples.negativeAnswer"
+                    defaultMessage="No"
+                  />
+                }
+                waitingForStudent={false}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </React.Fragment>

@@ -5,10 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 
 const styles = () => ({
-  root: {
-    display: "flex",
-    alignItems: "flex-end"
-  },
   bubbleThinking1: {
     transform: "scaleX(-1)",
     backgroundColor: "transparent",
@@ -27,7 +23,7 @@ const styles = () => ({
   },
   bubbleAnswer: {
     position: "relative",
-    left: "-20%",
+    left: "-50%",
     backgroundColor: "transparent",
     cursor: "pointer",
     overflow: "hidden",
@@ -71,9 +67,9 @@ class Teacher extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        {!this.props.waitingForAnswer && (
-          <Grid container justify="space-around" className={classes.root}>
+      <div className={classes.root}>
+        {!this.props.waitingForStudent && (
+          <Grid container justify="space-around" alignItems="flex-end">
             {this.state.thinking && (
               <div>
                 <button
@@ -96,8 +92,8 @@ class Teacher extends React.Component {
                 >
                   <img
                     src={this.state.bubbleThinking1}
-                    width="200"
-                    height="150"
+                    width="180"
+                    height="140"
                     alt="bubble"
                   />
                   <div className={classes.textImageThinking1}>
@@ -126,8 +122,8 @@ class Teacher extends React.Component {
                 >
                   <img
                     src={this.state.bubbleThinking2}
-                    width="200"
-                    height="150"
+                    width="180"
+                    height="140"
                     alt="bubble"
                   />
                   <div className={classes.textImageThinking2}>
@@ -157,7 +153,7 @@ class Teacher extends React.Component {
             )}
           </Grid>
         )}
-        <Grid container justify="center">
+        <Grid container justify="center" alignItems="flex-start">
           <img
             src="images/teacher/teacher.png"
             width="150"
@@ -175,7 +171,7 @@ Teacher.propTypes = {
   onClickBubble: PropTypes.func.isRequired,
   positiveAnswer: PropTypes.object,
   negativeAnswer: PropTypes.object,
-  waitingForAnswer: PropTypes.bool.isRequired
+  waitingForStudent: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(Teacher);
