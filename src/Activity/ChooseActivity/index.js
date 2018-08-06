@@ -13,8 +13,7 @@ import RulesDialog from "../../SidePanel/RulesDialog";
 
 const styles = theme => ({
   root: {
-    height: "100%",
-    overflow: "auto"
+    height: "100%"
   },
   sessionTimeline: {
     height: "15%"

@@ -60,7 +60,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     height: "100%",
-    overflow: "hidden"
+    overflow: "auto"
   },
   "content-left": {
     marginLeft: -drawerWidth

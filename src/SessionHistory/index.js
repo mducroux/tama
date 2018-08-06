@@ -47,8 +47,7 @@ function TestIcon(props) {
 
 const styles = theme => ({
   root: {
-    height: "100%",
-    overflow: "auto"
+    height: "100%"
   },
   title: {
     display: "flex",

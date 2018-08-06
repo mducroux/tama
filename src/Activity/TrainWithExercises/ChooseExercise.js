@@ -12,8 +12,7 @@ import parallelogramData from "../ParallelogramData";
 
 const styles = theme => ({
   root: {
-    height: "100%",
-    overflow: "auto"
+    height: "100%"
   },
   header: {
     display: "flex",

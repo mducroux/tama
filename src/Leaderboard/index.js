@@ -123,6 +123,7 @@ class LeaderboardView extends React.Component<PropsT, StateT> {
           indicatorColor="primary"
           textColor="primary"
           onChange={(_, value) => this.setState({ tab: value })}
+          centered
         >
           <Tab label="Daily" />
           <Tab label="Weekly" />

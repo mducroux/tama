@@ -13,8 +13,7 @@ import RadioListLesson from "./RadioListLesson";
 
 const styles = theme => ({
   root: {
-    height: "100%",
-    overflow: "auto"
+    height: "100%"
   },
   header: {
     display: "flex",

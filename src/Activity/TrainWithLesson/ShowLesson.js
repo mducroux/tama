@@ -8,8 +8,7 @@ import VirtualStudent from "../../VirtualStudent";
 
 const styles = theme => ({
   root: {
-    height: "100%",
-    overflow: "auto"
+    height: "100%"
   },
   group: {
     height: "100%"
