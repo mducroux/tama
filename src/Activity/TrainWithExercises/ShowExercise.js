@@ -13,7 +13,7 @@ const styles = () => ({
     height: "100%"
   },
   group: {
-    height: "80%"
+    height: "90%"
   },
   shape: {
     marginTop: "5%"

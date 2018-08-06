@@ -2,23 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { Typography } from "@material-ui/core";
 
 import VirtualStudent from "../../VirtualStudent";
 
-const styles = () => ({
+const styles = theme => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "50px"
+    height: "100%",
+    overflow: "auto"
   },
   group: {
+    height: "100%"
+  },
+  blackboard: {
     position: "relative"
   },
   textImage: {
     position: "absolute",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
+    textAlign: "center",
+    color: theme.palette.common.white
   }
 });
 
@@ -51,22 +56,40 @@ class ShowLesson extends React.Component {
     }
 
     return (
-      <div>
-        <Grid container justify="center" className={classes.root}>
-          <div className={classes.group}>
-            <img
-              src="images/blackboard.jpg"
-              alt="Blackboard"
-              width="400"
-              height="300"
-            />
-            <div className={classes.textImage}>{this.props.lesson.title}</div>
-          </div>
+      <Grid container className={classes.root}>
+        <Grid item xs={12} sm={6}>
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            className={classes.group}
+          >
+            <VirtualStudent bubbleText={bubbleText} />
+          </Grid>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText} />
+        <Grid item xs={12} sm={6}>
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            className={classes.group}
+          >
+            <div className={classes.blackboard}>
+              <img
+                src="images/blackboard.jpg"
+                alt="Blackboard"
+                width="400"
+                height="300"
+              />
+              <div className={classes.textImage}>
+                <Typography variant="title" color="inherit">
+                  {this.props.lesson.title}
+                </Typography>
+              </div>
+            </div>
+          </Grid>
         </Grid>
-      </div>
+      </Grid>
     );
   }
 }
