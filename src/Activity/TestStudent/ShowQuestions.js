@@ -9,17 +9,34 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import VirtualStudent from "../../VirtualStudent";
-import PointsTestBar from "./PointsTestBar";
+import TestScoreBar from "./TestScoreBar";
 
 const styles = () => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "25px"
+    height: "100%"
   },
-  title: {
+  group: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  question: {
     display: "flex",
     textAlign: "center"
+  },
+  testScoreBar: {
+    height: "18%"
+  },
+  title: {
+    height: "5%"
+  },
+  main: {
+    height: "60%"
+  },
+  student: {
+    height: "100%"
+  },
+  parallelogram: {
+    height: "100%"
   }
 });
 
@@ -82,17 +99,27 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
     }
 
     return (
-      <div>
-        <Grid container justify="center" className={classes.root}>
+      <div className={classes.root}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.testScoreBar}
+        >
           <Grid item sm={11}>
-            <PointsTestBar
+            <TestScoreBar
               completed={this.indexScore}
               gridScores={this.props.gridScores}
             />
           </Grid>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <Typography variant="title" className={classes.title}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.title}
+        >
+          <Typography variant="title" className={classes.question}>
             <FormattedMessage
               id="testShowQuestions.question"
               defaultMessage="Question: {index} / {numberOfQuestions}: Is it a parallelogram?"
@@ -103,18 +130,40 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
             />
           </Typography>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <img
-            src={this.props.questions[this.state.index].src}
-            alt="parallelogram"
-            width="300"
-            height="300"
-          />
+        <Grid container className={classes.main}>
+          <Grid item xs={12} sm={6}>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.student}
+            >
+              <VirtualStudent bubbleText={bubbleText} />
+            </Grid>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.parallelogram}
+            >
+              <img
+                src={this.props.questions[this.state.index].src}
+                alt="parallelogram"
+                width="300"
+                height="300"
+                border="1px solid"
+              />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText} />
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.navigation}
+        >
           {this.props.questions.length !== this.state.index + 1 && (
             <Button
               className={classes.button}
