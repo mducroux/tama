@@ -17,7 +17,8 @@ import SidePanel from "./SidePanel";
 const drawerWidth = 280;
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    height: "100%"
   },
   appFrame: {
     height: "100%",

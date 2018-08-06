@@ -21,23 +21,24 @@ import firebase from "../firebase";
 const styles = theme => ({
   root: {
     display: "flex",
-    marginTop: "50px"
+    marginTop: "0.5%",
+    height: "100%"
   },
   validatorForm: {
     margin: theme.spacing.unit
   },
   group: {
-    margin: theme.spacing.unit * 3
+    margin: theme.spacing.unit,
+    height: "12%"
   },
   title: {
-    margin: theme.spacing.unit * 3,
-    marginBottom: theme.spacing.unit * 6
+    height: "8%"
   },
   textValidator: {
     width: 200
   },
   button: {
-    margin: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit
   }
 });
 
@@ -96,9 +97,9 @@ class RegistrationForm extends React.Component {
     const { classes } = this.props;
     return (
       <Grid container className={classes.root} justify="center">
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={8} className={classes.root}>
           <Grid container className={classes.root} justify="center">
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={8} className={classes.root}>
               <ValidatorForm
                 component="fieldset"
                 className={classes.validatorForm}
