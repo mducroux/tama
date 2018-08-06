@@ -46,10 +46,14 @@ function TestIcon(props) {
 }
 
 const styles = theme => ({
+  root: {
+    height: "100%",
+    overflow: "auto"
+  },
   title: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "75px"
+    marginTop: "5%"
   },
   answers: {
     backgroundColor: theme.palette.background.default
@@ -88,7 +92,7 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
   const { activities, test } = history;
 
   return (
-    <div>
+    <div className={classes.root}>
       <Grid container justify="center" className={classes.title}>
         <Typography variant="display1">
           <FormattedMessage
@@ -177,11 +181,11 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                               defaultMessage="&quot;This is true&quot;"
                             />
                           ) : (
-                              <FormattedMessage
-                                id="sessionHistory.negativeAnswerTeacherExercise"
-                                defaultMessage="&quot;This is false&quot;"
-                              />
-                            )}
+                            <FormattedMessage
+                              id="sessionHistory.negativeAnswerTeacherExercise"
+                              defaultMessage="&quot;This is false&quot;"
+                            />
+                          )}
                         </Grid>
                       </Grid>
                     </div>
@@ -204,11 +208,11 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                               defaultMessage="&quot;This is a parallelogram&quot;"
                             />
                           ) : (
-                              <FormattedMessage
-                                id="sessionHistory.negativeAnswerTeacherExample"
-                                defaultMessage="&quot;This is not a parallelogram&quot;"
-                              />
-                            )}
+                            <FormattedMessage
+                              id="sessionHistory.negativeAnswerTeacherExample"
+                              defaultMessage="&quot;This is not a parallelogram&quot;"
+                            />
+                          )}
                         </Grid>
                       </Grid>
                     </div>
@@ -284,7 +288,7 @@ export const StyledSessionHistory = withStyles(styles, { withTheme: true })(
 class FirebaseWrapper extends React.Component<
   { sessionRef: any },
   { history: Object[] }
-  > {
+> {
   state = { history: {} };
 
   componentWillMount() {
