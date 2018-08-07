@@ -13,16 +13,21 @@ import RulesDialog from "../../SidePanel/RulesDialog";
 
 const styles = theme => ({
   root: {
-    display: "flex",
-    marginTop: "15px"
+    height: "100%"
+  },
+  sessionTimeline: {
+    height: "15%"
+  },
+  title: {
+    height: "10%"
   },
   test: {
-    marginTop: "50px"
+    height: "25%"
   },
   button: {
     position: "relative",
-    height: 512,
-    width: "100%",
+    height: 300,
+    width: 300,
     "&:hover, &$focusVisible": {
       "& $imageBackdrop": {
         opacity: 0.15
@@ -32,7 +37,7 @@ const styles = theme => ({
   button_test: {
     position: "relative",
     height: 100,
-    width: "75%",
+    width: 300,
     "&:hover, &$focusVisible": {
       "& $imageBackdrop": {
         opacity: 0.15
@@ -136,15 +141,20 @@ class ChooseActivity extends React.Component {
   render() {
     const { classes, sessionRef } = this.props;
     return (
-      <div>
-        <Grid container className={classes.root} justify="center">
+      <div className={classes.root}>
+        <Grid
+          container
+          className={classes.sessionTimeline}
+          justify="center"
+          alignItems="center"
+        >
           <Grid item sm={12}>
             <SessionTimeline sessionRef={sessionRef} />
           </Grid>
         </Grid>
-        <Grid container className={classes.root} justify="center">
+        <Grid container className={classes.title} justify="center">
           <Grid item sm={6}>
-            <Grid container className={classes.root} justify="center">
+            <Grid container className={classes.title} justify="center">
               <Typography variant="display1" color="inherit">
                 <FormattedMessage
                   id="chooseActivity.chooseActivity"
@@ -154,44 +164,42 @@ class ChooseActivity extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container className={classes.root} justify="center">
-          <Grid item xs={12} sm={12}>
-            <Grid
-              container
-              className={classes.root}
-              justify="center"
-              spacing={0}
-            >
-              {images.map((image, index) => (
-                <Grid item xs={12} sm={4} key={image.url}>
-                  <ButtonBase
-                    className={classes.button}
-                    focusVisibleClassName={classes.focusVisible}
-                    onClick={() => this.handleButtonClick(index)}
-                  >
-                    <span
-                      className={classes.imageSrc}
-                      style={{
-                        backgroundImage: `url(${image.url})`
-                      }}
-                    />
-                    <span className={classes.imageBackdrop} />
-                    <span className={classes.textButton}>
-                      <Typography
-                        component="span"
-                        variant="title"
-                        color="inherit"
-                      >
-                        {image.title} <br /> <br />- {image.learningCost} points
-                      </Typography>
-                    </span>
-                  </ButtonBase>
-                </Grid>
-              ))}
+        <Grid container className={classes.activities} justify="center">
+          {images.map((image, index) => (
+            <Grid item xs={12} sm={4} key={image.url}>
+              <Grid container className={classes.group} justify="center">
+                <ButtonBase
+                  className={classes.button}
+                  focusVisibleClassName={classes.focusVisible}
+                  onClick={() => this.handleButtonClick(index)}
+                >
+                  <span
+                    className={classes.imageSrc}
+                    style={{
+                      backgroundImage: `url(${image.url})`
+                    }}
+                  />
+                  <span className={classes.imageBackdrop} />
+                  <span className={classes.textButton}>
+                    <Typography
+                      component="span"
+                      variant="title"
+                      color="inherit"
+                    >
+                      {image.title} <br /> <br />- {image.learningCost} points
+                    </Typography>
+                  </span>
+                </ButtonBase>
+              </Grid>
             </Grid>
-          </Grid>
+          ))}
         </Grid>
-        <Grid container className={classes.test} justify="flex-end">
+        <Grid
+          container
+          className={classes.test}
+          justify="flex-end"
+          alignItems="center"
+        >
           <Grid item xs={12} sm={4}>
             <Grid container justify="center">
               <ButtonBase

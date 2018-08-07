@@ -26,7 +26,7 @@ import type { VirtualStudent } from "./VirtualStudent/types";
 import parallelogramData from "./Activity/ParallelogramData";
 import Leaderboard, { updateLeaderboard } from "./Leaderboard";
 import nameData from "./NameData";
-import Stats from "./Stats";
+import Stats from "./Statistics";
 import NotEnoughPointsSnackbar from "./NotEnoughPointsSnackbar";
 
 const theme = createMuiTheme({

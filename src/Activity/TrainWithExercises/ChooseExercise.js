@@ -12,9 +12,11 @@ import parallelogramData from "../ParallelogramData";
 
 const styles = theme => ({
   root: {
+    height: "100%"
+  },
+  header: {
     display: "flex",
-    flexWrap: "wrap",
-    overflow: "hidden"
+    flexWrap: "wrap"
   },
   button: {
     margin: theme.spacing.unit * 3
@@ -28,8 +30,7 @@ const styles = theme => ({
     display: "block",
     minHeight: "1px",
     width: "100%",
-    border: "1px solid #ddd",
-    overflow: "hidden"
+    border: "1px solid #ddd"
   },
   title: {
     display: "flex",
@@ -42,8 +43,8 @@ const ChooseExercise = ({
   onSelectExercise,
   classes
 }) => (
-  <div>
-    <div className={classes.root}>
+  <div className={classes.root}>
+    <div className={classes.header}>
       <IconButton
         className={classes.button}
         onClick={onNavigationBackToMenu}

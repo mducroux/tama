@@ -13,9 +13,11 @@ import RadioListLesson from "./RadioListLesson";
 
 const styles = theme => ({
   root: {
+    height: "100%"
+  },
+  header: {
     display: "flex",
-    flexWrap: "wrap",
-    overflow: "hidden"
+    flexWrap: "wrap"
   },
   button: {
     margin: theme.spacing.unit * 3
@@ -37,8 +39,8 @@ class TrainWithLesson extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <div className={classes.root}>
+      <div className={classes.root}>
+        <div className={classes.header}>
           <IconButton
             className={classes.button}
             onClick={this.props.onNavigationBackToMenu}
@@ -53,24 +55,23 @@ class TrainWithLesson extends React.Component {
             />
           </Typography>
         </div>
-        <div>
-          <RadioListLesson
-            onSelectLesson={index => this.setState({ checked: index })}
-            checked={this.state.checked}
-          />
-        </div>
-        <div className={classes.root}>
-          <Grid container justify="center">
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={() => this.props.onSubmit(this.state.checked)}
-            >
-              Ok
-            </Button>
-          </Grid>
-        </div>
+        <RadioListLesson
+          onSelectLesson={index => this.setState({ checked: index })}
+          checked={this.state.checked}
+        />
+        <Grid container justify="center">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              if (this.state.checked > 0)
+                this.props.onSubmit(this.state.checked);
+            }}
+          >
+            Ok
+          </Button>
+        </Grid>
       </div>
     );
   }

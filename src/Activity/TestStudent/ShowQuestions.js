@@ -9,17 +9,34 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 import VirtualStudent from "../../VirtualStudent";
-import PointsTestBar from "./PointsTestBar";
+import TestScoreBar from "./TestScoreBar";
 
 const styles = () => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "25px"
+    height: "100%"
   },
-  title: {
+  group: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  question: {
     display: "flex",
     textAlign: "center"
+  },
+  testScoreBar: {
+    height: "18%"
+  },
+  title: {
+    height: "5%"
+  },
+  mainContent: {
+    height: "60%"
+  },
+  student: {
+    height: "100%"
+  },
+  parallelogram: {
+    height: "100%"
   }
 });
 
@@ -31,17 +48,15 @@ type PropsT = {
   questions: Object[],
   answers: boolean[],
   student: any,
-  test: Object,
-  gridScores: Array<number>
+  gridScores: Array<number>,
+  indexScore: number,
+  incrementIndexScore: void => void
 };
 
 class ShowQuestions extends React.Component<PropsT, StateT> {
-  indexScore: number;
-
   constructor(props) {
     super(props);
     this.state = { thinking: true, index: 0, answer: false };
-    this.indexScore = 0;
   }
 
   componentDidMount() {
@@ -50,10 +65,10 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
 
   answerQuestion() {
     if (
-      this.props.test.questions[this.state.index].valid ===
-      this.props.test.answers[this.state.index]
+      this.props.questions[this.state.index].valid ===
+      this.props.answers[this.state.index]
     ) {
-      this.indexScore += 1;
+      this.props.incrementIndexScore();
     }
     this.setState({
       thinking: false,
@@ -82,20 +97,30 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
     }
 
     return (
-      <div>
-        <Grid container justify="center" className={classes.root}>
+      <div className={classes.root}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.testScoreBar}
+        >
           <Grid item sm={11}>
-            <PointsTestBar
-              completed={this.indexScore}
+            <TestScoreBar
+              completed={this.props.indexScore}
               gridScores={this.props.gridScores}
             />
           </Grid>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <Typography variant="title" className={classes.title}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.title}
+        >
+          <Typography variant="title" className={classes.question}>
             <FormattedMessage
               id="testShowQuestions.question"
-              defaultMessage="Question: {index} / {numberOfQuestions}: Is it a parallelogram?"
+              defaultMessage="Question {index} / {numberOfQuestions}: Is it a parallelogram?"
               values={{
                 index: this.state.index + 1,
                 numberOfQuestions: this.props.questions.length
@@ -103,42 +128,78 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
             />
           </Typography>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <img
-            src={this.props.questions[this.state.index].src}
-            alt="parallelogram"
-            width="300"
-            height="300"
-          />
+        <Grid container className={classes.mainContent}>
+          <Grid item xs={12} sm={6}>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.student}
+            >
+              <VirtualStudent bubbleText={bubbleText} />
+            </Grid>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              className={classes.parallelogram}
+            >
+              <img
+                src={this.props.questions[this.state.index].src}
+                alt="parallelogram"
+                width="300"
+                height="300"
+                border="1px solid"
+              />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText} />
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
-          {this.props.questions.length !== this.state.index + 1 && (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.navigation}
+        >
+          {this.props.questions.length !== this.state.index + 1 ? (
+            <div>
+              <Button
+                className={classes.button}
+                onClick={this.handleNextQuestion}
+                color="primary"
+                size="large"
+              >
+                <FormattedMessage
+                  id="testShowQuestions.nextQuestion"
+                  defaultMessage="Next question"
+                />
+              </Button>
+              <Button
+                className={classes.button}
+                onClick={this.props.displayResultTest}
+                color="primary"
+                size="large"
+              >
+                <FormattedMessage
+                  id="testShowQuestions.skipToResult"
+                  defaultMessage="Skip to result"
+                />
+              </Button>
+            </div>
+          ) : (
             <Button
               className={classes.button}
-              onClick={this.handleNextQuestion}
+              onClick={this.props.displayResultTest}
               color="primary"
               size="large"
             >
               <FormattedMessage
-                id="testShowQuestions.nextQuestion"
-                defaultMessage="Next question"
+                id="testShowQuestions.seeResult"
+                defaultMessage="See result"
               />
             </Button>
           )}
-          <Button
-            className={classes.button}
-            onClick={this.props.displayResultTest}
-            color="primary"
-            size="large"
-          >
-            <FormattedMessage
-              id="testShowQuestions.seeResult"
-              defaultMessage="See result"
-            />
-          </Button>
         </Grid>
       </div>
     );

@@ -137,7 +137,7 @@ const StepBar = ({
   return <div>{stepBars}</div>;
 };
 
-const PointsTestBar = ({ classes, completed, gridScores }: PropsT) => (
+const TestScoreBar = ({ classes, completed, gridScores }: PropsT) => (
   <div className={classes.root}>
     <LinearProgress
       className={classes.progressBar}
@@ -150,4 +150,4 @@ const PointsTestBar = ({ classes, completed, gridScores }: PropsT) => (
   </div>
 );
 
-export default withStyles(styles)(PointsTestBar);
+export default withStyles(styles)(TestScoreBar);

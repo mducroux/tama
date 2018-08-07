@@ -17,7 +17,8 @@ type PropsT = {
 };
 
 type StateT = {
-  tookTest: boolean
+  tookTest: boolean,
+  indexScore: number
 };
 
 class TestStudent extends React.Component<PropsT, StateT> {
@@ -27,7 +28,8 @@ class TestStudent extends React.Component<PropsT, StateT> {
   constructor(props: PropsT) {
     super(props);
     this.state = {
-      tookTest: false
+      tookTest: false,
+      indexScore: 0
     };
   }
 
@@ -39,7 +41,10 @@ class TestStudent extends React.Component<PropsT, StateT> {
           displayResultTest={() => this.setState({ tookTest: true })}
           student={this.props.student}
           gridScores={this.props.gridScores}
-          test={this.props.test}
+          indexScore={this.state.indexScore}
+          incrementIndexScore={() =>
+            this.setState({ indexScore: this.state.indexScore + 1 })
+          }
         />
       );
     }
@@ -51,6 +56,8 @@ class TestStudent extends React.Component<PropsT, StateT> {
         finalScore={this.props.finalScore}
         activityScore={this.props.activityScore}
         updateScore={() => this.props.updateScore()}
+        gridScores={this.props.gridScores}
+        indexScore={this.state.indexScore}
       />
     );
   }

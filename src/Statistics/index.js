@@ -17,10 +17,13 @@ import {
   VictoryBar
 } from "victory";
 
-import firebase from "./firebase";
+import firebase from "../firebase";
 
 const styles = () => ({
   root: {
+    height: "100%"
+  },
+  paper: {
     width: "500px",
     maxWidth: "100%",
     margin: "auto",
@@ -57,6 +60,7 @@ const GradeLine = ({ data }: any) => (
       style={{ data: { stroke: "#c43a31" } }}
       labels={d => (d.y > 0 ? `${d.y}` : "")}
       domain={{ y: [0, 10] }}
+      animate
     />
     <VictoryAxis
       crossAxis={false}
@@ -134,13 +138,14 @@ class StatsView extends React.Component<PropsT, StateT> {
 
   render() {
     const { tableData, histogramData, lineData } = this.state;
-    console.log(lineData.map(item => Math.trunc(item.x)));
     return (
-      <Paper className={this.props.classes.root}>
-        <GradeHistogram data={histogramData} />
-        <GradeLine data={lineData} />
-        <SessionTable data={tableData} classes={this.props.classes} />
-      </Paper>
+      <div className={this.props.classes.root}>
+        <Paper className={this.props.classes.paper}>
+          <GradeHistogram data={histogramData} />
+          <GradeLine data={lineData} />
+          <SessionTable data={tableData} classes={this.props.classes} />
+        </Paper>
+      </div>
     );
   }
 }

@@ -17,7 +17,8 @@ import SidePanel from "./SidePanel";
 const drawerWidth = 280;
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    height: "100%"
   },
   appFrame: {
     height: "100%",
@@ -57,7 +58,9 @@ const styles = theme => ({
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    height: "100%",
+    overflow: "auto"
   },
   "content-left": {
     marginLeft: -drawerWidth
@@ -134,12 +137,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                    <FormattedMessage
-                      id="appDrawer.welcomeCustomized"
-                      defaultMessage="Welcome {username} !"
-                      values={{ username: localStorage.getItem("username") }}
-                    />
-                  )}
+                  <FormattedMessage
+                    id="appDrawer.welcomeCustomized"
+                    defaultMessage="Welcome {username} !"
+                    values={{ username: localStorage.getItem("username") }}
+                  />
+                )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
