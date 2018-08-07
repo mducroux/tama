@@ -9,14 +9,20 @@ import Cancel from "@material-ui/icons/Cancel";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+
+import TestScoreBar from "./TestScoreBar";
 
 const styles = () => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "75px"
+    height: "100%"
   },
-  group: {
+  testScoreBar: {
+    height: "18%"
+  },
+  diploma: {
     position: "relative"
   },
   textImage: {
@@ -32,7 +38,28 @@ const styles = () => ({
     transform: "translate(-50%, -50%)"
   },
   finalScore: {
+    height: "7%"
+  },
+  textScore: {
     textAlign: "center"
+  },
+  mainContent: {
+    height: "60%"
+  },
+  resultStudent: {
+    height: "100%"
+  },
+  questionAnswers: {
+    height: "100%"
+  },
+  gridList: {
+    width: 600,
+    height: 400,
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)"
+  },
+  titleBar: {
+    background: "transparent"
   }
 });
 
@@ -46,17 +73,100 @@ type PropsT = {
   grade: number,
   questions: Object[],
   answers: Array<boolean>,
-  startNewGame: void => void
+  startNewGame: void => void,
+  gridScores: Array<number>,
+  indexScore: number
 };
 
 type StateT = {
+  grade: number,
   finalScore: Object
 };
+
+const ResultStudent = ({
+  classes,
+  studentName,
+  grade,
+  questions
+}: {
+  classes: Object,
+  studentName: string,
+  grade: number,
+  questions: Object[]
+}) => (
+  <Grid item xs={12} sm={6}>
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      className={classes.resultStudent}
+    >
+      <div className={classes.diploma}>
+        <img src="images/diploma.png" alt="Diploma" width="400" height="300" />
+        <div className={classes.textImage}>
+          <FormattedMessage
+            id="testResult.description"
+            defaultMessage="{studentName} obtained"
+            values={{ studentName }}
+          />
+        </div>
+        <div className={classes.textGrade}>
+          {grade} / {questions.length}
+        </div>
+      </div>
+    </Grid>
+  </Grid>
+);
+
+const QuestionsAnswers = ({
+  classes,
+  questions,
+  answers
+}: {
+  classes: Object,
+  questions: Object[],
+  answers: Array<boolean>
+}) => (
+  <Grid item xs={12} sm={6}>
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      className={classes.questionAnswers}
+    >
+      <GridList
+        cellHeight={200}
+        spacing={1}
+        cols={3}
+        className={classes.gridList}
+      >
+        {questions.map((img, index) => (
+          <GridListTile key={img.src}>
+            <img src={img.src} alt={img.src} width={200} height={200} />
+            <GridListTileBar
+              titlePosition="top"
+              actionIcon={
+                answers[index] === img.valid ? (
+                  <CheckCircle color="primary" />
+                ) : (
+                  <Cancel color="error" />
+                )
+              }
+              actionPosition="left"
+              className={classes.titleBar}
+            />
+          </GridListTile>
+        ))}
+      </GridList>
+    </Grid>
+  </Grid>
+);
 
 class Result extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
     this.state = {
+      grade: this.props.indexScore,
       finalScore: (
         <FormattedMessage
           id="testResult.finalScoreBefore"
@@ -73,6 +183,7 @@ class Result extends React.Component<PropsT, StateT> {
 
   componentDidMount() {
     this.props.updateScore();
+    setTimeout(() => this.setState({ grade: this.props.grade }), 100);
     setTimeout(
       () =>
         this.setState({
@@ -86,52 +197,51 @@ class Result extends React.Component<PropsT, StateT> {
             />
           )
         }),
-      2000
+      4000
     );
   }
 
   render() {
     const { classes } = this.props;
     return (
-      <React.Fragment>
-        <Grid container justify="center" className={classes.root}>
-          <Typography variant="headline" className={classes.finalScore}>
+      <div className={classes.root}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.testScoreBar}
+        >
+          <Grid item sm={11}>
+            <TestScoreBar
+              completed={this.state.grade}
+              gridScores={this.props.gridScores}
+            />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.finalScore}
+        >
+          <Typography variant="headline" className={classes.textScore}>
             {this.state.finalScore}
           </Typography>
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          <div className={classes.group}>
-            <img
-              src="images/diploma.png"
-              alt="Diploma"
-              width="400"
-              height="300"
-            />
-            <div className={classes.textImage}>
-              <FormattedMessage
-                id="testResult.description"
-                defaultMessage="{studentName} obtained"
-                values={{ studentName: this.props.studentName }}
-              />
-            </div>
-            <div className={classes.textGrade}>
-              {this.props.grade} / {this.props.questions.length}
-            </div>
-          </div>
+        <Grid container className={classes.mainContent}>
+          <ResultStudent
+            classes={classes}
+            studentName={this.props.studentName}
+            grade={this.props.grade}
+            questions={this.props.questions}
+          />
+          <QuestionsAnswers
+            classes={classes}
+            questions={this.props.questions}
+            answers={this.props.answers}
+          />
         </Grid>
-        <Grid container justify="center" className={classes.root}>
-          {this.props.questions.map((img, index) => (
-            <div key={img.src}>
-              <img src={img.src} alt={img.src} width="200" height="200" />
-              {this.props.answers[index] === img.valid ? (
-                <CheckCircle color="primary" />
-              ) : (
-                  <Cancel color="error" />
-                )}
-            </div>
-          ))}
-        </Grid>
-        <Grid container justify="center" className={classes.root}>
+        <Grid container justify="center" className={classes.group}>
           <Button
             variant="contained"
             color="primary"
@@ -143,7 +253,7 @@ class Result extends React.Component<PropsT, StateT> {
             />
           </Button>
         </Grid>
-      </React.Fragment>
+      </div>
     );
   }
 }

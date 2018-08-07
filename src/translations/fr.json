@@ -15,7 +15,8 @@
   "chooseLesson.statement": "Choisissez une leçon à donner",
   "dumbStudent.feedbackLessonAlreadyKnow": "Je le savais déjà",
   "dumbStudent.feedbackLessonDidntKnow": "Oh je ne savais pas !",
-  "dumbStudent.giveNegativeAnswer": "Je ne crois pas que ce soit un parallélogramme",
+  "dumbStudent.giveNegativeAnswer":
+    "Je ne crois pas que ce soit un parallélogramme",
   "dumbStudent.givePositiveAnswer": "Mmm je pense que c'est un parallélogramme",
   "dumbStudent.hasFalseAnswerExercise": "Mince !",
   "dumbStudent.hasRightAnswerExercise": "Super !",
@@ -23,8 +24,10 @@
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
-  "godStudent.feedbackLessonAlreadyKnow": "Je le savais déjà (comme d'habitude)",
-  "godStudent.feedbackLessonDidntKnow": "Impossible, mon concepteur n'a pas pu se tromper !",
+  "godStudent.feedbackLessonAlreadyKnow":
+    "Je le savais déjà (comme d'habitude)",
+  "godStudent.feedbackLessonDidntKnow":
+    "Impossible, mon concepteur n'a pas pu se tromper !",
   "godStudent.giveNegativeAnswer": "Ce n'est pas un parallélogramme",
   "godStudent.givePositiveAnswer": "C'est un parallélogramme",
   "godStudent.hasFalseAnswerExercise": "Vous mentez !",
@@ -35,21 +38,25 @@
   "godStudent.thinkingAboutExercise": "Trop facile !",
   "quickLearnerStudent.feedbackLessonAlreadyKnow": "Je le savais déjà",
   "quickLearnerStudent.feedbackLessonDidntKnow": "Oh je ne savais pas !",
-  "quickLearnerStudent.giveNegativeAnswer": "Je ne crois pas que ce soit un parallélogramme",
-  "quickLearnerStudent.givePositiveAnswer": "Mmm je pense que c'est un parallélogramme",
+  "quickLearnerStudent.giveNegativeAnswer":
+    "Je ne crois pas que ce soit un parallélogramme",
+  "quickLearnerStudent.givePositiveAnswer":
+    "Mmm je pense que c'est un parallélogramme",
   "quickLearnerStudent.hasFalseAnswerExercise": "Mince !",
   "quickLearnerStudent.hasRightAnswerExercise": "Super !",
   "quickLearnerStudent.questionExample": "Est-ce un parallélogramme ?",
   "quickLearnerStudent.thinkingAboutExam": "...",
   "quickLearnerStudent.thinkingAboutExample": "...",
   "quickLearnerStudent.thinkingAboutExercise": "...",
-  "notEnoughPointsSnackbar.message": "Vous n'avez pas assez de points pour faire cette activité",
+  "notEnoughPointsSnackbar.message":
+    "Vous n'avez pas assez de points pour faire cette activité",
   "registrationForm.age": "Age *",
   "registrationForm.gender": "Je suis :",
   "registrationForm.genderFemale": "Femme",
   "registrationForm.genderMale": "Homme",
   "registrationForm.genderOther": "Autre",
-  "registrationForm.knowledgeParallelograms": "Mes connaissances sur les parallélogrammes :",
+  "registrationForm.knowledgeParallelograms":
+    "Mes connaissances sur les parallélogrammes :",
   "registrationForm.knowledgeParallelogramsAverage": "Moyenne",
   "registrationForm.knowledgeParallelogramsNo": "Nulle",
   "registrationForm.knowledgeParallelogramsPoor": "Faible",
@@ -64,10 +71,12 @@
   "registrationForm.statusTeacher": "Enseignant(e)",
   "registrationForm.username": "Mon pseudo *",
   "rulesDialog.button": "J'ai compris !",
-  "rulesDialog.content": "<br> Votre but est d'apprendre à votre élève ce qu'est un parallélogramme. Pour cela, vous avez le choix entre plusieurs activités: <br><br> - Choisir un exemple: vous choisissez une forme parmi celles proposées afin de montrer à l'élève si celle-ci est ou n'est pas un parallélogramme. <br><br> - Donner un exercice: vous choisissez une forme à donner à l'élève en exercice. <br><br> - Donner une leçon: vous composez vous même une leçon à donner à l'élève. <br><br> Chacune de ces activités vous coûte un certain nombre de point (indiqué en dessous des activités). Vous pouvez choisir une activité à condition qu'il vous reste assez de points pour celle-ci. Une fois que vous pensez que votre élève a appris à quoi ressemblait un parallélogramme ou que vous n'avez plus de points à dépenser, vous pouvez faire passer le test final à votre élève et recevrez votre score final. <br><br> Bonne chance !",
+  "rulesDialog.content":
+    "<br> Votre but est d'apprendre à votre élève ce qu'est un parallélogramme. Pour cela, vous avez le choix entre plusieurs activités: <br><br> - Choisir un exemple: vous choisissez une forme parmi celles proposées afin de montrer à l'élève si celle-ci est ou n'est pas un parallélogramme. <br><br> - Donner un exercice: vous choisissez une forme à donner à l'élève en exercice. <br><br> - Donner une leçon: vous composez vous même une leçon à donner à l'élève. <br><br> Chacune de ces activités vous coûte un certain nombre de point (indiqué en dessous des activités). Vous pouvez choisir une activité à condition qu'il vous reste assez de points pour celle-ci. Une fois que vous pensez que votre élève a appris à quoi ressemblait un parallélogramme ou que vous n'avez plus de points à dépenser, vous pouvez faire passer le test final à votre élève et recevrez votre score final. <br><br> Bonne chance !",
   "rulesDialog.title": "Bienvenue à Tama!",
   "sessionHistory.grade": "Note: {grade} / {maxGrade}",
-  "sessionHistory.negativeAnswerTeacherExample": "\"Ce n'est pas un parallélogramme\"",
+  "sessionHistory.negativeAnswerTeacherExample":
+    "\"Ce n'est pas un parallélogramme\"",
   "sessionHistory.negativeAnswerTeacherExercise": "\"C'est faux\"",
   "sessionHistory.positiveAnswerTeacherExample": "\"C'est un parallélogramme\"",
   "sessionHistory.positiveAnswerTeacherExercise": "\"C'est vrai\"",
@@ -97,15 +106,19 @@
   "showExercise.true": "",
   "testConfirmationDialog.continue": "Oui, je veux passer le test",
   "testConfirmationDialog.goBack": "Non, je veux revenir à l'entraînement",
-  "testConfirmationDialog.statement": "10 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, vous gagnez plus de points. Une fois le test complété, le jeu sera fini et vous ne pourrez plus revenir à l'entraînement. Êtes-vous sûr de vouloir continuer ?",
+  "testConfirmationDialog.statement":
+    "10 questions vont être tirées au sort afin d'évaluer le niveau de l'élève. A chaque bonne réponse, vous gagnez plus de points. Une fois le test complété, le jeu sera fini et vous ne pourrez plus revenir à l'entraînement. Êtes-vous sûr de vouloir continuer ?",
   "testConfirmationDialog.takeTheTest": "Passer le test",
   "testResult.description": "{studentName} a obtenu",
   "testResult.finalScoreAfter": "Votre score final : {totalScore} points",
-  "testResult.finalScoreBefore": "Votre score final : {activityScore} + {testScore} = {totalScore} points",
+  "testResult.finalScoreBefore":
+    "Votre score final : {activityScore} + {testScore} = {totalScore} points",
   "testResult.startAgain": "Recommencer une partie",
   "testShowQuestions.nextQuestion": "Question suivante",
-  "testShowQuestions.question": "Question : {index} / {numberOfQuestions} : Est-ce un parallélogramme ?",
+  "testShowQuestions.question":
+    "Question {index} / {numberOfQuestions} : Est-ce un parallélogramme ?",
   "testShowQuestions.seeResult": "Voir le résultat",
+  "testShowQuestions.skipToResult": "Aller au résultat",
   "welcomeMenu.descriptionApp": "Enseignez le concept de parallélogramme",
   "welcomeMenu.startPlaying": "Commencer à jouer",
   "welcomeMenu.studentName": "Bonjour ! Je m'appelle {studentName} !"
