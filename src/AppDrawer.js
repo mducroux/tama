@@ -53,11 +53,15 @@ const styles = theme => ({
     display: "none"
   },
   content: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
     backgroundColor: theme.palette.background.default,
     overflow: "auto",
-    display: 'flex',
+    display: "flex",
     flexGrow: 1,
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   "content-left": {
     marginLeft: -drawerWidth - 1
@@ -82,7 +86,7 @@ const styles = theme => ({
   },
   drawerHeader: {
     ...theme.mixins.toolbar,
-    flex: '0 0 auto'
+    flex: "0 0 auto"
   }
 });
 
@@ -131,12 +135,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                    <FormattedMessage
-                      id="appDrawer.welcomeCustomized"
-                      defaultMessage="Welcome {username} !"
-                      values={{ username: localStorage.getItem("username") }}
-                    />
-                  )}
+                  <FormattedMessage
+                    id="appDrawer.welcomeCustomized"
+                    defaultMessage="Welcome {username} !"
+                    values={{ username: localStorage.getItem("username") }}
+                  />
+                )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (

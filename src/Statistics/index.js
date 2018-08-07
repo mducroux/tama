@@ -37,14 +37,17 @@ const styles = () => ({
 
 const GradeHistogram = ({ data }: any) => (
   <VictoryChart>
-    <VictoryBar
-      cornerRadius={2}
-      style={{ data: { fill: "#313ac4" }, labels: { fill: "white" } }}
-      data={data}
-      labels={d => (d.y > 0 ? `${d.y}` : "")}
-      labelComponent={<VictoryLabel dy={30} />}
-      barRatio={0.9}
-    />
+    {data.length > 0 && (
+      <VictoryBar
+        cornerRadius={2}
+        style={{ data: { fill: "#313ac4" }, labels: { fill: "white" } }}
+        data={data}
+        labels={d => (d.y > 0 ? `${d.y}` : "")}
+        labelComponent={<VictoryLabel dy={30} />}
+        barRatio={0.9}
+        animate
+      />
+    )}
     <VictoryAxis
       crossAxis={false}
       domain={[-0.5, 10.5]}
@@ -56,13 +59,15 @@ const GradeHistogram = ({ data }: any) => (
 
 const GradeLine = ({ data }: any) => (
   <VictoryChart>
-    <VictoryLine
-      data={data}
-      style={{ data: { stroke: "#c43a31" } }}
-      labels={d => (d.y > 0 ? `${d.y}` : "")}
-      domain={{ y: [0, 10] }}
-      animate
-    />
+    {data.length > 0 && (
+      <VictoryLine
+        data={data}
+        style={{ data: { stroke: "#c43a31" } }}
+        labels={d => (d.y > 0 ? `${d.y}` : "")}
+        domain={{ y: [0, 10] }}
+        animate
+      />
+    )}
     <VictoryAxis
       crossAxis={false}
       label="Sequence of students"
