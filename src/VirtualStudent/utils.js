@@ -26,14 +26,22 @@ export const featureList = [
 ];
 
 const getVirtualStudent = (name: string): VirtualStudent => {
+  let RandModel = DumbStudent;
   const studentModels = [
-    DumbStudent,
-    GodStudent,
-    NoMemory,
-    QuickLearnerStudent
+    [DumbStudent, 0.1],
+    [GodStudent, 0.1],
+    [NoMemory, 0.4],
+    [QuickLearnerStudent, 0.4]
   ];
-  const randIdx = Math.floor(studentModels.length * Math.random());
-  return new studentModels[randIdx](name);
+  studentModels.reduce(
+    (x, [studentModel, p]) => {
+      RandModel = (x > 0 && x - p < 0) ? studentModel : RandModel
+      return x - p
+    },
+    Math.random()
+  )
+
+  return new RandModel(name);
 };
 
 export default getVirtualStudent;
