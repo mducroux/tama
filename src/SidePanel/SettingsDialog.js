@@ -27,10 +27,17 @@ const SettingsDialog = ({
     aria-labelledby="alert-dialog-title"
     aria-describedby="alert-dialog-description"
   >
-    <DialogTitle id="alert-dialog-title">Settings</DialogTitle>
+    <DialogTitle id="alert-dialog-title">
+      <FormattedMessage id="settingsDialog.title" defaultMessage="Settings" />
+    </DialogTitle>
     <DialogContent>
       <FormControl>
-        <InputLabel htmlFor="language-simple">Language</InputLabel>
+        <InputLabel htmlFor="language-simple">
+          <FormattedMessage
+            id="settingsDialog.language"
+            defaultMessage="Language"
+          />
+        </InputLabel>
         <Select
           value={localStorage.getItem("lang")}
           onChange={event => changeLanguage(event.target.value)}

@@ -65,7 +65,7 @@ class TrainWithLesson extends React.Component {
             color="primary"
             className={classes.button}
             onClick={() => {
-              if (this.state.checked > 0)
+              if (this.state.checked >= 0)
                 this.props.onSubmit(this.state.checked);
             }}
           >
