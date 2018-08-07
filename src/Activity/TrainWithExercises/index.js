@@ -21,14 +21,10 @@ class TrainWithExercise extends React.Component {
   };
 
   recordExerciseActivity = (userAnswer, studentAnswer) => {
-    const image = parallelogramData[this.state.index].src
-    this.newActivityRef
-      .child("item")
-      .set(image);
+    const image = parallelogramData[this.state.index].src;
+    this.newActivityRef.child("item").set(image);
     this.newActivityRef.child("activity_type").set("exercise");
-    this.newActivityRef
-      .child("knowledge")
-      .set(this.props.student.getState());
+    this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef.child("student_answer").set(studentAnswer);
     this.newActivityRef.child("user_answer").set(userAnswer);
     this.newActivityRef.child("time").set(new Date().getTime());
