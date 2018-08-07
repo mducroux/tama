@@ -27,6 +27,7 @@ const styles = () => ({
     width: "500px",
     maxWidth: "100%",
     margin: "auto",
+    marginTop: "0px",
     overflowX: "auto"
   },
   table: {
