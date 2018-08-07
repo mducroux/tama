@@ -6,13 +6,12 @@ export interface VirtualStudent {
   name: string;
   state: any;
   feedbackLessonAlreadyKnow: Object;
-  knowledgeParallelogram: Object;
   questionExample: Object;
   thinkingAboutExercice: Object;
   hasRightAnswerExercise: Object;
   hasFalseAnswerExercise: Object;
   feedbackLessonAlreadyKnow: Object;
-  feedbackLessonDidnKnow: Object;
+  feedbackLessonDidntKnow: Object;
   thinkingAboutExam: Object;
   givePositiveAnswer: Object;
   giveNegativeAnswer: Object;

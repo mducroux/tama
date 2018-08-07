@@ -45,7 +45,7 @@ class GodStudent implements VirtualStudent {
       defaultMessage="I already know that (as always)"
     />
   );
-  feedbackLessonDidnKnow = (
+  feedbackLessonDidntKnow = (
     <FormattedMessage
       id="godStudent.feedbackLessonDidntKnow"
       defaultMessage="Impossible!"
@@ -70,16 +70,12 @@ class GodStudent implements VirtualStudent {
     />
   );
 
-
   constructor(name: string) {
-    this.name = name
+    this.name = name;
   }
 
   answerParallelogram(shape: ShapeFeatures) {
-    return (
-      shape.hasFourEdges &&
-      shape.hasEveryPairOppositeEdgesParallel
-    );
+    return shape.hasFourEdges && shape.hasEveryPairOppositeEdgesParallel;
   }
 
   learn() {
@@ -94,7 +90,7 @@ class GodStudent implements VirtualStudent {
     return true;
   }
 
-  setState() { }
+  setState() {}
 
   getState() {
     return "god";
