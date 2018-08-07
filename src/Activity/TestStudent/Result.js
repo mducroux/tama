@@ -15,7 +15,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 import TestScoreBar from "./TestScoreBar";
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     height: "100%"
   },
@@ -55,11 +55,20 @@ const styles = () => ({
   gridList: {
     width: 600,
     height: 400,
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)"
+    background: theme.palette.common.white,
+    border: "4px solid #fff"
   },
   titleBar: {
     background: "transparent"
+  },
+  imgPara: {
+    background: theme.palette.background.default
+  },
+  spacingPara: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden"
   }
 });
 
@@ -134,30 +143,38 @@ const QuestionsAnswers = ({
       alignItems="center"
       className={classes.questionAnswers}
     >
-      <GridList
-        cellHeight={200}
-        spacing={1}
-        cols={3}
-        className={classes.gridList}
-      >
-        {questions.map((img, index) => (
-          <GridListTile key={img.src}>
-            <img src={img.src} alt={img.src} width={200} height={200} />
-            <GridListTileBar
-              titlePosition="top"
-              actionIcon={
-                answers[index] === img.valid ? (
-                  <CheckCircle color="primary" />
-                ) : (
-                  <Cancel color="error" />
-                )
-              }
-              actionPosition="left"
-              className={classes.titleBar}
-            />
-          </GridListTile>
-        ))}
-      </GridList>
+      <div className={classes.spacingPara}>
+        <GridList
+          cols={3}
+          className={classes.gridList}
+          cellHeight={200}
+          spacing={4}
+        >
+          {questions.map((img, index) => (
+            <GridListTile key={img.src}>
+              <img
+                src={img.src}
+                alt={img.src}
+                width={200}
+                height={200}
+                className={classes.imgPara}
+              />
+              <GridListTileBar
+                titlePosition="top"
+                actionIcon={
+                  answers[index] === img.valid ? (
+                    <CheckCircle color="primary" />
+                  ) : (
+                    <Cancel color="error" />
+                  )
+                }
+                actionPosition="left"
+                className={classes.titleBar}
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
     </Grid>
   </Grid>
 );

@@ -50,6 +50,10 @@ const styles = () => ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center"
+  },
+  bubbles: {
+    display: "flex",
+    flexWrap: "noWrap"
   }
 });
 
@@ -69,9 +73,9 @@ class Teacher extends React.Component {
     return (
       <div className={classes.root}>
         {!this.props.waitingForStudent && (
-          <Grid container justify="space-around" alignItems="flex-end">
+          <Grid container alignItems="flex-end">
             {this.state.thinking && (
-              <div>
+              <div className={classes.bubbles}>
                 <button
                   className={classes.bubbleThinking1}
                   onClick={() => {
