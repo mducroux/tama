@@ -28,7 +28,7 @@ class TrainWithExercise extends React.Component {
     this.newActivityRef.child("activity_type").set("exercise");
     this.newActivityRef
       .child("knowledge")
-      .set(this.props.student.knowledgeParallelogram);
+      .set(this.props.student.getState());
     this.newActivityRef.child("student_answer").set(studentAnswer);
     this.newActivityRef.child("user_answer").set(userAnswer);
     this.newActivityRef.child("time").set(new Date().getTime());

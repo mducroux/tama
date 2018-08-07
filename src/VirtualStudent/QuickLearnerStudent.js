@@ -5,7 +5,8 @@ import { FormattedMessage } from "react-intl";
 import type { VirtualStudent, ShapeFeatures } from "./types";
 
 class QuickLearnerStudent implements VirtualStudent {
-  state = {};
+  name: string;
+  state: Object;
 
   // At first he doesn't know what a parallelogram looks like
   // so he thinks that everything is a parallelogram
@@ -84,6 +85,10 @@ class QuickLearnerStudent implements VirtualStudent {
     />
   );
 
+  constructor(name: string) {
+    this.name = name
+  }
+
   // All necessary features should correspond to identify the shape as a parallelogram
   answerParallelogram(shapeFeatures: ShapeFeatures) {
     return Object.keys(this.knowledgeParallelogram).reduce(
@@ -133,7 +138,7 @@ class QuickLearnerStudent implements VirtualStudent {
     );
   }
 
-  setState() {}
+  setState() { }
 
   getState() {
     return this.knowledgeParallelogram;
