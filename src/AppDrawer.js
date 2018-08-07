@@ -110,20 +110,19 @@ class AppDrawer extends React.Component {
             })}
           >
             <Toolbar disableGutters={!this.state.openSidePanel}>
-              {this.props.hasBeenWelcomed &&
-                this.props.isRegistered && (
-                  <IconButton
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={() => this.setState({ openSidePanel: true })}
-                    className={classNames(
-                      classes.menuButton,
-                      this.state.openSidePanel && classes.hide
-                    )}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                )}
+              {this.props.isRegistered && (
+                <IconButton
+                  color="inherit"
+                  aria-label="Open drawer"
+                  onClick={() => this.setState({ openSidePanel: true })}
+                  className={classNames(
+                    classes.menuButton,
+                    this.state.openSidePanel && classes.hide
+                  )}
+                >
+                  <MenuIcon />
+                </IconButton>
+              )}
               <Typography
                 variant="title"
                 color="inherit"
@@ -194,6 +193,7 @@ class AppDrawer extends React.Component {
             onUnregister={this.props.onUnregister}
             changeView={this.props.changeView}
             handleSidePanelClose={() => this.setState({ openSidePanel: false })}
+            hasBeenWelcomed={this.props.hasBeenWelcomed}
           />
           <main
             className={classNames(classes.content, classes[`content-left`], {
