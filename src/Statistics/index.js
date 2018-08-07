@@ -16,6 +16,7 @@ import {
   VictoryLabel,
   VictoryBar
 } from "victory";
+import { FormattedMessage, injectIntl } from "react-intl";
 
 import firebase from "../firebase";
 
@@ -34,7 +35,7 @@ const styles = () => ({
   }
 });
 
-const GradeHistogram = ({ data }: any) => (
+const GradeHistogram = ({ data, intl }: any) => (
   <VictoryChart>
     <VictoryBar
       cornerRadius={2}
@@ -48,12 +49,12 @@ const GradeHistogram = ({ data }: any) => (
       crossAxis={false}
       domain={[-0.5, 10.5]}
       tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-      label="Student's Grades"
+      label={intl.formatMessage({ id: "statistics.studentGrade" })}
     />
   </VictoryChart>
 );
 
-const GradeLine = ({ data }: any) => (
+const GradeLine = ({ data, intl }: any) => (
   <VictoryChart>
     <VictoryLine
       data={data}
@@ -64,7 +65,7 @@ const GradeLine = ({ data }: any) => (
     />
     <VictoryAxis
       crossAxis={false}
-      label="Sequence of students"
+      label={intl.formatMessage({ id: "statistics.sequenceStudent" })}
       tickValues={data.map(item => item.x)}
     />
   </VictoryChart>
@@ -74,9 +75,15 @@ const SessionTable = ({ classes, data }: { classes: Object, data: any[] }) => (
   <Table className={classes.table}>
     <TableHead>
       <TableRow>
-        <TableCell>Name</TableCell>
-        <TableCell>Score</TableCell>
-        <TableCell>Grade</TableCell>
+        <TableCell>
+          <FormattedMessage id="statistics.name" defaultMessage="Name" />
+        </TableCell>
+        <TableCell>
+          <FormattedMessage id="statistics.score" defaultMessage="Score" />
+        </TableCell>
+        <TableCell>
+          <FormattedMessage id="statistics.grade" defaultMessage="Grade" />
+        </TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -95,7 +102,7 @@ const SessionTable = ({ classes, data }: { classes: Object, data: any[] }) => (
   </Table>
 );
 
-type PropsT = { classes: Object };
+type PropsT = { classes: Object, intl: Object };
 
 type StateT = {
   tableData: any[],
@@ -138,11 +145,12 @@ class StatsView extends React.Component<PropsT, StateT> {
 
   render() {
     const { tableData, histogramData, lineData } = this.state;
+    const { intl } = this.props;
     return (
       <div className={this.props.classes.root}>
         <Paper className={this.props.classes.paper}>
-          <GradeHistogram data={histogramData} />
-          <GradeLine data={lineData} />
+          <GradeHistogram data={histogramData} intl={intl} />
+          <GradeLine data={lineData} intl={intl} />
           <SessionTable data={tableData} classes={this.props.classes} />
         </Paper>
       </div>
@@ -150,4 +158,4 @@ class StatsView extends React.Component<PropsT, StateT> {
   }
 }
 
-export default withStyles(styles)(StatsView);
+export default injectIntl(withStyles(styles)(StatsView));

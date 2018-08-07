@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import { FormattedMessage } from "react-intl";
 
 import firebase from "../firebase";
 
@@ -60,9 +61,15 @@ const Leaderboard = ({ classes, data }: { classes: Object, data: any[][] }) => (
   <Table className={classes.table}>
     <TableHead>
       <TableRow>
-        <TableCell>Name</TableCell>
-        <TableCell numeric>Score</TableCell>
-        <TableCell numeric>Rank</TableCell>
+        <TableCell>
+          <FormattedMessage id="leaderboard.name" defaultMessage="Name" />
+        </TableCell>
+        <TableCell numeric>
+          <FormattedMessage id="leaderboard.score" defaultMessage="Score" />
+        </TableCell>
+        <TableCell numeric>
+          <FormattedMessage id="leaderboard.rank" defaultMessage="Rank" />
+        </TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -125,9 +132,30 @@ class LeaderboardView extends React.Component<PropsT, StateT> {
           onChange={(_, value) => this.setState({ tab: value })}
           centered
         >
-          <Tab label="Daily" />
-          <Tab label="Weekly" />
-          <Tab label="All time" />
+          <Tab
+            label={
+              <FormattedMessage
+                id="leaderboard.categoryDaily"
+                defaultMessage="Daily"
+              />
+            }
+          />
+          <Tab
+            label={
+              <FormattedMessage
+                id="leaderboard.categoryWeekly"
+                defaultMessage="Weekly"
+              />
+            }
+          />
+          <Tab
+            label={
+              <FormattedMessage
+                id="leaderboard.categoryAlltime"
+                defaultMessage="All time"
+              />
+            }
+          />
         </Tabs>
         <Leaderboard
           data={[daily, weekly, alltime][tab]}

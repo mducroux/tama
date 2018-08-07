@@ -1,6 +1,7 @@
 import React from "react";
 
 import PropTypes from "prop-types";
+import { injectIntl } from "react-intl";
 
 import ChooseLesson from "./ChooseLesson";
 import ShowLesson from "./ShowLesson";
@@ -21,11 +22,12 @@ class TrainWithLesson extends React.Component {
   };
 
   recordLessonActivity = studentAlreadyKnow => {
+    const { intl } = this.props;
     this.newActivityRef.child("activity_type").set("lesson");
+    this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef
-      .child("knowledge")
-      .set(this.props.student.getState());
-    this.newActivityRef.child("item").set(lesson[this.state.index].title);
+      .child("item")
+      .set(intl.formatMessage({ id: lesson[this.state.index].title.props.id }));
     this.newActivityRef.child("time").set(new Date().getTime());
     this.newActivityRef.child("student_already_know").set(studentAlreadyKnow);
   };
@@ -55,7 +57,8 @@ TrainWithLesson.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  sessionRef: PropTypes.object.isRequired
+  sessionRef: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired
 };
 
-export default TrainWithLesson;
+export default injectIntl(TrainWithLesson);
