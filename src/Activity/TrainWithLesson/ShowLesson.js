@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 
 import type { VirtualStudent, ShapeFeatures } from "../../VirtualStudent/types";
-import VirtualStudentComponent from '../../VirtualStudent'
+import VirtualStudentComponent from "../../VirtualStudent";
 
 const styles = theme => ({
   root: {
@@ -30,7 +30,7 @@ const styles = theme => ({
 
 type StateT = {
   studentAlreadyKnow: boolean
-}
+};
 
 type PropsT = {
   student: VirtualStudent,
@@ -39,12 +39,12 @@ type PropsT = {
   getBackToMenu: Function,
   updateScore: Function,
   recordLessonActivity: Function
-}
+};
 
 class ShowLesson extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
-    const { student, lesson } = this.props
+    const { student, lesson } = this.props;
     this.state = {
       studentAlreadyKnow: student.alreadyKnowLesson(lesson.shapeFeatures)
     };

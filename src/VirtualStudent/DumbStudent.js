@@ -69,22 +69,22 @@ class DumbStudent implements VirtualStudent {
   state = {};
 
   constructor(name: string) {
-    this.name = name
+    this.name = name;
   }
 
   answerParallelogram() {
     return Math.random() > 0.5;
   }
 
-  learnLesson() { }
+  learnLesson() {}
 
-  learn() { }
+  learn() {}
 
   alreadyKnowLesson() {
     return Math.random() > 0.5;
   }
 
-  setState() { }
+  setState() {}
 
   getState() {
     return "empty";
