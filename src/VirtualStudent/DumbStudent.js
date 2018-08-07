@@ -5,7 +5,9 @@ import { FormattedMessage } from "react-intl";
 import type { VirtualStudent } from "./types";
 
 class DumbStudent implements VirtualStudent {
-  knowledgeParallelogram = {};
+  name: string;
+  state: Object;
+
   thinkingAboutExample = (
     <FormattedMessage
       id="dumbStudent.thinkingAboutExample"
@@ -66,22 +68,26 @@ class DumbStudent implements VirtualStudent {
 
   state = {};
 
+  constructor(name: string) {
+    this.name = name
+  }
+
   answerParallelogram() {
     return Math.random() > 0.5;
   }
 
-  learnLesson() {}
+  learnLesson() { }
 
-  learn() {}
+  learn() { }
 
   alreadyKnowLesson() {
     return Math.random() > 0.5;
   }
 
-  setState() {}
+  setState() { }
 
   getState() {
-    return {};
+    return "empty";
   }
 }
 

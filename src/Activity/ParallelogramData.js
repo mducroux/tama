@@ -457,7 +457,7 @@ const parallelogramData = [
       isBlue: false,
       isRotated: false,
       isThin: true,
-      hasEveryRightAngles: false,
+      hasEveryRightAngles: true,
       hasAtLeastOneRightAngle: true
     }
   },

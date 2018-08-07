@@ -27,7 +27,7 @@ class TrainWithExamples extends React.Component {
       .set(image);
     this.newActivityRef
       .child("knowledge")
-      .set(this.props.student.knowledgeParallelogram);
+      .set(this.props.student.getState());
     this.newActivityRef.child("user_answer").set(userAnswer);
     this.newActivityRef.child("time").set(new Date().getTime());
   };
