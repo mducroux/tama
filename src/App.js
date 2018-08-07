@@ -35,7 +35,7 @@ const theme = createMuiTheme({
     secondary: deepOrange,
     background: {
       paper: "#fff",
-      default: "#f1f1f1"
+      default: "#f5f5f5"
     }
   },
   status: {
@@ -48,7 +48,7 @@ const messages = {
   en: messagesEn
 };
 
-const gridScores = [0, 5, 10, 20, 50, 75, 100, 150, 250, 500, 1000];
+const gridScores = [0, 10, 25, 50, 100, 200, 500, 1000, 2000, 5000, 10000];
 
 const scoreCost = {
   example: -10,
@@ -86,9 +86,9 @@ class App extends React.Component<PropsT, StateT> {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      view: "training",
-      score: 5000,
-      scoreDisplayed: "5000",
+      view: "welcome_menu",
+      score: 200,
+      scoreDisplayed: "200",
       language:
         localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
       test: {},
@@ -203,9 +203,9 @@ class App extends React.Component<PropsT, StateT> {
       hasBeenWelcomed: false,
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      score: 5000,
-      scoreDisplayed: "5000",
-      view: "training",
+      score: 200,
+      scoreDisplayed: "200",
+      view: "welcome_menu",
       test: {}
     });
   };
@@ -227,12 +227,13 @@ class App extends React.Component<PropsT, StateT> {
   render() {
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "";
-    if (!this.state.hasBeenWelcomed) {
+    if (this.state.view === "welcome_menu") {
       displayed = (
         <WelcomeMenu
           onClickStart={() => {
             this.setState({
-              hasBeenWelcomed: true
+              hasBeenWelcomed: true,
+              view: this.state.isRegistered ? "training" : "registration_form"
             });
             if (this.state.isRegistered && userId) {
               this.recordNewSession(userId);
@@ -241,7 +242,7 @@ class App extends React.Component<PropsT, StateT> {
           studentName={this.studentName}
         />
       );
-    } else if (!this.state.isRegistered) {
+    } else if (this.state.view === "registration_form") {
       displayed = (
         <RegistrationForm
           onSubmit={newUserId => {
@@ -262,97 +263,99 @@ class App extends React.Component<PropsT, StateT> {
           student={this.student}
         />
       );
-    } else if (!this.state.hasChosenActivityType) {
-      displayed = (
-        <ChooseActivity
-          sessionRef={this.sessionRef}
-          onClickExample={() => {
-            if (this.state.score + scoreCost.example >= 0) {
-              this.setState({
-                hasChosenActivityType: true,
-                hasChosenActivity: "example"
-              });
-            } else {
-              this.setState({ openSnackbar: true });
-            }
-          }}
-          onClickExercise={() => {
-            if (this.state.score + scoreCost.exercise >= 0) {
-              this.setState({
-                hasChosenActivityType: true,
-                hasChosenActivity: "exercise"
-              });
-            } else {
-              this.setState({ openSnackbar: true });
-            }
-          }}
-          onClickLesson={() => {
-            if (this.state.score + scoreCost.lesson >= 0) {
-              this.setState({
-                hasChosenActivityType: true,
-                hasChosenActivity: "lesson"
-              });
-            } else {
-              this.setState({ openSnackbar: true });
-            }
-          }}
-          onConfirmTestDialog={this.runTest}
-          alreadyShownRules={this.state.alreadyShownRules}
-          hasShownRules={() => this.setState({ alreadyShownRules: true })}
-        />
-      );
-    } else if (this.state.hasChosenActivityType) {
-      if (this.state.hasChosenActivity === "example") {
+    } else if (this.state.view === "training") {
+      if (!this.state.hasChosenActivityType) {
         displayed = (
-          <TrainWithExamples
-            getBackToMenu={() =>
-              this.setState({ hasChosenActivityType: false })
-            }
-            updateScore={() => this.updateScore(scoreCost.example)}
-            student={this.student}
+          <ChooseActivity
             sessionRef={this.sessionRef}
+            onClickExample={() => {
+              if (this.state.score + scoreCost.example >= 0) {
+                this.setState({
+                  hasChosenActivityType: true,
+                  hasChosenActivity: "example"
+                });
+              } else {
+                this.setState({ openSnackbar: true });
+              }
+            }}
+            onClickExercise={() => {
+              if (this.state.score + scoreCost.exercise >= 0) {
+                this.setState({
+                  hasChosenActivityType: true,
+                  hasChosenActivity: "exercise"
+                });
+              } else {
+                this.setState({ openSnackbar: true });
+              }
+            }}
+            onClickLesson={() => {
+              if (this.state.score + scoreCost.lesson >= 0) {
+                this.setState({
+                  hasChosenActivityType: true,
+                  hasChosenActivity: "lesson"
+                });
+              } else {
+                this.setState({ openSnackbar: true });
+              }
+            }}
+            onConfirmTestDialog={this.runTest}
+            alreadyShownRules={this.state.alreadyShownRules}
+            hasShownRules={() => this.setState({ alreadyShownRules: true })}
           />
         );
-      } else if (this.state.hasChosenActivity === "exercise") {
-        displayed = (
-          <TrainWithExercises
-            getBackToMenu={() =>
-              this.setState({ hasChosenActivityType: false })
-            }
-            updateScore={() => this.updateScore(scoreCost.exercise)}
-            student={this.student}
-            sessionRef={this.sessionRef}
-          />
-        );
-      } else if (this.state.hasChosenActivity === "lesson") {
-        displayed = (
-          <TrainWithLesson
-            getBackToMenu={() =>
-              this.setState({ hasChosenActivityType: false })
-            }
-            updateScore={() => this.updateScore(scoreCost.lesson)}
-            student={this.student}
-            sessionRef={this.sessionRef}
-          />
-        );
-      } else if (this.state.hasChosenActivity === "test") {
-        displayed = (
-          <TestStudent
-            startNewGame={this.startNewGame}
-            student={this.student}
-            finalScore={this.finalScore}
-            activityScore={this.activityScore}
-            test={this.state.test}
-            studentName={this.studentName}
-            gridScores={gridScores}
-            updateScore={() =>
-              this.setState({
-                score: this.finalScore,
-                scoreDisplayed: String(this.finalScore)
-              })
-            }
-          />
-        );
+      } else if (this.state.hasChosenActivityType) {
+        if (this.state.hasChosenActivity === "example") {
+          displayed = (
+            <TrainWithExamples
+              getBackToMenu={() =>
+                this.setState({ hasChosenActivityType: false })
+              }
+              updateScore={() => this.updateScore(scoreCost.example)}
+              student={this.student}
+              sessionRef={this.sessionRef}
+            />
+          );
+        } else if (this.state.hasChosenActivity === "exercise") {
+          displayed = (
+            <TrainWithExercises
+              getBackToMenu={() =>
+                this.setState({ hasChosenActivityType: false })
+              }
+              updateScore={() => this.updateScore(scoreCost.exercise)}
+              student={this.student}
+              sessionRef={this.sessionRef}
+            />
+          );
+        } else if (this.state.hasChosenActivity === "lesson") {
+          displayed = (
+            <TrainWithLesson
+              getBackToMenu={() =>
+                this.setState({ hasChosenActivityType: false })
+              }
+              updateScore={() => this.updateScore(scoreCost.lesson)}
+              student={this.student}
+              sessionRef={this.sessionRef}
+            />
+          );
+        } else if (this.state.hasChosenActivity === "test") {
+          displayed = (
+            <TestStudent
+              startNewGame={this.startNewGame}
+              student={this.student}
+              finalScore={this.finalScore}
+              activityScore={this.activityScore}
+              test={this.state.test}
+              studentName={this.studentName}
+              gridScores={gridScores}
+              updateScore={() =>
+                this.setState({
+                  score: this.finalScore,
+                  scoreDisplayed: String(this.finalScore)
+                })
+              }
+            />
+          );
+        }
       }
     }
     return (

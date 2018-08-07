@@ -14,7 +14,7 @@ import SchoolIcon from "@material-ui/icons/School";
 import HistoryIcon from "@material-ui/icons/Timeline";
 import StatisticsIcon from "@material-ui/icons/InsertChart";
 import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
-import UnregisterIcon from "@material-ui/icons/ExitToApp";
+// import UnregisterIcon from "@material-ui/icons/ExitToApp";
 import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
 import SettingsIcon from "@material-ui/icons/Settings";
 import RulesIcon from "@material-ui/icons/Assignment";
@@ -32,9 +32,10 @@ type PropsT = {
   changeLanguage: string => void,
   theme: Object,
   classes: Object,
-  onUnregister: void => void,
+  // onUnregister: void => void,
   onLeaveSession: void => void,
-  handleSidePanelClose: void => void
+  handleSidePanelClose: void => void,
+  hasBeenWelcomed: boolean
 };
 
 type StateT = {
@@ -69,8 +70,8 @@ const LI = ({
 }: {
   Icon: Object,
   onClick: void => void,
-    id: string,
-      title: string
+  id: string,
+  title: string
 }) => (
   <ListItem button onClick={onClick}>
     <ListItemIcon>
@@ -95,20 +96,35 @@ class SidePanel extends React.Component<PropsT, StateT> {
       openSettingsDialog: false,
       openRulesDialog: false
     };
+  }
+
+  render() {
     this.mainMenuListItems = (
       <div>
-        <LI
-          Icon={SchoolIcon}
-          onClick={() => this.props.changeView("training")}
-          id="training"
-          title="Training"
-        />
-        <LI
-          Icon={HistoryIcon}
-          onClick={() => this.props.changeView("history")}
-          id="history"
-          title="History"
-        />
+        {this.props.hasBeenWelcomed && (
+          <LI
+            Icon={SchoolIcon}
+            onClick={() => this.props.changeView("training")}
+            id="training"
+            title="Training"
+          />
+        )}
+        {!this.props.hasBeenWelcomed && (
+          <LI
+            Icon={SchoolIcon}
+            onClick={() => this.props.changeView("welcome_menu")}
+            id="welcome"
+            title="Start game"
+          />
+        )}
+        {this.props.hasBeenWelcomed && (
+          <LI
+            Icon={HistoryIcon}
+            onClick={() => this.props.changeView("history")}
+            id="history"
+            title="History"
+          />
+        )}
         <LI
           Icon={RulesIcon}
           onClick={() => this.setState({ openRulesDialog: true })}
@@ -137,16 +153,18 @@ class SidePanel extends React.Component<PropsT, StateT> {
 
     this.tertiaryMenuListItems = (
       <div>
-        <LI
-          Icon={LeaveSessionIcon}
-          onClick={() => {
-            this.props.onLeaveSession();
-            this.props.handleSidePanelClose();
-          }}
-          id="leaveSession"
-          title="Leave session"
-        />
-        <LI
+        {this.props.hasBeenWelcomed && (
+          <LI
+            Icon={LeaveSessionIcon}
+            onClick={() => {
+              this.props.onLeaveSession();
+              this.props.handleSidePanelClose();
+            }}
+            id="leaveSession"
+            title="Leave session"
+          />
+        )}
+        {/* <LI
           Icon={UnregisterIcon}
           onClick={() => {
             this.props.onUnregister();
@@ -154,7 +172,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
           }}
           id="unregister"
           title="Unregister"
-        />
+        /> */}
         <LI
           Icon={SettingsIcon}
           onClick={() => this.setState({ openSettingsDialog: true })}
@@ -163,9 +181,6 @@ class SidePanel extends React.Component<PropsT, StateT> {
         />
       </div>
     );
-  }
-
-  render() {
     const { classes, theme } = this.props;
     return (
       <div>
@@ -185,8 +200,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
               ) : (
-                  <ChevronLeftIcon />
-                )}
+                <ChevronLeftIcon />
+              )}
             </IconButton>
           </div>
           <Divider />

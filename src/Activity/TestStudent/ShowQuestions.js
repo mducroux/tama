@@ -60,7 +60,7 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
   }
 
   componentDidMount() {
-    setTimeout(() => this.answerQuestion(), 200);
+    setTimeout(() => this.answerQuestion(), 300);
   }
 
   answerQuestion() {
@@ -81,7 +81,7 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
       index: this.state.index + 1,
       thinking: true
     });
-    setTimeout(() => this.answerQuestion(), 200);
+    setTimeout(() => this.answerQuestion(), 300);
   };
 
   render() {
