@@ -5,7 +5,8 @@ import { FormattedMessage } from "react-intl";
 import type { VirtualStudent, ShapeFeatures } from "./types";
 
 class GodStudent implements VirtualStudent {
-  state = {};
+  name: string;
+  state: Object;
 
   knowledgeParallelogram = {};
   thinkingAboutExample = (
@@ -69,10 +70,15 @@ class GodStudent implements VirtualStudent {
     />
   );
 
-  answerParallelogram(shapeFeatures: ShapeFeatures) {
+
+  constructor(name: string) {
+    this.name = name
+  }
+
+  answerParallelogram(shape: ShapeFeatures) {
     return (
-      shapeFeatures.hasFourEdges &&
-      shapeFeatures.hasEveryPairOppositeEdgesParallel
+      shape.hasFourEdges &&
+      shape.hasEveryPairOppositeEdgesParallel
     );
   }
 
@@ -88,10 +94,10 @@ class GodStudent implements VirtualStudent {
     return true;
   }
 
-  setState() {}
+  setState() { }
 
   getState() {
-    return {};
+    return "god";
   }
 }
 

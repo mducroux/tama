@@ -1,9 +1,11 @@
+// @flow
+
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-import VirtualStudent from "../../VirtualStudent";
+import type { VirtualStudent, ShapeFeatures } from "../../VirtualStudent/types";
+import VirtualStudentComponent from '../../VirtualStudent'
 
 const styles = () => ({
   root: {
@@ -22,13 +24,25 @@ const styles = () => ({
   }
 });
 
-class ShowLesson extends React.Component {
+type StateT = {
+  studentAlreadyKnow: boolean
+}
+
+type PropsT = {
+  student: VirtualStudent,
+  lesson: { shapeFeatures: ShapeFeatures, title: string },
+  classes: Object,
+  getBackToMenu: Function,
+  updateScore: Function,
+  recordLessonActivity: Function
+}
+
+class ShowLesson extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
+    const { student, lesson } = this.props
     this.state = {
-      studentAlreadyKnow: this.props.student.alreadyKnowLesson(
-        this.props.lesson.shapeFeatures
-      )
+      studentAlreadyKnow: student.alreadyKnowLesson(lesson.shapeFeatures)
     };
   }
 
@@ -64,20 +78,11 @@ class ShowLesson extends React.Component {
           </div>
         </Grid>
         <Grid container justify="center" className={classes.root}>
-          <VirtualStudent bubbleText={bubbleText} />
+          <VirtualStudentComponent bubbleText={bubbleText} />
         </Grid>
       </div>
     );
   }
 }
-
-ShowLesson.propTypes = {
-  classes: PropTypes.object.isRequired,
-  getBackToMenu: PropTypes.func.isRequired,
-  lesson: PropTypes.object.isRequired,
-  updateScore: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired,
-  recordLessonActivity: PropTypes.func.isRequired
-};
 
 export default withStyles(styles)(ShowLesson);

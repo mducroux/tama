@@ -17,7 +17,7 @@ import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
 import WelcomeMenu from "./WelcomeMenu";
-import QuickLearnerStudent from "./VirtualStudent/QuickLearnerStudent";
+import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
 import messagesFr from "./translations/fr.json";
@@ -87,15 +87,14 @@ class App extends React.Component<PropsT, StateT> {
       hasChosenActivityType: false,
       hasChosenActivity: "",
       view: "training",
-      score: 50,
-      scoreDisplayed: "50",
+      score: 5000,
+      scoreDisplayed: "5000",
       language:
         localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
       test: {},
       alreadyShownRules: false,
       openSnackbar: false
     };
-    this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
       Math.floor(
@@ -117,6 +116,8 @@ class App extends React.Component<PropsT, StateT> {
       )
       ]
       }`;
+    this.student = getVirtualStudent(this.studentName);
+
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
       localStorage.setItem("lang", this.state.language);
@@ -177,7 +178,6 @@ class App extends React.Component<PropsT, StateT> {
   };
 
   startNewGame = () => {
-    this.student = new QuickLearnerStudent();
     this.studentName = `${
       nameData[this.state.language].firstNames[
       Math.floor(
@@ -199,12 +199,13 @@ class App extends React.Component<PropsT, StateT> {
       )
       ]
       }`;
+    this.student = getVirtualStudent(this.studentName);
     this.setState({
       hasBeenWelcomed: false,
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      score: 200,
-      scoreDisplayed: "200",
+      score: 5000,
+      scoreDisplayed: "5000",
       view: "training",
       test: {}
     });
