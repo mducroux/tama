@@ -53,17 +53,18 @@ const styles = theme => ({
     display: "none"
   },
   content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    height: "100%",
-    overflow: "auto"
+    backgroundColor: theme.palette.background.default,
+    overflow: "auto",
+    display: "flex",
+    flexGrow: 1,
+    flexDirection: "column"
   },
   "content-left": {
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth - 1
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -84,11 +85,8 @@ const styles = theme => ({
     textAlign: "right"
   },
   drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
+    flex: "0 0 auto"
   }
 });
 

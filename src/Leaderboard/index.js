@@ -19,6 +19,7 @@ const styles = () => ({
     width: "500px",
     maxWidth: "100%",
     margin: "auto",
+    marginTop: "0px",
     overflowX: "auto"
   },
   table: {
@@ -105,9 +106,9 @@ class LeaderboardView extends React.Component<PropsT, StateT> {
           const val = d.val();
           const tabsData = val
             ? Object.keys(val)
-                .map(x => val[x])
-                .sort((a, b) => b.score - a.score)
-                .map(({ score, name }, i) => [name, score, i + 1])
+              .map(x => val[x])
+              .sort((a, b) => b.score - a.score)
+              .map(({ score, name }, i) => [name, score, i + 1])
             : [];
           this.setState({ [ref.split("/")[0]]: tabsData });
         });
