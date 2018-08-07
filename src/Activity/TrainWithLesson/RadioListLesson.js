@@ -19,7 +19,7 @@ class RadioListLesson extends React.Component {
         <List>
           {lesson.map((value, index) => (
             <ListItem
-              key={value.title}
+              key={value.title.props.id}
               dense={false}
               button
               onClick={this.handleToggle(index)}

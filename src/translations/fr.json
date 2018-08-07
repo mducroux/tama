@@ -36,6 +36,20 @@
   "godStudent.thinkingAboutExam": "Trop facile !",
   "godStudent.thinkingAboutExample": "Trop facile !",
   "godStudent.thinkingAboutExercise": "Trop facile !",
+  "leaderboard.categoryAlltime": "Tout le temps",
+  "leaderboard.categoryDaily": "Aujourd'hui",
+  "leaderboard.categoryWeekly": "Cette semaine",
+  "leaderboard.name": "Nom",
+  "leaderboard.rank": "Rang",
+  "leaderboard.score": "Score",
+  "lesson.item1": "Un parallélogramme est un quadrilatère",
+  "lesson.item2":
+    "Un parallélogramme a ses côtés opposés deux à deux parallèles",
+  "lesson.item3": "Un parallélogramme a ses côtés opposés de même longueur",
+  "lesson.item4":
+    "Un parallélogramme n'a pas obligatoirement tous ses côtés de même longueur",
+  "notEnoughPointsSnackbar.message":
+    "Vous n'avez pas assez de points pour faire cette activité",
   "quickLearnerStudent.feedbackLessonAlreadyKnow": "Je le savais déjà",
   "quickLearnerStudent.feedbackLessonDidntKnow": "Oh je ne savais pas !",
   "quickLearnerStudent.giveNegativeAnswer":
@@ -48,8 +62,6 @@
   "quickLearnerStudent.thinkingAboutExam": "...",
   "quickLearnerStudent.thinkingAboutExample": "...",
   "quickLearnerStudent.thinkingAboutExercise": "...",
-  "notEnoughPointsSnackbar.message":
-    "Vous n'avez pas assez de points pour faire cette activité",
   "registrationForm.age": "Age *",
   "registrationForm.gender": "Je suis :",
   "registrationForm.genderFemale": "Femme",
@@ -85,8 +97,10 @@
   "sessionHistory.test": "Test",
   "sessionTimeline.startOfGame": "Début du jeu",
   "sessionTimeline.test": "Test",
+  "settingsDialog.language": "Langage",
   "settingsDialog.languageEn": "Anglais",
   "settingsDialog.languageFr": "Français",
+  "settingsDialog.title": "Réglages",
   "sidePanel.history": "Historique",
   "sidePanel.leaderboard": "Classement",
   "sidePanel.leaveSession": "Quitter l'entraînement",
@@ -105,6 +119,11 @@
   "showExercise.negativeAnswer": "Faux",
   "showExercise.positiveAnswer": "Vrai",
   "showExercise.true": "",
+  "statistics.grade": "Note",
+  "statistics.name": "Nom",
+  "statistics.score": "Score",
+  "statistics.sequenceStudent": "Séquence d'étudiants",
+  "statistics.studentGrade": "Notes des étudiants",
   "testConfirmationDialog.continue": "Oui, je veux passer le test",
   "testConfirmationDialog.goBack": "Non, je veux revenir à l'entraînement",
   "testConfirmationDialog.statement":
