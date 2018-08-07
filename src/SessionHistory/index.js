@@ -4,14 +4,12 @@ import { withStyles } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { Typography } from "@material-ui/core";
 import SchoolIcon from "@material-ui/icons/School";
+
+import { VerticalTimeline, VerticalTimelineElement } from "./VerticalTimeline";
+import "./index.css";
 
 function ExampleIcon(props) {
   return (
