@@ -8,6 +8,7 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import { Typography } from "@material-ui/core";
 import SchoolIcon from "@material-ui/icons/School";
 
+// Reference: https://github.com/stephane-monnot/react-vertical-timeline
 import { VerticalTimeline, VerticalTimelineElement } from "./VerticalTimeline";
 import "./index.css";
 
