@@ -93,41 +93,43 @@ class QuickLearnerStudent implements VirtualStudent {
     this.name = name;
   }
 
+  // At least one necessary feature (> 0) in each subarray should correspond should correspond to identify the shape as a parallelogram
   answerParallelogram(shapeFeatures: ShapeFeatures) {
-    const res = this.knowledgeParallelogram.reduce(
-      (acc, feature) =>
-        acc +
-        feature.reduce(
-          (acc2, [subfeature, weight]) =>
-            acc2 + (shapeFeatures[subfeature] ? weight : -weight),
-          0
-        ),
-      0
-    );
-    console.log(res);
-    return res > 0;
+    let trigger = false;
+    const res = this.knowledgeParallelogram.reduce((acc, feature) => {
+      trigger = false;
+      return (
+        acc &&
+        feature.reduce((acc2, [subfeature, weight]) => {
+          if (weight > 0) {
+            if (trigger) {
+              return shapeFeatures[subfeature] || acc2;
+            }
+            trigger = true;
+            return shapeFeatures[subfeature];
+          }
+          return acc2;
+        }, true)
+      );
+    }, true);
+    return res;
   }
 
   learn(isParallelogram: boolean, shapeFeatures: ShapeFeatures) {
     if (!isParallelogram) {
       this.knowledgeParallelogram.forEach(features => {
         features.forEach(subfeature => {
-          subfeature[1] += !shapeFeatures[subfeature[0]]
-            ? 0.1 / (features.length * features.length) // minimize importance of long subarray
-            : -0.1 / (features.length * features.length);
+          subfeature[1] += !shapeFeatures[subfeature[0]] ? 0.1 : -0.1;
         });
       });
     }
     if (isParallelogram) {
       this.knowledgeParallelogram.forEach(features => {
         features.forEach(subfeature => {
-          subfeature[1] += shapeFeatures[subfeature[0]]
-            ? 0.1 / (features.length * features.length)
-            : -0.1 / (features.length * features.length);
+          subfeature[1] += shapeFeatures[subfeature[0]] ? 0.1 : -0.1;
         });
       });
     }
-    console.log(this.getState());
   }
 
   // The lesson is the truth (weight of 1 or -1)
@@ -139,7 +141,6 @@ class QuickLearnerStudent implements VirtualStudent {
         }
       });
     });
-    console.log(this.getState());
   }
 
   // check if there is a feature he didn't know it was necessary or not

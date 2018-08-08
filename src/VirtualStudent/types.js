@@ -19,6 +19,6 @@ export interface VirtualStudent {
   learn(isParallelogram: boolean, shapeFeatures: ShapeFeatures): void;
   learnLesson(shapeFeatures: ShapeFeatures): void;
   alreadyKnowLesson(shapeFeatures: ShapeFeatures): boolean;
-  getState(): string | Object;
+  getState(): string | Object | Array<*>;
   setState(state: string): void;
 }
