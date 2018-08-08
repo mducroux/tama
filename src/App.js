@@ -247,7 +247,7 @@ class App extends React.Component<PropsT, StateT> {
         <RegistrationForm
           onSubmit={newUserId => {
             this.recordNewSession(newUserId);
-            this.setState({ isRegistered: true });
+            this.setState({ isRegistered: true, view: "training" });
           }}
         />
       );
