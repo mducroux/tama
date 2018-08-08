@@ -107,7 +107,6 @@ class FixedMemory implements VirtualStudent {
     })
     const [model, features] = this.models[Math.floor(this.models.length * Math.random())]
     this.state = { model, features }
-    console.log(features)
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
@@ -121,7 +120,6 @@ class FixedMemory implements VirtualStudent {
     } else {
       this.memory = [this.memory[1], this.memory[2], this.memory[3], [isParallelogram, shape]]
     }
-    console.log(this.memory)
     if (isParallelogram !== this.answerParallelogram(shape)) {
       let minErrors = this.memory.length;
 
@@ -134,15 +132,12 @@ class FixedMemory implements VirtualStudent {
         .find(([, , e]) => e === minErrors) || []
       this.state = { model, features }
     }
-    console.log(this.state.features)
 
   }
 
   // The lesson is the truth (weight of 1 or -1)
   learnLesson(shape: ShapeFeatures) {
-    console.log(shape)
     const reverseShape = Object.keys(shape).reduce((acc, val) => ({ ...acc, [val]: !shape[val] }), {})
-    console.log(reverseShape)
     this.learn(true, shape)
     this.learn(false, reverseShape)
   }

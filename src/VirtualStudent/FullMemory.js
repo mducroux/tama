@@ -107,7 +107,6 @@ class FullMemory implements VirtualStudent {
     })
     const [model, features] = this.models[Math.floor(this.models.length * Math.random())]
     this.state = { model, features }
-    console.log(features)
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
@@ -117,7 +116,6 @@ class FullMemory implements VirtualStudent {
 
   learn(isParallelogram: boolean, shape: ShapeFeatures) {
     this.memory.push([isParallelogram, shape])
-    console.log(this.memory)
     if (isParallelogram !== this.answerParallelogram(shape)) {
       let minErrors = this.memory.length;
 
@@ -128,7 +126,6 @@ class FullMemory implements VirtualStudent {
       })
         .sort(() => 0.5 - Math.random())
         .find(([, , e]) => e === minErrors) || []
-      console.log(features)
       this.state = { model, features }
     }
   }
