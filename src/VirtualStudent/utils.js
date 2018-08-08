@@ -30,12 +30,9 @@ export const featureList = [
 const getVirtualStudent = (name: string): VirtualStudent => {
   let RandModel = DumbStudent;
   const studentModels = [
-    [FixedMemory, 1],
-    [DumbStudent, 0.1],
-    [GodStudent, 0.05],
-    [NoMemory, 0.2],
-    [QuickLearnerStudent, 0.2],
-    [FixedMemory, 0.2],
+    [NoMemory, 0.25],
+    [QuickLearnerStudent, 0.25],
+    [FixedMemory, 0.25],
     [FullMemory, 1],
   ];
   studentModels.reduce((x, [studentModel, p]) => {
