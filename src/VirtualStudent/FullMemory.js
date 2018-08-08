@@ -5,23 +5,29 @@ import { FormattedMessage } from "react-intl";
 import type { VirtualStudent, ShapeFeatures } from "./types";
 
 const featureList = [
-  'hasFourEdges',
-  'hasSixEdges',
-  'hasSameLengthEdges',
-  'hasSameLengthEveryPairOppositeEdges',
-  'hasEveryPairOppositeEdgesParallel',
-  'hasAtLeastOnePairOppositeEdgesParallel',
-  'isRed',
-  'isRotated',
-  'isThin',
-  'hasEveryRightAngles'
+  "hasThreeEdges",
+  "hasFourEdges",
+  "hasFiveEdges",
+  "hasSixEdges",
+  "hasSameLengthEdges",
+  "hasSameLengthEveryPairOppositeEdges",
+  "hasSameLengthOnePairOppositeEdges",
+  "hasEveryPairOppositeEdgesParallel",
+  "hasAtLeastOnePairOppositeEdgesParallel",
+  "isRed",
+  "isGreen",
+  "isBlue",
+  "isRotated",
+  "isThin",
+  "hasEveryRightAngles",
+  "hasAtLeastOneRightAngle"
 ]
 
-class NoMemory implements VirtualStudent {
+class FullMemory implements VirtualStudent {
   state: { model: Function, features: string };
   name: string;
   models = [];
-  tested = {};
+  memory = [];
 
   thinkingAboutExample = (
     <FormattedMessage
@@ -101,6 +107,7 @@ class NoMemory implements VirtualStudent {
     })
     const [model, features] = this.models[Math.floor(this.models.length * Math.random())]
     this.state = { model, features }
+    console.log(features)
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
@@ -109,16 +116,20 @@ class NoMemory implements VirtualStudent {
   }
 
   learn(isParallelogram: boolean, shape: ShapeFeatures) {
+    this.memory.push([isParallelogram, shape])
+    console.log(this.memory)
     if (isParallelogram !== this.answerParallelogram(shape)) {
-      const [model, features] = this.models.sort(() => 0.5 - Math.random()).find(([m, f]) => {
-        const correctOnCurrentShape = (m(shape) === isParallelogram);
-        const alreadyTested = this.tested[f]
-        // return a new model that correctly classify the current example
-        // but give only 25% chance to go back to an already tested example
-        return correctOnCurrentShape && (!alreadyTested || Math.random() < 0.25)
-      }) || this.models.sort(() => 0.5 - Math.random())[0]
+      let minErrors = this.memory.length;
+
+      const [model, features,] = this.models.map(([m, f]) => {
+        const nErrors = this.memory.reduce((acc, [b, s]) => m(s) === b ? acc : acc + 1, 0)
+        minErrors = minErrors < nErrors ? minErrors : nErrors
+        return [m, f, nErrors]
+      })
+        .sort(() => 0.5 - Math.random())
+        .find(([, , e]) => e === minErrors) || []
+      console.log(features)
       this.state = { model, features }
-      this.tested[features] = true
     }
   }
 
@@ -144,4 +155,4 @@ class NoMemory implements VirtualStudent {
   }
 }
 
-export default NoMemory;
+export default FullMemory;
