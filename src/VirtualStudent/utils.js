@@ -29,17 +29,14 @@ const getVirtualStudent = (name: string): VirtualStudent => {
   let RandModel = DumbStudent;
   const studentModels = [
     [DumbStudent, 0.1],
-    [GodStudent, 0.1],
-    [NoMemory, 0.4],
+    [GodStudent, 0.05],
+    [NoMemory, 0.45],
     [QuickLearnerStudent, 0.4]
   ];
-  studentModels.reduce(
-    (x, [studentModel, p]) => {
-      RandModel = (x > 0 && x - p < 0) ? studentModel : RandModel
-      return x - p
-    },
-    Math.random()
-  )
+  studentModels.reduce((x, [studentModel, p]) => {
+    RandModel = x > 0 && x - p < 0 ? studentModel : RandModel;
+    return x - p;
+  }, Math.random());
 
   return new RandModel(name);
 };
