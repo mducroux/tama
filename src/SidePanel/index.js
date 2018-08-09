@@ -72,8 +72,8 @@ const LI = ({
 }: {
   Icon: Object,
   onClick: void => void,
-    id: string,
-      title: string
+  id: string,
+  title: string
 }) => (
   <ListItem button onClick={onClick}>
     <ListItemIcon>
@@ -115,14 +115,15 @@ class SidePanel extends React.Component<PropsT, StateT> {
             title={testStarted ? "See results" : "Teaching"}
           />
         )}
-        {!isPlaying && (
-          <LI
-            Icon={SchoolIcon}
-            onClick={() => this.props.changeView("start_game")}
-            id="welcome"
-            title="Start game"
-          />
-        )}
+        {!isPlaying &&
+          isRegistered && (
+            <LI
+              Icon={SchoolIcon}
+              onClick={() => this.props.changeView("game_start")}
+              id="welcome"
+              title="Start game"
+            />
+          )}
         {isPlaying && (
           <LI
             Icon={HistoryIcon}
@@ -199,8 +200,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
                 ) : (
-                    <ChevronLeftIcon />
-                  )}
+                  <ChevronLeftIcon />
+                )}
               </IconButton>
             </div>
             <Divider />

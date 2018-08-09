@@ -142,6 +142,7 @@
   "testShowQuestions.seeResult": "Voir le résultat",
   "testShowQuestions.skipToResult": "Aller au résultat",
   "welcomeMenu.descriptionApp": "Enseignez le concept de parallélogramme",
+  "welcomeMenu.register": "S'enregister pour jouer",
   "welcomeMenu.startPlaying": "Commencer à jouer",
   "welcomeMenu.studentName": "Bonjour ! Je m'appelle {studentName} !"
 }

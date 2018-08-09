@@ -132,6 +132,7 @@
   "testShowQuestions.seeResult": "See result",
   "testShowQuestions.skipToResult": "Skip to result",
   "welcomeMenu.descriptionApp": "Teach the concept of parallelogram",
+  "welcomeMenu.register": "Register to play",
   "welcomeMenu.startPlaying": "Start playing",
   "welcomeMenu.studentName": "Hello! My name is {studentName}!"
 }

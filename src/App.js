@@ -178,7 +178,7 @@ class App extends React.Component<PropsT, StateT> {
       hasChosenActivity: "",
       score: 200,
       scoreDisplayed: "200",
-      view: "start_game",
+      view: "game_start",
       test: {},
       displayResultTest: false
     });
@@ -199,39 +199,48 @@ class App extends React.Component<PropsT, StateT> {
   };
 
   render() {
+    const { view, isRegistered, hasChosenActivity } = this.state;
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "";
-    if (this.state.view === "home") {
-      displayed = <Home />;
-    } else if (this.state.view === "start_game") {
+    if (view === "home") {
+      displayed = (
+        <Home
+          isRegistered={isRegistered}
+          onClickStart={() => {
+            const v = isRegistered ? "game_start" : "registration_form";
+            this.setState({ view: v });
+          }}
+        />
+      );
+    } else if (view === "registration_form") {
+      displayed = (
+        <RegistrationForm
+          onSubmit={newUserId => {
+            this.recordNewSession(newUserId);
+            this.setState({ isRegistered: true, view: "game_start" });
+          }}
+        />
+      );
+    } else if (view === "game_start") {
       displayed = (
         <GameStart
           onClickStart={() => {
             this.setState({
               hasBeenWelcomed: true,
-              view: this.state.isRegistered ? "training" : "registration_form"
+              view: "training"
             });
-            if (this.state.isRegistered && userId) {
+            if (isRegistered && userId) {
               this.recordNewSession(userId);
             }
           }}
           studentName={this.studentName}
         />
       );
-    } else if (this.state.view === "registration_form") {
-      displayed = (
-        <RegistrationForm
-          onSubmit={newUserId => {
-            this.recordNewSession(newUserId);
-            this.setState({ isRegistered: true, view: "training" });
-          }}
-        />
-      );
-    } else if (this.state.view === "leaderboard") {
+    } else if (view === "leaderboard") {
       displayed = <Leaderboard />;
-    } else if (this.state.view === "stats") {
+    } else if (view === "stats") {
       displayed = <Stats />;
-    } else if (this.state.view === "history") {
+    } else if (view === "history") {
       displayed = (
         <SessionHistory
           studentName={this.studentName}
@@ -239,7 +248,7 @@ class App extends React.Component<PropsT, StateT> {
           student={this.student}
         />
       );
-    } else if (this.state.view === "training") {
+    } else if (view === "training") {
       if (!this.state.hasChosenActivityType) {
         displayed = (
           <ChooseActivity
@@ -280,7 +289,7 @@ class App extends React.Component<PropsT, StateT> {
           />
         );
       } else if (this.state.hasChosenActivityType) {
-        if (this.state.hasChosenActivity === "example") {
+        if (hasChosenActivity === "example") {
           displayed = (
             <TrainWithExample
               getBackToMenu={() =>
@@ -291,7 +300,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
             />
           );
-        } else if (this.state.hasChosenActivity === "exercise") {
+        } else if (hasChosenActivity === "exercise") {
           displayed = (
             <TrainWithExercises
               getBackToMenu={() =>
@@ -302,7 +311,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
             />
           );
-        } else if (this.state.hasChosenActivity === "lesson") {
+        } else if (hasChosenActivity === "lesson") {
           displayed = (
             <TrainWithLesson
               getBackToMenu={() =>
@@ -313,7 +322,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
             />
           );
-        } else if (this.state.hasChosenActivity === "test") {
+        } else if (hasChosenActivity === "test") {
           displayed = (
             <TestStudent
               startNewGame={this.startNewGame}
@@ -358,8 +367,8 @@ class App extends React.Component<PropsT, StateT> {
               });
             }}
             scoreDisplayed={this.state.scoreDisplayed}
-            changeView={view => this.setState({ view })}
-            testStarted={this.state.hasChosenActivity === "test"}
+            changeView={v => this.setState({ view: v })}
+            testStarted={hasChosenActivity === "test"}
             mainContent={displayed}
             changeLanguage={language => {
               localStorage.setItem("lang", language);
