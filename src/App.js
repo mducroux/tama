@@ -83,6 +83,8 @@ class App extends React.Component<PropsT, StateT> {
 
   constructor(props: PropsT) {
     super(props);
+    const language =
+      localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0];
     this.state = {
       hasBeenWelcomed: false,
       isRegistered: !!localStorage.getItem("user_id"),
@@ -91,34 +93,17 @@ class App extends React.Component<PropsT, StateT> {
       view: "home",
       score: 200,
       scoreDisplayed: "200",
-      language:
-        localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
+      language,
       test: {},
       alreadyShownRules: false,
       openSnackbar: false,
       displayResultTest: false
     };
-    this.studentName = `${
-      nameData[this.state.language].firstNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].firstNames.length
-      )
-      ]
-      } ${
-      nameData[this.state.language].lastNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].lastNames.length
-      )
-      ]
-      }`;
+    const fNameIdx = Math.random() * nameData[language].firstNames.length;
+    const lNameIdx = Math.random() * nameData[language].lastNames.length;
+    const firstName = nameData[language].firstNames[Math.floor(fNameIdx)];
+    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
+    this.studentName = `${firstName} ${lastName}`;
     this.student = getVirtualStudent(this.studentName);
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
@@ -182,25 +167,25 @@ class App extends React.Component<PropsT, StateT> {
   startNewGame = () => {
     this.studentName = `${
       nameData[this.state.language].firstNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].firstNames.length
-      )
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].firstNames.length
+        )
       ]
-      } ${
+    } ${
       nameData[this.state.language].lastNames[
-      Math.floor(
-        Math.random() *
-        nameData[
-          localStorage.getItem("lang") ||
-          navigator.language.split(/[-_]/)[0]
-        ].lastNames.length
-      )
+        Math.floor(
+          Math.random() *
+            nameData[
+              localStorage.getItem("lang") ||
+                navigator.language.split(/[-_]/)[0]
+            ].lastNames.length
+        )
       ]
-      }`;
+    }`;
     this.student = getVirtualStudent(this.studentName);
     this.setState({
       hasBeenWelcomed: false,
@@ -232,9 +217,7 @@ class App extends React.Component<PropsT, StateT> {
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "";
     if (this.state.view === "home") {
-      displayed = (
-        <Home />
-      );
+      displayed = <Home />;
     } else if (this.state.view === "start_game") {
       displayed = (
         <GameStart
