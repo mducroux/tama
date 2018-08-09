@@ -115,14 +115,15 @@ class SidePanel extends React.Component<PropsT, StateT> {
             title={testStarted ? "See results" : "Teaching"}
           />
         )}
-        {!isPlaying && (
-          <LI
-            Icon={SchoolIcon}
-            onClick={() => this.props.changeView("welcome_menu")}
-            id="welcome"
-            title="Start game"
-          />
-        )}
+        {!isPlaying &&
+          isRegistered && (
+            <LI
+              Icon={SchoolIcon}
+              onClick={() => this.props.changeView("game_start")}
+              id="welcome"
+              title="Start game"
+            />
+          )}
         {isPlaying && (
           <LI
             Icon={HistoryIcon}

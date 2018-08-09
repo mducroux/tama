@@ -16,7 +16,8 @@ import TrainWithExample from "./Activity/TrainWithExample";
 import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
-import WelcomeMenu from "./WelcomeMenu";
+import Home from "./Home";
+import GameStart from "./GameStart";
 import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
@@ -83,43 +84,28 @@ class App extends React.Component<PropsT, StateT> {
 
   constructor(props: PropsT) {
     super(props);
+    const language =
+      localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0];
     this.state = {
       hasBeenWelcomed: false,
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      view: "welcome_menu",
+      view: "home",
       score: 200,
       scoreDisplayed: "200",
-      language:
-        localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
+      language,
       test: {},
       alreadyShownRules: false,
       openSnackbar: false,
       displayResultTest: false,
       genderTeacherMale: false
     };
-    this.studentName = `${
-      nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
-      ]
-    } ${
-      nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
-      ]
-    }`;
+    const fNameIdx = Math.random() * nameData[language].firstNames.length;
+    const lNameIdx = Math.random() * nameData[language].lastNames.length;
+    const firstName = nameData[language].firstNames[Math.floor(fNameIdx)];
+    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
+    this.studentName = `${firstName} ${lastName}`;
     this.student = getVirtualStudent(this.studentName);
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
@@ -181,27 +167,12 @@ class App extends React.Component<PropsT, StateT> {
   };
 
   startNewGame = () => {
-    this.studentName = `${
-      nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
-      ]
-    } ${
-      nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
-      ]
-    }`;
+    const { language } = this.state;
+    const fNameIdx = Math.random() * nameData[language].firstNames.length;
+    const lNameIdx = Math.random() * nameData[language].lastNames.length;
+    const firstName = nameData[language].firstNames[Math.floor(fNameIdx)];
+    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
+    this.studentName = `${firstName} ${lastName}`;
     this.student = getVirtualStudent(this.studentName);
     this.setState({
       hasBeenWelcomed: false,
@@ -209,7 +180,7 @@ class App extends React.Component<PropsT, StateT> {
       hasChosenActivity: "",
       score: 200,
       scoreDisplayed: "200",
-      view: "welcome_menu",
+      view: "game_start",
       test: {},
       displayResultTest: false
     });
@@ -230,56 +201,61 @@ class App extends React.Component<PropsT, StateT> {
   };
 
   render() {
+    const { view, isRegistered, hasChosenActivity } = this.state;
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "";
-    if (this.state.view === "welcome_menu") {
+    if (view === "home") {
       displayed = (
-        <WelcomeMenu
+        <Home
+          isRegistered={isRegistered}
+          onClickStart={() => {
+            const v = isRegistered ? "game_start" : "registration_form";
+            this.setState({ view: v });
+            if (this.state.isRegistered && userId) {
+              this.recordNewSession(userId);
+              const dbRef = firebase.database().ref(`/users/${userId}/`);
+              dbRef.once("value").then(snapshot => {
+                const genderTeacherMale = snapshot.val().gender === "male";
+                this.setState({ genderTeacherMale });
+              });
+            }
+          }}
+        />
+      );
+    } else if (view === "registration_form") {
+      displayed = (
+        <RegistrationForm
+          onSubmit={newUserId => {
+            this.recordNewSession(newUserId);
+            const dbRef = firebase.database().ref(`/users/${newUserId}/`);
+            dbRef.once("value").then(snapshot => {
+              const genderTeacherMale = snapshot.val().gender === "male";
+              this.setState({ genderTeacherMale });
+            });
+            this.setState({ isRegistered: true, view: "game_start" });
+          }}
+        />
+      );
+    } else if (view === "game_start") {
+      displayed = (
+        <GameStart
           onClickStart={() => {
             this.setState({
               hasBeenWelcomed: true,
-              view: this.state.isRegistered ? "training" : "registration_form"
+              view: "training"
             });
-            if (this.state.isRegistered && userId) {
+            if (isRegistered && userId) {
               this.recordNewSession(userId);
-              firebase
-                .database()
-                .ref(`/users/${userId}/`)
-                .once("value")
-                .then(snapshot => {
-                  console.log(snapshot.val());
-                  this.setState({
-                    genderTeacherMale: snapshot.val().gender === "male"
-                  });
-                });
             }
           }}
           studentName={this.studentName}
         />
       );
-    } else if (this.state.view === "registration_form") {
-      displayed = (
-        <RegistrationForm
-          onSubmit={newUserId => {
-            this.recordNewSession(newUserId);
-            firebase
-              .database()
-              .ref(`/users/${newUserId}/`)
-              .once("value")
-              .then(snapshot =>
-                this.setState({
-                  genderTeacherMale: snapshot.val().gender === "male"
-                })
-              );
-            this.setState({ isRegistered: true, view: "training" });
-          }}
-        />
-      );
-    } else if (this.state.view === "leaderboard") {
+    } else if (view === "leaderboard") {
       displayed = <Leaderboard />;
-    } else if (this.state.view === "stats") {
+    } else if (view === "stats") {
       displayed = <Stats />;
-    } else if (this.state.view === "history") {
+    } else if (view === "history") {
       displayed = (
         <SessionHistory
           studentName={this.studentName}
@@ -288,7 +264,7 @@ class App extends React.Component<PropsT, StateT> {
           genderTeacherMale={this.state.genderTeacherMale}
         />
       );
-    } else if (this.state.view === "training") {
+    } else if (view === "training") {
       if (!this.state.hasChosenActivityType) {
         displayed = (
           <ChooseActivity
@@ -329,7 +305,7 @@ class App extends React.Component<PropsT, StateT> {
           />
         );
       } else if (this.state.hasChosenActivityType) {
-        if (this.state.hasChosenActivity === "example") {
+        if (hasChosenActivity === "example") {
           displayed = (
             <TrainWithExample
               getBackToMenu={() =>
@@ -341,7 +317,7 @@ class App extends React.Component<PropsT, StateT> {
               genderTeacherMale={this.state.genderTeacherMale}
             />
           );
-        } else if (this.state.hasChosenActivity === "exercise") {
+        } else if (hasChosenActivity === "exercise") {
           displayed = (
             <TrainWithExercises
               getBackToMenu={() =>
@@ -353,7 +329,7 @@ class App extends React.Component<PropsT, StateT> {
               genderTeacherMale={this.state.genderTeacherMale}
             />
           );
-        } else if (this.state.hasChosenActivity === "lesson") {
+        } else if (hasChosenActivity === "lesson") {
           displayed = (
             <TrainWithLesson
               getBackToMenu={() =>
@@ -364,7 +340,7 @@ class App extends React.Component<PropsT, StateT> {
               sessionRef={this.sessionRef}
             />
           );
-        } else if (this.state.hasChosenActivity === "test") {
+        } else if (hasChosenActivity === "test") {
           displayed = (
             <TestStudent
               startNewGame={this.startNewGame}
@@ -409,8 +385,8 @@ class App extends React.Component<PropsT, StateT> {
               });
             }}
             scoreDisplayed={this.state.scoreDisplayed}
-            changeView={view => this.setState({ view })}
-            testStarted={this.state.hasChosenActivity === "test"}
+            changeView={v => this.setState({ view: v })}
+            testStarted={hasChosenActivity === "test"}
             mainContent={displayed}
             changeLanguage={language => {
               localStorage.setItem("lang", language);
