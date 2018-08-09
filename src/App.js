@@ -87,6 +87,7 @@ class App extends React.Component<PropsT, StateT> {
   studentImgId: number;
   studentLearningImg: string;
   studentBackpackImg: string;
+  studentAvatar: string;
 
   constructor(props: PropsT) {
     super(props);
@@ -135,6 +136,9 @@ class App extends React.Component<PropsT, StateT> {
     this.studentBackpackImg = `/images/virtual_student/${
       this.genderStudent
     }/backpack/student_${this.genderStudent}_backpack_${this.studentImgId}.png`;
+    this.studentAvatar = `/images/virtual_student/avatar/${
+      this.genderStudent
+    }/student_${this.genderStudent}_${this.studentImgId}.png`;
   };
 
   startNewGame = () => {
@@ -279,6 +283,7 @@ class App extends React.Component<PropsT, StateT> {
           sessionRef={this.sessionRef}
           student={this.student}
           genderTeacherMale={this.genderTeacherMale}
+          studentAvatar={this.studentAvatar}
         />
       );
     } else if (view === "training") {
