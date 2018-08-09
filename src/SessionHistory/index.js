@@ -86,9 +86,17 @@ function FormattedMessageFixed(props) {
   return <FormattedMessage {...props} />;
 }
 
-const SessionHistory = ({ classes, history, studentName, student }) => {
+const SessionHistory = ({
+  classes,
+  history,
+  studentName,
+  student,
+  genderTeacherMale
+}) => {
   const { activities, test } = history;
-
+  const teacherAvatar = genderTeacherMale
+    ? "images/teacher/teacher_male_avatar.png"
+    : "images/teacher/teacher_female_avatar.png";
   return (
     <div className={classes.root}>
       <Grid container justify="center" className={classes.title}>
@@ -166,7 +174,7 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                       <Grid container alignItems="center" spacing={16}>
                         <Grid item>
                           <img
-                            src="images/teacher/teacher_avatar.png"
+                            src={teacherAvatar}
                             alt="teacher-avatar"
                             width="40px"
                             height="40px"
@@ -193,7 +201,7 @@ const SessionHistory = ({ classes, history, studentName, student }) => {
                       <Grid container alignItems="center" spacing={16}>
                         <Grid item>
                           <img
-                            src="images/teacher/teacher_avatar.png"
+                            src={teacherAvatar}
                             alt="teacher-avatar"
                             width="40px"
                             height="40px"
@@ -276,7 +284,8 @@ SessionHistory.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   studentName: PropTypes.string.isRequired,
-  student: PropTypes.object.isRequired
+  student: PropTypes.object.isRequired,
+  genderTeacherMale: PropTypes.bool.isRequired
 };
 
 export const StyledSessionHistory = withStyles(styles, { withTheme: true })(
