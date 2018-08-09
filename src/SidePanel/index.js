@@ -16,7 +16,7 @@ import StatisticsIcon from "@material-ui/icons/InsertChart";
 import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
 // import UnregisterIcon from "@material-ui/icons/ExitToApp";
 import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
-import SettingsIcon from "@material-ui/icons/Settings";
+import LanguageIcon from "@material-ui/icons/Language";
 import RulesIcon from "@material-ui/icons/Assignment";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -174,7 +174,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
           title="Unregister"
         /> */}
         <LI
-          Icon={SettingsIcon}
+          Icon={LanguageIcon}
           onClick={() => this.setState({ openSettingsDialog: true })}
           id="settings"
           title="Settings"
