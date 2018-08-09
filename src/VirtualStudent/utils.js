@@ -2,7 +2,6 @@
 
 import { VirtualStudent } from "./types";
 import DumbStudent from "./DumbStudent";
-import GodStudent from "./GodStudent";
 import NoMemory from "./NoMemory";
 import WeightModel from "./WeightModel";
 import FullMemory from './FullMemory'
@@ -30,7 +29,7 @@ export const featureList = [
 const getVirtualStudent = (name: string): VirtualStudent => {
   let RandModel = DumbStudent;
   const studentModels = [
-    [WeightModel, 0.25]
+    [WeightModel, 0.25],
     [NoMemory, 0.25],
     [FixedMemory, 0.25],
     [FullMemory, 1],

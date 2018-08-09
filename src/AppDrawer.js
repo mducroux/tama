@@ -1,7 +1,8 @@
-import React from "react";
+// @flow
+
+import * as React from "react";
 
 import { FormattedMessage } from "react-intl";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -90,7 +91,20 @@ const styles = theme => ({
   }
 });
 
-class AppDrawer extends React.Component {
+type PropsT = {
+  classes: Object,
+  isRegistered: boolean,
+  hasBeenWelcomed: boolean,
+  scoreDisplayed: string,
+  changeLanguage: string => void,
+  mainContent: any
+}
+
+type StateT = {
+  openSidePanel: boolean
+}
+
+class AppDrawer extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
     this.state = {
@@ -110,19 +124,17 @@ class AppDrawer extends React.Component {
             })}
           >
             <Toolbar disableGutters={!this.state.openSidePanel}>
-              {this.props.isRegistered && (
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={() => this.setState({ openSidePanel: true })}
-                  className={classNames(
-                    classes.menuButton,
-                    this.state.openSidePanel && classes.hide
-                  )}
-                >
-                  <MenuIcon />
-                </IconButton>
-              )}
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={() => this.setState({ openSidePanel: true })}
+                className={classNames(
+                  classes.menuButton,
+                  this.state.openSidePanel && classes.hide
+                )}
+              >
+                <MenuIcon />
+              </IconButton>
               <Typography
                 variant="title"
                 color="inherit"
@@ -134,12 +146,12 @@ class AppDrawer extends React.Component {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                  <FormattedMessage
-                    id="appDrawer.welcomeCustomized"
-                    defaultMessage="Welcome {username} !"
-                    values={{ username: localStorage.getItem("username") }}
-                  />
-                )}
+                    <FormattedMessage
+                      id="appDrawer.welcomeCustomized"
+                      defaultMessage="Welcome {username} !"
+                      values={{ username: localStorage.getItem("username") }}
+                    />
+                  )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
@@ -186,14 +198,10 @@ class AppDrawer extends React.Component {
             </Toolbar>
           </AppBar>
           <SidePanel
+            {...this.props}
             open={this.state.openSidePanel}
-            changeLanguage={this.props.changeLanguage}
-            studentName={this.props.studentName}
-            onLeaveSession={this.props.onLeaveSession}
-            onUnregister={this.props.onUnregister}
-            changeView={this.props.changeView}
             handleSidePanelClose={() => this.setState({ openSidePanel: false })}
-            hasBeenWelcomed={this.props.hasBeenWelcomed}
+            classes={undefined}
           />
           <main
             className={classNames(classes.content, classes[`content-left`], {
@@ -209,18 +217,5 @@ class AppDrawer extends React.Component {
     );
   }
 }
-
-AppDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  hasBeenWelcomed: PropTypes.bool.isRequired,
-  isRegistered: PropTypes.bool.isRequired,
-  scoreDisplayed: PropTypes.string,
-  mainContent: PropTypes.object.isRequired,
-  changeLanguage: PropTypes.func.isRequired,
-  studentName: PropTypes.string.isRequired,
-  changeView: PropTypes.func.isRequired,
-  onUnregister: PropTypes.func.isRequired,
-  onLeaveSession: PropTypes.func.isRequired
-};
 
 export default withStyles(styles)(AppDrawer);
