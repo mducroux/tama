@@ -23,7 +23,7 @@ const styles = () => ({
   },
   bubbleAnswer: {
     position: "relative",
-    left: "-50%",
+    left: "-20%",
     backgroundColor: "transparent",
     cursor: "pointer",
     overflow: "hidden",
@@ -66,6 +66,9 @@ class Teacher extends React.Component {
       bubbleThinking2: "images/teacher/bubble-thinking.png",
       answer: true
     };
+    this.teacherImage = this.props.genderTeacherMale
+      ? "images/teacher/teacher_male.png"
+      : "images/teacher/teacher_female.png";
   }
 
   render() {
@@ -158,12 +161,7 @@ class Teacher extends React.Component {
           </Grid>
         )}
         <Grid container justify="center" alignItems="flex-start">
-          <img
-            src="images/teacher/teacher.png"
-            width="150"
-            height="300"
-            alt="teacher"
-          />
+          <img src={this.teacherImage} width="323" height="300" alt="teacher" />
         </Grid>
       </div>
     );
@@ -175,7 +173,8 @@ Teacher.propTypes = {
   onClickBubble: PropTypes.func.isRequired,
   positiveAnswer: PropTypes.object,
   negativeAnswer: PropTypes.object,
-  waitingForStudent: PropTypes.bool.isRequired
+  waitingForStudent: PropTypes.bool.isRequired,
+  genderTeacherMale: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(Teacher);

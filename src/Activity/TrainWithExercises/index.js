@@ -46,6 +46,7 @@ class TrainWithExercise extends React.Component {
         updateScore={this.props.updateScore}
         student={this.props.student}
         recordExerciseActivity={this.recordExerciseActivity}
+        genderTeacherMale={this.props.genderTeacherMale}
       />
     );
   }
@@ -55,7 +56,8 @@ TrainWithExercise.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  sessionRef: PropTypes.object.isRequired
+  sessionRef: PropTypes.object.isRequired,
+  genderTeacherMale: PropTypes.bool.isRequired
 };
 
 export default TrainWithExercise;

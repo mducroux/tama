@@ -19,15 +19,11 @@ class TrainWithExample extends React.Component {
     this.setState({ hasChosenExample: true, index });
   };
 
-  recordExampleActivity = (userAnswer) => {
+  recordExampleActivity = userAnswer => {
     this.newActivityRef.child("activity_type").set("example");
     const image = parallelogramData[this.state.index].src;
-    this.newActivityRef
-      .child("item")
-      .set(image);
-    this.newActivityRef
-      .child("knowledge")
-      .set(this.props.student.getState());
+    this.newActivityRef.child("item").set(image);
+    this.newActivityRef.child("knowledge").set(this.props.student.getState());
     this.newActivityRef.child("user_answer").set(userAnswer);
     this.newActivityRef.child("time").set(new Date().getTime());
   };
@@ -41,7 +37,7 @@ class TrainWithExample extends React.Component {
         />
       );
     }
-    const parallelogram = parallelogramData[this.state.index]
+    const parallelogram = parallelogramData[this.state.index];
     return (
       <ShowExample
         parallelogram={parallelogram}
@@ -49,6 +45,7 @@ class TrainWithExample extends React.Component {
         updateScore={this.props.updateScore}
         student={this.props.student}
         recordExampleActivity={this.recordExampleActivity}
+        genderTeacherMale={this.props.genderTeacherMale}
       />
     );
   }
@@ -58,7 +55,8 @@ TrainWithExample.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  sessionRef: PropTypes.object.isRequired
+  sessionRef: PropTypes.object.isRequired,
+  genderTeacherMale: PropTypes.bool.isRequired
 };
 
 export default TrainWithExample;

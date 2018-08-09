@@ -96,6 +96,7 @@ class ShowExample extends React.Component {
                   />
                 }
                 waitingForStudent={false}
+                genderTeacherMale={this.props.genderTeacherMale}
               />
             </Grid>
           </Grid>
@@ -111,7 +112,8 @@ ShowExample.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  recordExampleActivity: PropTypes.func.isRequired
+  recordExampleActivity: PropTypes.func.isRequired,
+  genderTeacherMale: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(ShowExample);
