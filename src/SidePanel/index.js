@@ -70,8 +70,8 @@ const LI = ({
 }: {
   Icon: Object,
   onClick: void => void,
-  id: string,
-  title: string
+    id: string,
+      title: string
 }) => (
   <ListItem button onClick={onClick}>
     <ListItemIcon>
@@ -112,7 +112,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
         {!this.props.hasBeenWelcomed && (
           <LI
             Icon={SchoolIcon}
-            onClick={() => this.props.changeView("welcome_menu")}
+            onClick={() => this.props.changeView("start_game")}
             id="welcome"
             title="Start game"
           />
@@ -200,8 +200,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
               ) : (
-                <ChevronLeftIcon />
-              )}
+                  <ChevronLeftIcon />
+                )}
             </IconButton>
           </div>
           <Divider />

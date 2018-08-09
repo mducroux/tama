@@ -16,7 +16,8 @@ import TrainWithExample from "./Activity/TrainWithExample";
 import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
-import WelcomeMenu from "./WelcomeMenu";
+import Home from "./Home";
+import GameStart from "./GameStart";
 import getVirtualStudent from "./VirtualStudent/utils";
 import AppDrawer from "./AppDrawer";
 import SessionHistory from "./SessionHistory";
@@ -86,7 +87,7 @@ class App extends React.Component<PropsT, StateT> {
       isRegistered: !!localStorage.getItem("user_id"),
       hasChosenActivityType: false,
       hasChosenActivity: "",
-      view: "welcome_menu",
+      view: "home",
       score: 200,
       scoreDisplayed: "200",
       language:
@@ -97,25 +98,25 @@ class App extends React.Component<PropsT, StateT> {
     };
     this.studentName = `${
       nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].firstNames.length
+      )
       ]
-    } ${
+      } ${
       nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].lastNames.length
+      )
       ]
-    }`;
+      }`;
     this.student = getVirtualStudent(this.studentName);
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
@@ -179,25 +180,25 @@ class App extends React.Component<PropsT, StateT> {
   startNewGame = () => {
     this.studentName = `${
       nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].firstNames.length
+      )
       ]
-    } ${
+      } ${
       nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
+      Math.floor(
+        Math.random() *
+        nameData[
+          localStorage.getItem("lang") ||
+          navigator.language.split(/[-_]/)[0]
+        ].lastNames.length
+      )
       ]
-    }`;
+      }`;
     this.student = getVirtualStudent(this.studentName);
     this.setState({
       hasBeenWelcomed: false,
@@ -205,7 +206,7 @@ class App extends React.Component<PropsT, StateT> {
       hasChosenActivity: "",
       score: 200,
       scoreDisplayed: "200",
-      view: "welcome_menu",
+      view: "gamestart",
       test: {}
     });
   };
@@ -227,9 +228,13 @@ class App extends React.Component<PropsT, StateT> {
   render() {
     let displayed;
     const userId: string = localStorage.getItem("user_id") || "";
-    if (this.state.view === "welcome_menu") {
+    if (this.state.view === "home") {
       displayed = (
-        <WelcomeMenu
+        <Home />
+      );
+    } else if (this.state.view === "start_game") {
+      displayed = (
+        <GameStart
           onClickStart={() => {
             this.setState({
               hasBeenWelcomed: true,
