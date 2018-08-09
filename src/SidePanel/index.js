@@ -72,8 +72,8 @@ const LI = ({
 }: {
   Icon: Object,
   onClick: void => void,
-    id: string,
-      title: string
+  id: string,
+  title: string
 }) => (
   <ListItem button onClick={onClick}>
     <ListItemIcon>
@@ -97,8 +97,14 @@ class SidePanel extends React.Component<PropsT, StateT> {
   }
 
   render() {
-    const { isRegistered, hasBeenWelcomed, testStarted, startNewGame } = this.props
-    const isPlaying = hasBeenWelcomed
+    const {
+      isRegistered,
+      hasBeenWelcomed,
+      testStarted,
+      startNewGame,
+      handleSidePanelClose
+    } = this.props;
+    const isPlaying = hasBeenWelcomed;
     const mainMenuListItems = (
       <React.Fragment>
         {isPlaying && (
@@ -106,16 +112,9 @@ class SidePanel extends React.Component<PropsT, StateT> {
             Icon={SchoolIcon}
             onClick={() => this.props.changeView("training")}
             id={testStarted ? "testresult" : "training"}
-            title={testStarted ? "Test result" : "Teaching"}
+            title={testStarted ? "See results" : "Teaching"}
           />
         )}
-        {testStarted &&
-          <LI
-            Icon={NewGameIcon}
-            onClick={startNewGame}
-            id="newgame"
-            title="New game"
-          />}
         {!isPlaying && (
           <LI
             Icon={SchoolIcon}
@@ -159,12 +158,25 @@ class SidePanel extends React.Component<PropsT, StateT> {
     );
 
     const tertiaryMenuListItems = (
-      <LI
-        Icon={LanguageIcon}
-        onClick={() => this.setState({ openSettingsDialog: true })}
-        id="settings"
-        title="Language"
-      />
+      <React.Fragment>
+        {testStarted && (
+          <LI
+            Icon={NewGameIcon}
+            onClick={() => {
+              handleSidePanelClose();
+              startNewGame();
+            }}
+            id="newgame"
+            title="New game"
+          />
+        )}
+        <LI
+          Icon={LanguageIcon}
+          onClick={() => this.setState({ openSettingsDialog: true })}
+          id="settings"
+          title="Language"
+        />
+      </React.Fragment>
     );
 
     const { classes, theme } = this.props;
@@ -187,8 +199,8 @@ class SidePanel extends React.Component<PropsT, StateT> {
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
                 ) : (
-                    <ChevronLeftIcon />
-                  )}
+                  <ChevronLeftIcon />
+                )}
               </IconButton>
             </div>
             <Divider />
