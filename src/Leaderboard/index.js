@@ -47,15 +47,14 @@ export const updateLeaderboard = (
   const weeklyRef = `weekly/${getCurrentWeek()}`;
   const alltimeRef = "alltime";
   const refs = [dailyRef, weeklyRef, alltimeRef];
-  refs.forEach(ref => {
-    firebase
-      .database()
-      .ref(`leaderboard/${ref}/${userId}`)
-      .transaction(
-        current =>
-          current ? { score: current.score + score, name } : { score, name }
+  refs.map(ref => firebase.database().ref(`leaderboard/${ref}/${userId}`))
+    .forEach(fire => {
+      fire.transaction(
+        current => current
+          ? { score: current.score + score, count: current.count + 1, name }
+          : { score, count: 1, name }
       );
-  });
+    });
 };
 
 const Leaderboard = ({ classes, data }: { classes: Object, data: any[][] }) => (
@@ -114,6 +113,7 @@ class LeaderboardView extends React.Component<PropsT, StateT> {
           const tabsData = val
             ? Object.keys(val)
               .map(x => val[x])
+              .map(({ score, count, name }) => ({ score: Math.ceil(score / (count + 1)), name }))
               .sort((a, b) => b.score - a.score)
               .map(({ score, name }, i) => [name, score, i + 1])
             : [];
