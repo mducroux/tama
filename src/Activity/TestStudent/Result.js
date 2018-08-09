@@ -180,6 +180,8 @@ const QuestionsAnswers = ({
 );
 
 class Result extends React.Component<PropsT, StateT> {
+  timeout: TimeoutID;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -200,8 +202,8 @@ class Result extends React.Component<PropsT, StateT> {
 
   componentDidMount() {
     this.props.updateScore();
-    setTimeout(() => this.setState({ grade: this.props.grade }), 100);
-    setTimeout(
+    setTimeout(() => this.setState({ grade: this.props.grade }), 100); // allows animation of progress bar
+    this.timeout = setTimeout(
       () =>
         this.setState({
           finalScore: (
@@ -216,6 +218,12 @@ class Result extends React.Component<PropsT, StateT> {
         }),
       4000
     );
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
 
   render() {
