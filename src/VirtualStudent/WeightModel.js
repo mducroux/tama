@@ -8,22 +8,24 @@ class QuickLearnerStudent implements VirtualStudent {
   name: string;
   state: Object;
 
-  // At first he doesn't know what a parallelogram looks like
-  // so he thinks that everything is a parallelogram
-  knowledgeParallelogram = {
-    hasThreeEdges: 0,
-    hasFourEdges: 0,
-    hasFiveEdges: 0,
-    hasSixEdges: 0,
-    hasSameLengthEdges: 0,
-    hasSameLengthEveryPairOppositeEdges: 0,
-    hasSameLengthOnePairOppositeEdges: 0,
-    hasEveryPairOppositeEdgesParallel: 0,
-    hasAtLeastOnePairOppositeEdgesParallel: 0,
-    isRed: 0,
-    isGreen: 0,
-    isBlue: 0
-  };
+  knowledgeParallelogram = [
+    [
+      ["hasThreeEdges", 0],
+      ["hasFourEdges", 0],
+      ["hasFiveEdges", 0],
+      ["hasSixEdges", 0]
+    ],
+    [["hasSameLengthEdges", 0]],
+    [["hasSameLengthEveryPairOppositeEdges", 0]],
+    [["hasSameLengthOnePairOppositeEdges", 0]],
+    [["hasEveryPairOppositeEdgesParallel", 0]],
+    [["hasAtLeastOnePairOppositeEdgesParallel", 0]],
+    [["isRed", 0], ["isGreen", 0], ["isBlue", 0]],
+    [["isRotated", 0]],
+    [["isThin", 0]],
+    [["hasEveryRightAngles", 0]],
+    [["hasAtLeastOneRightAngle", 0]]
+  ];
   thinkingAboutExample = (
     <FormattedMessage
       id="quickLearnerStudent.thinkingAboutExample"
@@ -86,59 +88,81 @@ class QuickLearnerStudent implements VirtualStudent {
   );
 
   constructor(name: string) {
-    this.name = name
+    this.name = name;
   }
 
-  // All necessary features should correspond to identify the shape as a parallelogram
   answerParallelogram(shapeFeatures: ShapeFeatures) {
-    return Object.keys(this.knowledgeParallelogram).reduce(
+    const res = this.knowledgeParallelogram.reduce(
       (acc, feature) =>
-        acc &&
-        (this.knowledgeParallelogram[feature] > 0
-          ? shapeFeatures[feature]
-          : true),
-      true
+        acc +
+        feature.reduce(
+          (acc2, [subfeature, weight]) =>
+            acc2 + (shapeFeatures[subfeature] ? weight : -weight),
+          0
+        ),
+      0
     );
+    console.log(res);
+    return res > 0;
   }
 
   learn(isParallelogram: boolean, shapeFeatures: ShapeFeatures) {
     if (!isParallelogram) {
-      Object.keys(this.knowledgeParallelogram).forEach(feature => {
-        this.knowledgeParallelogram[feature] += !shapeFeatures[feature]
-          ? 0.1
-          : -0.1;
+      this.knowledgeParallelogram.forEach(feature => {
+        feature.forEach(subfeature => {
+          subfeature[1] +=
+            Math.abs(subfeature[1]) !== 1 &&
+            (!shapeFeatures[subfeature[0]]
+              ? 0.1 / feature.length // minimize importance of long subarrays
+              : -0.1 / feature.length);
+        });
       });
     }
     if (isParallelogram) {
-      Object.keys(this.knowledgeParallelogram).forEach(feature => {
-        this.knowledgeParallelogram[feature] += shapeFeatures[feature]
-          ? 0.1
-          : -0.1;
+      this.knowledgeParallelogram.forEach(feature => {
+        feature.forEach(subfeature => {
+          subfeature[1] +=
+            Math.abs(subfeature[1]) !== 1 &&
+            (shapeFeatures[subfeature[0]]
+              ? 0.1 / feature.length // minimize importance of long subarrays
+              : -0.1 / feature.length);
+        });
       });
     }
+    console.log(this.getState());
   }
 
   // The lesson is the truth (weight of 1 or -1)
   learnLesson(shapeFeatures: ShapeFeatures) {
-    Object.keys(shapeFeatures).forEach(feature => {
-      this.knowledgeParallelogram[feature] = shapeFeatures[feature] ? 1 : -1;
+    this.knowledgeParallelogram.forEach(feature => {
+      feature.forEach(subfeature => {
+        if (Object.keys(shapeFeatures).includes(subfeature[0])) {
+          subfeature[1] = shapeFeatures[subfeature[0]] ? 1 : -1;
+        }
+      });
     });
+    console.log(this.getState());
   }
 
   // check if there is a feature he didn't know it was necessary or not
   // return true even if it increased his certainty
   alreadyKnowLesson(shapeFeatures: ShapeFeatures) {
-    return Object.keys(shapeFeatures).reduce(
+    return this.knowledgeParallelogram.reduce(
       (acc, feature) =>
         acc &&
-        !(this.knowledgeParallelogram[feature] > 0
-          ? !shapeFeatures[feature]
-          : shapeFeatures[feature]),
+        feature.reduce(
+          (acc2, [subfeature, weight]) =>
+            acc2 &&
+            !(weight > 0
+              ? !shapeFeatures[subfeature]
+              : shapeFeatures[subfeature]),
+          true
+        ),
       true
     );
   }
 
-  setState() { }
+  setState() {}
 
   getState() {
     return this.knowledgeParallelogram;
