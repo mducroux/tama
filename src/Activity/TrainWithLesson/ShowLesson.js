@@ -38,7 +38,8 @@ type PropsT = {
   classes: Object,
   getBackToMenu: Function,
   updateScore: Function,
-  recordLessonActivity: Function
+  recordLessonActivity: Function,
+  studentImg: string
 };
 
 class ShowLesson extends React.Component<PropsT, StateT> {
@@ -77,7 +78,10 @@ class ShowLesson extends React.Component<PropsT, StateT> {
             alignItems="center"
             className={classes.group}
           >
-            <VirtualStudentComponent bubbleText={bubbleText} />
+            <VirtualStudentComponent
+              bubbleText={bubbleText}
+              studentImg={this.props.studentImg}
+            />
           </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>

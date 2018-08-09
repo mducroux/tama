@@ -57,6 +57,8 @@ const scoreCost = {
   lesson: -50
 };
 
+const numStudentImg = 5;
+
 type PropsT = {};
 
 type StateT = {
@@ -71,8 +73,7 @@ type StateT = {
   test: Object,
   alreadyShownRules: boolean,
   openSnackbar: boolean,
-  displayResultTest: boolean,
-  genderTeacherMale: boolean
+  displayResultTest: boolean
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -81,6 +82,11 @@ class App extends React.Component<PropsT, StateT> {
   sessionRef: Object;
   finalScore: number;
   activityScore: number;
+  genderTeacherMale: boolean;
+  genderStudent: string;
+  studentImgId: number;
+  studentLearningImg: string;
+  studentBackpackImg: string;
 
   constructor(props: PropsT) {
     super(props);
@@ -98,20 +104,52 @@ class App extends React.Component<PropsT, StateT> {
       test: {},
       alreadyShownRules: false,
       openSnackbar: false,
-      displayResultTest: false,
-      genderTeacherMale: false
+      displayResultTest: false
     };
-    const fNameIdx = Math.random() * nameData[language].firstNames.length;
-    const lNameIdx = Math.random() * nameData[language].lastNames.length;
-    const firstName = nameData[language].firstNames[Math.floor(fNameIdx)];
-    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
-    this.studentName = `${firstName} ${lastName}`;
-    this.student = getVirtualStudent(this.studentName);
+    this.initializeConstructorVars();
     addLocaleData([...localeEn, ...localeFr]);
     if (!localStorage.getItem("lang")) {
       localStorage.setItem("lang", this.state.language);
     }
   }
+
+  initializeConstructorVars = () => {
+    this.genderTeacherMale = false;
+
+    this.genderStudent = Math.random() > 0.5 ? "male" : "female";
+    const { language } = this.state;
+    const fNameIdx =
+      Math.random() * nameData[language].firstNames[this.genderStudent].length;
+    const lNameIdx = Math.random() * nameData[language].lastNames.length;
+    const firstName =
+      nameData[language].firstNames[this.genderStudent][Math.floor(fNameIdx)];
+    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
+    this.studentName = `${firstName} ${lastName}`;
+
+    this.student = getVirtualStudent(this.studentName);
+
+    this.studentImgId = Math.floor(Math.random() * numStudentImg);
+    this.studentLearningImg = `/images/virtual_student/${
+      this.genderStudent
+    }/learning/student_${this.genderStudent}_${this.studentImgId}.png`;
+    this.studentBackpackImg = `/images/virtual_student/${
+      this.genderStudent
+    }/backpack/student_${this.genderStudent}_backpack_${this.studentImgId}.png`;
+  };
+
+  startNewGame = () => {
+    this.initializeConstructorVars();
+    this.setState({
+      hasBeenWelcomed: false,
+      hasChosenActivityType: false,
+      hasChosenActivity: "",
+      score: 200,
+      scoreDisplayed: "200",
+      view: "game_start",
+      test: {},
+      displayResultTest: false
+    });
+  };
 
   updateScore = (points: number) => {
     this.sessionRef.update({ score: this.state.score + points });
@@ -166,26 +204,6 @@ class App extends React.Component<PropsT, StateT> {
     }
   };
 
-  startNewGame = () => {
-    const { language } = this.state;
-    const fNameIdx = Math.random() * nameData[language].firstNames.length;
-    const lNameIdx = Math.random() * nameData[language].lastNames.length;
-    const firstName = nameData[language].firstNames[Math.floor(fNameIdx)];
-    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
-    this.studentName = `${firstName} ${lastName}`;
-    this.student = getVirtualStudent(this.studentName);
-    this.setState({
-      hasBeenWelcomed: false,
-      hasChosenActivityType: false,
-      hasChosenActivity: "",
-      score: 200,
-      scoreDisplayed: "200",
-      view: "game_start",
-      test: {},
-      displayResultTest: false
-    });
-  };
-
   recordNewSession = (userId: string) => {
     const sessionId = firebase
       .database()
@@ -215,8 +233,7 @@ class App extends React.Component<PropsT, StateT> {
               this.recordNewSession(userId);
               const dbRef = firebase.database().ref(`/users/${userId}/`);
               dbRef.once("value").then(snapshot => {
-                const genderTeacherMale = snapshot.val().gender === "male";
-                this.setState({ genderTeacherMale });
+                this.genderTeacherMale = snapshot.val().gender === "male";
               });
             }
           }}
@@ -229,8 +246,7 @@ class App extends React.Component<PropsT, StateT> {
             this.recordNewSession(newUserId);
             const dbRef = firebase.database().ref(`/users/${newUserId}/`);
             dbRef.once("value").then(snapshot => {
-              const genderTeacherMale = snapshot.val().gender === "male";
-              this.setState({ genderTeacherMale });
+              this.genderTeacherMale = snapshot.val().gender === "male";
             });
             this.setState({ isRegistered: true, view: "game_start" });
           }}
@@ -249,6 +265,7 @@ class App extends React.Component<PropsT, StateT> {
             }
           }}
           studentName={this.studentName}
+          studentImg={this.studentBackpackImg}
         />
       );
     } else if (view === "leaderboard") {
@@ -261,7 +278,7 @@ class App extends React.Component<PropsT, StateT> {
           studentName={this.studentName}
           sessionRef={this.sessionRef}
           student={this.student}
-          genderTeacherMale={this.state.genderTeacherMale}
+          genderTeacherMale={this.genderTeacherMale}
         />
       );
     } else if (view === "training") {
@@ -314,7 +331,8 @@ class App extends React.Component<PropsT, StateT> {
               updateScore={() => this.updateScore(scoreCost.example)}
               student={this.student}
               sessionRef={this.sessionRef}
-              genderTeacherMale={this.state.genderTeacherMale}
+              genderTeacherMale={this.genderTeacherMale}
+              studentImg={this.studentLearningImg}
             />
           );
         } else if (hasChosenActivity === "exercise") {
@@ -326,7 +344,8 @@ class App extends React.Component<PropsT, StateT> {
               updateScore={() => this.updateScore(scoreCost.exercise)}
               student={this.student}
               sessionRef={this.sessionRef}
-              genderTeacherMale={this.state.genderTeacherMale}
+              genderTeacherMale={this.genderTeacherMale}
+              studentImg={this.studentLearningImg}
             />
           );
         } else if (hasChosenActivity === "lesson") {
@@ -338,6 +357,7 @@ class App extends React.Component<PropsT, StateT> {
               updateScore={() => this.updateScore(scoreCost.lesson)}
               student={this.student}
               sessionRef={this.sessionRef}
+              studentImg={this.studentLearningImg}
             />
           );
         } else if (hasChosenActivity === "test") {
@@ -360,6 +380,7 @@ class App extends React.Component<PropsT, StateT> {
               hasSeenQuestionsTest={() =>
                 this.setState({ displayResultTest: true })
               }
+              studentImg={this.studentLearningImg}
             />
           );
         }

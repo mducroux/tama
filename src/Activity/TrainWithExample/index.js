@@ -46,6 +46,7 @@ class TrainWithExample extends React.Component {
         student={this.props.student}
         recordExampleActivity={this.recordExampleActivity}
         genderTeacherMale={this.props.genderTeacherMale}
+        studentImg={this.props.studentImg}
       />
     );
   }
@@ -56,7 +57,8 @@ TrainWithExample.propTypes = {
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired,
-  genderTeacherMale: PropTypes.bool.isRequired
+  genderTeacherMale: PropTypes.bool.isRequired,
+  studentImg: PropTypes.string.isRequired
 };
 
 export default TrainWithExample;
