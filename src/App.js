@@ -115,7 +115,7 @@ class App extends React.Component<PropsT, StateT> {
   }
 
   initializeConstructorVars = () => {
-    this.genderTeacherMale = false;
+    this.genderTeacherMale = !!this.genderTeacherMale;
 
     this.genderStudent = Math.random() > 0.5 ? "male" : "female";
     const { language } = this.state;
