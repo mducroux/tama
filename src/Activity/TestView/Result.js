@@ -83,7 +83,6 @@ type PropsT = {
   questions: Object[],
   answers: Array<boolean>,
   startNewGame: void => void,
-  gridScores: Array<number>,
   indexScore: number
 };
 
@@ -237,10 +236,7 @@ class Result extends React.Component<PropsT, StateT> {
           className={classes.testScoreBar}
         >
           <Grid item sm={11}>
-            <TestScoreBar
-              completed={this.state.grade}
-              gridScores={this.props.gridScores}
-            />
+            <TestScoreBar completed={this.state.grade} />
           </Grid>
         </Grid>
         <Grid
