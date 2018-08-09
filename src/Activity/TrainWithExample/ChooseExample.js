@@ -38,7 +38,7 @@ const styles = theme => ({
   }
 });
 
-const ChooseExamples = ({
+const ChooseExample = ({
   onNavigationBackToMenu,
   onSelectExample,
   classes
@@ -54,7 +54,7 @@ const ChooseExamples = ({
       </IconButton>
       <Typography variant="headline" className={classes.title}>
         <FormattedMessage
-          id="chooseExamples.statement"
+          id="chooseExample.statement"
           defaultMessage="Choose a shape to show"
         />
       </Typography>
@@ -70,10 +70,10 @@ const ChooseExamples = ({
   </div>
 );
 
-ChooseExamples.propTypes = {
+ChooseExample.propTypes = {
   classes: PropTypes.object.isRequired,
   onSelectExample: PropTypes.func.isRequired,
   onNavigationBackToMenu: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ChooseExamples);
+export default withStyles(styles)(ChooseExample);

@@ -20,7 +20,7 @@ const styles = {
   }
 };
 
-class ShowExamples extends React.Component {
+class ShowExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = { thinking: false };
@@ -85,13 +85,13 @@ class ShowExamples extends React.Component {
                 onClickBubble={this.handleClick}
                 positiveAnswer={
                   <FormattedMessage
-                    id="showExamples.positiveAnswer"
+                    id="showExample.positiveAnswer"
                     defaultMessage="Yes"
                   />
                 }
                 negativeAnswer={
                   <FormattedMessage
-                    id="showExamples.negativeAnswer"
+                    id="showExample.negativeAnswer"
                     defaultMessage="No"
                   />
                 }
@@ -105,7 +105,7 @@ class ShowExamples extends React.Component {
   }
 }
 
-ShowExamples.propTypes = {
+ShowExample.propTypes = {
   classes: PropTypes.object.isRequired,
   parallelogram: PropTypes.object.isRequired,
   getBackToMenu: PropTypes.func.isRequired,
@@ -114,4 +114,4 @@ ShowExamples.propTypes = {
   recordExampleActivity: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ShowExamples);
+export default withStyles(styles)(ShowExample);

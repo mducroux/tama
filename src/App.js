@@ -12,7 +12,7 @@ import localeFr from "react-intl/locale-data/fr";
 import firebase from "./firebase";
 import RegistrationForm from "./RegistrationForm";
 import ChooseActivity from "./Activity/ChooseActivity";
-import TrainWithExamples from "./Activity/TrainWithExamples";
+import TrainWithExample from "./Activity/TrainWithExample";
 import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
 import TestStudent from "./Activity/TestStudent";
@@ -306,7 +306,7 @@ class App extends React.Component<PropsT, StateT> {
       } else if (this.state.hasChosenActivityType) {
         if (this.state.hasChosenActivity === "example") {
           displayed = (
-            <TrainWithExamples
+            <TrainWithExample
               getBackToMenu={() =>
                 this.setState({ hasChosenActivityType: false })
               }
