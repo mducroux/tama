@@ -4,7 +4,9 @@ import { VirtualStudent } from "./types";
 import DumbStudent from "./DumbStudent";
 import GodStudent from "./GodStudent";
 import NoMemory from "./NoMemory";
-import QuickLearnerStudent from "./QuickLearnerStudent";
+import WeightModel from "./WeightModel";
+import FullMemory from './FullMemory'
+import FixedMemory from './FixedMemory'
 
 export const featureList = [
   "hasThreeEdges",
@@ -28,11 +30,12 @@ export const featureList = [
 const getVirtualStudent = (name: string): VirtualStudent => {
   let RandModel = DumbStudent;
   const studentModels = [
-    [DumbStudent, 0.1],
-    [GodStudent, 0.05],
-    [NoMemory, 0.45],
-    [QuickLearnerStudent, 0.4]
+    [WeightModel, 0.25]
+    [NoMemory, 0.25],
+    [FixedMemory, 0.25],
+    [FullMemory, 1],
   ];
+
   studentModels.reduce((x, [studentModel, p]) => {
     RandModel = x > 0 && x - p < 0 ? studentModel : RandModel;
     return x - p;

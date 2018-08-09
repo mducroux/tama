@@ -2,11 +2,11 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import ChooseExamples from "./ChooseExamples";
-import ShowExamples from "./ShowExamples";
+import ChooseExample from "./ChooseExample";
+import ShowExample from "./ShowExample";
 import parallelogramData from "../ParallelogramData";
 
-class TrainWithExamples extends React.Component {
+class TrainWithExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +35,7 @@ class TrainWithExamples extends React.Component {
   render() {
     if (!this.state.hasChosenExample) {
       return (
-        <ChooseExamples
+        <ChooseExample
           onSelectExample={this.handleSelectExample}
           onNavigationBackToMenu={this.props.getBackToMenu}
         />
@@ -43,7 +43,7 @@ class TrainWithExamples extends React.Component {
     }
     const parallelogram = parallelogramData[this.state.index]
     return (
-      <ShowExamples
+      <ShowExample
         parallelogram={parallelogram}
         getBackToMenu={this.props.getBackToMenu}
         updateScore={this.props.updateScore}
@@ -54,11 +54,11 @@ class TrainWithExamples extends React.Component {
   }
 }
 
-TrainWithExamples.propTypes = {
+TrainWithExample.propTypes = {
   getBackToMenu: PropTypes.func.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired
 };
 
-export default TrainWithExamples;
+export default TrainWithExample;

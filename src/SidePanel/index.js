@@ -19,7 +19,7 @@ import SchoolIcon from "@material-ui/icons/School";
 import HistoryIcon from "@material-ui/icons/Timeline";
 import StatisticsIcon from "@material-ui/icons/InsertChart";
 import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
-import SettingsIcon from "@material-ui/icons/Settings";
+import LanguageIcon from "@material-ui/icons/Language";
 import RulesIcon from "@material-ui/icons/Assignment";
 import NewGameIcon from "@material-ui/icons/Refresh";
 
@@ -160,10 +160,10 @@ class SidePanel extends React.Component<PropsT, StateT> {
 
     const tertiaryMenuListItems = (
       <LI
-        Icon={SettingsIcon}
+        Icon={LanguageIcon}
         onClick={() => this.setState({ openSettingsDialog: true })}
         id="settings"
-        title="Settings"
+        title="Language"
       />
     );
 

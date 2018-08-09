@@ -278,7 +278,7 @@
                         <definition_loaded>true</definition_loaded>
                         <description></description>
                         <comment></comment>
-                        <default_text>Show examples</default_text>
+                        <default_text>Show an example</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -310,7 +310,7 @@
                 </children>
             </folder_node>
             <folder_node>
-                <name>chooseExamples</name>
+                <name>chooseExample</name>
                 <children>
                     <concept_node>
                         <name>statement</name>
@@ -1380,7 +1380,7 @@
                 </children>
             </folder_node>
             <folder_node>
-                <name>showExamples</name>
+                <name>showExample</name>
                 <children>
                     <concept_node>
                         <name>indexExample</name>

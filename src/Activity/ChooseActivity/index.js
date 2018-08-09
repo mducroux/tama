@@ -83,7 +83,7 @@ const images = [
     title: (
       <FormattedMessage
         id="chooseActivity.showExample"
-        defaultMessage="Show examples"
+        defaultMessage="Show an example"
       />
     ),
     learningCost: "10"
