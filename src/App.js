@@ -213,7 +213,7 @@ class App extends React.Component<PropsT, StateT> {
             this.setState({ view: v });
             if (this.state.isRegistered && userId) {
               this.recordNewSession(userId);
-              const dbRef = firebase.database().ref(`/users/${newUserId}/`);
+              const dbRef = firebase.database().ref(`/users/${userId}/`);
               dbRef.once("value").then(snapshot => {
                 const genderTeacherMale = snapshot.val().gender === "male";
                 this.setState({ genderTeacherMale });

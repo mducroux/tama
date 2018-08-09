@@ -17,18 +17,19 @@ const styles = () => ({
   },
   logo: {
     width: "auto",
-    height: "20%",
-    margin: "5%"
+    height: "15%",
+    margin: "20px"
   },
   title: {
-    margin: "5%"
+    margin: "20px"
   },
   text: {
     width: "500px",
-    maxWidth: "100%"
+    maxWidth: "100%",
+    margin: "20px"
   },
   button: {
-    marginTop: "10%"
+    margin: "20px"
   }
 });
 
