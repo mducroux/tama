@@ -165,27 +165,12 @@ class App extends React.Component<PropsT, StateT> {
   };
 
   startNewGame = () => {
-    this.studentName = `${
-      nameData[this.state.language].firstNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].firstNames.length
-        )
-      ]
-    } ${
-      nameData[this.state.language].lastNames[
-        Math.floor(
-          Math.random() *
-            nameData[
-              localStorage.getItem("lang") ||
-                navigator.language.split(/[-_]/)[0]
-            ].lastNames.length
-        )
-      ]
-    }`;
+    const { language } = this.state;
+    const fNameIdx = Math.random() * nameData[language].firstNames.length;
+    const lNameIdx = Math.random() * nameData[language].lastNames.length;
+    const firstName = nameData[language].firstNames[Math.floor(fNameIdx)];
+    const lastName = nameData[language].lastNames[Math.floor(lNameIdx)];
+    this.studentName = `${firstName} ${lastName}`;
     this.student = getVirtualStudent(this.studentName);
     this.setState({
       hasBeenWelcomed: false,
