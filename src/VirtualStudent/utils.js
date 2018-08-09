@@ -30,7 +30,7 @@ export const featureList = [
 const getVirtualStudent = (name: string): VirtualStudent => {
   let RandModel = DumbStudent;
   const studentModels = [
-    [WeightModel, 0.25]
+    [WeightModel, 0.25],
     [NoMemory, 0.25],
     [FixedMemory, 0.25],
     [FullMemory, 1],
