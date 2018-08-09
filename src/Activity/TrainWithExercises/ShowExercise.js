@@ -118,7 +118,11 @@ class ShowExercise extends React.Component {
               className={classes.group}
             >
               {this.state.thinking ? (
-                <Teacher onClickBubble={this.handleClick} waitingForStudent />
+                <Teacher
+                  onClickBubble={this.handleClick}
+                  waitingForStudent
+                  genderTeacherMale={this.props.genderTeacherMale}
+                />
               ) : (
                 <Teacher
                   onClickBubble={this.handleClick}
@@ -135,6 +139,7 @@ class ShowExercise extends React.Component {
                     />
                   }
                   waitingForStudent={false}
+                  genderTeacherMale={this.props.genderTeacherMale}
                 />
               )}
             </Grid>
@@ -151,7 +156,8 @@ ShowExercise.propTypes = {
   parallelogram: PropTypes.object.isRequired,
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
-  recordExerciseActivity: PropTypes.func.isRequired
+  recordExerciseActivity: PropTypes.func.isRequired,
+  genderTeacherMale: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(ShowExercise);

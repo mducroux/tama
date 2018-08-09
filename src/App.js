@@ -71,7 +71,8 @@ type StateT = {
   test: Object,
   alreadyShownRules: boolean,
   openSnackbar: boolean,
-  displayResultTest: boolean
+  displayResultTest: boolean,
+  genderTeacherMale: boolean
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -97,7 +98,8 @@ class App extends React.Component<PropsT, StateT> {
       test: {},
       alreadyShownRules: false,
       openSnackbar: false,
-      displayResultTest: false
+      displayResultTest: false,
+      genderTeacherMale: false
     };
     const fNameIdx = Math.random() * nameData[language].firstNames.length;
     const lNameIdx = Math.random() * nameData[language].lastNames.length;
@@ -209,6 +211,14 @@ class App extends React.Component<PropsT, StateT> {
           onClickStart={() => {
             const v = isRegistered ? "game_start" : "registration_form";
             this.setState({ view: v });
+            if (this.state.isRegistered && userId) {
+              this.recordNewSession(userId);
+              const dbRef = firebase.database().ref(`/users/${newUserId}/`);
+              dbRef.once("value").then(snapshot => {
+                const genderTeacherMale = snapshot.val().gender === "male";
+                this.setState({ genderTeacherMale });
+              });
+            }
           }}
         />
       );
@@ -217,6 +227,11 @@ class App extends React.Component<PropsT, StateT> {
         <RegistrationForm
           onSubmit={newUserId => {
             this.recordNewSession(newUserId);
+            const dbRef = firebase.database().ref(`/users/${newUserId}/`);
+            dbRef.once("value").then(snapshot => {
+              const genderTeacherMale = snapshot.val().gender === "male";
+              this.setState({ genderTeacherMale });
+            });
             this.setState({ isRegistered: true, view: "game_start" });
           }}
         />
@@ -246,6 +261,7 @@ class App extends React.Component<PropsT, StateT> {
           studentName={this.studentName}
           sessionRef={this.sessionRef}
           student={this.student}
+          genderTeacherMale={this.state.genderTeacherMale}
         />
       );
     } else if (view === "training") {
@@ -298,6 +314,7 @@ class App extends React.Component<PropsT, StateT> {
               updateScore={() => this.updateScore(scoreCost.example)}
               student={this.student}
               sessionRef={this.sessionRef}
+              genderTeacherMale={this.state.genderTeacherMale}
             />
           );
         } else if (hasChosenActivity === "exercise") {
@@ -309,6 +326,7 @@ class App extends React.Component<PropsT, StateT> {
               updateScore={() => this.updateScore(scoreCost.exercise)}
               student={this.student}
               sessionRef={this.sessionRef}
+              genderTeacherMale={this.state.genderTeacherMale}
             />
           );
         } else if (hasChosenActivity === "lesson") {
