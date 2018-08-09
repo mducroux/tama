@@ -41,7 +41,7 @@
   "leaderboard.rank": "Rank",
   "leaderboard.score": "Score",
   "lesson.item1": "A parallelogram is a quadrilateral",
-  "lesson.item2": "A parallelogram has both pairs of opposite sides parallel",
+  "lesson.item2": "A parallelogram has pairs of opposite sides parallel",
   "lesson.item3": "The opposite sides of a parallelogram are of equal length",
   "lesson.item4":
     "A parallelogram doesn't necessarily have all its sides equal",
@@ -80,7 +80,7 @@
   "registrationForm.username": "Your pseudo *",
   "rulesDialog.button": "Got it!",
   "rulesDialog.content":
-    "<br> Your goal is to teach your student what a prallelogram is. For this, you can choose between several activities: <br><br> - Choose an example: you select a shape among the proposed one in order to show your student what a parallelogram is or isn't. <br><br> - Give an exercise: you select a shape to give to your student as an exercise. <br><br> - Give a lesson: you compose your own lesson to give to your student. <br><br> Each of these activities costs you points (indicated below the activities). You can choose an activity provided that you have enough point for this. Once you think your student knows what a parallelogram is or you no longer have points to spend, you can make your student take the final test and you'll receive your final score. <br><br> Good luck!",
+    "<br> Your goal is to teach your student what a prallelogram is. For this, you can choose between several activities: <br><br> - Show an example: Select a shape, then tell your student if it is or not a parallelogram<br><br> - Give an exercise: Select a shape, your student has to guess if it is or not a parallelogram, then tell your student the correct answer. <br><br> - Give a lesson: explain one rule describing properties of parallelograms. <br><br> Each of these activities costs you points (indicated below the activities). You can choose an activity provided that you have enough point for this. Once you think your student knows what a parallelogram is or you no longer have points to spend, you can make your student take the final test and you'll receive your final score. <br><br> Good luck!",
   "rulesDialog.title": "Welcome to Tama!",
   "sessionHistory.grade": "Grade: {grade} / {maxGrade}",
   "sessionHistory.startGame": "Start of the game",
