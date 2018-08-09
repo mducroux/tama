@@ -8,8 +8,6 @@ class QuickLearnerStudent implements VirtualStudent {
   name: string;
   state: Object;
 
-  // A weight > 0 correspond to a necessary condition
-  // Each subarray is a disjonction of conditions
   knowledgeParallelogram = [
     [
       ["hasThreeEdges", 0],
@@ -93,54 +91,57 @@ class QuickLearnerStudent implements VirtualStudent {
     this.name = name;
   }
 
-  // At least one necessary feature (> 0) in each subarray should correspond should correspond to identify the shape as a parallelogram
   answerParallelogram(shapeFeatures: ShapeFeatures) {
-    let trigger = false;
-    const res = this.knowledgeParallelogram.reduce((acc, feature) => {
-      trigger = false;
-      return (
-        acc &&
-        feature.reduce((acc2, [subfeature, weight]) => {
-          if (weight > 0) {
-            if (trigger) {
-              return shapeFeatures[subfeature] || acc2;
-            }
-            trigger = true;
-            return shapeFeatures[subfeature];
-          }
-          return acc2;
-        }, true)
-      );
-    }, true);
-    return res;
+    const res = this.knowledgeParallelogram.reduce(
+      (acc, feature) =>
+        acc +
+        feature.reduce(
+          (acc2, [subfeature, weight]) =>
+            acc2 + (shapeFeatures[subfeature] ? weight : -weight),
+          0
+        ),
+      0
+    );
+    console.log(res);
+    return res > 0;
   }
 
   learn(isParallelogram: boolean, shapeFeatures: ShapeFeatures) {
     if (!isParallelogram) {
-      this.knowledgeParallelogram.forEach(features => {
-        features.forEach(subfeature => {
-          subfeature[1] += !shapeFeatures[subfeature[0]] ? 0.1 : -0.1;
+      this.knowledgeParallelogram.forEach(feature => {
+        feature.forEach(subfeature => {
+          subfeature[1] +=
+            Math.abs(subfeature[1]) !== 1 &&
+            (!shapeFeatures[subfeature[0]]
+              ? 0.1 / feature.length // minimize importance of long subarrays
+              : -0.1 / feature.length);
         });
       });
     }
     if (isParallelogram) {
-      this.knowledgeParallelogram.forEach(features => {
-        features.forEach(subfeature => {
-          subfeature[1] += shapeFeatures[subfeature[0]] ? 0.1 : -0.1;
+      this.knowledgeParallelogram.forEach(feature => {
+        feature.forEach(subfeature => {
+          subfeature[1] +=
+            Math.abs(subfeature[1]) !== 1 &&
+            (shapeFeatures[subfeature[0]]
+              ? 0.1 / feature.length // minimize importance of long subarrays
+              : -0.1 / feature.length);
         });
       });
     }
+    console.log(this.getState());
   }
 
   // The lesson is the truth (weight of 1 or -1)
   learnLesson(shapeFeatures: ShapeFeatures) {
-    this.knowledgeParallelogram.forEach(features => {
-      features.forEach(subfeature => {
+    this.knowledgeParallelogram.forEach(feature => {
+      feature.forEach(subfeature => {
         if (Object.keys(shapeFeatures).includes(subfeature[0])) {
           subfeature[1] = shapeFeatures[subfeature[0]] ? 1 : -1;
         }
       });
     });
+    console.log(this.getState());
   }
 
   // check if there is a feature he didn't know it was necessary or not
