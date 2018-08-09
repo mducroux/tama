@@ -70,7 +70,8 @@ type StateT = {
   language: string,
   test: Object,
   alreadyShownRules: boolean,
-  openSnackbar: boolean
+  openSnackbar: boolean,
+  displayResultTest: boolean
 };
 
 class App extends React.Component<PropsT, StateT> {
@@ -94,7 +95,8 @@ class App extends React.Component<PropsT, StateT> {
         localStorage.getItem("lang") || navigator.language.split(/[-_]/)[0],
       test: {},
       alreadyShownRules: false,
-      openSnackbar: false
+      openSnackbar: false,
+      displayResultTest: false
     };
     this.studentName = `${
       nameData[this.state.language].firstNames[
@@ -206,8 +208,9 @@ class App extends React.Component<PropsT, StateT> {
       hasChosenActivity: "",
       score: 200,
       scoreDisplayed: "200",
-      view: "gamestart",
-      test: {}
+      view: "start_game",
+      test: {},
+      displayResultTest: false
     });
   };
 
@@ -358,6 +361,10 @@ class App extends React.Component<PropsT, StateT> {
                   scoreDisplayed: String(this.finalScore)
                 })
               }
+              displayResultTest={this.state.displayResultTest}
+              hasSeenQuestionsTest={() =>
+                this.setState({ displayResultTest: true })
+              }
             />
           );
         }
@@ -372,7 +379,7 @@ class App extends React.Component<PropsT, StateT> {
           <AppDrawer
             hasBeenWelcomed={this.state.hasBeenWelcomed}
             isRegistered={this.state.isRegistered}
-            onLeaveSession={this.startNewGame}
+            startNewGame={this.startNewGame}
             onUnregister={() => {
               this.startNewGame();
               localStorage.removeItem("user_id");
@@ -384,6 +391,7 @@ class App extends React.Component<PropsT, StateT> {
             }}
             scoreDisplayed={this.state.scoreDisplayed}
             changeView={view => this.setState({ view })}
+            testStarted={this.state.hasChosenActivity === "test"}
             mainContent={displayed}
             changeLanguage={language => {
               localStorage.setItem("lang", language);

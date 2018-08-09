@@ -13,11 +13,12 @@ type PropsT = {
   studentName: string,
   test: Object,
   gridScores: Array<number>,
-  updateScore: void => void
+  updateScore: void => void,
+  displayResultTest: boolean,
+  hasSeenQuestionsTest: void => void
 };
 
 type StateT = {
-  tookTest: boolean,
   indexScore: number
 };
 
@@ -28,17 +29,16 @@ class TestStudent extends React.Component<PropsT, StateT> {
   constructor(props: PropsT) {
     super(props);
     this.state = {
-      tookTest: false,
       indexScore: 0
     };
   }
 
   render() {
-    if (!this.state.tookTest) {
+    if (!this.props.displayResultTest) {
       return (
         <ShowQuestions
           {...this.props.test}
-          displayResultTest={() => this.setState({ tookTest: true })}
+          displayResultTest={() => this.props.hasSeenQuestionsTest()}
           student={this.props.student}
           gridScores={this.props.gridScores}
           indexScore={this.state.indexScore}

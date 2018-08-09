@@ -2,7 +2,6 @@
 
 import { VirtualStudent } from "./types";
 import DumbStudent from "./DumbStudent";
-import GodStudent from "./GodStudent";
 import NoMemory from "./NoMemory";
 import WeightModel from "./WeightModel";
 import FullMemory from './FullMemory'

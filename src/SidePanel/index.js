@@ -1,8 +1,9 @@
 // @flow
+
 import * as React from "react";
+import { FormattedMessage } from "react-intl";
 
 import Drawer from "@material-ui/core/Drawer";
-import { FormattedMessage } from "react-intl";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -10,17 +11,17 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Divider from "@material-ui/core/Divider";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+
 import SchoolIcon from "@material-ui/icons/School";
 import HistoryIcon from "@material-ui/icons/Timeline";
 import StatisticsIcon from "@material-ui/icons/InsertChart";
 import LeaderboardIcon from "@material-ui/icons/FormatListNumbered";
-// import UnregisterIcon from "@material-ui/icons/ExitToApp";
-import LeaveSessionIcon from "@material-ui/icons/BeachAccess";
 import LanguageIcon from "@material-ui/icons/Language";
 import RulesIcon from "@material-ui/icons/Assignment";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import NewGameIcon from "@material-ui/icons/Refresh";
 
 import SettingsDialog from "./SettingsDialog";
 import RulesDialog from "./RulesDialog";
@@ -32,10 +33,11 @@ type PropsT = {
   changeLanguage: string => void,
   theme: Object,
   classes: Object,
-  // onUnregister: void => void,
-  onLeaveSession: void => void,
   handleSidePanelClose: void => void,
-  hasBeenWelcomed: boolean
+  hasBeenWelcomed: boolean,
+  isRegistered: boolean,
+  testStarted: boolean,
+  startNewGame: Function
 };
 
 type StateT = {
@@ -86,10 +88,6 @@ const LI = ({
 );
 
 class SidePanel extends React.Component<PropsT, StateT> {
-  mainMenuListItems: React.Element<*>;
-  secondaryMenuListItems: React.Element<*>;
-  tertiaryMenuListItems: React.Element<*>;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -99,17 +97,25 @@ class SidePanel extends React.Component<PropsT, StateT> {
   }
 
   render() {
-    this.mainMenuListItems = (
-      <div>
-        {this.props.hasBeenWelcomed && (
+    const {
+      isRegistered,
+      hasBeenWelcomed,
+      testStarted,
+      startNewGame,
+      handleSidePanelClose
+    } = this.props;
+    const isPlaying = hasBeenWelcomed;
+    const mainMenuListItems = (
+      <React.Fragment>
+        {isPlaying && (
           <LI
             Icon={SchoolIcon}
             onClick={() => this.props.changeView("training")}
-            id="training"
-            title="Training"
+            id={testStarted ? "testresult" : "training"}
+            title={testStarted ? "See results" : "Teaching"}
           />
         )}
-        {!this.props.hasBeenWelcomed && (
+        {!isPlaying && (
           <LI
             Icon={SchoolIcon}
             onClick={() => this.props.changeView("start_game")}
@@ -117,7 +123,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
             title="Start game"
           />
         )}
-        {this.props.hasBeenWelcomed && (
+        {isPlaying && (
           <LI
             Icon={HistoryIcon}
             onClick={() => this.props.changeView("history")}
@@ -131,11 +137,11 @@ class SidePanel extends React.Component<PropsT, StateT> {
           id="rules"
           title="Rules"
         />
-      </div>
+      </React.Fragment>
     );
 
-    this.secondaryMenuListItems = (
-      <div>
+    const secondaryMenuListItems = (
+      <React.Fragment>
         <LI
           Icon={StatisticsIcon}
           onClick={() => this.props.changeView("stats")}
@@ -148,42 +154,34 @@ class SidePanel extends React.Component<PropsT, StateT> {
           id="leaderboard"
           title="Leaderboard"
         />
-      </div>
+      </React.Fragment>
     );
 
-    this.tertiaryMenuListItems = (
-      <div>
-        {this.props.hasBeenWelcomed && (
+    const tertiaryMenuListItems = (
+      <React.Fragment>
+        {testStarted && (
           <LI
-            Icon={LeaveSessionIcon}
+            Icon={NewGameIcon}
             onClick={() => {
-              this.props.onLeaveSession();
-              this.props.handleSidePanelClose();
+              handleSidePanelClose();
+              startNewGame();
             }}
-            id="leaveSession"
-            title="Leave session"
+            id="newgame"
+            title="New game"
           />
         )}
-        {/* <LI
-          Icon={UnregisterIcon}
-          onClick={() => {
-            this.props.onUnregister();
-            this.props.handleSidePanelClose();
-          }}
-          id="unregister"
-          title="Unregister"
-        /> */}
         <LI
           Icon={LanguageIcon}
           onClick={() => this.setState({ openSettingsDialog: true })}
           id="settings"
-          title="Settings"
+          title="Language"
         />
-      </div>
+      </React.Fragment>
     );
+
     const { classes, theme } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <Drawer
           variant="persistent"
           anchor="left"
@@ -192,24 +190,26 @@ class SidePanel extends React.Component<PropsT, StateT> {
             paper: classes.sidePanelPaper
           }}
         >
-          <div className={classes.sidePanelHeader}>
-            <Typography variant="title" className={classes.studentName}>
-              {this.props.studentName}
-            </Typography>
-            <IconButton onClick={this.props.handleSidePanelClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                  <ChevronLeftIcon />
-                )}
-            </IconButton>
-          </div>
-          <Divider />
-          <List>{this.mainMenuListItems}</List>
-          <Divider />
-          <List>{this.secondaryMenuListItems}</List>
-          <Divider />
-          <List>{this.tertiaryMenuListItems}</List>
+          <List>
+            <div className={classes.sidePanelHeader}>
+              <Typography variant="title" className={classes.studentName}>
+                {this.props.studentName}
+              </Typography>
+              <IconButton onClick={this.props.handleSidePanelClose}>
+                {theme.direction === "rtl" ? (
+                  <ChevronRightIcon />
+                ) : (
+                    <ChevronLeftIcon />
+                  )}
+              </IconButton>
+            </div>
+            <Divider />
+            {mainMenuListItems}
+            {isRegistered && <Divider />}
+            {isRegistered && secondaryMenuListItems}
+            <Divider />
+            {tertiaryMenuListItems}
+          </List>
         </Drawer>
         <SettingsDialog
           openSettingsDialog={this.state.openSettingsDialog}
@@ -222,7 +222,7 @@ class SidePanel extends React.Component<PropsT, StateT> {
           openRulesDialog={this.state.openRulesDialog}
           onCloseRulesDialog={() => this.setState({ openRulesDialog: false })}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
