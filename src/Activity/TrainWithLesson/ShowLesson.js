@@ -75,7 +75,7 @@ class ShowLesson extends React.Component<PropsT, StateT> {
           <Grid
             container
             justify="center"
-            alignItems="center"
+            alignItems="flex-end"
             className={classes.group}
           >
             <VirtualStudentComponent

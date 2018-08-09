@@ -23,7 +23,7 @@ const styles = () => ({
   },
   bubbleAnswer: {
     position: "relative",
-    left: "-20%",
+    left: "-30%",
     backgroundColor: "transparent",
     cursor: "pointer",
     overflow: "hidden",
@@ -161,7 +161,7 @@ class Teacher extends React.Component {
           </Grid>
         )}
         <Grid container justify="center" alignItems="flex-start">
-          <img src={this.teacherImage} width="323" height="300" alt="teacher" />
+          <img src={this.teacherImage} width="250" height="232" alt="teacher" />
         </Grid>
       </div>
     );

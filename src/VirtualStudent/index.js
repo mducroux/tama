@@ -33,7 +33,7 @@ const VirtualStudent = ({ classes, bubbleText, studentImg }) => (
       </div>
     </Grid>
     <Grid container justify="center">
-      <img src={studentImg} width="150" height="250" alt="virtual_student" />
+      <img src={studentImg} width="108" height="180" alt="virtual_student" />
     </Grid>
   </div>
 );
