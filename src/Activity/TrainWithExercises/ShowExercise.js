@@ -13,7 +13,7 @@ const styles = () => ({
     height: "100%"
   },
   group: {
-    height: "90%"
+    height: "100%"
   },
   shape: {
     marginTop: "5%"
@@ -90,7 +90,10 @@ class ShowExercise extends React.Component {
               alignItems="flex-end"
               className={classes.group}
             >
-              <VirtualStudent bubbleText={bubbleText} />
+              <VirtualStudent
+                bubbleText={bubbleText}
+                studentImg={this.props.studentImg}
+              />
             </Grid>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -157,7 +160,8 @@ ShowExercise.propTypes = {
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   recordExerciseActivity: PropTypes.func.isRequired,
-  genderTeacherMale: PropTypes.bool.isRequired
+  genderTeacherMale: PropTypes.bool.isRequired,
+  studentImg: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ShowExercise);

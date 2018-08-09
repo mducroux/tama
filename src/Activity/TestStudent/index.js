@@ -15,7 +15,8 @@ type PropsT = {
   gridScores: Array<number>,
   updateScore: void => void,
   displayResultTest: boolean,
-  hasSeenQuestionsTest: void => void
+  hasSeenQuestionsTest: void => void,
+  studentImg: string
 };
 
 type StateT = {
@@ -45,6 +46,7 @@ class TestStudent extends React.Component<PropsT, StateT> {
           incrementIndexScore={() =>
             this.setState({ indexScore: this.state.indexScore + 1 })
           }
+          studentImg={this.props.studentImg}
         />
       );
     }

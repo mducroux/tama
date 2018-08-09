@@ -91,7 +91,8 @@ const SessionHistory = ({
   history,
   studentName,
   student,
-  genderTeacherMale
+  genderTeacherMale,
+  studentAvatar
 }) => {
   const { activities, test } = history;
   const teacherAvatar = genderTeacherMale
@@ -157,7 +158,7 @@ const SessionHistory = ({
                       <Grid container alignItems="center" spacing={16}>
                         <Grid item>
                           <img
-                            src="images/virtual_student/student_avatar.png"
+                            src={studentAvatar}
                             alt="student-avatar"
                             width="40px"
                             height="40px"
@@ -228,7 +229,7 @@ const SessionHistory = ({
                       <Grid container alignItems="center" spacing={16}>
                         <Grid item>
                           <img
-                            src="images/virtual_student/student_avatar.png"
+                            src={studentAvatar}
                             alt="student-avatar"
                             width="40px"
                             height="40px"
@@ -285,7 +286,8 @@ SessionHistory.propTypes = {
   history: PropTypes.object.isRequired,
   studentName: PropTypes.string.isRequired,
   student: PropTypes.object.isRequired,
-  genderTeacherMale: PropTypes.bool.isRequired
+  genderTeacherMale: PropTypes.bool.isRequired,
+  studentAvatar: PropTypes.string.isRequired
 };
 
 export const StyledSessionHistory = withStyles(styles, { withTheme: true })(

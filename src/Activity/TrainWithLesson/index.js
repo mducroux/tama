@@ -48,6 +48,7 @@ class TrainWithLesson extends React.Component {
         updateScore={this.props.updateScore}
         student={this.props.student}
         recordLessonActivity={this.recordLessonActivity}
+        studentImg={this.props.studentImg}
       />
     );
   }
@@ -58,7 +59,8 @@ TrainWithLesson.propTypes = {
   updateScore: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
   sessionRef: PropTypes.object.isRequired,
-  intl: PropTypes.object.isRequired
+  intl: PropTypes.object.isRequired,
+  studentImg: PropTypes.string.isRequired
 };
 
 export default injectIntl(TrainWithLesson);
