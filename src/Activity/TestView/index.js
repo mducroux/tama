@@ -4,7 +4,9 @@ import React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import Grow from "@material-ui/core/Grow";
+import Slide from "@material-ui/core/Slide";
 
 import Cancel from "@material-ui/icons/Cancel";
 import CheckCircle from "@material-ui/icons/CheckCircle";
@@ -63,24 +65,65 @@ const styles = () => ({
     justifyContent: "space-evenly"
   },
   scoreBoard: {
-    height: "40%",
+    height: "30%",
     display: "flex",
     justifyContent: "center",
+    alignItems: "center"
+  },
+  scoreBoardPaper: {
+    height: "90%",
+    width: "90%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
     alignItems: "center"
   },
   shape: {
     height: "100%",
     width: "auto"
+  },
+  bottomButton: {
+    height: "10%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 
-const Avatar = ({ img, classes }) => (
+const Avatar = ({ img, classes }: any) => (
   <img src={img} alt="student" className={classes.studentImg} />
 );
 
-const ScoreBoard = ({ img, classes }) => "scoreboard";
+const ScoreBoard = ({ show, classes }: any) => (
+  <Paper className={classes.scoreBoardPaper}>
+    <Slide in={show > 12} direction="up">
+      <span>Starting Score: 200</span>
+    </Slide>
+    <Slide in={show > 13} direction="up">
+      <span>Teaching activities used: -170</span>
+    </Slide>
+    <Slide in={show > 14} direction="up">
+      <span>Grade bonus: 10.000</span>
+    </Slide>
+    <Slide in={show > 15} direction="up">
+      <span>Total Score: 10.030</span>
+    </Slide>
+  </Paper>
+);
 
-const LeaderboardPeek = ({ img, classes }) => "leaderboard";
+const LeaderboardPeek = ({ show, classes }: any) => (
+  <Paper className={classes.scoreBoardPaper}>
+    <Slide in={show > 17} direction="up">
+      <span>Daily score: 2000 => 2050</span>
+    </Slide>
+    <Slide in={show > 18} direction="up">
+      <span>Weekly score: 2000 => 2050</span>
+    </Slide>
+    <Slide in={show > 19} direction="up">
+      <span>All time score: 2000 => 2050</span>
+    </Slide>
+  </Paper>
+);
 
 const Answer = ({ src, isCorrect, show, classes }: any) => (
   <Grow in={show} timeout={400} direction="left">
@@ -142,10 +185,10 @@ class TestStudent extends React.Component<PropsT, StateT> {
     this.interval = setInterval(() => {
       const index = this.state.index + 1;
       this.setState({ index });
-      if (index > 10) {
+      if (index > 20) {
         clearInterval(this.interval);
       }
-    }, 750);
+    }, 500);
   }
 
   componentWillUnmount() {
@@ -157,9 +200,9 @@ class TestStudent extends React.Component<PropsT, StateT> {
     const { classes, test, studentImg } = this.props;
     const { index } = this.state;
 
-    const qs = test.questions.map(({ src, valid }, index) => ({
+    const qs = test.questions.map(({ src, valid }, idx) => ({
       src,
-      index,
+      index: idx,
       answer: test.answers[index],
       isCorrect: valid === test.answers[index]
     }));
@@ -181,18 +224,21 @@ class TestStudent extends React.Component<PropsT, StateT> {
           <Avatar classes={classes} img={studentImg} />
         </Grid>
         <Grid item xs={2} className={classes.bubbles}>
-          <div>I think these ARE correct</div>
-          <div>I think these are NOT correct</div>
+          <div>PARALLELOGRAMS:</div>
+          <div>NOT PARALLELOGRAMS:</div>
         </Grid>
         <Grid item xs={8} className={classes.studentAnswers}>
           <QuestionsList classes={classes} questions={qY} index={index} />
           <QuestionsList classes={classes} questions={qN} index={index} />
         </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
-          <ScoreBoard />
+          <ScoreBoard show={index} classes={classes} />
         </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
-          <LeaderboardPeek />
+          <LeaderboardPeek show={index} classes={classes} />
+        </Grid>
+        <Grid item xs={12} className={classes.bottomButton}>
+          BUTTON NEW GAME
         </Grid>
       </Grid>
     );

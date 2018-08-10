@@ -59,7 +59,8 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     backgroundColor: theme.palette.background.default,
-    overflow: "auto",
+    overflowY: "auto",
+    overflowX: "hidden",
     display: "flex",
     flexGrow: 1,
     flexDirection: "column"
@@ -98,11 +99,11 @@ type PropsT = {
   scoreDisplayed: string,
   changeLanguage: string => void,
   mainContent: any
-}
+};
 
 type StateT = {
   openSidePanel: boolean
-}
+};
 
 class AppDrawer extends React.Component<PropsT, StateT> {
   constructor(props) {
@@ -146,12 +147,12 @@ class AppDrawer extends React.Component<PropsT, StateT> {
                     defaultMessage="Welcome to Tama !"
                   />
                 ) : (
-                    <FormattedMessage
-                      id="appDrawer.welcomeCustomized"
-                      defaultMessage="Welcome {username} !"
-                      values={{ username: localStorage.getItem("username") }}
-                    />
-                  )}
+                  <FormattedMessage
+                    id="appDrawer.welcomeCustomized"
+                    defaultMessage="Welcome {username} !"
+                    values={{ username: localStorage.getItem("username") }}
+                  />
+                )}
               </Typography>
               {this.props.hasBeenWelcomed &&
                 this.props.isRegistered && (
