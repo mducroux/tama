@@ -35,6 +35,23 @@ const styles = () => ({
   }
 });
 
+const ExerciseList = ({ questions, answers }) => {
+  console.log(test);
+  return (
+    <div>
+      {questions.map(q => (
+        <img
+          key={q.src}
+          src={q.src}
+          alt="test question"
+          width="300"
+          height="300"
+        />
+      ))}
+    </div>
+  );
+};
+
 type PropsT = {
   startNewGame: () => void,
   student: Object,
@@ -61,12 +78,15 @@ class TestStudent extends React.Component<PropsT, StateT> {
 
   render() {
     console.log(this.props);
-    const { classes } = this.props;
+    const { classes, test } = this.props;
     return (
       <div className={classes.root}>
         <Grid container justify="center" alignItems="center">
           <Grid item xs={12}>
             <TestScoreBar completed={this.state.indexScore} />
+          </Grid>
+          <Grid item xs={12}>
+            <ExerciseList {...test} />
           </Grid>
         </Grid>
       </div>

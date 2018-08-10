@@ -49,7 +49,8 @@ type PropsT = {
   answers: boolean[],
   student: any,
   indexScore: number,
-  incrementIndexScore: void => void
+  incrementIndexScore: void => void,
+  studentImg: string
 };
 
 class ShowQuestions extends React.Component<PropsT, StateT> {
@@ -132,7 +133,10 @@ class ShowQuestions extends React.Component<PropsT, StateT> {
               alignItems="center"
               className={classes.student}
             >
-              <VirtualStudent bubbleText={bubbleText} />
+              <VirtualStudent
+                bubbleText={bubbleText}
+                studentImg={this.props.studentImg}
+              />
             </Grid>
           </Grid>
           <Grid item xs={12} sm={6}>

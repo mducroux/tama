@@ -19,7 +19,7 @@ const styles = () => ({
   }
 });
 
-const VirtualStudent = ({ classes, bubbleText }) => (
+const VirtualStudent = ({ classes, bubbleText, studentImg }) => (
   <div>
     <Grid container justify="center">
       <div className={classes.bubbleItem}>
@@ -33,19 +33,15 @@ const VirtualStudent = ({ classes, bubbleText }) => (
       </div>
     </Grid>
     <Grid container justify="center">
-      <img
-        src="images/virtual_student/student.png"
-        width="180"
-        height="180"
-        alt="virtual_student"
-      />
+      <img src={studentImg} width="108" height="180" alt="virtual_student" />
     </Grid>
   </div>
 );
 
 VirtualStudent.propTypes = {
   classes: PropTypes.object.isRequired,
-  bubbleText: PropTypes.object.isRequired
+  bubbleText: PropTypes.object.isRequired,
+  studentImg: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(VirtualStudent);

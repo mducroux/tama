@@ -37,10 +37,16 @@ const styles = () => ({
 type PropsT = {
   classes: Object,
   onClickStart: void => void,
-  studentName: string
+  studentName: string,
+  studentImg: string
 };
 
-const WelcomeMenu = ({ classes, onClickStart, studentName }: PropsT) => (
+const WelcomeMenu = ({
+  classes,
+  onClickStart,
+  studentName,
+  studentImg
+}: PropsT) => (
   <div className={classes.welcome}>
     <Grid
       container
@@ -75,6 +81,7 @@ const WelcomeMenu = ({ classes, onClickStart, studentName }: PropsT) => (
             values={{ studentName }}
           />
         }
+        studentImg={studentImg}
       />
     </Grid>
     <Grid container justify="center" className={classes.root}>
