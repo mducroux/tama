@@ -81,17 +81,12 @@ const GameStart = ({
           <TeacherWelcome
             bubbleText={
               <FormattedMessage
-                id="gameStart.teacherPresentation"
-                defaultMessage={
-                  <FormattedMessage
-                    id="gameStart.teacherBubble"
-                    defaultMessage="Hello {studentName}! I'm {username}, your teacher!"
-                    values={{
-                      studentName: studentName.replace(/ .*/, ""),
-                      username: localStorage.getItem("username")
-                    }}
-                  />
-                }
+                id="gameStart.teacherBubble"
+                defaultMessage="Hello {studentName}! I'm {username}, your teacher!"
+                values={{
+                  studentName: studentName.replace(/ .*/, ""),
+                  username: localStorage.getItem("username")
+                }}
               />
             }
             genderTeacherMale={genderTeacherMale}

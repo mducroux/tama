@@ -7,11 +7,7 @@ const styles = () => ({
   bubble: {
     position: "relative",
     left: "-30%",
-    backgroundColor: "transparent",
-    cursor: "pointer",
-    overflow: "hidden",
-    outline: "none",
-    border: "none"
+    overflow: "hidden"
   },
   textImage: {
     position: "absolute",

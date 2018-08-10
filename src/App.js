@@ -327,6 +327,7 @@ class App extends React.Component<PropsT, StateT> {
             alreadyShownRules={this.state.alreadyShownRules}
             hasShownRules={() => this.setState({ alreadyShownRules: true })}
             studentImg={this.studentLearningImg}
+            genderTeacherMale={this.genderTeacherMale}
           />
         );
       } else if (this.state.hasChosenActivityType) {
