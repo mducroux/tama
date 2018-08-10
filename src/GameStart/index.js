@@ -85,7 +85,7 @@ const GameStart = ({
                 defaultMessage={
                   <FormattedMessage
                     id="gameStart.teacherBubble"
-                    defaultMessage="Hello {studentName}! I'm your teacher, {username}!"
+                    defaultMessage="Hello {studentName}! I'm {username}, your teacher!"
                     values={{
                       studentName: studentName.replace(/ .*/, ""),
                       username: localStorage.getItem("username")

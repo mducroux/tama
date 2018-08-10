@@ -26,7 +26,7 @@
   "gameStart.startTeaching": "Start teaching {studentName}",
   "gameStart.studentName": "Hello! My name is {studentName}!",
   "gameStart.teacherBubble":
-    "Hello {studentName}! I'm your teacher, {username}!",
+    "Hello {studentName}! I'm {username}, your teacher!",
   "godStudent.feedbackLessonAlreadyKnow": "I already know that (as always)",
   "godStudent.feedbackLessonDidntKnow":
     "Impossible, my designer can't be wrong !",
@@ -42,6 +42,7 @@
     "In this game you play the role of a teacher whose purpose is to teach the concept of parallelogram. Teach well so that your student gets the best possible grade!",
   "home.register": "Register to play",
   "home.startPlaying": "Meet my new student",
+  "home.title": "Welcome to the game of TAMA",
   "leaderboard.categoryAlltime": "All time",
   "leaderboard.categoryDaily": "Daily",
   "leaderboard.categoryWeekly": "Weekly",
