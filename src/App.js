@@ -324,6 +324,7 @@ class App extends React.Component<PropsT, StateT> {
             onConfirmTestDialog={this.runTest}
             alreadyShownRules={this.state.alreadyShownRules}
             hasShownRules={() => this.setState({ alreadyShownRules: true })}
+            studentImg={this.studentLearningImg}
           />
         );
       } else if (this.state.hasChosenActivityType) {

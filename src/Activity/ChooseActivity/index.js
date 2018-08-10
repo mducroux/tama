@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import TestConfirmationDialog from "./TestConfirmationDialog";
 import SessionTimeline from "./SessionTimeline";
 import RulesDialog from "../../SidePanel/RulesDialog";
+import VirtualStudent from "../../VirtualStudent";
 
 const styles = theme => ({
   root: {
@@ -164,65 +165,82 @@ class ChooseActivity extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container className={classes.activities} justify="center">
-          {images.map((image, index) => (
-            <Grid item xs={12} sm={4} key={image.url}>
-              <Grid container className={classes.group} justify="center">
-                <ButtonBase
-                  className={classes.button}
-                  focusVisibleClassName={classes.focusVisible}
-                  onClick={() => this.handleButtonClick(index)}
-                >
-                  <span
-                    className={classes.imageSrc}
-                    style={{
-                      backgroundImage: `url(${image.url})`
-                    }}
-                  />
-                  <span className={classes.imageBackdrop} />
-                  <span className={classes.textButton}>
-                    <Typography
-                      component="span"
-                      variant="title"
-                      color="inherit"
-                    >
-                      {image.title} <br /> <br />- {image.learningCost} points
-                    </Typography>
-                  </span>
-                </ButtonBase>
-              </Grid>
-            </Grid>
-          ))}
-        </Grid>
-        <Grid
-          container
-          className={classes.test}
-          justify="flex-end"
-          alignItems="center"
-        >
+        <Grid container>
           <Grid item xs={12} sm={4}>
-            <Grid container justify="center">
-              <ButtonBase
-                className={classes.button_test}
-                focusVisibleClassName={classes.focusVisible}
-                onClick={() => this.setState({ openTestDialog: true })}
-              >
-                <span
-                  className={classes.imageSrc}
-                  style={{
-                    backgroundImage: `url(${"images/medal_300x100.png"})`
-                  }}
-                />
-                <span className={classes.imageBackdrop} />
-                <span className={classes.textButton}>
-                  <Typography component="span" variant="title" color="inherit">
-                    <FormattedMessage
-                      id="chooseActivity.takeTest"
-                      defaultMessage="Take the test"
+            <Grid container justify="center" alignItems="flex-end">
+              <VirtualStudent
+                bubbleText="What do we do now ?"
+                studentImg={this.props.studentImg}
+              />
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid container className={classes.activities} justify="center">
+              {images.map((image, index) => (
+                <Grid item xs={12} sm={4} key={image.url}>
+                  <Grid container className={classes.group} justify="center">
+                    <ButtonBase
+                      className={classes.button}
+                      focusVisibleClassName={classes.focusVisible}
+                      onClick={() => this.handleButtonClick(index)}
+                    >
+                      <span
+                        className={classes.imageSrc}
+                        style={{
+                          backgroundImage: `url(${image.url})`
+                        }}
+                      />
+                      <span className={classes.imageBackdrop} />
+                      <span className={classes.textButton}>
+                        <Typography
+                          component="span"
+                          variant="title"
+                          color="inherit"
+                        >
+                          {image.title} <br /> <br />- {image.learningCost}{" "}
+                          points
+                        </Typography>
+                      </span>
+                    </ButtonBase>
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+            <Grid
+              container
+              className={classes.test}
+              justify="flex-end"
+              alignItems="center"
+            >
+              <Grid item xs={12} sm={4}>
+                <Grid container justify="center">
+                  <ButtonBase
+                    className={classes.button_test}
+                    focusVisibleClassName={classes.focusVisible}
+                    onClick={() => this.setState({ openTestDialog: true })}
+                  >
+                    <span
+                      className={classes.imageSrc}
+                      style={{
+                        backgroundImage: `url(${"images/medal_300x100.png"})`
+                      }}
                     />
-                  </Typography>
-                </span>
-              </ButtonBase>
+                    <span className={classes.imageBackdrop} />
+                    <span className={classes.textButton}>
+                      <Typography
+                        component="span"
+                        variant="title"
+                        color="inherit"
+                      >
+                        <FormattedMessage
+                          id="chooseActivity.takeTest"
+                          defaultMessage="Take the test"
+                        />
+                      </Typography>
+                    </span>
+                  </ButtonBase>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -248,7 +266,8 @@ ChooseActivity.propTypes = {
   onConfirmTestDialog: PropTypes.func.isRequired,
   sessionRef: PropTypes.object.isRequired,
   hasShownRules: PropTypes.func.isRequired,
-  alreadyShownRules: PropTypes.bool.isRequired
+  alreadyShownRules: PropTypes.bool.isRequired,
+  studentImg: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(ChooseActivity);
