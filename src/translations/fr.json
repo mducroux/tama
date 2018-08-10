@@ -24,7 +24,7 @@
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
-  "gameStart.startTeaching": "Apprendre à {studentName}",
+  "gameStart.startTeaching": "Enseigner {studentName}",
   "gameStart.studentName": "Bonjour ! Je m'appelle {studentName} !",
   "gameStart.teacherBubble":
     "Bonjour {studentName} ! Je suis {username}, ton professeur !",

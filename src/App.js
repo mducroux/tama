@@ -231,14 +231,15 @@ class App extends React.Component<PropsT, StateT> {
         <Home
           isRegistered={isRegistered}
           onClickStart={() => {
-            const v = isRegistered ? "game_start" : "registration_form";
-            this.setState({ view: v });
             if (this.state.isRegistered && userId) {
               this.recordNewSession(userId);
               const dbRef = firebase.database().ref(`/users/${userId}/`);
               dbRef.once("value").then(snapshot => {
                 this.genderTeacherMale = snapshot.val().gender === "male";
+                this.setState({ view: "game_start" });
               });
+            } else {
+              this.setState({ view: "registration_form" });
             }
           }}
         />
@@ -251,8 +252,8 @@ class App extends React.Component<PropsT, StateT> {
             const dbRef = firebase.database().ref(`/users/${newUserId}/`);
             dbRef.once("value").then(snapshot => {
               this.genderTeacherMale = snapshot.val().gender === "male";
+              this.setState({ isRegistered: true, view: "game_start" });
             });
-            this.setState({ isRegistered: true, view: "game_start" });
           }}
         />
       );
