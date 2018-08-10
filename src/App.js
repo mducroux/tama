@@ -270,6 +270,7 @@ class App extends React.Component<PropsT, StateT> {
           }}
           studentName={this.studentName}
           studentImg={this.studentBackpackImg}
+          genderTeacherMale={this.genderTeacherMale}
         />
       );
     } else if (view === "leaderboard") {
