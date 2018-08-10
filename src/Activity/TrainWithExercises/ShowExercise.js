@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
 import VirtualStudent from "../../VirtualStudent";
-import Teacher from "../../Teacher";
+import TeacherTeaching from "../../Teacher/TeacherTeaching";
 
 const styles = () => ({
   root: {
@@ -121,13 +121,13 @@ class ShowExercise extends React.Component {
               className={classes.group}
             >
               {this.state.thinking ? (
-                <Teacher
+                <TeacherTeaching
                   onClickBubble={this.handleClick}
                   waitingForStudent
                   genderTeacherMale={this.props.genderTeacherMale}
                 />
               ) : (
-                <Teacher
+                <TeacherTeaching
                   onClickBubble={this.handleClick}
                   positiveAnswer={
                     <FormattedMessage

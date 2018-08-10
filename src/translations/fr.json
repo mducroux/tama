@@ -24,6 +24,10 @@
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
+  "gameStart.startTeaching": "Apprendre à {studentName}",
+  "gameStart.studentName": "Bonjour ! Je m'appelle {studentName} !",
+  "gameStart.teacherBubble":
+    "Bonjour {studentName} ! Je suis {username}, ton professeur !",
   "godStudent.feedbackLessonAlreadyKnow":
     "Je le savais déjà (comme d'habitude)",
   "godStudent.feedbackLessonDidntKnow":
@@ -36,6 +40,11 @@
   "godStudent.thinkingAboutExam": "Trop facile !",
   "godStudent.thinkingAboutExample": "Trop facile !",
   "godStudent.thinkingAboutExercise": "Trop facile !",
+  "home.description":
+    "Dans ce jeu vous jouez le rôle d'un professeur dont le but est d'enseigner le concept de parallélogramme. Enseignez efficacement pour que votre élève obtienne la meilleure note possible !",
+  "home.register": "S'enregister pour jouer",
+  "home.startPlaying": "Rencontrer mon élève",
+  "home.title": "Bienvenue dans le jeu TAMA",
   "leaderboard.categoryAlltime": "Tout le temps",
   "leaderboard.categoryDaily": "Aujourd'hui",
   "leaderboard.categoryWeekly": "Cette semaine",
@@ -140,9 +149,5 @@
   "testShowQuestions.question":
     "Question {index} / {numberOfQuestions} : Est-ce un parallélogramme ?",
   "testShowQuestions.seeResult": "Voir le résultat",
-  "testShowQuestions.skipToResult": "Aller au résultat",
-  "welcomeMenu.descriptionApp": "Enseignez le concept de parallélogramme",
-  "welcomeMenu.register": "S'enregister pour jouer",
-  "welcomeMenu.startPlaying": "Commencer à jouer",
-  "welcomeMenu.studentName": "Bonjour ! Je m'appelle {studentName} !"
+  "testShowQuestions.skipToResult": "Aller au résultat"
 }
