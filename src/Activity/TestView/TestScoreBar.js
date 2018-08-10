@@ -15,8 +15,7 @@ const heightBar = "25px";
 const styles = {
   root: {
     flexGrow: 1,
-    position: "relative",
-    margin: "35px"
+    position: "relative"
   },
   progressBar: {
     borderRadius: "10px",
