@@ -144,12 +144,12 @@ class AppDrawer extends React.Component<PropsT, StateT> {
                 {!this.props.isRegistered ? (
                   <FormattedMessage
                     id="appDrawer.welcome"
-                    defaultMessage="Welcome to Tama !"
+                    defaultMessage="Welcome to Tama!"
                   />
                 ) : (
                   <FormattedMessage
                     id="appDrawer.welcomeCustomized"
-                    defaultMessage="Welcome {username} !"
+                    defaultMessage="Welcome {username}!"
                     values={{ username: localStorage.getItem("username") }}
                   />
                 )}

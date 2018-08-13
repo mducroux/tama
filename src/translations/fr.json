@@ -7,9 +7,14 @@
   "appDrawer.welcomeCustomized": "Bienvenue {username} !",
   "chooseActivity.chooseActivity": "Choisissez une activité",
   "chooseActivity.giveExercise": "Donner un exercice",
+  "chooseActivity.giveExerciseTeacherText": "Nous allons faire un exercice",
   "chooseActivity.giveLesson": "Donner une leçon",
+  "chooseActivity.giveLessonTeacherText": "Je vais te donner une définition",
   "chooseActivity.showExample": "Montrer un exemple",
+  "chooseActivity.showExampleTeacherText": "Je vais te montrer un exemple",
+  "chooseActivity.studentQuestion": "Qu'est-ce qu'on fait maintenant ?",
   "chooseActivity.takeTest": "Passer le test",
+  "chooseActivity.takeTestTeacherText": "C'est l'heure de passer le test !",
   "chooseExample.statement": "Choisissez une forme à montrer",
   "chooseExercise.statement": "Choisissez une forme pour l'exercice",
   "chooseLesson.statement": "Choisissez une leçon à donner",
@@ -24,6 +29,10 @@
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
+  "gameStart.startTeaching": "Enseigner {studentName}",
+  "gameStart.studentName": "Bonjour ! Je m'appelle {studentName} !",
+  "gameStart.teacherBubble":
+    "Bonjour {studentName} ! Je suis {username}, ton professeur !",
   "godStudent.feedbackLessonAlreadyKnow":
     "Je le savais déjà (comme d'habitude)",
   "godStudent.feedbackLessonDidntKnow":
@@ -36,6 +45,11 @@
   "godStudent.thinkingAboutExam": "Trop facile !",
   "godStudent.thinkingAboutExample": "Trop facile !",
   "godStudent.thinkingAboutExercise": "Trop facile !",
+  "home.description":
+    "Dans ce jeu vous jouez le rôle d'un professeur dont le but est d'enseigner le concept de parallélogramme. Enseignez efficacement pour que votre élève obtienne la meilleure note possible !",
+  "home.register": "S'enregister pour jouer",
+  "home.startPlaying": "Rencontrer mon élève",
+  "home.title": "Bienvenue dans le jeu TAMA",
   "leaderboard.categoryAlltime": "Tout le temps",
   "leaderboard.categoryDaily": "Aujourd'hui",
   "leaderboard.categoryWeekly": "Cette semaine",
@@ -140,9 +154,5 @@
   "testShowQuestions.question":
     "Question {index} / {numberOfQuestions} : Est-ce un parallélogramme ?",
   "testShowQuestions.seeResult": "Voir le résultat",
-  "testShowQuestions.skipToResult": "Aller au résultat",
-  "welcomeMenu.descriptionApp": "Enseignez le concept de parallélogramme",
-  "welcomeMenu.register": "S'enregister pour jouer",
-  "welcomeMenu.startPlaying": "Commencer à jouer",
-  "welcomeMenu.studentName": "Bonjour ! Je m'appelle {studentName} !"
+  "testShowQuestions.skipToResult": "Aller au résultat"
 }

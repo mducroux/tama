@@ -21,12 +21,16 @@ const styles = () => ({
     margin: "20px"
   },
   title: {
-    margin: "20px"
+    display: "flex",
+    alignItems: "center",
+    height: "20%"
   },
   text: {
+    display: "flex",
+    alignItems: "center",
     width: "500px",
     maxWidth: "100%",
-    margin: "20px"
+    height: "30%"
   },
   button: {
     margin: "20px"
@@ -39,20 +43,22 @@ type PropsT = {
   isRegistered: boolean
 };
 
-const WelcomeMenu = ({ classes, isRegistered, onClickStart }: PropsT) => (
+const Home = ({ classes, isRegistered, onClickStart }: PropsT) => (
   <div className={classes.root}>
     <img src="images/logo.png" alt="logo" className={classes.logo} />
     <Typography variant="title" align="center" className={classes.title}>
       <FormattedMessage
         id="home.title"
-        defaultMessage="Welcome to the game of TAMA."
+        defaultMessage="Welcome to the game of TAMA"
       />
     </Typography>
-    <Typography variant="body1" align="center" className={classes.text}>
-      In this game you play the role of a teacher. Everytime you play you will
-      teach a new student by selecting activities. At the end of the game your
-      student passes a test and you earn points depending on the grade obtained.
-      Teach well so that your students get the best grades possible!
+    <Typography variant="subheading" align="center" className={classes.text}>
+      <FormattedMessage
+        id="home.description"
+        defaultMessage="In this game you play the role of a teacher whose purpose is to teach the
+        concept of parallelograms. Teach well so that your student gets the best
+        possible grade!"
+      />
     </Typography>
 
     <Button
@@ -62,11 +68,11 @@ const WelcomeMenu = ({ classes, isRegistered, onClickStart }: PropsT) => (
       className={classes.button}
     >
       <FormattedMessage
-        id={isRegistered ? "welcomeMenu.startPlaying" : "welcomeMenu.register"}
+        id={isRegistered ? "home.startPlaying" : "home.register"}
         defaultMessage="Start playing"
       />
     </Button>
   </div>
 );
 
-export default withStyles(styles)(WelcomeMenu);
+export default withStyles(styles)(Home);

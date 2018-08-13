@@ -3,13 +3,18 @@
   "app.exercise": "Exercise",
   "app.lesson": "Lesson",
   "appDrawer.score": "Your score:",
-  "appDrawer.welcome": "Welcome to Tama !",
-  "appDrawer.welcomeCustomized": "Welcome {username} !",
+  "appDrawer.welcome": "Welcome to Tama!",
+  "appDrawer.welcomeCustomized": "Welcome {username}!",
   "chooseActivity.chooseActivity": "Choose an activity",
   "chooseActivity.giveExercise": "Give an exercise",
+  "chooseActivity.giveExerciseTeacherText": "I'm going to give you an exercise",
   "chooseActivity.giveLesson": "Give a lesson",
+  "chooseActivity.giveLessonTeacherText": "I'm going to give you a definition",
   "chooseActivity.showExample": "Show an example",
+  "chooseActivity.showExampleTeacherText": "I'm going to show you an example",
+  "chooseActivity.studentQuestion": "What do we do now?",
   "chooseActivity.takeTest": "Take the test",
+  "chooseActivity.takeTestTeacherText": "It's time for you to take the test!",
   "chooseExample.statement": "Choose a shape to show",
   "chooseExercise.statement": "Choose a shape for the exercise",
   "chooseLesson.statement": "Choose a lesson to give",
@@ -23,6 +28,10 @@
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
+  "gameStart.startTeaching": "Start teaching {studentName}",
+  "gameStart.studentName": "Hello! My name is {studentName}!",
+  "gameStart.teacherBubble":
+    "Hello {studentName}! I'm {username}, your teacher!",
   "godStudent.feedbackLessonAlreadyKnow": "I already know that (as always)",
   "godStudent.feedbackLessonDidntKnow":
     "Impossible, my designer can't be wrong !",
@@ -34,6 +43,11 @@
   "godStudent.thinkingAboutExam": "Too easy!",
   "godStudent.thinkingAboutExample": "Too easy!",
   "godStudent.thinkingAboutExercise": "Too easy!",
+  "home.description":
+    "In this game you play the role of a teacher whose purpose is to teach the concept of parallelogram. Teach well so that your student gets the best possible grade!",
+  "home.register": "Register to play",
+  "home.startPlaying": "Meet my new student",
+  "home.title": "Welcome to the game of TAMA",
   "leaderboard.categoryAlltime": "All time",
   "leaderboard.categoryDaily": "Daily",
   "leaderboard.categoryWeekly": "Weekly",
@@ -130,9 +144,5 @@
   "testShowQuestions.question":
     "Question {index} / {numberOfQuestions}: Is it a parallelogram?",
   "testShowQuestions.seeResult": "See result",
-  "testShowQuestions.skipToResult": "Skip to result",
-  "welcomeMenu.descriptionApp": "Teach the concept of parallelogram",
-  "welcomeMenu.register": "Register to play",
-  "welcomeMenu.startPlaying": "Start playing",
-  "welcomeMenu.studentName": "Hello! My name is {studentName}!"
+  "testShowQuestions.skipToResult": "Skip to result"
 }

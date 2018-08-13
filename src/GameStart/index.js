@@ -4,19 +4,23 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
 
 import VirtualStudent from "../VirtualStudent";
+import TeacherWelcome from "../Teacher/TeacherWelcome";
 
 const styles = () => ({
   root: {
     display: "flex",
-    flexWrap: "wrap",
-    marginTop: "1%"
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    alignItems: "center"
   },
-  welcome: {
+  mainContent: {
+    height: "70%"
+  },
+  group: {
     height: "100%"
   },
   studentName: {
@@ -24,13 +28,9 @@ const styles = () => ({
     alignSelf: "center"
   },
   logo: {
-    height: "10%"
-  },
-  title: {
-    height: "3%"
-  },
-  student: {
-    height: "60%"
+    width: "auto",
+    height: "15%",
+    margin: "20px"
   }
 });
 
@@ -38,61 +38,72 @@ type PropsT = {
   classes: Object,
   onClickStart: void => void,
   studentName: string,
-  studentImg: string
+  studentImg: string,
+  genderTeacherMale: boolean
 };
 
-const WelcomeMenu = ({
+const GameStart = ({
   classes,
   onClickStart,
   studentName,
-  studentImg
+  studentImg,
+  genderTeacherMale
 }: PropsT) => (
-  <div className={classes.welcome}>
-    <Grid
-      container
-      justify="center"
-      className={classNames(classes.root, classes.logo)}
-    >
-      <img src="images/logo.png" width="110" height="60" alt="logo" />
-    </Grid>
-    <Grid
-      container
-      justify="center"
-      className={classNames(classes.root, classes.title)}
-    >
-      <Typography className={classes.title} variant="title" color="inherit">
-        <FormattedMessage
-          id="welcomeMenu.descriptionApp"
-          defaultMessage="Teach the concept of parallelogram"
-        />
-      </Typography>
-    </Grid>
-    <Grid
-      container
-      justify="center"
-      alignItems="center"
-      className={classNames(classes.root, classes.student)}
-    >
-      <VirtualStudent
-        bubbleText={
-          <FormattedMessage
-            id="welcomeMenu.studentName"
-            defaultMessage="Hello! My name is {studentName}!"
-            values={{ studentName }}
+  <div className={classes.root}>
+    <img src="images/logo.png" alt="logo" className={classes.logo} />
+    <Grid container justify="space-around" className={classes.mainContent}>
+      <Grid item xs={12} sm={4}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.group}
+        >
+          <VirtualStudent
+            bubbleText={
+              <FormattedMessage
+                id="gameStart.studentName"
+                defaultMessage="Hello! My name is {studentName}!"
+                values={{ studentName }}
+              />
+            }
+            studentImg={studentImg}
           />
-        }
-        studentImg={studentImg}
-      />
+        </Grid>
+      </Grid>
+      <Grid item xs={12} sm={4}>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.group}
+        >
+          <TeacherWelcome
+            bubbleText={
+              <FormattedMessage
+                id="gameStart.teacherBubble"
+                defaultMessage="Hello {studentName}! I'm {username}, your teacher!"
+                values={{
+                  studentName: studentName.replace(/ .*/, ""),
+                  username: localStorage.getItem("username")
+                }}
+              />
+            }
+            genderTeacherMale={genderTeacherMale}
+          />
+        </Grid>
+      </Grid>
     </Grid>
-    <Grid container justify="center" className={classes.root}>
+    <Grid container justify="center">
       <Button variant="contained" color="primary" onClick={onClickStart}>
         <FormattedMessage
-          id="welcomeMenu.startPlaying"
-          defaultMessage="Start playing"
+          id="gameStart.startTeaching"
+          defaultMessage="Start teaching {studentName}"
+          values={{ studentName: studentName.replace(/ .*/, "") }}
         />
       </Button>
     </Grid>
   </div>
 );
 
-export default withStyles(styles)(WelcomeMenu);
+export default withStyles(styles)(GameStart);

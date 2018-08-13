@@ -11,6 +11,9 @@ import StarIcon from "@material-ui/icons/Stars";
 import SchoolIcon from "@material-ui/icons/School";
 
 const styles = theme => ({
+  root: {
+    width: "100%"
+  },
   stepper: {
     backgroundColor: theme.palette.background.default,
     padding: "5px"
@@ -33,7 +36,7 @@ function FormattedMessageFixed(props) {
 const SessionTimeline = ({ history, classes }) => {
   const { activities } = history;
   return (
-    <div>
+    <div className={classes.root}>
       <Stepper
         className={classes.stepper}
         alternativeLabel

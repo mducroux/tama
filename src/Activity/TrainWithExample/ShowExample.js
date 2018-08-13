@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import PropTypes from "prop-types";
 
 import VirtualStudent from "../../VirtualStudent";
-import Teacher from "../../Teacher";
+import TeacherTeaching from "../../Teacher/TeacherTeaching";
 
 const styles = {
   root: {
@@ -84,7 +84,7 @@ class ShowExample extends React.Component {
               alignItems="flex-end"
               className={classes.group}
             >
-              <Teacher
+              <TeacherTeaching
                 onClickBubble={this.handleClick}
                 positiveAnswer={
                   <FormattedMessage

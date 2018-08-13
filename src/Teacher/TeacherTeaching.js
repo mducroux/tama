@@ -57,7 +57,7 @@ const styles = () => ({
   }
 });
 
-class Teacher extends React.Component {
+class TeacherTeaching extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +74,7 @@ class Teacher extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div>
         {!this.props.waitingForStudent && (
           <Grid container alignItems="flex-end">
             {this.state.thinking && (
@@ -168,7 +168,7 @@ class Teacher extends React.Component {
   }
 }
 
-Teacher.propTypes = {
+TeacherTeaching.propTypes = {
   classes: PropTypes.object.isRequired,
   onClickBubble: PropTypes.func.isRequired,
   positiveAnswer: PropTypes.object,
@@ -177,4 +177,4 @@ Teacher.propTypes = {
   genderTeacherMale: PropTypes.bool.isRequired
 };
 
-export default withStyles(styles)(Teacher);
+export default withStyles(styles)(TeacherTeaching);

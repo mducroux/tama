@@ -12,7 +12,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Divider from "@material-ui/core/Divider";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 
 import SchoolIcon from "@material-ui/icons/School";
@@ -28,7 +27,6 @@ import RulesDialog from "./RulesDialog";
 
 type PropsT = {
   open: boolean,
-  studentName: string,
   changeView: string => void,
   changeLanguage: string => void,
   theme: Object,
@@ -55,12 +53,9 @@ const styles = theme => ({
   sidePanelHeader: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     padding: "0 8px",
     ...theme.mixins.toolbar
-  },
-  studentName: {
-    marginLeft: theme.spacing.unit * 2
   }
 });
 
@@ -193,9 +188,6 @@ class SidePanel extends React.Component<PropsT, StateT> {
         >
           <List>
             <div className={classes.sidePanelHeader}>
-              <Typography variant="title" className={classes.studentName}>
-                {this.props.studentName}
-              </Typography>
               <IconButton onClick={this.props.handleSidePanelClose}>
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
