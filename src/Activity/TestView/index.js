@@ -1,12 +1,18 @@
 // @flow
 
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Grow from "@material-ui/core/Grow";
 import Slide from "@material-ui/core/Slide";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
 
 import Cancel from "@material-ui/icons/Cancel";
 import CheckCircle from "@material-ui/icons/CheckCircle";
@@ -50,7 +56,8 @@ const styles = () => ({
     height: "40%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: "column"
   },
   studentImg: {
     width: "auto",
@@ -87,6 +94,9 @@ const styles = () => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
+  },
+  table: {
+    width: "100%"
   }
 });
 
@@ -94,39 +104,76 @@ const Avatar = ({ img, classes }: any) => (
   <img src={img} alt="student" className={classes.studentImg} />
 );
 
-const ScoreBoard = ({ show, classes }: any) => (
+const ScoreBoard = ({ show, classes, activityScore, testScore }: any) => (
   <Paper className={classes.scoreBoardPaper}>
-    <Slide in={show > 12} direction="up">
-      <span>Starting Score: 200</span>
-    </Slide>
-    <Slide in={show > 13} direction="up">
-      <span>Teaching activities used: -170</span>
-    </Slide>
-    <Slide in={show > 14} direction="up">
-      <span>Grade bonus: 10.000</span>
-    </Slide>
-    <Slide in={show > 15} direction="up">
-      <span>Total Score: 10.030</span>
-    </Slide>
+    <Table className={classes.table}>
+      <TableBody>
+        <Slide in={show > 12} direction="up">
+          <TableRow>
+            <TableCell>Starting points</TableCell>
+            <TableCell>{200}</TableCell>
+          </TableRow>
+        </Slide>
+        <Slide in={show > 13} direction="up">
+          <TableRow>
+            <TableCell>Teaching activities used</TableCell>
+            <TableCell>{activityScore - 200}</TableCell>
+          </TableRow>
+        </Slide>
+        <Slide in={show > 14} direction="up">
+          <TableRow>
+            <TableCell>Grade bonus</TableCell>
+            <TableCell>{testScore}</TableCell>
+          </TableRow>
+        </Slide>
+        <Slide in={show > 15} direction="up">
+          <TableRow>
+            <TableCell>Total Score:</TableCell>
+            <TableCell>{testScore + activityScore}</TableCell>
+          </TableRow>
+        </Slide>
+      </TableBody>
+    </Table>
   </Paper>
 );
 
 const LeaderboardPeek = ({ show, classes }: any) => (
   <Paper className={classes.scoreBoardPaper}>
-    <Slide in={show > 17} direction="up">
-      <span>Daily score: 2000 => 2050</span>
-    </Slide>
-    <Slide in={show > 18} direction="up">
-      <span>Weekly score: 2000 => 2050</span>
-    </Slide>
-    <Slide in={show > 19} direction="up">
-      <span>All time score: 2000 => 2050</span>
-    </Slide>
+    <Table className={classes.table}>
+      <Slide in={show > 17} direction="up">
+        <TableBody>
+          <TableRow>
+            <TableCell>Daily score</TableCell>
+            <TableCell>XXX</TableCell>
+            <TableCell>=></TableCell>
+            <Slide in={show > 18} direction="up">
+              <TableCell>YYY</TableCell>
+            </Slide>
+          </TableRow>
+          <TableRow>
+            <TableCell>Weekly score</TableCell>
+            <TableCell>XXX</TableCell>
+            <TableCell>=></TableCell>
+            <Slide in={show > 19} direction="up">
+              <TableCell>YYY</TableCell>
+            </Slide>
+          </TableRow>
+          <TableRow>
+            <TableCell>All time score</TableCell>
+            <TableCell>XXX</TableCell>
+            <TableCell>=></TableCell>
+            <Slide in={show > 20} direction="up">
+              <TableCell>YYY</TableCell>
+            </Slide>
+          </TableRow>
+        </TableBody>
+      </Slide>
+    </Table>
   </Paper>
 );
 
 const Answer = ({ src, isCorrect, show, classes }: any) => (
-  <Grow in={show} timeout={400} direction="left">
+  <Grow in={show} timeout={400} direction="left" className={classes.answer}>
     <div className={classes.answer}>
       <img src={src} alt="test question" className={classes.shape} />
       {isCorrect ? (
@@ -188,7 +235,7 @@ class TestStudent extends React.Component<PropsT, StateT> {
       if (index > 20) {
         clearInterval(this.interval);
       }
-    }, 500);
+    }, 200);
   }
 
   componentWillUnmount() {
@@ -197,17 +244,17 @@ class TestStudent extends React.Component<PropsT, StateT> {
 
   render() {
     console.log(this.props);
-    const { classes, test, studentImg } = this.props;
+    const { classes, test, studentImg, activityScore } = this.props;
     const { index } = this.state;
-
-    const qs = test.questions.map(({ src, valid }, idx) => ({
+    const qs = test.questions.map(({ src, valid }, i) => ({
       src,
-      index: idx,
-      answer: test.answers[index],
-      isCorrect: valid === test.answers[index]
+      index: i,
+      answer: test.answers[i],
+      isCorrect: valid === test.answers[i]
     }));
     const qY = qs.filter(x => x.answer);
     const qN = qs.filter(x => !x.answer);
+    const scoreIndex = qs.filter(x => x.isCorrect && x.index < index).length;
 
     return (
       <Grid
@@ -218,27 +265,42 @@ class TestStudent extends React.Component<PropsT, StateT> {
         alignItems="flex-start"
       >
         <Grid item xs={12} className={classes.scoreBar}>
-          <TestScoreBar completed={this.state.index} />
+          <TestScoreBar completed={scoreIndex} />
         </Grid>
-        <Grid item xs={2} className={classes.avatar}>
+        <Grid item xs={3} className={classes.avatar}>
           <Avatar classes={classes} img={studentImg} />
+          <div>
+            Grade: {scoreIndex} / {Math.min(10, index)}
+          </div>
         </Grid>
-        <Grid item xs={2} className={classes.bubbles}>
-          <div>PARALLELOGRAMS:</div>
-          <div>NOT PARALLELOGRAMS:</div>
-        </Grid>
-        <Grid item xs={8} className={classes.studentAnswers}>
+        <Grid item xs={9} className={classes.studentAnswers}>
+          <div>I think these are PARALLELOGRAMS:</div>
           <QuestionsList classes={classes} questions={qY} index={index} />
+          <div>I think these are NOT PARALLELOGRAMS:</div>
           <QuestionsList classes={classes} questions={qN} index={index} />
         </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
-          <ScoreBoard show={index} classes={classes} />
+          <ScoreBoard
+            show={index}
+            activityScore={activityScore}
+            testScore={test.testScore}
+            classes={classes}
+          />
         </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
           <LeaderboardPeek show={index} classes={classes} />
         </Grid>
         <Grid item xs={12} className={classes.bottomButton}>
-          BUTTON NEW GAME
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => this.props.startNewGame()}
+          >
+            <FormattedMessage
+              id="testResult.startAgain"
+              defaultMessage="Start a new game"
+            />
+          </Button>
         </Grid>
       </Grid>
     );
