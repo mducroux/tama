@@ -1,14 +1,10 @@
 // @flow
+
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 const styles = () => ({
-  bubble: {
-    position: "relative",
-    left: "-30%",
-    overflow: "hidden"
-  },
+  root: { width: "100%", height: "100%" },
   textImage: {
     position: "absolute",
     top: "45%",
@@ -16,6 +12,20 @@ const styles = () => ({
     transform: "translate(-50%, -50%)",
     textAlign: "center",
     width: "90%"
+  },
+  bubble: {
+    position: "relative",
+    left: "10%",
+    width: "55%"
+  },
+  bubbleImage: {
+    width: "100%",
+    height: "auto"
+  },
+  teacherImage: {
+    marginLeft: "20%",
+    width: "80%",
+    height: "auto"
   }
 });
 
@@ -30,21 +40,16 @@ const TeacherWelcome = ({ classes, bubbleText, genderTeacherMale }: PropsT) => {
     ? "images/teacher/teacher_male.png"
     : "images/teacher/teacher_female.png";
   return (
-    <div>
-      <Grid container justify="center">
-        <div className={classes.bubble}>
-          <img
-            src="images/teacher/bubble-answer.png"
-            width="180"
-            height="130"
-            alt="bubble"
-          />
-          <div className={classes.textImage}>{bubbleText}</div>
-        </div>
-      </Grid>
-      <Grid container justify="center" alignItems="flex-start">
-        <img src={teacherImage} width="250" height="232" alt="teacher" />
-      </Grid>
+    <div className={classes.root}>
+      <div className={classes.bubble}>
+        <img
+          src="images/teacher/bubble-answer.png"
+          alt="bubble"
+          className={classes.bubbleImage}
+        />
+        <div className={classes.textImage}>{bubbleText}</div>
+      </div>
+      <img src={teacherImage} alt="teacher" className={classes.teacherImage} />
     </div>
   );
 };

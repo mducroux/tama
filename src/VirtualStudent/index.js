@@ -6,10 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 const styles = () => ({
-  bubbleItem: {
-    position: "relative",
-    left: "50%"
-  },
   textImage: {
     position: "absolute",
     top: "42%",
@@ -19,29 +15,36 @@ const styles = () => ({
     width: "90%"
   },
   bubble: {
-    display: "flex",
-    flexWrap: "noWrap"
+    position: "relative",
+    left: "40%",
+    width: "55%"
+  },
+  bubbleImage: {
+    width: "100%",
+    height: "auto"
+  },
+  studentImage: {
+    marginLeft: "20%",
+    width: "35%",
+    height: "auto"
   }
 });
 
 const VirtualStudent = ({ classes, bubbleText, studentImg }) => (
   <div>
-    <Grid container justify="center" alignItems="flex-end">
-      <div className={classes.bubble}>
-        <div className={classes.bubbleItem}>
-          <img
-            src="images/virtual_student/bubble.png"
-            width="180"
-            height="130"
-            alt="bubble"
-          />
-          <div className={classes.textImage}>{bubbleText}</div>
-        </div>
-      </div>
-    </Grid>
-    <Grid container justify="center" alignItems="flex-start">
-      <img src={studentImg} width="108" height="180" alt="virtual_student" />
-    </Grid>
+    <div className={classes.bubble}>
+      <img
+        src="images/virtual_student/bubble.png"
+        alt="bubble"
+        className={classes.bubbleImage}
+      />
+      <div className={classes.textImage}>{bubbleText}</div>
+    </div>
+    <img
+      src={studentImg}
+      className={classes.studentImage}
+      alt="virtual_student"
+    />
   </div>
 );
 

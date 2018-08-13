@@ -1,7 +1,8 @@
-import React from "react";
+// @flow
 
+import * as React from "react";
 import { FormattedMessage } from "react-intl";
-import PropTypes from "prop-types";
+
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
@@ -26,12 +27,16 @@ const styles = theme => ({
     height: "85%"
   },
   activityChoice: {
-    height: "100%"
+    height: "100%",
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column"
   },
   button: {
     position: "relative",
-    height: "100%",
-    width: "400%",
+    margin: "1%",
+    height: "10%",
+    width: "100%",
     "&:hover, &$focusVisible": {
       "& $imageBackdrop": {
         opacity: 0.15
@@ -140,10 +145,101 @@ const images = [
         defaultMessage="I'm going to give you a definition"
       />
     )
+  },
+  {
+    url: "images/medal_600x200.png",
+    title: (
+      <FormattedMessage
+        id="chooseActivity.takeTest"
+        defaultMessage="Take the test"
+      />
+    ),
+    learningCost: null,
+    teacherText: (
+      <FormattedMessage
+        id="chooseActivity.takeTestTeacherText"
+        defaultMessage="It's time for you to take the test!"
+      />
+    )
   }
 ];
 
-class ChooseActivity extends React.Component {
+const ActivityButton = ({
+  classes,
+  index,
+  image,
+  handleButtonClick,
+  setState,
+  hasChosen
+}: Object) => (
+  <ButtonBase
+    className={classes.button}
+    focusVisibleClassName={classes.focusVisible}
+    onClick={() => {
+      setState({
+        teacherBubble: "images/teacher/bubble-answer2.png",
+        hasChosen: true
+      });
+      setTimeout(() => handleButtonClick(index), 1000);
+    }}
+    onMouseEnter={() => {
+      if (!hasChosen) {
+        setState({
+          teacherText: image.teacherText
+        });
+      }
+    }}
+    onMouseLeave={() => {
+      if (!hasChosen) {
+        setState({
+          teacherText: (
+            <FormattedMessage
+              id="gameStart.teacherThinking"
+              defaultMessage="..."
+            />
+          )
+        });
+      }
+    }}
+  >
+    <span
+      className={classes.imageSrc}
+      style={{
+        backgroundImage: `url(${image.url})`
+      }}
+    />
+    <span className={classes.imageBackdrop} />
+    <span className={classes.textButton}>
+      <Typography component="span" variant="title" color="inherit">
+        {image.title} <br />
+        {image.learningCost !== null ? `-${image.learningCost} points` : ""}
+      </Typography>
+    </span>
+  </ButtonBase>
+);
+
+type PropsT = {
+  classes: Object,
+  sessionRef: any,
+  alreadyShownRules: boolean,
+  genderTeacherMale: boolean,
+  studentImg: string,
+  hasShownRules: () => void,
+  onClickExample: () => void,
+  onClickExercise: () => void,
+  onClickLesson: () => void,
+  onConfirmTestDialog: () => void
+};
+
+type StateT = {
+  openTestDialog: boolean,
+  openRulesDialog: boolean,
+  teacherText: any,
+  teacherBubble: string,
+  hasChosen: boolean
+};
+
+class ChooseActivity extends React.Component<PropsT, StateT> {
   constructor(props) {
     super(props);
     this.state = {
@@ -155,29 +251,28 @@ class ChooseActivity extends React.Component {
       teacherBubble: "images/teacher/bubble-thinking.png",
       hasChosen: false
     };
-    this.props.sessionRef.parent.once("value").then(snapshot => {
-      if (
-        !this.props.alreadyShownRules &&
-        Object.keys(snapshot.val()).length === 1
-      ) {
+    const { sessionRef, alreadyShownRules, hasShownRules } = this.props;
+    sessionRef.parent.once("value").then(snapshot => {
+      if (!alreadyShownRules && Object.keys(snapshot.val()).length === 1) {
         this.setState({ openRulesDialog: true });
-        this.props.hasShownRules();
+        hasShownRules();
       }
     });
   }
 
   handleButtonClick = key => {
-    if (key === 0) {
-      this.props.onClickExample();
-    } else if (key === 1) {
-      this.props.onClickExercise();
-    } else if (key === 2) {
-      this.props.onClickLesson();
-    }
+    const { onClickExample, onClickExercise, onClickLesson } = this.props;
+    [
+      onClickExample,
+      onClickExercise,
+      onClickLesson,
+      () => this.setState({ openTestDialog: true })
+    ][key]();
   };
 
   render() {
-    const { classes, sessionRef } = this.props;
+    const { classes, sessionRef, genderTeacherMale, studentImg } = this.props;
+    const { teacherText, teacherBubble, hasChosen } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.sessionTimeline}>
@@ -185,7 +280,7 @@ class ChooseActivity extends React.Component {
         </div>
         <Grid
           container
-          justify="space-evenly"
+          justify="space-around"
           alignItems="flex-end"
           className={classes.mainContent}
         >
@@ -197,132 +292,28 @@ class ChooseActivity extends React.Component {
                   defaultMessage="What do we do now?"
                 />
               }
-              studentImg={this.props.studentImg}
+              studentImg={studentImg}
             />
           </Grid>
           <Grid item xs={6} sm={4}>
             <TeacherChoosingActivity
-              bubbleText={this.state.teacherText}
-              genderTeacherMale={this.props.genderTeacherMale}
-              teacherBubble={this.state.teacherBubble}
+              bubbleText={teacherText}
+              genderTeacherMale={genderTeacherMale}
+              teacherBubble={teacherBubble}
             />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.activityChoice}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              spacing={8}
-              className={classes.activityChoice}
-            >
-              {images.map((image, index) => (
-                <Grid item xs={12} sm={3} key={image.url}>
-                  <ButtonBase
-                    className={classes.button}
-                    focusVisibleClassName={classes.focusVisible}
-                    onClick={() => {
-                      this.setState({
-                        teacherBubble: "images/teacher/bubble-answer2.png",
-                        hasChosen: true
-                      });
-                      setTimeout(() => this.handleButtonClick(index), 1500);
-                    }}
-                    onMouseEnter={() =>
-                      !this.state.hasChosen &&
-                      this.setState({
-                        teacherText: image.teacherText
-                      })
-                    }
-                    onMouseLeave={() =>
-                      !this.state.hasChosen &&
-                      this.setState({
-                        teacherText: (
-                          <FormattedMessage
-                            id="gameStart.teacherThinking"
-                            defaultMessage="..."
-                          />
-                        )
-                      })
-                    }
-                  >
-                    <span
-                      className={classes.imageSrc}
-                      style={{
-                        backgroundImage: `url(${image.url})`
-                      }}
-                    />
-                    <span className={classes.imageBackdrop} />
-                    <span className={classes.textButton}>
-                      <Typography
-                        component="span"
-                        variant="title"
-                        color="inherit"
-                      >
-                        {image.title} <br /> <br />- {image.learningCost} points
-                      </Typography>
-                    </span>
-                  </ButtonBase>
-                </Grid>
-              ))}
-              <Grid item xs={12} sm={3}>
-                <ButtonBase
-                  className={classes.button_test}
-                  focusVisibleClassName={classes.focusVisible}
-                  onClick={() => {
-                    this.setState({
-                      teacherBubble: "images/teacher/bubble-answer2.png",
-                      hasChosen: true
-                    });
-                    setTimeout(
-                      () => this.setState({ openTestDialog: true }),
-                      1500
-                    );
-                  }}
-                  onMouseEnter={() =>
-                    !this.state.hasChosen &&
-                    this.setState({
-                      teacherText: (
-                        <FormattedMessage
-                          id="chooseActivity.takeTestTeacherText"
-                          defaultMessage="It's time for you to take the test!"
-                        />
-                      )
-                    })
-                  }
-                  onMouseLeave={() =>
-                    !this.state.hasChosen &&
-                    this.setState({
-                      teacherText: (
-                        <FormattedMessage
-                          id="gameStart.teacherThinking"
-                          defaultMessage="..."
-                        />
-                      )
-                    })
-                  }
-                >
-                  <span
-                    className={classes.imageSrc}
-                    style={{
-                      backgroundImage: `url(${"images/medal_600x200.png"})`
-                    }}
-                  />
-                  <span className={classes.imageBackdrop} />
-                  <span className={classes.textButtonTest}>
-                    <Typography
-                      component="span"
-                      variant="title"
-                      color="inherit"
-                    >
-                      <FormattedMessage
-                        id="chooseActivity.takeTest"
-                        defaultMessage="Take the test"
-                      />
-                    </Typography>
-                  </span>
-                </ButtonBase>
-              </Grid>
-            </Grid>
+            {images.map((image, index) => (
+              <ActivityButton
+                key={image.url}
+                image={image}
+                index={index}
+                classes={classes}
+                hasChosen={hasChosen}
+                handleButtonClick={this.handleButtonClick}
+                setState={x => this.setState(x)}
+              />
+            ))}
           </Grid>
         </Grid>
         <TestConfirmationDialog
@@ -338,18 +329,5 @@ class ChooseActivity extends React.Component {
     );
   }
 }
-
-ChooseActivity.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClickExample: PropTypes.func.isRequired,
-  onClickExercise: PropTypes.func.isRequired,
-  onClickLesson: PropTypes.func.isRequired,
-  onConfirmTestDialog: PropTypes.func.isRequired,
-  sessionRef: PropTypes.object.isRequired,
-  hasShownRules: PropTypes.func.isRequired,
-  alreadyShownRules: PropTypes.bool.isRequired,
-  studentImg: PropTypes.string.isRequired,
-  genderTeacherMale: PropTypes.bool.isRequired
-};
 
 export default withStyles(styles)(ChooseActivity);
