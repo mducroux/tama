@@ -3,10 +3,11 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+import { gridScores } from "../../App";
+
 type PropsT = {
   classes: Object,
-  completed: number,
-  gridScores: Array<number>
+  completed: number
 };
 
 const heightBar = "25px";
@@ -14,8 +15,7 @@ const heightBar = "25px";
 const styles = {
   root: {
     flexGrow: 1,
-    position: "relative",
-    marginBottom: "50px"
+    position: "relative"
   },
   progressBar: {
     borderRadius: "10px",
@@ -111,42 +111,32 @@ const styles = {
   },
   step: {
     position: "absolute",
-    top: "100%",
-    transform: "translate(-50%, -50%)"
+    right: "4px",
+    transform: "translate(0,25%)"
   }
 };
 
-const StepBar = ({
-  classes,
-  gridScores
-}: {
-  classes: Object,
-  gridScores: Array<number>
-}) => {
+const StepBar = ({ classes }: { classes: Object }) => {
   const stepBars = [];
   for (let i = 1; i <= 10; i++) {
     stepBars.push(
       <div className={classes[`stepBar${i}`]} key={i}>
-        <p className={classes.step}>
-          {"+"}
-          {gridScores[i]}
-        </p>
+        <span className={classes.step}>{gridScores[i]}</span>
       </div>
     );
   }
   return <div>{stepBars}</div>;
 };
 
-const TestScoreBar = ({ classes, completed, gridScores }: PropsT) => (
+const TestScoreBar = ({ classes, completed }: PropsT) => (
   <div className={classes.root}>
     <LinearProgress
       className={classes.progressBar}
       variant="determinate"
       color="primary"
       value={completed * 10}
-      // classes={{ barColorPrimary: classes.colorPrimary }}
     />
-    <StepBar classes={classes} gridScores={gridScores} />
+    <StepBar classes={classes} />
   </div>
 );
 

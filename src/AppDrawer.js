@@ -59,7 +59,8 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     backgroundColor: theme.palette.background.default,
-    overflow: "auto",
+    overflowY: "auto",
+    overflowX: "hidden",
     display: "flex",
     flexGrow: 1,
     flexDirection: "column"

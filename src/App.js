@@ -15,7 +15,7 @@ import ChooseActivity from "./Activity/ChooseActivity";
 import TrainWithExample from "./Activity/TrainWithExample";
 import TrainWithExercises from "./Activity/TrainWithExercises";
 import TrainWithLesson from "./Activity/TrainWithLesson";
-import TestStudent from "./Activity/TestStudent";
+import TestView from "./Activity/TestView";
 import Home from "./Home";
 import GameStart from "./GameStart";
 import getVirtualStudent from "./VirtualStudent/utils";
@@ -49,7 +49,19 @@ const messages = {
   en: messagesEn
 };
 
-const gridScores = [0, 10, 25, 50, 100, 200, 500, 1000, 2000, 5000, 10000];
+export const gridScores = [
+  0,
+  10,
+  25,
+  50,
+  100,
+  200,
+  500,
+  1000,
+  2000,
+  5000,
+  10000
+];
 
 const scoreCost = {
   example: -10,
@@ -371,14 +383,13 @@ class App extends React.Component<PropsT, StateT> {
           );
         } else if (hasChosenActivity === "test") {
           displayed = (
-            <TestStudent
+            <TestView
               startNewGame={this.startNewGame}
               student={this.student}
               finalScore={this.finalScore}
               activityScore={this.activityScore}
               test={this.state.test}
               studentName={this.studentName}
-              gridScores={gridScores}
               updateScore={() =>
                 this.setState({
                   score: this.finalScore,
