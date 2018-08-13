@@ -6,6 +6,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 const styles = () => ({
+  root: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end"
+  },
   textImage: {
     position: "absolute",
     top: "42%",
@@ -31,7 +38,7 @@ const styles = () => ({
 });
 
 const VirtualStudent = ({ classes, bubbleText, studentImg }) => (
-  <div>
+  <div className={classes.root}>
     <div className={classes.bubble}>
       <img
         src="images/virtual_student/bubble.png"

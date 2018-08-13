@@ -5,6 +5,13 @@ import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 
 const styles = () => ({
+  root: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end"
+  },
   bubbleThinking1: {
     transform: "scaleX(-1)",
     backgroundColor: "transparent",
@@ -23,12 +30,8 @@ const styles = () => ({
   },
   bubbleAnswer: {
     position: "relative",
-    left: "-30%",
-    backgroundColor: "transparent",
-    cursor: "pointer",
-    overflow: "hidden",
-    outline: "none",
-    border: "none"
+    left: "10%",
+    width: "55%"
   },
   textImageThinking1: {
     position: "absolute",
@@ -54,6 +57,19 @@ const styles = () => ({
   bubbles: {
     display: "flex",
     flexWrap: "noWrap"
+  },
+  bubbleImage1: {
+    width: "100%",
+    height: "auto"
+  },
+  bubbleImage2: {
+    width: "100%",
+    height: "auto"
+  },
+  teacherImage: {
+    marginLeft: "10%",
+    width: "80%",
+    height: "auto"
   }
 });
 
@@ -74,7 +90,7 @@ class TeacherTeaching extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         {!this.props.waitingForStudent && (
           <Grid container alignItems="flex-end">
             {this.state.thinking && (
@@ -99,8 +115,7 @@ class TeacherTeaching extends React.Component {
                 >
                   <img
                     src={this.state.bubbleThinking1}
-                    width="180"
-                    height="140"
+                    className={classes.bubbleImage1}
                     alt="bubble"
                   />
                   <div className={classes.textImageThinking1}>
@@ -129,8 +144,7 @@ class TeacherTeaching extends React.Component {
                 >
                   <img
                     src={this.state.bubbleThinking2}
-                    width="180"
-                    height="140"
+                    className={classes.bubbleImage2}
                     alt="bubble"
                   />
                   <div className={classes.textImageThinking2}>
@@ -145,8 +159,7 @@ class TeacherTeaching extends React.Component {
               <div className={classes.bubbleAnswer}>
                 <img
                   src="images/teacher/bubble-answer.png"
-                  width="200"
-                  height="150"
+                  className={classes.bubbleImage1}
                   alt="bubble"
                 />
                 <div className={classes.textImageAnswer}>
@@ -161,7 +174,11 @@ class TeacherTeaching extends React.Component {
           </Grid>
         )}
         <Grid container justify="center" alignItems="flex-start">
-          <img src={this.teacherImage} width="250" height="232" alt="teacher" />
+          <img
+            src={this.teacherImage}
+            alt="teacher"
+            className={classes.teacherImage}
+          />
         </Grid>
       </div>
     );

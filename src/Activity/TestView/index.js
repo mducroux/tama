@@ -26,7 +26,8 @@ const styles = () => ({
   },
   answer: {
     marginRight: "5px",
-    border: "solid black 1px"
+    border: "solid black 1px",
+    width: "17%"
   },
   questionList: {
     height: "40%",
@@ -174,7 +175,7 @@ const LeaderboardPeek = ({ show, classes }: any) => (
 
 const Answer = ({ src, isCorrect, show, classes }: any) => (
   <Grow in={show} timeout={400} direction="left" className={classes.answer}>
-    <div className={classes.answer}>
+    <div>
       <img src={src} alt="test question" className={classes.shape} />
       {isCorrect ? (
         <CheckCircle color="primary" className={classes.statusIcon} />
