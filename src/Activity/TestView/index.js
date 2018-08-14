@@ -64,7 +64,7 @@ const ScoreBoard = ({ show, classes, activityScore, testScore }: any) => (
         <Slide in={show > 15} direction="up">
           <TableRow>
             <TableCell>
-              T<FormattedMessage
+              <FormattedMessage
                 id="test.totalscore"
                 defaultMessage="Total score"
               />
