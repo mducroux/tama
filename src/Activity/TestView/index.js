@@ -18,88 +18,7 @@ import Cancel from "@material-ui/icons/Cancel";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 
 import TestScoreBar from "./TestScoreBar";
-
-const styles = () => ({
-  root: {
-    height: "90%",
-    overflow: "hidden"
-  },
-  answer: {
-    marginRight: "5px",
-    border: "solid black 1px",
-    width: "17%"
-  },
-  questionList: {
-    height: "40%",
-    display: "flex",
-    flexDirection: "row",
-    overflowX: "auto",
-    overflowY: "hidden"
-  },
-  statusIcon: {
-    position: "absolute",
-    bottom: 0,
-    right: 0
-  },
-  scoreBar: {
-    height: "10%",
-    display: "flex",
-    alignItems: "center"
-  },
-  bubbles: {
-    height: "40%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-evenly"
-  },
-  avatar: {
-    height: "40%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column"
-  },
-  studentImg: {
-    width: "auto",
-    height: "auto",
-    maxHeight: "100%",
-    maxWidth: "100%"
-  },
-  studentAnswers: {
-    height: "40%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly"
-  },
-  scoreBoard: {
-    height: "30%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  scoreBoardPaper: {
-    height: "90%",
-    width: "90%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: "center"
-  },
-  shape: {
-    height: "100%",
-    width: "auto"
-  },
-  bottomButton: {
-    height: "10%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  table: {
-    width: "100%"
-  }
-});
+import styles from "./styles";
 
 const Avatar = ({ img, classes }: any) => (
   <img src={img} alt="student" className={classes.studentImg} />
@@ -111,25 +30,45 @@ const ScoreBoard = ({ show, classes, activityScore, testScore }: any) => (
       <TableBody>
         <Slide in={show > 12} direction="up">
           <TableRow>
-            <TableCell>Starting points</TableCell>
+            <TableCell>
+              <FormattedMessage
+                id="test.startingpoints"
+                defaultMessage="Starting points"
+              />
+            </TableCell>
             <TableCell>{200}</TableCell>
           </TableRow>
         </Slide>
         <Slide in={show > 13} direction="up">
           <TableRow>
-            <TableCell>Teaching activities used</TableCell>
+            <TableCell>
+              <FormattedMessage
+                id="test.teachingpoints"
+                defaultMessage="Teaching activities used"
+              />
+            </TableCell>
             <TableCell>{activityScore - 200}</TableCell>
           </TableRow>
         </Slide>
         <Slide in={show > 14} direction="up">
           <TableRow>
-            <TableCell>Grade bonus</TableCell>
+            <TableCell>
+              <FormattedMessage
+                id="test.gradebonus"
+                defaultMessage="Grade bonus"
+              />
+            </TableCell>
             <TableCell>{testScore}</TableCell>
           </TableRow>
         </Slide>
         <Slide in={show > 15} direction="up">
           <TableRow>
-            <TableCell>Total Score:</TableCell>
+            <TableCell>
+              <FormattedMessage
+                id="test.totalscore"
+                defaultMessage="Total score"
+              />
+            </TableCell>
             <TableCell>{testScore + activityScore}</TableCell>
           </TableRow>
         </Slide>
@@ -141,13 +80,13 @@ const ScoreBoard = ({ show, classes, activityScore, testScore }: any) => (
 const LeaderboardPeek = ({ show, classes }: any) => (
   <Paper className={classes.scoreBoardPaper}>
     <Table className={classes.table}>
-      <Slide in={show > 17} direction="up">
+      <Slide in={show > 999} direction="up">
         <TableBody>
           <TableRow>
             <TableCell>Daily score</TableCell>
             <TableCell>XXX</TableCell>
             <TableCell>=></TableCell>
-            <Slide in={show > 18} direction="up">
+            <Slide in={show > 999} direction="up">
               <TableCell>YYY</TableCell>
             </Slide>
           </TableRow>
@@ -155,7 +94,7 @@ const LeaderboardPeek = ({ show, classes }: any) => (
             <TableCell>Weekly score</TableCell>
             <TableCell>XXX</TableCell>
             <TableCell>=></TableCell>
-            <Slide in={show > 19} direction="up">
+            <Slide in={show > 999} direction="up">
               <TableCell>YYY</TableCell>
             </Slide>
           </TableRow>
@@ -163,7 +102,7 @@ const LeaderboardPeek = ({ show, classes }: any) => (
             <TableCell>All time score</TableCell>
             <TableCell>XXX</TableCell>
             <TableCell>=></TableCell>
-            <Slide in={show > 20} direction="up">
+            <Slide in={show > 999} direction="up">
               <TableCell>YYY</TableCell>
             </Slide>
           </TableRow>
@@ -244,7 +183,6 @@ class TestStudent extends React.Component<PropsT, StateT> {
   }
 
   render() {
-    console.log(this.props);
     const { classes, test, studentImg, activityScore } = this.props;
     const { index } = this.state;
     const qs = test.questions.map(({ src, valid }, i) => ({
@@ -271,13 +209,20 @@ class TestStudent extends React.Component<PropsT, StateT> {
         <Grid item xs={3} className={classes.avatar}>
           <Avatar classes={classes} img={studentImg} />
           <div>
-            Grade: {scoreIndex} / {Math.min(10, index)}
+            <FormattedMessage id="test.grade" defaultMessage="Grade: " />
+            {scoreIndex} / {Math.min(10, index)}
           </div>
         </Grid>
         <Grid item xs={9} className={classes.studentAnswers}>
-          <div>I think these are PARALLELOGRAMS:</div>
+          <FormattedMessage
+            id="test.arepara"
+            defaultMessage="I think these ARE parallelograms:"
+          />
           <QuestionsList classes={classes} questions={qY} index={index} />
-          <div>I think these are NOT PARALLELOGRAMS:</div>
+          <FormattedMessage
+            id="test.arenotpara"
+            defaultMessage="I think these ARE NOT parallelograms:"
+          />
           <QuestionsList classes={classes} questions={qN} index={index} />
         </Grid>
         <Grid item xs={6} className={classes.scoreBoard}>
