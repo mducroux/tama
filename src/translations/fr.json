@@ -29,6 +29,7 @@
   "dumbStudent.thinkingAboutExam": "...",
   "dumbStudent.thinkingAboutExample": "...",
   "dumbStudent.thinkingAboutExercise": "...",
+  "gameStart.teacherThinking": "...",
   "gameStart.startTeaching": "Enseigner {studentName}",
   "gameStart.studentName": "Bonjour ! Je m'appelle {studentName} !",
   "gameStart.teacherBubble":
@@ -140,6 +141,13 @@
   "statistics.score": "Score",
   "statistics.sequenceStudent": "Séquence d'étudiants",
   "statistics.studentGrade": "Notes des étudiants",
+  "test.grade": "Note: ",
+  "test.arepara": "Je pense que ceux là SONT des parallélogrammes: ",
+  "test.arenotpara": "Je pense que ceux là NE SONT PAS des parallélogrammes",
+  "test.startingpoints": "Points de départ",
+  "test.teachingpoints": "Points dépensés",
+  "test.gradebonus": "Bonus de note",
+  "test.totalscore": "Score total",
   "testConfirmationDialog.continue": "Oui, je veux passer le test",
   "testConfirmationDialog.goBack": "Non, je veux revenir à l'entraînement",
   "testConfirmationDialog.statement":

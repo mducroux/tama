@@ -21,7 +21,7 @@ const featureList = [
   "isThin",
   "hasEveryRightAngles",
   "hasAtLeastOneRightAngle"
-]
+];
 
 class FixedMemory implements VirtualStudent {
   state: { model: Function, features: string };
@@ -91,69 +91,94 @@ class FixedMemory implements VirtualStudent {
   );
 
   constructor(name: string) {
-    this.name = name
+    this.name = name;
 
     featureList.forEach((f1, idx1) => {
-      this.models.push([(x: ShapeFeatures) => x[f1], f1])
-      this.models.push([(x: ShapeFeatures) => !x[f1], `!${f1}`])
+      this.models.push([(x: ShapeFeatures) => x[f1], f1]);
+      this.models.push([(x: ShapeFeatures) => !x[f1], `!${f1}`]);
       featureList.forEach((f2, idx2) => {
         if (idx1 < idx2) {
-          this.models.push([(x: ShapeFeatures) => x[f1] && x[f2], `${f1}&${f2}`])
-          this.models.push([(x: ShapeFeatures) => !x[f1] && x[f2], `!${f1}&${f2}`])
-          this.models.push([(x: ShapeFeatures) => x[f1] && !x[f2], `${f1}&!${f2}`])
-          this.models.push([(x: ShapeFeatures) => !x[f1] && !x[f2], `!${f1}&!${f2}`])
+          this.models.push([
+            (x: ShapeFeatures) => x[f1] && x[f2],
+            `${f1}&${f2}`
+          ]);
+          this.models.push([
+            (x: ShapeFeatures) => !x[f1] && x[f2],
+            `!${f1}&${f2}`
+          ]);
+          this.models.push([
+            (x: ShapeFeatures) => x[f1] && !x[f2],
+            `${f1}&!${f2}`
+          ]);
+          this.models.push([
+            (x: ShapeFeatures) => !x[f1] && !x[f2],
+            `!${f1}&!${f2}`
+          ]);
         }
-      })
-    })
-    const [model, features] = this.models[Math.floor(this.models.length * Math.random())]
-    this.state = { model, features }
+      });
+    });
+    const [model, features] = this.models[
+      Math.floor(this.models.length * Math.random())
+    ];
+    this.state = { model, features };
   }
 
   // All necessary features should correspond to identify the shape as a parallelogram
   answerParallelogram(shape: ShapeFeatures) {
-    return this.state.model(shape)
+    return this.state.model(shape);
   }
 
   learn(isParallelogram: boolean, shape: ShapeFeatures) {
     if (this.memory.length < 4) {
-      this.memory.push([isParallelogram, shape])
+      this.memory.push([isParallelogram, shape]);
     } else {
-      this.memory = [this.memory[1], this.memory[2], this.memory[3], [isParallelogram, shape]]
+      this.memory = [
+        this.memory[1],
+        this.memory[2],
+        this.memory[3],
+        [isParallelogram, shape]
+      ];
     }
     if (isParallelogram !== this.answerParallelogram(shape)) {
       let minErrors = this.memory.length;
 
-      const [model, features,] = this.models.map(([m, f]) => {
-        const nErrors = this.memory.reduce((acc, [b, s]) => m(s) === b ? acc : acc + 1, 0)
-        minErrors = minErrors < nErrors ? minErrors : nErrors
-        return [m, f, nErrors]
-      })
-        .sort(() => 0.5 - Math.random())
-        .find(([, , e]) => e === minErrors) || []
-      this.state = { model, features }
+      const [model, features] =
+        this.models
+          .map(([m, f]) => {
+            const nErrors = this.memory.reduce(
+              (acc, [b, s]) => (m(s) === b ? acc : acc + 1),
+              0
+            );
+            minErrors = minErrors < nErrors ? minErrors : nErrors;
+            return [m, f, nErrors];
+          })
+          .sort(() => 0.5 - Math.random())
+          .find(([, , e]) => e === minErrors) || [];
+      this.state = { model, features };
     }
-
   }
 
   // The lesson is the truth (weight of 1 or -1)
   learnLesson(shape: ShapeFeatures) {
-    const reverseShape = Object.keys(shape).reduce((acc, val) => ({ ...acc, [val]: !shape[val] }), {})
-    this.learn(true, shape)
-    this.learn(false, reverseShape)
+    const reverseShape = Object.keys(shape).reduce(
+      (acc, val) => ({ ...acc, [val]: !shape[val] }),
+      {}
+    );
+    this.learn(true, shape);
+    this.learn(false, reverseShape);
   }
 
   // check if there is a feature he didn't know it was necessary or not
   // return true even if it increased his certainty
   alreadyKnowLesson(shape: ShapeFeatures) {
-    return !!this.state.model(shape)
+    return !!this.state.model(shape);
   }
 
-  setState() {
-  }
+  setState() {}
 
   getState() {
-    const { features } = this.state
-    return features;
+    const { features } = this.state;
+    return `FIXED_MEMORY:${features}`;
   }
 }
 
