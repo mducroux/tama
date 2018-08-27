@@ -85,7 +85,7 @@ const LeaderboardPeek = ({ show, classes }: any) => (
           <TableRow>
             <TableCell>Daily score</TableCell>
             <TableCell>XXX</TableCell>
-            <TableCell>=></TableCell>
+            <TableCell>{"=>"}</TableCell>
             <Slide in={show > 999} direction="up">
               <TableCell>YYY</TableCell>
             </Slide>
@@ -93,7 +93,7 @@ const LeaderboardPeek = ({ show, classes }: any) => (
           <TableRow>
             <TableCell>Weekly score</TableCell>
             <TableCell>XXX</TableCell>
-            <TableCell>=></TableCell>
+            <TableCell>{"=>"}</TableCell>
             <Slide in={show > 999} direction="up">
               <TableCell>YYY</TableCell>
             </Slide>
@@ -101,7 +101,7 @@ const LeaderboardPeek = ({ show, classes }: any) => (
           <TableRow>
             <TableCell>All time score</TableCell>
             <TableCell>XXX</TableCell>
-            <TableCell>=></TableCell>
+            <TableCell>{"=>"}</TableCell>
             <Slide in={show > 999} direction="up">
               <TableCell>YYY</TableCell>
             </Slide>
@@ -143,14 +143,10 @@ const QuestionsList = ({ questions, index, classes }: any) => (
 
 type PropsT = {
   startNewGame: () => void,
-  student: Object,
-  finalScore: number,
   activityScore: number,
-  studentName: string,
   test: Object,
-  updateScore: void => void,
-  hasSeenQuestionsTest: void => void,
-  classes: Object
+  classes: Object,
+  studentImg: string
 };
 
 type StateT = {

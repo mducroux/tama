@@ -8,7 +8,8 @@
     "react/require-default-props": "off",
     "no-plusplus": "off",
     "react/sort-comp": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "no-param-reassign": "off"
   },
   "extends": [
     "airbnb",
