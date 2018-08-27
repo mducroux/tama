@@ -102,7 +102,6 @@ class QuickLearnerStudent implements VirtualStudent {
         ),
       0
     );
-    console.log(res);
     return res > 0;
   }
 
@@ -129,7 +128,6 @@ class QuickLearnerStudent implements VirtualStudent {
         });
       });
     }
-    console.log(this.getState());
   }
 
   // The lesson is the truth (weight of 1 or -1)
@@ -141,7 +139,6 @@ class QuickLearnerStudent implements VirtualStudent {
         }
       });
     });
-    console.log(this.getState());
   }
 
   // check if there is a feature he didn't know it was necessary or not
